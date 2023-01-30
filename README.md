@@ -20,12 +20,11 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Theraline is a Capstone Project for the American University of Beirut (AUB). It was developed by a group of 4 students, two of which designed the website, one of the others the mobile app, and the last one designed the backend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Our aim is to bring/introduce group therapy sessions to the online world. We achieve this by using either group chats, or by Google's Meet face-to-face services.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Visit us now on: [https://www.theraline.com]
 
 ## Deploy on Vercel
 

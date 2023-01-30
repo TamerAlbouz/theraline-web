@@ -1,4 +1,4 @@
-function ProfileMenu(): any {
+function ProfileMenu() {
   return (
     <div className="ml-2 flex w-full flex-row items-center gap-3 md:ml-0 md:px-5">
       <img

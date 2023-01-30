@@ -1,8 +1,12 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { classNames } from "./sideBarUtils";
 
 function SideNavigationItem(props: any) {
-  const { name, href, current } = props;
+  const { name, href } = props;
+
+  const router = useRouter();
+  const current = router.pathname === href;
 
   return (
     <Link href={href} key={name}>

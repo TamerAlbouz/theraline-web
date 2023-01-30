@@ -4,23 +4,33 @@ import { HiOutlineClipboardList } from "react-icons/hi";
 import { MdOutlinePayments } from "react-icons/md";
 import { RiCalendarTodoLine, RiDashboard2Line } from "react-icons/ri";
 
-export const navigation = [
-  { name: "Overview", href: "/", current: true, icon: RiDashboard2Line },
+export var navigation = [
+  {
+    name: "Overview",
+    href: "/",
+    icon: RiDashboard2Line,
+  },
   {
     name: "Calendar",
-    href: "/",
-    current: false,
+    href: "/calendar",
     icon: RiCalendarTodoLine,
   },
   {
     name: "Patient List",
-    href: "/",
-    current: false,
+    href: "/patient-list",
     icon: HiOutlineClipboardList,
   },
-  { name: "Messeges", href: "/", current: false, icon: AiOutlineMessage },
-  { name: "Payment Info", href: "/", current: false, icon: MdOutlinePayments },
-  { name: "Settings", href: "/", current: false, icon: FiSettings },
+  {
+    name: "Messeges",
+    href: "/messeges",
+    icon: AiOutlineMessage,
+  },
+  {
+    name: "Payment Info",
+    href: "/payment-info",
+    icon: MdOutlinePayments,
+  },
+  { name: "Settings", href: "/settings", icon: FiSettings },
 ];
 
 export function classNames(...classes: any) {

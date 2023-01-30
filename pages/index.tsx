@@ -1,7 +1,9 @@
-import type { NextPage } from "next";
+function OverviewPage() {
+  return (
+    <div>
+      <h1>Overview</h1>
+    </div>
+  );
+}
 
-const Home: NextPage = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
-};
-
-export default Home;
+export default OverviewPage;

@@ -55,7 +55,7 @@ function SideNavigation() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:w-full md:flex-col md:justify-start md:gap-5 md:py-5 md:pr-0">
                 <button
                   type="button"
-                  className="block rounded-full bg-secondary p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary md:hidden"
+                  className="block rounded-full bg-secondary p-1 text-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary md:hidden"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -75,27 +75,7 @@ function SideNavigation() {
           </div>
 
           <Disclosure.Panel className="md:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as={Link}
-                  href={item.href}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  <a
-                    className={classNames(
-                      item.current
-                        ? "bg-white text-primary"
-                        : "text-white hover:bg-secondary",
-                      "block rounded-md px-3 py-2 text-base font-medium"
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                </Disclosure.Button>
-              ))}
-            </div>
+            <SideNavigationList />
           </Disclosure.Panel>
         </>
       )}
