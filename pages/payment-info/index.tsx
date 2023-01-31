@@ -7,12 +7,12 @@ function PaymentInfoPage() {
   const { status, data } = useSession({
     required: true,
     onUnauthenticated() {
-      router.push("/auth/signin");
+      // router.push("/auth/signin");
     },
   });
 
   console.log(status);
-  console.log(data);
+  console.log(data?.user);
 
   return (
     <div>

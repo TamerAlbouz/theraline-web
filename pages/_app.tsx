@@ -10,7 +10,6 @@ function MyApp({
 }: AppProps<{
   session: Session;
 }>) {
-  console.log(pageProps.session);
   return (
     <SessionProvider session={pageProps.session}>
       <Layout>

@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -63,6 +63,8 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // async redirect({ url, baseUrl }) { return baseUrl },
     async session({ session, token, user }) {
+      session.user.id = "ID-HERE";
+
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
@@ -71,4 +73,6 @@ export default NextAuth({
   },
   // Enable debug messages in the console if you are having problems
   debug: true,
-});
+};
+
+export default NextAuth(authOptions);
