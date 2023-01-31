@@ -1,4 +1,4 @@
-import { navigation } from "./sideBarUtils";
+import { navigation } from "../utils";
 import SideNavigationItem from "./SideNavigationItem";
 
 function SideNavigationList(): any {

@@ -1,10 +1,9 @@
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { classNames, navigation } from "./sideBarUtils";
 import SideNavigationList from "./SideNavigationList";
 import ProfileMenu from "./ProfileMenu";
 import { BiHelpCircle } from "react-icons/bi";
+import { HiX, HiMenu, HiBell } from "react-icons/hi";
 
 function SideNavigation() {
   return (
@@ -18,9 +17,9 @@ function SideNavigation() {
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-secondary hover:text-white focus:outline-none">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <XMarkIcon className="block h-8 w-8" aria-hidden="true" />
+                    <HiX className="block h-8 w-8" aria-hidden="true" />
                   ) : (
-                    <Bars3Icon className="block h-8 w-8" aria-hidden="true" />
+                    <HiMenu className="block h-8 w-8" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
@@ -58,7 +57,7 @@ function SideNavigation() {
                   className="block rounded-full bg-secondary p-1 text-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary md:hidden"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <HiBell className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <Link href="/help">
                   <a className="hidden w-full flex-row items-center justify-start gap-2 px-5 py-3 md:flex">
