@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 
 function SettingsPage() {
@@ -10,16 +10,33 @@ function SettingsPage() {
 
       {data && (
         <Link href="/auth/signout">
-          <a>Sign Out</a>
+          <a className="text-3xl font-bold text-white">Sign Out</a>
         </Link>
       )}
       {!data && (
         <Link href="/auth/signin">
-          <a>Sign In</a>
+          <a className="text-xl text-white">Sign In</a>
         </Link>
       )}
     </div>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permenant: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 }
 
 export default SettingsPage;

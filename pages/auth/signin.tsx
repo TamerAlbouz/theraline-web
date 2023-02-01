@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
@@ -38,7 +38,7 @@ const SignInPage = () => {
     console.log(data);
 
     await signIn("credentials", {
-      username: data.username,
+      email: data.email,
       password: data.password,
     });
   };
@@ -79,7 +79,7 @@ const SignInPage = () => {
 
         <div className="mt-4 flex justify-between">
           <Link replace href="/auth/signup">
-            <a className="w-1/2 text-sm hover:text-primary text-primary-dark">
+            <a className="w-1/2 text-sm text-primary-dark hover:text-primary">
               Not a member? Join here
             </a>
           </Link>
@@ -90,5 +90,22 @@ const SignInPage = () => {
     </AuthBackgroundCard>
   );
 };
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permenant: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
 
 export default SignInPage;

@@ -21,8 +21,8 @@ function Header() {
         <navigationItem.icon className="text-4xl" />
         <h1 className="font-semibold">{navigationItem.name}</h1>
       </div>
-      <div className="flex w-1/5 flex-row justify-end gap-5">
-        <button className="flex w-full items-center gap-2 rounded-full border-2 border-white bg-primary p-1 pl-3 text-gray-400  focus:outline-none">
+      <div className="flex flex-row justify-end gap-5">
+        <button className="flex w-48 items-center gap-2 rounded-full border-2 border-white bg-primary p-1 pl-3 text-gray-400  focus:outline-none">
           <HiSearch />
           <p>Search</p>
         </button>

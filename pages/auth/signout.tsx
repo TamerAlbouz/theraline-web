@@ -7,9 +7,11 @@ const SignOutPage = () => {
 
   return (
     <div>
-      <h3>Sign out page</h3>
+      <h3 className="text-3xl font-bold text-white">Sign out page</h3>
 
-      <button onClick={onSignOut}>Sign out</button>
+      <button className="text-xl font-medium text-white" onClick={onSignOut}>
+        Sign out
+      </button>
     </div>
   );
 };
