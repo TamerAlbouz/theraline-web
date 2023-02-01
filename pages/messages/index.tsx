@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-function PatientListPage() {
+function MessegesPage() {
   const router = useRouter();
 
   useSession({
@@ -13,9 +13,9 @@ function PatientListPage() {
 
   return (
     <div>
-      <h1>PatientList</h1>
+      <h1>Messeges</h1>
     </div>
   );
 }
 
-export default PatientListPage;
+export default MessegesPage;

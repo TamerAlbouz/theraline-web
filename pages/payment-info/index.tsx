@@ -4,15 +4,12 @@ import { useRouter } from "next/router";
 function PaymentInfoPage() {
   const router = useRouter();
 
-  const { status, data } = useSession({
+  useSession({
     required: true,
     onUnauthenticated() {
-      // router.push("/auth/signin");
+      router.push("/auth/signin");
     },
   });
-
-  console.log(status);
-  console.log(data?.user);
 
   return (
     <div>

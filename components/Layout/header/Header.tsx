@@ -4,8 +4,16 @@ import { navigation } from "../utils";
 
 function Header() {
   const router = useRouter();
+
   const path = router.pathname;
+
   const navigationItem: any = navigation.find((item) => item.href === path);
+
+  // for paths like sign-in
+  // alternatively, could define a list of excluded paths for which the header won't be shown
+  if (navigationItem == undefined) {
+    return <div />;
+  }
 
   return (
     <header className="hidden flex-row items-center justify-between border-b-2 border-b-white p-5 md:flex">

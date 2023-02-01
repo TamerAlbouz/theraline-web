@@ -6,12 +6,12 @@ const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "username" },
+        email: { label: "Email", type: "email", placeholder: "Email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
         try {
-          if (!credentials?.username || !credentials.password) {
+          if (!credentials?.email || !credentials.password) {
             return null;
           }
 

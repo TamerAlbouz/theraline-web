@@ -21,8 +21,8 @@ export var navigation = [
     icon: HiOutlineClipboardList,
   },
   {
-    name: "Messeges",
-    href: "/messeges",
+    name: "Messages",
+    href: "/messages",
     icon: AiOutlineMessage,
   },
   {
