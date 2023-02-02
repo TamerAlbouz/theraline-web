@@ -1,5 +1,7 @@
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import PatientList from "../../components/patient-list/details-body/PatientList";
+import PatientListHeader from "../../components/patient-list/header/Header";
 
 function PatientListPage() {
   // const router = useRouter();
@@ -12,8 +14,12 @@ function PatientListPage() {
   // });
 
   return (
-    <div>
-      <h1>PatientList</h1>
+    <div className="w-full">
+      <PatientListHeader />
+
+      <hr className="my-4" />
+
+      <PatientList />
     </div>
   );
 }

@@ -1,13 +1,6 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  labelClassName,
-  inputClassName,
-  buttonClassName,
-  spanClassName,
-  inputGroupClassName,
-} from "../../components/auth/utils";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
 
@@ -46,8 +39,11 @@ const SignUpPage = () => {
   return (
     <AuthBackgroundCard>
       <form onSubmit={handleSubmit(submitUserInfo)} className="w-full">
-        <div className={inputGroupClassName}>
-          <label htmlFor="signup-first-name" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signup-first-name"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             First Name
           </label>
           <input
@@ -57,12 +53,17 @@ const SignUpPage = () => {
             id="signup-first-name"
             type="text"
             placeholder="First name"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>{errors.firstName?.message}</span>
+          <span className="text-xs text-red-500">
+            {errors.firstName?.message}
+          </span>
         </div>
-        <div className={inputGroupClassName}>
-          <label htmlFor="signup-last-name" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signup-last-name"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             Last Name
           </label>
           <input
@@ -72,13 +73,18 @@ const SignUpPage = () => {
             id="signup-last-name"
             type="text"
             placeholder="Last name"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>{errors.lastName?.message}</span>
+          <span className="text-xs text-red-500">
+            {errors.lastName?.message}
+          </span>
         </div>
 
-        <div className={inputGroupClassName}>
-          <label htmlFor="signup-email" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signup-email"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             Email
           </label>
           <input
@@ -88,13 +94,16 @@ const SignUpPage = () => {
             id="signup-email"
             type="text"
             placeholder="Email"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>{errors.email?.message}</span>
+          <span className="text-xs text-red-500">{errors.email?.message}</span>
         </div>
 
-        <div className={inputGroupClassName}>
-          <label htmlFor="signup-password" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signup-password"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             Password
           </label>
           <input
@@ -103,13 +112,18 @@ const SignUpPage = () => {
             })}
             id="signup-password"
             type="text"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>{errors.password?.message}</span>
+          <span className="text-xs text-red-500">
+            {errors.password?.message}
+          </span>
         </div>
 
-        <div className={inputGroupClassName}>
-          <label htmlFor="signup-confirm-password" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signup-confirm-password"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             Confirm Password
           </label>
           <input
@@ -118,9 +132,9 @@ const SignUpPage = () => {
             })}
             id="signup-confirm-password"
             type="text"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>
+          <span className="text-xs text-red-500">
             {errors.confirmPassword?.message}
           </span>
         </div>
@@ -132,7 +146,11 @@ const SignUpPage = () => {
             </a>
           </Link>
 
-          <input type="submit" value="Sign up" className={buttonClassName} />
+          <input
+            type="submit"
+            value="Sign up"
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-white hover:bg-primary-dark focus:outline-none"
+          />
         </div>
       </form>
     </AuthBackgroundCard>

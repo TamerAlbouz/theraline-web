@@ -7,7 +7,6 @@ function SettingsPage() {
   return (
     <div>
       <h1>Settings</h1>
-
       {data && (
         <Link href="/auth/signout">
           <a className="text-3xl font-bold text-white">Sign Out</a>
