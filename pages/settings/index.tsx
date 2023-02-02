@@ -13,11 +13,6 @@ function SettingsPage() {
           <a className="text-3xl font-bold text-white">Sign Out</a>
         </Link>
       )}
-      {!data && (
-        <Link href="/auth/signin">
-          <a className="text-xl text-white">Sign In</a>
-        </Link>
-      )}
     </div>
   );
 }

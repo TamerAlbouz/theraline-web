@@ -7,7 +7,7 @@ function Layout(props: any) {
       <SideNavigation />
       <section className="w-full">
         <Header />
-        <main className="flex h-full flex-wrap items-center justify-center p-5">
+        <main className="flex h-full flex-wrap items-start justify-center p-5">
           {props.children}
         </main>
       </section>
