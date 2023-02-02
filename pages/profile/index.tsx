@@ -1,12 +1,12 @@
 import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
+import SignOutPage from "../auth/signout";
 
-function SettingsPage() {
-  const { data } = useSession();
-
+function ProfilePage() {
   return (
     <div>
-      <h1>Settings</h1>
+      <h1>The Profile Page</h1>
+      <SignOutPage />
     </div>
   );
 }
@@ -28,4 +28,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default SettingsPage;
+export default ProfilePage;

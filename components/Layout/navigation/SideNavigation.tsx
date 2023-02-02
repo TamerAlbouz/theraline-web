@@ -16,9 +16,10 @@ function SideNavigation() {
 
   // for paths like sign-in
   // alternatively, could define a list of excluded paths for which the header won't be shown
-  if (navigationItem == undefined) {
+  if (navigationItem === undefined) {
     return <div />;
   }
+
   return (
     <Disclosure as="nav" className="bg-primary md:w-60 lg:w-72">
       {({ open }) => (
@@ -81,6 +82,7 @@ function SideNavigation() {
                   </a>
                 </Link>
                 <div className="hidden h-0.5 w-full bg-secondary md:block"></div>
+
                 <ProfileMenu />
               </div>
             </div>

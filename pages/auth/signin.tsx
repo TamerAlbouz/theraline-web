@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { getSession, signIn } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AuthBackgroundCard from "../../components/card/AuthBackgroundCard";
+import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
 
 const signInSchema = z.object({
