@@ -1,11 +1,7 @@
 import CardWrapper from "../card/CardWrapper";
 
 function Meeting(): any {
-  return (
-    <CardWrapper>
-      <h1 className="text-white">Meeting</h1>
-    </CardWrapper>
-  );
+  return <CardWrapper title="Meeting"></CardWrapper>;
 }
 
 export default Meeting;

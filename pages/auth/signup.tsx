@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
+import AuthBackgroundCard from "../../components/card/AuthBackgroundCard";
 import Link from "next/link";
 
 const signUpSchema = z

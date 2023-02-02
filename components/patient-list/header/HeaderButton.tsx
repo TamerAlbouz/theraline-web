@@ -7,12 +7,12 @@ const HeaderButton = (props: {
 }) => {
   return (
     <div
-      className="mr-4 flex h-8 cursor-pointer flex-row flex-wrap items-center rounded-md bg-white px-2 shadow-md"
+      className="mr-4 flex cursor-pointer flex-row flex-wrap items-center justify-center rounded-md bg-primary-dark py-2 px-3 shadow-md"
       onClick={props.handleClick}
     >
-      {props.icon && <props.icon className="mr-2 h-4 w-4 text-primary-dark" />}
+      {props.icon && <props.icon className="mr-2 h-4 w-4 text-white" />}
 
-      <p className="font-semibold text-primary text-sm">{props.label}</p>
+      <p className="text-sm font-semibold text-white">{props.label}</p>
     </div>
   );
 };

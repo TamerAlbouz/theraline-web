@@ -42,7 +42,7 @@ const CardOptionsButton = () => {
       <Menu as="div" className="relative inline-block text-left">
         <Menu.Button className="px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           <HiEllipsisHorizontal
-            className="ml-2 -mr-1 h-7 w-7 text-primary hover:text-primary-dark"
+            className="ml-2 -mr-1 h-7 w-7 text-white"
             aria-hidden="true"
           />
         </Menu.Button>
