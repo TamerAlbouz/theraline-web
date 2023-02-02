@@ -3,12 +3,14 @@ import Meeting from "../components/overview/Meeting";
 
 function OverviewPage() {
   return (
-    <section className="flex w-full flex-wrap items-center justify-center gap-5">
-      <Meeting />
-      <Meeting />
-      <Meeting />
-      <Meeting />
-    </section>
+    <div className="items-center justify-center p-5">
+      <section className="flex w-full flex-wrap items-center justify-center gap-5">
+        <Meeting />
+        <Meeting />
+        <Meeting />
+        <Meeting />
+      </section>
+    </div>
   );
 }
 

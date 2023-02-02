@@ -3,13 +3,6 @@ import { getSession, signIn } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
-import {
-  labelClassName,
-  inputClassName,
-  buttonClassName,
-  spanClassName,
-  inputGroupClassName,
-} from "../../components/auth/utils";
 import Link from "next/link";
 
 const signInSchema = z.object({
@@ -46,8 +39,11 @@ const SignInPage = () => {
   return (
     <AuthBackgroundCard>
       <form onSubmit={handleSubmit(submitUserInfo)}>
-        <div className={inputGroupClassName}>
-          <label htmlFor="signin-email" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signin-email"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             Email
           </label>
           <input
@@ -57,13 +53,16 @@ const SignInPage = () => {
             id="signin-email"
             type="text"
             placeholder="Email"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>{errors.email?.message}</span>
+          <span className="text-xs text-red-500">{errors.email?.message}</span>
         </div>
 
-        <div className={inputGroupClassName}>
-          <label htmlFor="signin-password" className={labelClassName}>
+        <div className="mb-4">
+          <label
+            htmlFor="signin-password"
+            className="text-md mb-2 block font-bold text-primary-dark"
+          >
             Password
           </label>
           <input
@@ -72,9 +71,11 @@ const SignInPage = () => {
             })}
             id="signin-password"
             type="text"
-            className={inputClassName}
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />{" "}
-          <span className={spanClassName}>{errors.password?.message}</span>
+          <span className="text-xs text-red-500">
+            {errors.password?.message}
+          </span>
         </div>
 
         <div className="mt-4 flex justify-between">
@@ -84,7 +85,11 @@ const SignInPage = () => {
             </a>
           </Link>
 
-          <input type="submit" value="Sign in" className={buttonClassName} />
+          <input
+            type="submit"
+            value="Sign in"
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-white hover:bg-primary-dark focus:outline-none"
+          />
         </div>
       </form>
     </AuthBackgroundCard>
