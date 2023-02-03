@@ -18,7 +18,7 @@ const PatientListHeader = () => {
 
       <div className="ml-6 mt-4 flex flex-wrap last:mr-2 lg:mt-0">
         <HeaderButton
-          label="Filter"
+          label="Print"
           icon={HiPrinter}
           handleClick={() => {
             console.log("printer");
