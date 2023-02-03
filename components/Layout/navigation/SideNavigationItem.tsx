@@ -15,7 +15,7 @@ function SideNavigationItem(props: any) {
           current
             ? "bg-white text-primary"
             : "text-white hover:bg-secondary hover:text-white",
-          "flex flex-row items-center px-5 py-4 text-lg font-semibold focus:outline-none"
+          "flex flex-row items-center px-5 py-4 text-lg font-semibold transition-all duration-200 focus:outline-none"
         )}
         aria-current={current ? "page" : undefined}
       >

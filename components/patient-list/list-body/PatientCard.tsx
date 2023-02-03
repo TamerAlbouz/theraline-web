@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import CardOptionsButton from "./CardOptionsButton";
 
 const PatientCard = (props: {
+  patientId: string;
   name: string;
   email: string;
   phoneNumber: string;
@@ -8,9 +10,18 @@ const PatientCard = (props: {
   nextAppointment: string | null | undefined;
   lastAppointment: string | null | undefined;
 }) => {
+  const router = useRouter();
+
+  const navigateToPatient = () => {
+    router.push(`/patient-list/${props.patientId}`);
+  };
+
   return (
-    <div className="mx-6 my-2 grid grid-cols-3 items-center rounded-lg bg-primary-dark bg-opacity-95 py-3 px-4 text-white shadow sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7">
-      <div className="col-span-2 flex flex-row">
+    <div className="mx-6 my-2 grid  grid-cols-3 items-center rounded-lg bg-primary-dark bg-opacity-95 py-3 px-4 text-white shadow hover:bg-primary sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7">
+      <div
+        onClick={navigateToPatient}
+        className="col-span-2 flex cursor-pointer flex-row"
+      >
         <img
           className="h-10 w-10 rounded-full md:h-12 md:w-12"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -30,9 +41,9 @@ const PatientCard = (props: {
       <p className="text-md hidden md:block">
         {props.lastAppointment ? props.lastAppointment : "-"}
       </p>
-      <p className="text-md">
+      <div className="text-md">
         <CardOptionsButton />
-      </p>
+      </div>
     </div>
   );
 };
