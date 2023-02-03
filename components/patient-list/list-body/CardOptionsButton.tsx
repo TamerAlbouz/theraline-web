@@ -56,9 +56,9 @@ const CardOptionsButton = () => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute right-0 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            {menuOptions.map((e) => {
+            {menuOptions.map((e, index) => {
               return (
-                <Menu.Item>
+                <Menu.Item key={index}>
                   {({ active }) => (
                     <div
                       className={`${
@@ -75,29 +75,6 @@ const CardOptionsButton = () => {
                 </Menu.Item>
               );
             })}
-            {/* <Menu.Item>
-            {({ active }) => (
-              <a
-                className={`${active && "bg-blue-500"}`}
-                href="/account-settings"
-              >
-                Account settings
-              </a>
-            )}
-          </Menu.Item>
-          <Menu.Item>
-            {({ active }) => (
-              <a
-                className={`${active && "bg-blue-500"}`}
-                href="/account-settings"
-              >
-                Documentation
-              </a>
-            )}
-          </Menu.Item>
-          <Menu.Item disabled>
-            <span className="opacity-75">Invite a friend (coming soon!)</span>
-          </Menu.Item> */}
           </Menu.Items>
         </Transition>
       </Menu>

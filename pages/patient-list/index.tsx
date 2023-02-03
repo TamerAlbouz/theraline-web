@@ -1,21 +1,11 @@
-import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import PatientList from "../../components/patient-list/details-body/PatientList";
+import { getSession } from "next-auth/react";
+import PatientList from "../../components/patient-list/list-body/PatientList";
 import PatientListHeader from "../../components/patient-list/header/Header";
 
 function PatientListPage() {
-  // const router = useRouter();
-
-  // useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     router.push("/auth/signin");
-  //   },
-  // });
-
   return (
     <div className="w-full">
-      <PatientListHeader />
+      <PatientListHeader patientName={undefined} />
 
       <hr className="my-4" />
 
