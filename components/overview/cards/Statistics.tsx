@@ -1,4 +1,4 @@
-import StatisticsWrapper from "./card/StatisticsCardWrapper";
+import StatisticsWrapper from "../card-wrappers/StatisticsCardWrapper";
 
 function Statistics() {
   const lastName = "Doe";

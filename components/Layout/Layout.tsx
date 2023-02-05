@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import Header from "./header/Header";
+import TopBar from "./topbar/topbar";
 import SideNavigation from "./navigation/SideNavigation";
 
 function Layout(props: any) {
   const router = useRouter();
-
   const path = router.pathname;
 
   return (
@@ -17,7 +16,7 @@ function Layout(props: any) {
     >
       <SideNavigation />
       <section className="w-full">
-        <Header />
+        <TopBar />
         <main className="flex h-full flex-wrap items-start justify-center p-5">
           {props.children}
         </main>

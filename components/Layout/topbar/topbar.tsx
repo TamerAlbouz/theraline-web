@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { HiBell, HiPlus, HiSearch } from "react-icons/hi";
 import { navigation } from "../utils";
 
-function Header() {
+function TopBar() {
   const router = useRouter();
 
   const path = router.pathname;
@@ -37,4 +37,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default TopBar;

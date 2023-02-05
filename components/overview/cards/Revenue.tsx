@@ -1,4 +1,4 @@
-import CardWrapper from "./card/CardWrapper";
+import CardWrapper from "../card-wrappers/CardWrapper";
 
 function Revenue() {
   return <CardWrapper title="Revenue"></CardWrapper>;
