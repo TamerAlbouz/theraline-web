@@ -6,11 +6,11 @@ function TotalPatients() {
       <div className="flex flex-col gap-3 font-medium text-white">
         <div>
           <p>This Month</p>
-          <p className="text-4xl font-normal">24</p>
+          <p className="text-5xl font-normal">24</p>
         </div>
         <div>
           <p>All Time</p>
-          <p className="text-4xl font-normal">177</p>
+          <p className="text-5xl font-normal">177</p>
         </div>
       </div>
     </CardWrapper>

@@ -7,7 +7,7 @@ import TotalPatients from "../components/overview/cards/TotalPatients";
 
 function OverviewPage() {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-5">
+    <div className="flex w-full flex-col items-center justify-center gap-5">
       <Statistics />
       <section className="flex w-full flex-wrap items-center justify-center gap-5">
         <ClinicInfo />
