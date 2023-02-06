@@ -1,16 +1,16 @@
 import { getSession } from "next-auth/react";
 import Appointments from "../components/overview/cards/Appointments";
-import Meeting from "../components/overview/cards/Meeting";
+import ClinicInfo from "../components/overview/cards/ClinicInfo";
 import Revenue from "../components/overview/cards/Revenue";
 import Statistics from "../components/overview/cards/Statistics";
 import TotalPatients from "../components/overview/cards/TotalPatients";
 
 function OverviewPage() {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-5">
       <Statistics />
       <section className="flex w-full flex-wrap items-center justify-center gap-5">
-        <Meeting />
+        <ClinicInfo />
         <Appointments />
         <TotalPatients />
         <Revenue />

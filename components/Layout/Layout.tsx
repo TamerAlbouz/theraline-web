@@ -15,12 +15,16 @@ function Layout(props: any) {
       } bg-secondary md:flex-row`}
     >
       <SideNavigation />
-      <section className="w-full">
+      <main className="w-full">
         <TopBar />
-        <main className="flex h-full flex-wrap items-start justify-center p-5">
+        <section
+          className={`flex ${
+            path === "/auth/signin" || path === "/auth/signup" ? "h-full" : ""
+          } flex-wrap items-start justify-center p-5`}
+        >
           {props.children}
-        </main>
-      </section>
+        </section>
+      </main>
     </div>
   );
 }
