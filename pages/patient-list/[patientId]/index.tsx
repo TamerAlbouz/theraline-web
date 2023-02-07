@@ -1,3 +1,4 @@
+import { getServerSession } from "next-auth";
 import { getSession } from "next-auth/react";
 import InfoCard from "../../../components/patient-list/details-body/InfoCard";
 import NotesCard from "../../../components/patient-list/details-body/NotesCard";
@@ -46,7 +47,7 @@ export async function getServerSideProps(context: any) {
   const { patientId } = context.params;
   console.log(patientId);
 
-  const session = await getSession({ req: context.req });
+  const session = await getSession();
 
   if (!session) {
     return {

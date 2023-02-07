@@ -1,9 +1,6 @@
-import { getSession, useSession } from "next-auth/react";
-import Link from "next/link";
+import { getSession } from "next-auth/react";
 
 function SettingsPage() {
-  const { data } = useSession();
-
   return (
     <div>
       <h1>Settings</h1>

@@ -1,8 +1,8 @@
-import CardWrapper from "../card-wrappers/CardWrapper";
+import CardWrapper from "../CardWrapper";
 
 function Revenue() {
   return (
-    <CardWrapper title="REVENUE" link="/">
+    <CardWrapper title="REVENUE" link="/overview/revenue">
       <div className="flex flex-col gap-3 font-medium text-white">
         <div>
           <p className="text-5xl font-normal">$2,400</p>

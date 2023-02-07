@@ -1,16 +1,6 @@
-import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { getSession } from "next-auth/react";
 
 function PaymentInfoPage() {
-  // const router = useRouter();
-
-  // useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     router.push("/auth/signin");
-  //   },
-  // });
-
   return (
     <div>
       <h1>PaymentInfo</h1>

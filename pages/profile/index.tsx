@@ -1,5 +1,4 @@
-import { getSession, useSession } from "next-auth/react";
-import Link from "next/link";
+import { getSession } from "next-auth/react";
 import SignOutPage from "../auth/signout";
 
 function ProfilePage() {

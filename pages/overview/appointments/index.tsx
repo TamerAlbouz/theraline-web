@@ -1,9 +1,9 @@
 import { getSession } from "next-auth/react";
 
-function AppointmentDetail() {
+function AppointmentsOverview() {
   return (
     <div>
-      <h1>Appointment Detail</h1>
+      <h1>Appointments Overview</h1>
     </div>
   );
 }
@@ -25,4 +25,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default AppointmentDetail;
+export default AppointmentsOverview;

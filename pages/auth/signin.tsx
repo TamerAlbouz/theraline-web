@@ -4,6 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),

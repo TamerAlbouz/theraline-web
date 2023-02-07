@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import CardWrapper from "../card-wrappers/CardWrapper";
+import CardWrapper from "../CardWrapper";
 
 function Appointments() {
   const router = useRouter();

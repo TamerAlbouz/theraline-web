@@ -1,9 +1,9 @@
 import { getSession } from "next-auth/react";
-import Appointments from "../components/overview/cards/Appointments";
-import ClinicInfo from "../components/overview/cards/ClinicInfo";
-import Revenue from "../components/overview/cards/Revenue";
-import Statistics from "../components/overview/cards/Statistics";
-import TotalPatients from "../components/overview/cards/TotalPatients";
+import Appointments from "../components/overview/appointments/Appointments";
+import ClinicInfo from "../components/overview/clinics/ClinicInfo";
+import TotalPatients from "../components/overview/patients/TotalPatients";
+import Revenue from "../components/overview/revenue/Revenue";
+import Statistics from "../components/overview/Statistics";
 
 function OverviewPage() {
   return (

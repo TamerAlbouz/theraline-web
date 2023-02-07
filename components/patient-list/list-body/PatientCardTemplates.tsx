@@ -58,7 +58,6 @@ export const cityTemplate = (data: patientData) => {
 export const lastAppointmentTemplate = (data: patientData) => {
   return (
     <div className="px-2">
-      {" "}
       <p className="text-md">
         {data.nextAppointment ? data.nextAppointment : "-"}
       </p>
