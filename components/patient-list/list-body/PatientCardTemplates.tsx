@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
 import React from "react";
-import { HiArrowsUpDown } from "react-icons/hi2";
 import CardOptionsButton from "./CardOptionsButton";
 
 type patientData = {
@@ -15,17 +13,8 @@ type patientData = {
 };
 
 export const basicInfoTemplate = (data: patientData) => {
-  const router = useRouter();
-
-  const navigateToPatient = () => {
-    router.push(`/patient-list/${data.patientId}`);
-  };
-
   return (
-    <div
-      onClick={navigateToPatient}
-      className="my-2 flex cursor-pointer flex-row px-2 pl-4"
-    >
+    <div className="my-2 flex flex-row px-2 pl-4">
       <img
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
         src={data.imageUrl}
@@ -71,16 +60,6 @@ export const nextAppointmentTemplate = (data: patientData) => {
       <p className="text-md">
         {data.lastAppointment ? data.lastAppointment : "-"}
       </p>
-    </div>
-  );
-};
-
-export const headerTemplate = (title: string, filterable: true | false) => {
-  return (
-    <div className="flex flex-row items-center justify-center">
-      <p className="mr-2 text-lg">{title}</p>
-
-      <HiArrowsUpDown className="h-8 w-8" />
     </div>
   );
 };

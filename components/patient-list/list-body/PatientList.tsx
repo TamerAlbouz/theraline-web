@@ -4,12 +4,12 @@ import {
   cityTemplate,
   nextAppointmentTemplate,
   lastAppointmentTemplate,
-  headerTemplate,
 } from "./PatientCardTemplates";
 import { Column } from "primereact/column";
-import { DataTable } from "primereact/datatable";
+import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
-import "primereact/resources/themes/lara-dark-blue/theme.css";
+import "primereact/resources/themes/md-light-indigo/theme.css";
+import { useRouter } from "next/router";
 
 type patientData = {
   patientId: string;
@@ -70,6 +70,14 @@ const patientList: Array<patientData> = [
 ];
 
 const PatientList = () => {
+  const router = useRouter();
+
+  const navigateToPatient = (patientId: string) => {
+    console.log(`::::: /patient-list/${patientId}`);
+    router.push(`/patient-list/${patientId}`);
+    console.log(router.pathname);
+  };
+
   const filters = {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
   };
@@ -82,8 +90,13 @@ const PatientList = () => {
         paginatorClassName="text-center font-bold text-primary"
         paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-        className="overflow-x-scroll rounded-lg px-4 py-6"
-        cellClassName={() => "bg-primary-dark"}
+        className="overflow-x-scroll rounded-xl bg-white px-4 py-6"
+        rowClassName={() =>
+          "bg-gray-200 rounded-lg text-primary border-b-2 border-white cursor-pointer"
+        }
+        onRowClick={(rowData: DataTableRowClickEventParams) => {
+          navigateToPatient(rowData.data.patientId);
+        }}
         rows={3}
         removableSort
         dataKey="id"
@@ -94,43 +107,44 @@ const PatientList = () => {
       >
         <Column
           field="basicInfo"
-          header={() => headerTemplate("Basic Info", true)}
+          header="Basic Info"
           showFilterMenu={false}
           filter
           filterField="name"
           filterPlaceholder="Search by name"
           sortable
           sortField="name"
+          headerClassName="text-center text-primary-dark cursor-pointer"
           body={basicInfoTemplate}
-          className="w-1/5 px-2"
+          className="w-1/5 px-2 text-primary"
         />
 
         <Column
           header="Phone Number"
+          headerClassName="text-center text-primary-dark"
           body={phoneNumberTemplate}
-          className="w-1/5 px-2 text-center"
+          className="w-1/5 px-2 text-center text-primary"
         />
 
         <Column
           header="City"
+          headerClassName="text-center text-primary-dark"
           body={cityTemplate}
-          className="w-1/5 px-2 text-center"
+          className="w-1/5 px-2 text-center text-primary"
         />
 
         <Column
           header="Last Appointment"
+          headerClassName="text-center text-primary-dark"
           body={lastAppointmentTemplate}
-          sortable
-          sortField="name"
-          className="w-1/5 px-2 text-center"
+          className="w-1/5 px-2 text-center text-primary"
         />
 
         <Column
           header="Next Appointment"
+          headerClassName="text-center text-primary-dark"
           body={nextAppointmentTemplate}
-          sortable
-          sortField="name"
-          className="w-1/5 px-2 text-center"
+          className="text-primarys w-1/5 px-2 text-center"
         />
       </DataTable>
     </div>
