@@ -40,7 +40,7 @@ const NotesCard = () => {
           <p className="text-sm text-white">Drg. Mega Noodle</p>
         </div>
 
-        <p className="text-white">31 Jan '23</p>
+        <p className="text-white">31 Jan 2023</p>
       </div>
     </div>
   );

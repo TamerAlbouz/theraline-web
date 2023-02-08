@@ -20,7 +20,7 @@ function Layout(props: any) {
         <section
           className={`flex ${
             path === "/auth/signin" || path === "/auth/signup" ? "h-full" : ""
-          } flex-wrap items-start justify-center p-5`}
+          } p-5`} // flex-wrap items-start justify-center
         >
           {props.children}
         </section>

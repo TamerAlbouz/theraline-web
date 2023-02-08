@@ -4,22 +4,8 @@ import SideNavigationList from "./SideNavigationList";
 import ProfileMenu from "./ProfileMenu";
 import { BiHelpCircle } from "react-icons/bi";
 import { HiX, HiMenu, HiBell } from "react-icons/hi";
-import { useRouter } from "next/router";
-import { navigation } from "../utils";
 
 function SideNavigation() {
-  const router = useRouter();
-
-  const path = router.pathname;
-
-  const navigationItem: any = navigation.find((item) => item.href === path);
-
-  // for paths like sign-in
-  // alternatively, could define a list of excluded paths for which the header won't be shown
-  if (navigationItem === undefined) {
-    return <div />;
-  }
-
   return (
     <Disclosure as="nav" className="bg-primary md:w-60 lg:w-72">
       {({ open }) => (

@@ -6,6 +6,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   important: true,
+  variants: {
+    extend: {
+      display: ["hover", "focus", "group-hover"],
+    },
+  },
   theme: {
     extend: {
       colors: {

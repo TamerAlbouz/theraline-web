@@ -75,7 +75,6 @@ const PatientList = () => {
   const navigateToPatient = (patientId: string) => {
     console.log(`::::: /patient-list/${patientId}`);
     router.push(`/patient-list/${patientId}`);
-    console.log(router.pathname);
   };
 
   const filters = {
