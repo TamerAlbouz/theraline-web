@@ -1,15 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useNotesStore } from "../../../hooks/useNotesStore";
+import { noteModel } from "../../../types/note";
 import { NoteInfo } from "./NoteInfo";
 
-type note = {
-  id: string;
-  title: string;
-  body: string;
-};
-
-export const NoteCard = (props: { data: note; opensModal: boolean }) => {
+export const NoteCard = (props: { data: noteModel; opensModal: boolean }) => {
   let [isOpen, setIsOpen] = useState(false);
 
   const { selectedNote, setSelectedNote } = useNotesStore();
@@ -75,7 +70,7 @@ export const NoteCard = (props: { data: note; opensModal: boolean }) => {
                     as="h3"
                     className="text-lg font-bold leading-6 text-black"
                   >
-                    {selectedNote.title}
+                    {selectedNote && selectedNote?.title}
                   </Dialog.Title>
 
                   <NoteInfo showTitle={false} />

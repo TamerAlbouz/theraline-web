@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNotesStore } from "../../../hooks/useNotesStore";
 
 export const NoteInfo = (props: { showTitle: boolean }) => {
@@ -11,13 +12,23 @@ export const NoteInfo = (props: { showTitle: boolean }) => {
     );
   }
 
+  const [body, setBody] = useState(selectedNote.body);
+
   return (
-    <div className="flex flex-col border-b border-white bg-white pt-2 text-black">
+    <div className="flex h-full flex-col border-b border-white bg-white p-4 text-black">
       {props.showTitle && (
-        <p className="text-xl font-bold">{selectedNote.title}</p>
+        <p className="mb-2 px-3 text-2xl font-bold">{selectedNote.title}</p>
       )}
 
-      <p className="text-lg font-bold">{selectedNote.body}</p>
+      {/* <p className="text-lg font-bold">{selectedNote.body}</p> */}
+
+      <textarea
+        className="min-h-32 resize-y p-3 text-lg"
+        value={body}
+        onChange={(event) => {
+          setBody(event.target.value);
+        }}
+      />
     </div>
   );
 };

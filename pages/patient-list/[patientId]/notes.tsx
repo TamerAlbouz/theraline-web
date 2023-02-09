@@ -2,8 +2,9 @@ import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { NoteCard } from "../../../components/patient-list/notes/NoteCard";
 import { NoteInfo } from "../../../components/patient-list/notes/NoteInfo";
+import { noteModel } from "../../../types/note";
 
-const dummyData: Array<{ id: string; title: string; body: string }> = [
+const dummyData: Array<noteModel> = [
   { id: "1", title: "title 1", body: "lorem ipsum 1" },
   { id: "2", title: "title 2", body: "lorem ipsum 2" },
   { id: "3", title: "title 3", body: "lorem ipsum 3" },

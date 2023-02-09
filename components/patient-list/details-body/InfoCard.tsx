@@ -1,22 +1,15 @@
-const InfoCard = (props: {
-  gender: string;
-  birthday: string;
-  phoneNumber: string;
-  street: string;
-  city: string;
-  zipCode: string;
-  memberStatus: string;
-  registerDate: string;
-}) => {
+import { patientDataModel } from "../../../types/patientData";
+
+const InfoCard = (props: { data: patientDataModel }) => {
   const infoItems: Array<{ label: string; value: string }> = [
-    { label: "Gender", value: props.gender },
-    { label: "Birthday", value: props.birthday },
-    { label: "Phone Number", value: props.phoneNumber },
-    { label: "Street Address", value: props.street },
-    { label: "City", value: props.city },
-    { label: "Zip Code", value: props.zipCode },
-    { label: "Member Status", value: props.memberStatus },
-    { label: "Registered Date", value: props.registerDate },
+    { label: "Gender", value: props.data.gender },
+    { label: "Birthday", value: props.data.birthday },
+    { label: "Phone Number", value: props.data.phoneNumber },
+    { label: "Street Address", value: props.data.street },
+    { label: "City", value: props.data.city },
+    { label: "Zip Code", value: props.data.zipCode },
+    { label: "Member Status", value: props.data.memberStatus },
+    { label: "Registered Date", value: props.data.registerDate },
   ];
 
   return (

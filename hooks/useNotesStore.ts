@@ -1,8 +1,9 @@
+import { noteModel } from "./../types/note.d";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 interface NotesState {
-  selectedNote: any;
+  selectedNote: noteModel | undefined;
   setSelectedNote: (newNote: any) => void;
 }
 
@@ -11,7 +12,7 @@ const useNotesStore = create<NotesState>()(
     persist(
       (set) => ({
         selectedNote: undefined,
-        setSelectedNote: (newNote) =>
+        setSelectedNote: (newNote: noteModel) =>
           set((_: any) => ({ selectedNote: newNote })),
       }),
       {

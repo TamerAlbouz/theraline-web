@@ -10,19 +10,9 @@ import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
 import "primereact/resources/themes/md-light-indigo/theme.css";
 import { useRouter } from "next/router";
+import { patientDataModel } from "../../../types/patientData";
 
-type patientData = {
-  patientId: string;
-  name: string;
-  imageUrl: string;
-  email: string;
-  phoneNumber: string;
-  city: string;
-  nextAppointment: string | undefined | null;
-  lastAppointment: string | undefined | null;
-};
-
-const patientList: Array<patientData> = [
+const patientList: Array<patientDataModel> = [
   {
     patientId: "1",
     name: "Jane Cooper",
@@ -33,6 +23,14 @@ const patientList: Array<patientData> = [
     city: "Beirut",
     nextAppointment: "Mar 12, 2023",
     lastAppointment: null,
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 2,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
   {
     patientId: "2",
@@ -44,6 +42,14 @@ const patientList: Array<patientData> = [
     city: "Tripoli",
     nextAppointment: undefined,
     lastAppointment: "May 20, 2023",
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 0,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
   {
     patientId: "3",
@@ -55,6 +61,14 @@ const patientList: Array<patientData> = [
     city: "Tripoli",
     nextAppointment: undefined,
     lastAppointment: "May 20, 2023",
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 0,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
   {
     patientId: "4",
@@ -66,6 +80,14 @@ const patientList: Array<patientData> = [
     city: "Tripoli",
     nextAppointment: undefined,
     lastAppointment: "May 20, 2023",
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 0,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
 ];
 
@@ -73,7 +95,6 @@ const PatientList = () => {
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
-    console.log(`::::: /patient-list/${patientId}`);
     router.push(`/patient-list/${patientId}`);
   };
 

@@ -22,6 +22,9 @@ module.exports = {
       height: {
         0.5: "0.125rem",
       },
+      minHeight: (theme) => ({
+        ...theme("spacing"),
+      }),
     },
   },
   plugins: [],
