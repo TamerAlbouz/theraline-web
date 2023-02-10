@@ -3,6 +3,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
+import { useSignUpMutation } from "../../hooks/mutations/useSignupMutation";
 
 const signUpSchema = z
   .object({
@@ -24,6 +25,8 @@ const signUpSchema = z
 type signUpValues = z.infer<typeof signUpSchema>;
 
 const SignUpPage = () => {
+  const { mutate: signup } = useSignUpMutation();
+
   const {
     register,
     handleSubmit,
@@ -34,6 +37,14 @@ const SignUpPage = () => {
 
   const submitUserInfo = async (data: any) => {
     console.log(data);
+
+    let res = signup(data, {
+      onError(error, variables, context) {
+        console.log(error);
+      },
+    });
+
+    console.log(res);
   };
 
   return (

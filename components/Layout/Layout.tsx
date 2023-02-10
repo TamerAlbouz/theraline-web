@@ -8,20 +8,14 @@ function Layout(props: any) {
   const path = router.pathname;
 
   return (
-    <div
-      className={`flex min-h-screen flex-col bg-secondary md:flex-row ${
-        path === "/auth/signin" || path === "/auth/signup"
-          ? "justify-center"
-          : ""
-      } `}
-    >
+    <div className={`flex min-h-screen flex-col bg-secondary md:flex-row`}>
       <SideNavigation />
       <main className="w-full">
         <TopBar />
         <section
-          className={`flex ${
-            path === "/auth/signin" || path === "/auth/signup" ? "h-full" : ""
-          }  flex-wrap items-start justify-center p-5`}
+          className={`flex flex-col items-center justify-center p-5 ${
+            path === "/auth/signin" || path === "/auth/signup" ? "h-full " : ""
+          } `}
         >
           {props.children}
         </section>

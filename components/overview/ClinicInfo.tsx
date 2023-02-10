@@ -1,4 +1,4 @@
-import CardWrapper from "./CardWrapper";
+import CardWrapper from "../card/CardWrapper";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
 

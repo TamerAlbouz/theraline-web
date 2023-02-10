@@ -10,19 +10,9 @@ import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
 import "primereact/resources/themes/md-light-indigo/theme.css";
 import { useRouter } from "next/router";
+import { patientDataModel } from "../../../types/patientData";
 
-type patientData = {
-  patientId: string;
-  name: string;
-  imageUrl: string;
-  email: string;
-  phoneNumber: string;
-  city: string;
-  nextAppointment: string | undefined | null;
-  lastAppointment: string | undefined | null;
-};
-
-const patientList: Array<patientData> = [
+const patientList: Array<patientDataModel> = [
   {
     patientId: "1",
     name: "Jane Cooper",
@@ -33,6 +23,14 @@ const patientList: Array<patientData> = [
     city: "Beirut",
     nextAppointment: "Mar 12, 2023",
     lastAppointment: null,
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 2,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
   {
     patientId: "2",
@@ -44,6 +42,14 @@ const patientList: Array<patientData> = [
     city: "Tripoli",
     nextAppointment: undefined,
     lastAppointment: "May 20, 2023",
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 0,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
   {
     patientId: "3",
@@ -55,6 +61,14 @@ const patientList: Array<patientData> = [
     city: "Tripoli",
     nextAppointment: undefined,
     lastAppointment: "May 20, 2023",
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 0,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
   {
     patientId: "4",
@@ -66,6 +80,14 @@ const patientList: Array<patientData> = [
     city: "Tripoli",
     nextAppointment: undefined,
     lastAppointment: "May 20, 2023",
+    birthday: "Feb 2 2008",
+    gender: "Female",
+    memberStatus: "Active",
+    nextAppointmentsCount: 1,
+    previousAppointmentsCount: 0,
+    registerDate: "Jun 03 2021",
+    street: "Blahaj",
+    zipCode: "1820372",
   },
 ];
 
@@ -73,9 +95,7 @@ const PatientList = () => {
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
-    console.log(`::::: /patient-list/${patientId}`);
     router.push(`/patient-list/${patientId}`);
-    console.log(router.pathname);
   };
 
   const filters = {
@@ -89,7 +109,7 @@ const PatientList = () => {
       paginatorClassName="text-center font-bold text-primary"
       paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-      className="overflow-x-scroll rounded-xl bg-white px-4 py-6"
+      className=" overflow-x-scroll rounded-xl bg-white px-4 py-6"
       rowClassName={() =>
         "bg-gray-200 rounded-lg text-primary border-b-2 border-white cursor-pointer"
       }
@@ -115,35 +135,35 @@ const PatientList = () => {
         sortField="name"
         headerClassName="text-center text-primary-dark cursor-pointer"
         body={basicInfoTemplate}
-        className="w-auto text-center text-primary"
+        // className="w-1/5 text-center text-primary"
       />
 
       <Column
         header="Phone Number"
         headerClassName="text-center text-primary-dark"
         body={phoneNumberTemplate}
-        className="w-auto text-center text-primary"
+        // className="w-1/5 text-center text-primary"
       />
 
       <Column
         header="City"
         headerClassName="text-center text-primary-dark"
         body={cityTemplate}
-        className="w-auto text-center text-primary"
+        // className="w-1/5 text-center text-primary"
       />
 
       <Column
         header="Last Appointment"
         headerClassName="text-center text-primary-dark"
         body={lastAppointmentTemplate}
-        className="w-auto text-center text-primary"
+        // className="w-1/5 text-center text-primary"
       />
 
       <Column
         header="Next Appointment"
         headerClassName="text-center text-primary-dark"
         body={nextAppointmentTemplate}
-        className="w-auto text-center text-primary"
+        // className="w-1/5 text-center text-primary"
       />
     </DataTable>
   );

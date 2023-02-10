@@ -1,6 +1,5 @@
-import { Tab } from "@headlessui/react";
 import { Chart } from "primereact/chart";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Statistics() {
   const lastName = "Doe";

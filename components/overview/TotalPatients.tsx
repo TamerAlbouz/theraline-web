@@ -1,4 +1,4 @@
-import CardWrapper from "./CardWrapper";
+import CardWrapper from "../card/CardWrapper";
 
 function TotalPatients() {
   return (

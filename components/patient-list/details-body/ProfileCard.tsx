@@ -1,11 +1,7 @@
 import Link from "next/link";
+import { patientDataModel } from "../../../types/patientData";
 
-const ProfileCard = (props: {
-  name: string;
-  email: string;
-  pastAppointments: number;
-  upcomingAppointments: number;
-}) => {
+const ProfileCard = (props: { data: patientDataModel }) => {
   return (
     <div className="flex flex-col items-center rounded-lg bg-primary-dark px-6 py-10">
       <img
@@ -14,14 +10,14 @@ const ProfileCard = (props: {
         alt=""
       />
 
-      <p className="my-2 text-xl font-bold text-white">{props.name}</p>
+      <p className="my-2 text-xl font-bold text-white">{props.data.name}</p>
 
-      <p className="text-md my-2 text-white">{props.email}</p>
+      <p className="text-md my-2 text-white">{props.data.email}</p>
 
       <div className="flex flex-row">
         <div className="flex flex-col items-center">
           <p className="text-xl font-bold text-white">
-            {props.pastAppointments}
+            {props.data.previousAppointmentsCount}
           </p>
 
           <p className="text-lg text-white">Past</p>
@@ -31,7 +27,7 @@ const ProfileCard = (props: {
 
         <div className="flex flex-col items-center">
           <p className="text-xl font-bold text-white">
-            {props.upcomingAppointments}
+            {props.data.nextAppointmentsCount}
           </p>
 
           <p className="text-lg text-white">Upcoming</p>

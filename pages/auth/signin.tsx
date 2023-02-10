@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
+import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -16,6 +17,8 @@ const signInSchema = z.object({
 type signInValues = z.infer<typeof signInSchema>;
 
 const SignInPage = () => {
+  const { mutate: login } = useLoginMutation();
+
   const {
     register,
     handleSubmit,
@@ -30,6 +33,14 @@ const SignInPage = () => {
 
   const submitUserInfo = async (data: any) => {
     console.log(data);
+
+    let res = login(data, {
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+
+    console.log(res);
 
     await signIn("credentials", {
       email: data.email,
