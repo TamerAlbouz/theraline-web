@@ -83,71 +83,69 @@ const PatientList = () => {
   };
 
   return (
-    <div className="pb-4">
-      <DataTable
-        value={patientList}
-        paginator
-        paginatorClassName="text-center font-bold text-primary"
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-        className="overflow-x-scroll rounded-xl bg-white px-4 py-6"
-        rowClassName={() =>
-          "bg-gray-200 rounded-lg text-primary border-b-2 border-white cursor-pointer"
-        }
-        onRowClick={(rowData: DataTableRowClickEventParams) => {
-          navigateToPatient(rowData.data.patientId);
-        }}
-        rows={3}
-        removableSort
-        dataKey="id"
-        filters={filters}
-        filterDisplay="row"
-        responsiveLayout="scroll"
-        emptyMessage="No patients found."
-      >
-        <Column
-          field="basicInfo"
-          header="Basic Info"
-          showFilterMenu={false}
-          filter
-          filterField="name"
-          filterPlaceholder="Search by name"
-          sortable
-          sortField="name"
-          headerClassName="text-center text-primary-dark cursor-pointer"
-          body={basicInfoTemplate}
-          className="w-1/5 px-2 text-primary"
-        />
+    <DataTable
+      value={patientList}
+      paginator
+      paginatorClassName="text-center font-bold text-primary"
+      paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+      className="overflow-x-scroll rounded-xl bg-white px-4 py-6"
+      rowClassName={() =>
+        "bg-gray-200 rounded-lg text-primary border-b-2 border-white cursor-pointer"
+      }
+      onRowClick={(rowData: DataTableRowClickEventParams) => {
+        navigateToPatient(rowData.data.patientId);
+      }}
+      rows={3}
+      removableSort
+      dataKey="id"
+      filters={filters}
+      filterDisplay="row"
+      responsiveLayout="scroll"
+      emptyMessage="No patients found."
+    >
+      <Column
+        field="basicInfo"
+        header="Basic Info"
+        showFilterMenu={false}
+        filter
+        filterField="name"
+        filterPlaceholder="Search by name"
+        sortable
+        sortField="name"
+        headerClassName="text-center text-primary-dark cursor-pointer"
+        body={basicInfoTemplate}
+        className="w-auto text-center text-primary"
+      />
 
-        <Column
-          header="Phone Number"
-          headerClassName="text-center text-primary-dark"
-          body={phoneNumberTemplate}
-          className="w-1/5 px-2 text-center text-primary"
-        />
+      <Column
+        header="Phone Number"
+        headerClassName="text-center text-primary-dark"
+        body={phoneNumberTemplate}
+        className="w-auto text-center text-primary"
+      />
 
-        <Column
-          header="City"
-          headerClassName="text-center text-primary-dark"
-          body={cityTemplate}
-          className="w-1/5 px-2 text-center text-primary"
-        />
+      <Column
+        header="City"
+        headerClassName="text-center text-primary-dark"
+        body={cityTemplate}
+        className="w-auto text-center text-primary"
+      />
 
-        <Column
-          header="Last Appointment"
-          headerClassName="text-center text-primary-dark"
-          body={lastAppointmentTemplate}
-          className="w-1/5 px-2 text-center text-primary"
-        />
+      <Column
+        header="Last Appointment"
+        headerClassName="text-center text-primary-dark"
+        body={lastAppointmentTemplate}
+        className="w-auto text-center text-primary"
+      />
 
-        <Column
-          header="Next Appointment"
-          headerClassName="text-center text-primary-dark"
-          body={nextAppointmentTemplate}
-          className="text-primarys w-1/5 px-2 text-center"
-        />
-      </DataTable>
-    </div>
+      <Column
+        header="Next Appointment"
+        headerClassName="text-center text-primary-dark"
+        body={nextAppointmentTemplate}
+        className="w-auto text-center text-primary"
+      />
+    </DataTable>
   );
 };
 

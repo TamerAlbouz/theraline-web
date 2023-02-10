@@ -1,11 +1,7 @@
 import { getSession } from "next-auth/react";
 
 function PaymentInfoPage() {
-  return (
-    <div>
-      <h1>PaymentInfo</h1>
-    </div>
-  );
+  return;
 }
 
 export async function getServerSideProps(context: any) {

@@ -47,7 +47,7 @@ export async function getServerSideProps(context: any) {
   const { patientId } = context.params;
   console.log(patientId);
 
-  const session = await getSession();
+  const session = await getSession({ req: context.req });
 
   if (!session) {
     return {

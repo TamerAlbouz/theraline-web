@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 import { Chart } from "primereact/chart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Statistics() {
   const lastName = "Doe";
@@ -78,11 +78,13 @@ function Statistics() {
           <Tab>Tab 2</Tab>
           <Tab>Tab 3</Tab>
         </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>Content 1</Tab.Panel>
-          <Tab.Panel>Content 2</Tab.Panel>
-          <Tab.Panel>Content 3</Tab.Panel>
-        </Tab.Panels>
+        {
+          <Tab.Panels>
+            <Tab.Panel>content 1</Tab.Panel>
+            <Tab.Panel>content 2</Tab.Panel>
+            <Tab.Panel>content 3</Tab.Panel>
+          </Tab.Panels>
+        }
       </Tab.Group> */}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold text-white">

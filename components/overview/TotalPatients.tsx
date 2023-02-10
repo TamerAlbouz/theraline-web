@@ -1,8 +1,8 @@
-import CardWrapper from "../CardWrapper";
+import CardWrapper from "./CardWrapper";
 
 function TotalPatients() {
   return (
-    <CardWrapper title="TOTAL PATIENTS" link="/overview/patients">
+    <CardWrapper title="TOTAL PATIENTS" link="/patient-list">
       <div className="flex flex-col gap-3 font-medium text-white">
         <div>
           <p>This Month</p>

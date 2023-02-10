@@ -1,16 +1,14 @@
 import { getSession } from "next-auth/react";
 import PatientList from "../../components/patient-list/list-body/PatientList";
 import PatientListHeader from "../../components/patient-list/header/Header";
+import { Fragment } from "react";
 
 function PatientListPage() {
   return (
-    <div className="w-full">
+    <Fragment>
       <PatientListHeader patientName={undefined} />
-
-      <hr className="my-4" />
-
       <PatientList />
-    </div>
+    </Fragment>
   );
 }
 

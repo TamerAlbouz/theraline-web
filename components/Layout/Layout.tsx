@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import TopBar from "./topbar/topbar";
 import SideNavigation from "./navigation/SideNavigation";
+import { Tab } from "@headlessui/react";
 
 function Layout(props: any) {
   const router = useRouter();
@@ -8,11 +9,11 @@ function Layout(props: any) {
 
   return (
     <div
-      className={`flex min-h-screen flex-col ${
+      className={`flex min-h-screen flex-col bg-secondary md:flex-row ${
         path === "/auth/signin" || path === "/auth/signup"
           ? "justify-center"
           : ""
-      } bg-secondary md:flex-row`}
+      } `}
     >
       <SideNavigation />
       <main className="w-full">
@@ -20,7 +21,7 @@ function Layout(props: any) {
         <section
           className={`flex ${
             path === "/auth/signin" || path === "/auth/signup" ? "h-full" : ""
-          } flex-wrap items-start justify-center p-5`}
+          }  flex-wrap items-start justify-center p-5`}
         >
           {props.children}
         </section>

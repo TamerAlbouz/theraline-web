@@ -1,13 +1,6 @@
-import { useRouter } from "next/router";
-import CardWrapper from "../CardWrapper";
+import CardWrapper from "./CardWrapper";
 
 function Appointments() {
-  const router = useRouter();
-
-  const navigateToLink = (id: any) => {
-    router.push("/overview/appointments/" + id);
-  };
-
   const DUMMY_APPOINTMENTS = [
     {
       id: 1,
@@ -30,15 +23,14 @@ function Appointments() {
   ];
 
   return (
-    <CardWrapper title="APPOINTMENTS TODAY" link="/overview/appointments">
+    <CardWrapper title="APPOINTMENTS TODAY" link="/calendar">
       <div className="flex flex-row justify-between gap-5 overflow-hidden">
         <p className="text-7xl text-white">{DUMMY_APPOINTMENTS.length}</p>
         <div className="flex w-full flex-col gap-3 overflow-scroll">
           {DUMMY_APPOINTMENTS.slice(0, 2).map((appointment) => (
             <div
-              onClick={navigateToLink.bind(null, appointment.id)}
               key={appointment.id}
-              className="flex cursor-pointer items-center justify-between rounded-md bg-primary-dark p-3 text-sm text-white hover:bg-secondary"
+              className="flex items-center justify-between rounded-md bg-primary-dark p-3 text-sm text-white "
             >
               <div>
                 <p>{appointment.length}</p>

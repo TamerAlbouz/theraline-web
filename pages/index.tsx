@@ -1,9 +1,10 @@
+import { Tab } from "@headlessui/react";
 import { getSession } from "next-auth/react";
-import Appointments from "../components/overview/appointments/Appointments";
-import ClinicInfo from "../components/overview/clinics/ClinicInfo";
-import TotalPatients from "../components/overview/patients/TotalPatients";
-import Revenue from "../components/overview/revenue/Revenue";
+import Appointments from "../components/overview/Appointments";
+import ClinicInfo from "../components/overview/ClinicInfo";
+import Revenue from "../components/overview/Revenue";
 import Statistics from "../components/overview/Statistics";
+import TotalPatients from "../components/overview/TotalPatients";
 
 function OverviewPage() {
   return (
