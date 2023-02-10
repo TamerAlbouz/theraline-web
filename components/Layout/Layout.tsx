@@ -8,19 +8,18 @@ function Layout(props: any) {
 
   return (
     <div
-      className={`flex min-h-screen flex-col ${
-        path === "/auth/signin" || path === "/auth/signup"
-          ? "justify-center"
-          : ""
-      } bg-secondary md:flex-row`}
+      className={`flex min-h-screen flex-col bg-secondary md:flex-row`}
     >
       <SideNavigation />
       <main className="w-full">
         <TopBar />
         <section
-          className={`flex ${
-            path === "/auth/signin" || path === "/auth/signup" ? "h-full" : ""
-          } p-5`} // flex-wrap items-start justify-center
+          className={`flex p-5 ${
+            path === "/auth/signin" ||
+            path === "/auth/signup"
+              ? "h-full items-center justify-center"
+              : ""
+          } `}
         >
           {props.children}
         </section>

@@ -3,20 +3,34 @@ import type { AppProps } from "next/app";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import Layout from "../components/Layout/Layout";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
-function MyApp({
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 2 } },
+});
+
+function App({
   Component,
   pageProps,
 }: AppProps<{
   session: Session;
 }>) {
   return (
-    <SessionProvider session={pageProps.session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </SessionProvider>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider session={pageProps.session}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SessionProvider>
+    </QueryClientProvider>
   );
 }
 
-export default MyApp;
+// @Tamer
+// we could probably check if authenticated here.
+// if yes, show the layout; otherwise don't
+
+export default App;
