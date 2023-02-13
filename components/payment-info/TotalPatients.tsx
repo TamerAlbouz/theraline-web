@@ -4,8 +4,10 @@ function TotalPatients() {
   return (
     <CardWrapper title="Total Patients" link="/">
       <div className="flex flex-col gap-2">
-        <p className="text-4xl font-semibold text-white">103</p>
-        <p className="text-lg font-medium text-white">This Month So Far...</p>
+        <p className="text-4xl font-semibold text-textColor">103</p>
+        <p className="text-lg font-medium text-textColor">
+          This Month So Far...
+        </p>
       </div>
     </CardWrapper>
   );

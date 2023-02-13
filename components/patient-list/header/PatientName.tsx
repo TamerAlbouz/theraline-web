@@ -8,9 +8,9 @@ const PatientName = (props: { patientName: string }) => {
         <Link href="/patient-list">Patient List</Link>
       </div>
 
-      <HiChevronRight className="mx-6 h-10 w-10 text-white" />
+      <HiChevronRight className="mx-6 h-10 w-10 text-textColor" />
 
-      <p className="text-2xl text-white">{props.patientName}</p>
+      <p className="text-2xl text-textColor">{props.patientName}</p>
     </div>
   );
 };

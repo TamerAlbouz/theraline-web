@@ -8,7 +8,7 @@ function Layout(props: any) {
   const path = router.pathname;
 
   return (
-    <div className={`flex min-h-screen flex-col bg-secondary md:flex-row`}>
+    <div className="flex min-h-screen flex-col bg-secondary md:flex-row">
       <SideNavigation />
       <main className="w-full">
         <TopBar />

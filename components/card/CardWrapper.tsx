@@ -16,13 +16,13 @@ function CardWrapper(props: any) {
         router.pathname === "/" ? "h-80" : "h-60"
       } w-full flex-grow flex-col justify-between rounded-sm bg-primary p-5 md:w-1/3 xl:w-1/5`}
     >
-      <h1 className="mb-3 text-lg font-semibold text-white">{title}</h1>
+      <h1 className="mb-3 text-lg font-semibold text-textColor">{title}</h1>
       {children}
-      <div className="group mt-3 flex w-36 cursor-pointer flex-row items-center justify-between rounded-full border-2 border-white bg-secondary pl-5 text-white">
+      <div className="group mt-3 flex w-36 cursor-pointer flex-row items-center justify-between rounded-full border-2 border-white bg-secondary pl-5 text-textColor">
         <p className="text-center">More</p>
         <HiArrowCircleRight
           onClick={navigateToLink}
-          className="text-4xl text-white group-hover:text-gray-300"
+          className="text-4xl text-textColor group-hover:text-gray-300"
         />
       </div>
     </div>

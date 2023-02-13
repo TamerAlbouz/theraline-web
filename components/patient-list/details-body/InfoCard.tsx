@@ -20,9 +20,9 @@ const InfoCard = (props: { data: patientDataModel }) => {
             className="flex flex-col items-center border-b border-white p-4 text-center"
             key={index}
           >
-            <p className="text-md text-white">{e.label}</p>
+            <p className="text-md text-textColor">{e.label}</p>
 
-            <p className="text-lg font-bold text-white">{e.value}</p>
+            <p className="text-lg font-bold text-textColor">{e.value}</p>
           </div>
         );
       })}

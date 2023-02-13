@@ -37,7 +37,7 @@ export const NoteCard = (props: { data: noteModel; opensModal: boolean }) => {
         }`}
         onClick={selectNote}
       >
-        <div className="text-white">{props.data.title}</div>
+        <div className="text-textColor">{props.data.title}</div>
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>

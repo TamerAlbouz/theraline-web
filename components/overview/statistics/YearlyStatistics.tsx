@@ -1,7 +1,8 @@
 import { Chart } from "primereact/chart";
 import { useState } from "react";
+import Tabs from "../Tab";
 
-function PaymentStatistics() {
+function YearlyStatistics() {
   const [basicData] = useState({
     labels: [
       "January",
@@ -19,17 +20,21 @@ function PaymentStatistics() {
     ],
     datasets: [
       {
-        label: "Payments",
+        label: "Appointments",
         backgroundColor: "#429cfd",
-        data: [38, 48, 40, 19, 12, 27, 22, 40, 19, 46, 27, 18],
+        data: [68, 48, 40, 19, 86, 27, 81, 40, 19, 86, 27, 81],
+      },
+      {
+        label: "Cancelled",
+        backgroundColor: "#f66d83",
+        data: [20, 16, 36, 24, 40, 10, 15, 36, 24, 40, 10, 15],
       },
     ],
   });
 
   let basicOptions = {
     maintainAspectRatio: false,
-    aspectRatio: 1.25,
-
+    aspectRatio: 0.8,
     plugins: {
       legend: {
         labels: {
@@ -57,16 +62,7 @@ function PaymentStatistics() {
     },
   };
 
-  return (
-    <div className="flex w-full flex-col gap-4 rounded-sm bg-primary-dark p-5">
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-textColor">Statistics</h1>
-      </div>
-      <div className="text-textColor">
-        <Chart type="bar" data={basicData} options={basicOptions} />
-      </div>
-    </div>
-  );
+  return <Chart type="bar" data={basicData} options={basicOptions} />;
 }
 
-export default PaymentStatistics;
+export default YearlyStatistics;

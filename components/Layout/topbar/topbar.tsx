@@ -17,7 +17,7 @@ function TopBar() {
 
   return (
     <header className="hidden flex-row items-center justify-between border-b-2 border-b-white p-5 md:flex">
-      <div className="flex flex-row items-center gap-3 text-2xl text-white">
+      <div className="flex flex-row items-center gap-3 text-2xl text-textColor">
         <navigationItem.icon className="text-4xl" />
         <h1 className="font-semibold">{navigationItem.name}</h1>
       </div>
@@ -26,10 +26,10 @@ function TopBar() {
           <HiSearch />
           <p>Search</p>
         </button>
-        <button className="rounded-full bg-white p-2 text-secondary hover:bg-primary hover:text-white">
+        <button className="rounded-full bg-white p-2 text-secondary hover:bg-primary hover:text-textColor">
           <HiPlus className="text-xl " />
         </button>
-        <button className="rounded-full bg-white p-2 text-secondary  hover:bg-primary hover:text-white">
+        <button className="rounded-full bg-white p-2 text-secondary  hover:bg-primary hover:text-textColor">
           <HiBell className="text-xl " />
         </button>
       </div>

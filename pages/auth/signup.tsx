@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
 import { useSignUpMutation } from "../../hooks/mutations/useSignupMutation";
+import { getSession } from "next-auth/react";
 
 const signUpSchema = z
   .object({
@@ -160,12 +161,25 @@ const SignUpPage = () => {
           <input
             type="submit"
             value="Sign up"
-            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-white hover:bg-primary-dark focus:outline-none"
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
           />
         </div>
       </form>
     </AuthBackgroundCard>
   );
 };
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+}
 
 export default SignUpPage;

@@ -10,27 +10,27 @@ const ProfileCard = (props: { data: patientDataModel }) => {
         alt=""
       />
 
-      <p className="my-2 text-xl font-bold text-white">{props.data.name}</p>
+      <p className="my-2 text-xl font-bold text-textColor">{props.data.name}</p>
 
-      <p className="text-md my-2 text-white">{props.data.email}</p>
+      <p className="text-md my-2 text-textColor">{props.data.email}</p>
 
       <div className="flex flex-row">
         <div className="flex flex-col items-center">
-          <p className="text-xl font-bold text-white">
+          <p className="text-xl font-bold text-textColor">
             {props.data.previousAppointmentsCount}
           </p>
 
-          <p className="text-lg text-white">Past</p>
+          <p className="text-lg text-textColor">Past</p>
         </div>
 
         <div className="m-2 mx-10 h-8 border-l-2 border-white" />
 
         <div className="flex flex-col items-center">
-          <p className="text-xl font-bold text-white">
+          <p className="text-xl font-bold text-textColor">
             {props.data.nextAppointmentsCount}
           </p>
 
-          <p className="text-lg text-white">Upcoming</p>
+          <p className="text-lg text-textColor">Upcoming</p>
         </div>
       </div>
 

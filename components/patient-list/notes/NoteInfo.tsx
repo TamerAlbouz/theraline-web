@@ -41,7 +41,7 @@ export const NoteInfo = (props: { showTitle: boolean }) => {
           onClick={(e) => {
             console.log(body);
           }}
-          className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-white hover:bg-primary"
+          className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-textColor hover:bg-primary"
         />
       )}
     </div>

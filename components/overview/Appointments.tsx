@@ -25,12 +25,12 @@ function Appointments() {
   return (
     <CardWrapper title="APPOINTMENTS TODAY" link="/calendar">
       <div className="flex flex-row justify-between gap-5 overflow-hidden">
-        <p className="text-7xl text-white">{DUMMY_APPOINTMENTS.length}</p>
+        <p className="text-7xl text-textColor">{DUMMY_APPOINTMENTS.length}</p>
         <div className="flex w-full flex-col gap-3 overflow-scroll">
           {DUMMY_APPOINTMENTS.slice(0, 2).map((appointment) => (
             <div
               key={appointment.id}
-              className="flex items-center justify-between rounded-md bg-primary-dark p-3 text-sm text-white "
+              className="flex items-center justify-between rounded-md bg-primary-dark p-3 text-sm text-textColor "
             >
               <div>
                 <p>{appointment.length}</p>

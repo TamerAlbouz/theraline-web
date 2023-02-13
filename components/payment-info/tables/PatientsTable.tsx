@@ -110,7 +110,7 @@ const PatientsTable = () => {
     return (
       <Column
         key={col.id}
-        className="w-1/4 bg-secondary text-center text-white"
+        className="w-1/4 bg-secondary text-center text-textColor"
         body={col.body}
       />
     );

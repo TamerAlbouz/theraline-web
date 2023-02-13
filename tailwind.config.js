@@ -18,9 +18,11 @@ module.exports = {
         "primary-dark": "#002329",
         secondary: "#005A69",
         tertiary: "#00D2F6",
+        textColor: "#FFFFFF",
       },
       height: {
         0.5: "0.125rem",
+        118.75: "29.688rem",
       },
       minHeight: (theme) => ({
         ...theme("spacing"),

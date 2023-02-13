@@ -11,7 +11,7 @@ function ProfileMenu() {
         />
       </Link>
       <div className="hidden md:block">
-        <h2 className="text-xl font-semibold text-white">Tim Cook</h2>
+        <h2 className="text-xl font-semibold text-textColor">Tim Cook</h2>
         <p className="text-secondary">Therapist</p>
       </div>
     </div>

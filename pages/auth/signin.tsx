@@ -100,7 +100,7 @@ const SignInPage = () => {
           <input
             type="submit"
             value="Sign in"
-            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-white hover:bg-primary-dark focus:outline-none"
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
           />
         </div>
       </form>

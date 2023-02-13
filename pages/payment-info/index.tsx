@@ -1,6 +1,5 @@
 import { getSession } from "next-auth/react";
 import { MdArrowForwardIos } from "react-icons/md";
-import PaymentsListHeader from "../../components/payment-info/Header/Header";
 import PaymentStatistics from "../../components/payment-info/Statistics";
 import PatientsTable from "../../components/payment-info/tables/PatientsTable";
 import PaymentsTable from "../../components/payment-info/tables/PaymentsTable";
@@ -11,7 +10,7 @@ function PaymentInfoPage() {
   return (
     <>
       {/* <PaymentsListHeader /> */}
-      <div className="flex w-full gap-16 text-white">
+      <div className="flex w-full gap-16 text-textColor">
         <div className="flex w-2/3 flex-col gap-10">
           <div className="flex flex-col gap-10">
             <div className="flex items-center justify-between">

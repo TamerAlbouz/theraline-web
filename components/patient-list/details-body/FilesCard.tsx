@@ -13,7 +13,7 @@ const FilesCard = () => {
   return (
     <div className="flex flex-col rounded-lg bg-primary-dark px-6 py-10">
       <div className="flex flex-row justify-between">
-        <p className="text-lg font-bold text-white">Files / Documents</p>
+        <p className="text-lg font-bold text-textColor">Files / Documents</p>
 
         <div className="cursor-pointer text-lg font-bold text-tertiary">
           Add Files

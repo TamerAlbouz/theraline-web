@@ -1,6 +1,6 @@
 function CardWrapper(props: any) {
   return (
-    <div className="rounded-md bg-primary p-5 text-lg font-medium text-white">
+    <div className="rounded-md bg-primary p-5 text-lg font-medium text-textColor">
       {props.children}
     </div>
   );

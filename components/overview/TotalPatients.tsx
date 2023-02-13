@@ -3,7 +3,7 @@ import CardWrapper from "../card/CardWrapper";
 function TotalPatients() {
   return (
     <CardWrapper title="TOTAL PATIENTS" link="/patient-list">
-      <div className="flex flex-col gap-3 font-medium text-white">
+      <div className="flex flex-col gap-3 font-medium text-textColor">
         <div>
           <p>This Month</p>
           <p className="text-5xl font-normal">24</p>
