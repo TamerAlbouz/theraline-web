@@ -4,7 +4,6 @@ import { Column } from "primereact/column";
 import { patientDataModel } from "../../../types/patientData";
 import {
   basicInfoTemplate,
-  cityTemplate,
   lastAppointmentTemplate,
   phoneNumberTemplate,
 } from "./TablesTemplates";
@@ -91,6 +90,32 @@ const patientList: Array<patientDataModel> = [
 const PatientsTable = () => {
   const [selectedPatient, setSelectedPatient] = useState<patientDataModel>();
 
+  const columns = [
+    {
+      id: 1,
+      body: basicInfoTemplate,
+    },
+    {
+      id: 2,
+      body: phoneNumberTemplate,
+    },
+    {
+      id: 3,
+      body: phoneNumberTemplate,
+    },
+    { id: 4, body: lastAppointmentTemplate },
+  ];
+
+  const dynamicColumns = columns.map((col) => {
+    return (
+      <Column
+        key={col.id}
+        className="w-1/4 bg-secondary text-center text-white"
+        body={col.body}
+      />
+    );
+  });
+
   return (
     <DataTable
       value={patientList}
@@ -98,22 +123,7 @@ const PatientsTable = () => {
       tableClassName="w-full"
       className="rounded-md"
     >
-      <Column
-        className="w-1/4 bg-secondary text-center text-white "
-        body={basicInfoTemplate}
-      ></Column>
-      <Column
-        className="w-1/4 bg-secondary text-center text-white"
-        body={phoneNumberTemplate}
-      ></Column>
-      <Column
-        className="w-1/4 bg-secondary text-center text-white"
-        body={cityTemplate}
-      ></Column>
-      <Column
-        className="w-1/4 bg-secondary text-center text-white"
-        body={lastAppointmentTemplate}
-      ></Column>
+      {dynamicColumns}
     </DataTable>
   );
 };

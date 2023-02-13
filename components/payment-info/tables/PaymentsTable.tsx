@@ -1,7 +1,6 @@
 import React from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { patientDataModel } from "../../../types/patientData";
 import { paymentDataModel } from "../../../types/paymentData";
 import {
   paymentAmountTemplate,
@@ -31,6 +30,27 @@ const paymentList: Array<paymentDataModel> = [
 ];
 
 const PaymentsTable = () => {
+  const columns = [
+    { id: 1, header: "Date", body: paymentDateTemplate },
+    { id: 2, header: "Paid", body: paymentStatusTemplate },
+    { id: 3, header: "Method", body: paymentMethodTemplate },
+    { id: 4, header: "Notes", body: paymentNoteTemplate },
+    { id: 5, header: "Amount", body: paymentAmountTemplate },
+  ];
+
+  const dynamicColumns = columns.map((col) => {
+    return (
+      <Column
+        key={col.id}
+        header={col.header}
+        headerClassName="p-3 bg-primary-dark text-xl"
+        bodyClassName="bg-primary"
+        className="w-1/5 py-5 text-center"
+        body={col.body}
+      />
+    );
+  });
+
   return (
     <DataTable
       value={paymentList}
@@ -39,41 +59,7 @@ const PaymentsTable = () => {
       tableClassName="w-full"
       className="rounded-md bg-primary-dark p-1"
     >
-      <Column
-        header="Date"
-        headerClassName="p-3 bg-primary-dark text-xl"
-        bodyClassName="bg-primary"
-        className="w-1/5 py-5 text-center"
-        body={paymentDateTemplate}
-      ></Column>
-      <Column
-        header="Paid"
-        headerClassName="p-3 bg-primary-dark text-xl"
-        bodyClassName="bg-primary"
-        className="w-1/5 py-5 text-center"
-        body={paymentStatusTemplate}
-      ></Column>
-      <Column
-        header="Method"
-        headerClassName="p-3 bg-primary-dark text-xl"
-        bodyClassName="bg-primary"
-        className="w-1/5 py-5 text-center"
-        body={paymentMethodTemplate}
-      ></Column>
-      <Column
-        header="Notes"
-        headerClassName="p-3 bg-primary-dark text-xl"
-        bodyClassName="bg-primary"
-        className="w-1/5 py-5 text-center"
-        body={paymentNoteTemplate}
-      ></Column>
-      <Column
-        header="Amount"
-        headerClassName="p-3 bg-primary-dark text-xl"
-        bodyClassName="bg-primary"
-        className="w-1/5 py-5 text-center"
-        body={paymentAmountTemplate}
-      ></Column>
+      {dynamicColumns}
     </DataTable>
   );
 };
