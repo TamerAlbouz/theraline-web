@@ -37,7 +37,7 @@ function SideNavigation() {
                     <img
                       className="hidden h-9 w-auto md:block"
                       src="https://tailwindui.com/img/logos/mark.svg?color=white"
-                      alt="Your Company"
+                      alt=""
                     />
                     <h1 className="hidden text-2xl font-bold text-white md:block">
                       Theraline

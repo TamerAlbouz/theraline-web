@@ -1,4 +1,4 @@
-import CardWrapper from "../CardWrapper";
+import CardWrapper from "../card/CardWrapper";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
 
@@ -7,7 +7,7 @@ function ClinicInfo() {
   const phone = "(123) 456-7890";
 
   return (
-    <CardWrapper title="CLINIC INFO" link="/overview/clinic">
+    <CardWrapper title="CLINIC INFO" link="/profile">
       <div className="flex flex-col gap-5 font-medium text-white">
         <div className="flex items-center gap-2 ">
           <BiCurrentLocation className="text-2xl" />

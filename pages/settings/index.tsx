@@ -1,11 +1,7 @@
 import { getSession } from "next-auth/react";
 
 function SettingsPage() {
-  return (
-    <div>
-      <h1>Settings</h1>
-    </div>
-  );
+  return <div></div>;
 }
 
 export async function getServerSideProps(context: any) {

@@ -9,7 +9,7 @@ const PatientListHeader = (props: {
   patientName: string | undefined | null;
 }) => {
   return (
-    <div className="mt-2 flex w-full flex-col flex-wrap items-center justify-between lg:flex-row">
+    <div className="my-4 mt-2 flex w-full flex-col flex-wrap items-center justify-between border-b border-solid pb-4 lg:flex-row">
       {!props.patientName && (
         <div className="ml-6 flex flex-col flex-wrap sm:flex-row">
           <PatientCount count={27} />

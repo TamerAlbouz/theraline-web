@@ -1,6 +1,6 @@
-import { noteModel } from "./../types/note.d";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { noteModel } from "../../types/note";
 
 interface NotesState {
   selectedNote: noteModel | undefined;
