@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { useNotesStore } from "../../../hooks/useNotesStore";
+import { useNotesStore } from "../../../hooks/stores/useNotesStore";
 import { noteModel } from "../../../types/note";
 import { NoteInfo } from "./NoteInfo";
 
