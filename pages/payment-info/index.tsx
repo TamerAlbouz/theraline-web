@@ -1,20 +1,42 @@
 import { getSession } from "next-auth/react";
+import { MdArrowForwardIos } from "react-icons/md";
+import PaymentsListHeader from "../../components/payment-info/Header/Header";
 import PaymentStatistics from "../../components/payment-info/Statistics";
+import PatientsTable from "../../components/payment-info/tables/PatientsTable";
+import PaymentsTable from "../../components/payment-info/tables/PaymentsTable";
 import TotalPatients from "../../components/payment-info/TotalPatients";
 import TotalPayments from "../../components/payment-info/TotalPayments";
 
 function PaymentInfoPage() {
   return (
-    <div className="w-full">
-      <DataTableResponsiveDemo />
-      <div className="flex w-4/12 flex-col gap-5">
-        <PaymentStatistics />
-        <div className="flex gap-5">
-          <TotalPayments />
-          <TotalPatients />
+    <>
+      {/* <PaymentsListHeader /> */}
+      <div className="flex w-full gap-16 text-white">
+        <div className="flex w-2/3 flex-col gap-10">
+          <div className="flex flex-col gap-10">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-semibold">Recent Payout</h2>
+              <button className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2">
+                View More
+                <MdArrowForwardIos />
+              </button>
+            </div>
+            <PaymentsTable />
+          </div>
+          <div className="flex flex-col gap-7">
+            <h2 className="text-2xl font-semibold">Recent Treatments</h2>
+            <PatientsTable />
+          </div>
+        </div>
+        <div className="flex w-1/3 flex-col gap-5">
+          <PaymentStatistics />
+          <div className="flex gap-5">
+            <TotalPayments />
+            <TotalPatients />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

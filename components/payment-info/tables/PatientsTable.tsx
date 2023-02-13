@@ -1,16 +1,13 @@
+import React, { useState, useEffect } from "react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { patientDataModel } from "../../../types/patientData";
 import {
   basicInfoTemplate,
-  phoneNumberTemplate,
   cityTemplate,
-  nextAppointmentTemplate,
   lastAppointmentTemplate,
-} from "./PatientCardTemplates";
-import { Column } from "primereact/column";
-import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
-import { FilterMatchMode } from "primereact/api";
-import "primereact/resources/themes/md-light-indigo/theme.css";
-import { useRouter } from "next/router";
-import { patientDataModel } from "../../../types/patientData";
+  phoneNumberTemplate,
+} from "./TablesTemplates";
 
 const patientList: Array<patientDataModel> = [
   {
@@ -21,8 +18,8 @@ const patientList: Array<patientDataModel> = [
     email: "test@gmail",
     phoneNumber: "78-919-933",
     city: "Beirut",
-    nextAppointment: "Mar 12, 2023",
-    lastAppointment: null,
+    nextAppointment: undefined,
+    lastAppointment: "Mar 12, 2023",
     birthday: "Feb 2 2008",
     gender: "Female",
     memberStatus: "Active",
@@ -91,83 +88,34 @@ const patientList: Array<patientDataModel> = [
   },
 ];
 
-const PatientList = () => {
-  const router = useRouter();
-
-  const navigateToPatient = (patientId: string) => {
-    router.push(`/patient-list/${patientId}`);
-  };
-
-  const filters = {
-    name: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  };
+const PatientsTable = () => {
+  const [selectedPatient, setSelectedPatient] = useState<patientDataModel>();
 
   return (
     <DataTable
       value={patientList}
-      paginator
-      paginatorClassName="text-center font-bold text-primary"
-      paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-      className="w-full overflow-x-scroll rounded-xl bg-white px-4 py-6"
-      rowClassName={() =>
-        "bg-gray-200 rounded-lg text-primary border-b-2 border-white cursor-pointer"
-      }
-      onRowClick={(rowData: DataTableRowClickEventParams) => {
-        navigateToPatient(rowData.data.patientId);
-      }}
-      rows={3}
-      removableSort
-      dataKey="id"
-      filters={filters}
-      filterDisplay="row"
       responsiveLayout="scroll"
-      emptyMessage="No patients found."
       tableClassName="w-full"
+      className="rounded-md"
     >
       <Column
-        field="basicInfo"
-        header="Basic Info"
-        showFilterMenu={false}
-        filter
-        filterField="name"
-        filterPlaceholder="Search by name"
-        sortable
-        sortField="name"
-        headerClassName="text-center text-primary-dark cursor-pointer"
+        className="w-1/4 bg-secondary text-center text-white "
         body={basicInfoTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
+      ></Column>
       <Column
-        header="Phone Number"
-        headerClassName="text-center text-primary-dark"
+        className="w-1/4 bg-secondary text-center text-white"
         body={phoneNumberTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
+      ></Column>
       <Column
-        header="City"
-        headerClassName="text-center text-primary-dark"
+        className="w-1/4 bg-secondary text-center text-white"
         body={cityTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
+      ></Column>
       <Column
-        header="Last Appointment"
-        headerClassName="text-center text-primary-dark"
+        className="w-1/4 bg-secondary text-center text-white"
         body={lastAppointmentTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
-      <Column
-        header="Next Appointment"
-        headerClassName="text-center text-primary-dark"
-        body={nextAppointmentTemplate}
-        className="w-1/5 text-center text-primary"
-      />
+      ></Column>
     </DataTable>
   );
 };
 
-export default PatientList;
+export default PatientsTable;
