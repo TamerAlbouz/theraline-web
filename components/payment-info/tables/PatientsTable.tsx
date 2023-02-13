@@ -4,6 +4,7 @@ import { Column } from "primereact/column";
 import { patientDataModel } from "../../../types/patientData";
 import {
   basicInfoTemplate,
+  cityTemplate,
   lastAppointmentTemplate,
   phoneNumberTemplate,
 } from "./TablesTemplates";
@@ -101,7 +102,7 @@ const PatientsTable = () => {
     },
     {
       id: 3,
-      body: phoneNumberTemplate,
+      body: cityTemplate,
     },
     { id: 4, body: lastAppointmentTemplate },
   ];
@@ -110,7 +111,7 @@ const PatientsTable = () => {
     return (
       <Column
         key={col.id}
-        className="w-1/4 bg-secondary text-center text-textColor"
+        className="relative w-1/4 text-center text-textColor"
         body={col.body}
       />
     );
@@ -122,6 +123,9 @@ const PatientsTable = () => {
       responsiveLayout="scroll"
       tableClassName="w-full"
       className="rounded-md"
+      rowClassName={(rowData) => {
+        return "cursor-pointer";
+      }}
     >
       {dynamicColumns}
     </DataTable>

@@ -36,7 +36,7 @@ export const cityTemplate = (data: patientDataModel) => {
 
 export const lastAppointmentTemplate = (data: patientDataModel) => {
   return (
-    <div className="rounded-md bg-primary px-2 py-7">
+    <div className="rounded-r-md bg-primary px-2 py-7">
       <p className="text-md">{data.lastAppointment}</p>
     </div>
   );

@@ -44,7 +44,6 @@ const PaymentsTable = () => {
         key={col.id}
         header={col.header}
         headerClassName="p-3 bg-primary-dark text-xl"
-        bodyClassName="bg-primary"
         className="w-1/5 py-5 text-center"
         body={col.body}
       />
@@ -55,9 +54,12 @@ const PaymentsTable = () => {
     <DataTable
       value={paymentList}
       responsiveLayout="scroll"
-      autoLayout={true}
+      autoLayout
       tableClassName="w-full"
       className="rounded-md bg-primary-dark p-1"
+      rowClassName={(rowData) => {
+        return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
+      }}
     >
       {dynamicColumns}
     </DataTable>

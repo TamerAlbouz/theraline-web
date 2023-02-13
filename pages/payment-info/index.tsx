@@ -11,8 +11,8 @@ function PaymentInfoPage() {
     <>
       {/* <PaymentsListHeader /> */}
       <div className="flex w-full gap-16 text-textColor">
-        <div className="flex w-2/3 flex-col gap-10">
-          <div className="flex flex-col gap-10">
+        <div className="flex w-2/3 flex-col gap-14">
+          <div className="flex flex-col gap-7">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold">Recent Payout</h2>
               <button className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2">
@@ -23,7 +23,13 @@ function PaymentInfoPage() {
             <PaymentsTable />
           </div>
           <div className="flex flex-col gap-7">
-            <h2 className="text-2xl font-semibold">Recent Treatments</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-semibold">Recent Treatments</h2>
+              <button className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2">
+                View More
+                <MdArrowForwardIos />
+              </button>
+            </div>
             <PatientsTable />
           </div>
         </div>
