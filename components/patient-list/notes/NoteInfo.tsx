@@ -6,9 +6,11 @@ export const NoteInfo = (props: { showTitle: boolean }) => {
 
   const [body, setBody] = useState("");
 
-  useEffect(() => {
-    setBody(selectedNote.body);
-  }, selectedNote.body);
+  if (selectedNote) {
+    useEffect(() => {
+      setBody(selectedNote.body);
+    }, [selectedNote.body]);
+  }
 
   if (selectedNote == undefined) {
     return (
