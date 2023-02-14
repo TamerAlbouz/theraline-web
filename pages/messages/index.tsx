@@ -1,19 +1,12 @@
-import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { getSession } from "next-auth/react";
+import ChatsList from "../../components/messages/chats/ChatsList";
+import MessageList from "../../components/messages/MessageList";
 
 function MessegesPage() {
-  const router = useRouter();
-
-  useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push("/auth/signin");
-    },
-  });
-
   return (
     <div>
-      <h1>Messeges</h1>
+      <ChatsList />
+      <MessageList />
     </div>
   );
 }
