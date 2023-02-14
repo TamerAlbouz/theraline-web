@@ -10,8 +10,8 @@ export const basicInfoTemplate = (data: patientDataModel) => {
         alt=""
       />
       <div className="ml-4 flex flex-col">
-        <p className="text-md font-bold ">{data.name}</p>
-        <p className="text-sm">{data.email}</p>
+        <p className="text-md font-bold text-white">{data.name}</p>
+        <p className="text-sm text-white">{data.email}</p>
       </div>
     </div>
   );
@@ -20,7 +20,7 @@ export const basicInfoTemplate = (data: patientDataModel) => {
 export const phoneNumberTemplate = (data: patientDataModel) => {
   return (
     <div className="px-2">
-      <p className="text-md">{data.phoneNumber}</p>
+      <p className="text-md text-center text-white">{data.phoneNumber}</p>
     </div>
   );
 };
@@ -28,7 +28,7 @@ export const phoneNumberTemplate = (data: patientDataModel) => {
 export const cityTemplate = (data: patientDataModel) => {
   return (
     <div className="px-2">
-      <p className="text-md">{data.city}</p>
+      <p className="text-md text-center text-white">{data.city}</p>
     </div>
   );
 };
@@ -36,7 +36,7 @@ export const cityTemplate = (data: patientDataModel) => {
 export const lastAppointmentTemplate = (data: patientDataModel) => {
   return (
     <div className="px-2">
-      <p className="text-md">
+      <p className="text-md text-center text-white">
         {data.nextAppointment ? data.nextAppointment : "-"}
       </p>
     </div>
@@ -46,7 +46,7 @@ export const lastAppointmentTemplate = (data: patientDataModel) => {
 export const nextAppointmentTemplate = (data: patientDataModel) => {
   return (
     <div className="px-2">
-      <p className="text-md">
+      <p className="text-md text-center text-white">
         {data.lastAppointment ? data.lastAppointment : "-"}
       </p>
     </div>
