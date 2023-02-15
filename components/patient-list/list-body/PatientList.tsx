@@ -8,8 +8,17 @@ import {
 import { Column } from "primereact/column";
 import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
+import { Ripple } from "primereact/ripple";
+import { classNames } from "primereact/utils";
 import { useRouter } from "next/router";
 import { patientDataModel } from "../../../types/patientData";
+import {
+  JSXElementConstructor,
+  MouseEventHandler,
+  ReactElement,
+  ReactFragment,
+  ReactPortal,
+} from "react";
 
 const patientList: Array<patientDataModel> = [
   {
@@ -90,7 +99,7 @@ const patientList: Array<patientDataModel> = [
   },
 ];
 
-const PatientList = () => {
+function PatientList() {
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
@@ -101,72 +110,195 @@ const PatientList = () => {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
   };
 
+  const columns = [
+    { id: 1, header: "Basic Info", sortable: true, body: basicInfoTemplate },
+    {
+      id: 2,
+      header: "Phone Number",
+      sortable: false,
+      body: phoneNumberTemplate,
+    },
+    { id: 3, header: "City", sortable: false, body: cityTemplate },
+    {
+      id: 4,
+      header: "Last Appointment",
+      sortable: false,
+      body: lastAppointmentTemplate,
+    },
+    {
+      id: 5,
+      header: "Next Appointment",
+      sortable: false,
+      body: nextAppointmentTemplate,
+    },
+  ];
+
+  const paginatorTemplate = {
+    layout: "PrevPageLink PageLinks NextPageLink CurrentPageReport",
+    PrevPageLink: (options: {
+      className: string | undefined;
+      onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+      disabled: boolean | undefined;
+    }) => {
+      return (
+        <button
+          type="button"
+          className={options.className}
+          onClick={options.onClick}
+          disabled={options.disabled}
+        >
+          <span className="p-3 font-bold text-white hover:text-tertiary">
+            Previous
+          </span>
+          <Ripple />
+        </button>
+      );
+    },
+    NextPageLink: (options: {
+      className: string | undefined;
+      onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+      disabled: boolean | undefined;
+    }) => {
+      return (
+        <button
+          type="button"
+          className={options.className}
+          onClick={options.onClick}
+          disabled={options.disabled}
+        >
+          <span className="p-3 font-bold text-white hover:text-tertiary">
+            Next
+          </span>
+          <Ripple />
+        </button>
+      );
+    },
+    PageLinks: (options: {
+      view: { startPage: number; endPage: any };
+      page: number;
+      totalPages: any;
+      className: string | undefined;
+      onClick: MouseEventHandler<HTMLButtonElement> | undefined;
+    }) => {
+      if (
+        (options.view.startPage === options.page &&
+          options.view.startPage !== 0) ||
+        (options.view.endPage === options.page &&
+          options.page + 1 !== options.totalPages)
+      ) {
+        const className = classNames(options.className, { "p-disabled": true });
+
+        return (
+          <span className={className} style={{ userSelect: "none" }}>
+            ...
+          </span>
+        );
+      }
+
+      return (
+        <button
+          type="button"
+          className={options.className + " mx-2 font-bold text-white"}
+          onClick={options.onClick}
+        >
+          {options.page + 1}
+          <Ripple />
+        </button>
+      );
+    },
+    CurrentPageReport: (options: {
+      first:
+        | string
+        | number
+        | boolean
+        | ReactElement<any, string | JSXElementConstructor<any>>
+        | ReactFragment
+        | ReactPortal
+        | null
+        | undefined;
+      last:
+        | string
+        | number
+        | boolean
+        | ReactElement<any, string | JSXElementConstructor<any>>
+        | ReactFragment
+        | ReactPortal
+        | null
+        | undefined;
+      totalRecords:
+        | string
+        | number
+        | boolean
+        | ReactElement<any, string | JSXElementConstructor<any>>
+        | ReactFragment
+        | ReactPortal
+        | null
+        | undefined;
+    }) => {
+      return (
+        <span
+          style={{
+            color: "var(--text-color)",
+            userSelect: "none",
+            width: "120px",
+            textAlign: "center",
+          }}
+          className="mx-6 text-white"
+        >
+          Showing {options.first} - {options.last} of {options.totalRecords}
+        </span>
+      );
+    },
+  };
+
   return (
     <DataTable
       value={patientList}
       paginator
-      paginatorClassName="text-center font-bold text-primary"
-      paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-      className="w-full overflow-x-scroll rounded-xl bg-white px-4 py-6"
-      rowClassName={() =>
-        "bg-gray-200 rounded-lg text-primary border-b-2 border-white cursor-pointer"
-      }
+      paginatorTemplate={paginatorTemplate}
+      paginatorClassName="py-2"
+      rows={3}
       onRowClick={(rowData: DataTableRowClickEventParams) => {
         navigateToPatient(rowData.data.patientId);
       }}
-      rows={3}
+      responsiveLayout="scroll"
+      autoLayout
+      tableClassName="w-full"
+      className="w-full rounded-md bg-primary-dark p-1"
+      rowClassName={(rowData) => {
+        return "hover:bg-secondary bg-primary cursor-pointer transition duration-200 ease-in-out";
+      }}
       removableSort
       dataKey="id"
       filters={filters}
-      filterDisplay="row"
-      responsiveLayout="scroll"
-      emptyMessage="No patients found."
-      tableClassName="w-full"
     >
-      <Column
-        field="basicInfo"
-        header="Basic Info"
-        showFilterMenu={false}
-        filter
-        filterField="name"
-        filterPlaceholder="Search by name"
-        sortable
-        sortField="name"
-        headerClassName="text-center text-primary-dark cursor-pointer"
-        body={basicInfoTemplate}
-        className="w-1/5 text-center text-primary"
-      />
+      {columns.map((col) => {
+        if (col.sortable) {
+          return (
+            <Column
+              key={col.id}
+              header={col.header}
+              headerClassName="p-3 bg-primary-dark text-xl text-white w-12"
+              className="my-5 w-1/5"
+              body={col.body}
+              sortable
+              sortField="name"
+            />
+          );
+        }
 
-      <Column
-        header="Phone Number"
-        headerClassName="text-center text-primary-dark"
-        body={phoneNumberTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
-      <Column
-        header="City"
-        headerClassName="text-center text-primary-dark"
-        body={cityTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
-      <Column
-        header="Last Appointment"
-        headerClassName="text-center text-primary-dark"
-        body={lastAppointmentTemplate}
-        className="w-1/5 text-center text-primary"
-      />
-
-      <Column
-        header="Next Appointment"
-        headerClassName="text-center text-primary-dark"
-        body={nextAppointmentTemplate}
-        className="w-1/5 text-center text-primary"
-      />
+        return (
+          <Column
+            key={col.id}
+            header={col.header}
+            headerClassName="p-3 bg-primary-dark text-xl text-white"
+            className="w-1/5 py-5"
+            body={col.body}
+          />
+        );
+      })}
     </DataTable>
   );
-};
+}
 
 export default PatientList;
