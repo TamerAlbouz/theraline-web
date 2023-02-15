@@ -25,7 +25,7 @@ const signUpSchema = z
 
 type signUpValues = z.infer<typeof signUpSchema>;
 
-const SignUpPage = () => {
+function SignUpPage() {
   const { mutate: signup } = useSignUpMutation();
 
   const {
@@ -167,7 +167,7 @@ const SignUpPage = () => {
       </form>
     </AuthBackgroundCard>
   );
-};
+}
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });

@@ -19,7 +19,6 @@ import {
   ReactFragment,
   ReactPortal,
 } from "react";
-import "primeicons/primeicons.css";
 
 const patientList: Array<patientDataModel> = [
   {
@@ -100,7 +99,7 @@ const patientList: Array<patientDataModel> = [
   },
 ];
 
-const PatientList = () => {
+function PatientList() {
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
@@ -300,6 +299,6 @@ const PatientList = () => {
       })}
     </DataTable>
   );
-};
+}
 
 export default PatientList;

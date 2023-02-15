@@ -16,7 +16,7 @@ const signInSchema = z.object({
 
 type signInValues = z.infer<typeof signInSchema>;
 
-const SignInPage = () => {
+function SignInPage() {
   const { mutate: login } = useLoginMutation();
 
   const {
@@ -106,7 +106,7 @@ const SignInPage = () => {
       </form>
     </AuthBackgroundCard>
   );
-};
+}
 
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });

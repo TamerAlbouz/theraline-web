@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { HiOutlineUser } from "react-icons/hi2";
 
-const NotesCard = () => {
+function NotesCard() {
   const router = useRouter();
 
   const patientId = router.query.patientId;
@@ -44,6 +44,6 @@ const NotesCard = () => {
       </div>
     </div>
   );
-};
+}
 
 export default NotesCard;

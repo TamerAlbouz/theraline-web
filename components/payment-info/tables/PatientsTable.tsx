@@ -88,7 +88,7 @@ const patientList: Array<patientDataModel> = [
   },
 ];
 
-const PatientsTable = () => {
+function PatientsTable() {
   const [selectedPatient, setSelectedPatient] = useState<patientDataModel>();
 
   const columns = [
@@ -130,6 +130,6 @@ const PatientsTable = () => {
       {dynamicColumns}
     </DataTable>
   );
-};
+}
 
 export default PatientsTable;

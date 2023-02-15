@@ -4,7 +4,7 @@ import {
   HiOutlineArrowDownTray,
 } from "react-icons/hi2";
 
-const FilesCard = () => {
+function FilesCard() {
   const dummyData: Array<{ name: string; size: string }> = [
     { name: "Check-up result", size: "240KB" },
     { name: "Report", size: "194KB" },
@@ -47,6 +47,6 @@ const FilesCard = () => {
       })}
     </div>
   );
-};
+}
 
 export default FilesCard;
