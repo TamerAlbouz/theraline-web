@@ -4,7 +4,7 @@ import MonthlyStatistics from "./statistics/MonthlyStatistics";
 import WeeklyStatistics from "./statistics/WeeklyStatistics";
 import YearlyStatistics from "./statistics/YearlyStatistics";
 
-function Tabs() {
+function TabStatistics() {
   const lastName = "Doe";
 
   const dynamicTabs = ["Weekly", "Monthly", "Yearly"].map((tab, i) => {
@@ -54,4 +54,4 @@ function Tabs() {
   );
 }
 
-export default Tabs;
+export default TabStatistics;

@@ -1,6 +1,7 @@
 import { Chart } from "primereact/chart";
 import { useState } from "react";
-import Tabs from "../Tab";
+import Tabs from "../TabStatistics";
+import { basicOptions } from "./ChartOptions";
 
 function WeeklyStatistics() {
   const [basicData] = useState({
@@ -18,36 +19,6 @@ function WeeklyStatistics() {
       },
     ],
   });
-
-  let basicOptions = {
-    maintainAspectRatio: false,
-    aspectRatio: 0.8,
-    plugins: {
-      legend: {
-        labels: {
-          color: "#fff",
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "#fff",
-        },
-        grid: {
-          color: "#303030",
-        },
-      },
-      y: {
-        ticks: {
-          color: "#fff",
-        },
-        grid: {
-          color: "#303030",
-        },
-      },
-    },
-  };
 
   return <Chart type="bar" data={basicData} options={basicOptions} />;
 }

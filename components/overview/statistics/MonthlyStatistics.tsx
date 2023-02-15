@@ -1,5 +1,6 @@
 import { Chart } from "primereact/chart";
 import { useState } from "react";
+import { basicOptions } from "./ChartOptions";
 
 function MonthlyStatistics() {
   const [basicData] = useState({
@@ -55,36 +56,6 @@ function MonthlyStatistics() {
       },
     ],
   });
-
-  let basicOptions = {
-    maintainAspectRatio: false,
-    aspectRatio: 0.8,
-    plugins: {
-      legend: {
-        labels: {
-          color: "#fff",
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "#fff",
-        },
-        grid: {
-          color: "#303030",
-        },
-      },
-      y: {
-        ticks: {
-          color: "#fff",
-        },
-        grid: {
-          color: "#303030",
-        },
-      },
-    },
-  };
 
   return <Chart type="bar" data={basicData} options={basicOptions} />;
 }

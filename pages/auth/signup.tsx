@@ -180,6 +180,10 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
+
+  return {
+    props: { session },
+  };
 }
 
 export default SignUpPage;

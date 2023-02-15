@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { MdArrowForwardIos } from "react-icons/md";
 import PaymentStatistics from "../../components/payment-info/Statistics";
 import PatientsTable from "../../components/payment-info/tables/PatientsTable";
@@ -7,6 +8,12 @@ import TotalPatients from "../../components/payment-info/TotalPatients";
 import TotalPayments from "../../components/payment-info/TotalPayments";
 
 function PaymentInfoPage() {
+  const router = useRouter();
+
+  const navigateToLink = (link: any) => {
+    router.push(link);
+  };
+
   return (
     <>
       {/* <PaymentsListHeader /> */}
@@ -15,7 +22,10 @@ function PaymentInfoPage() {
           <div className="flex flex-col gap-7">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold">Recent Payout</h2>
-              <button className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2">
+              <button
+                className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2"
+                onClick={navigateToLink.bind(null, "/payment-info/payouts")}
+              >
                 View More
                 <MdArrowForwardIos />
               </button>
@@ -25,7 +35,11 @@ function PaymentInfoPage() {
           <div className="flex flex-col gap-7">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold">Recent Treatments</h2>
-              <button className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2">
+
+              <button
+                className="flex items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2"
+                onClick={navigateToLink.bind(null, "/patient-list")}
+              >
                 View More
                 <MdArrowForwardIos />
               </button>

@@ -8,7 +8,6 @@ import {
 import { Column } from "primereact/column";
 import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
-import "primereact/resources/themes/md-light-indigo/theme.css";
 import { useRouter } from "next/router";
 import { patientDataModel } from "../../../types/patientData";
 

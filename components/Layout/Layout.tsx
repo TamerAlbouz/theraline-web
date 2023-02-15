@@ -10,7 +10,7 @@ function Layout(props: any) {
   return (
     <div className="flex min-h-screen flex-col bg-secondary md:flex-row">
       <SideNavigation />
-      <main className="w-full">
+      <main className="w-full text-textColor">
         <TopBar />
         <section
           className={`flex flex-col items-center justify-center p-5 ${

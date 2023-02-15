@@ -27,10 +27,10 @@ function TopBar() {
           <p>Search</p>
         </button>
         <button className="rounded-full bg-white p-2 text-secondary hover:bg-primary hover:text-textColor">
-          <HiPlus className="text-xl " />
+          <HiPlus className="text-xl transition ease-in-out" />
         </button>
         <button className="rounded-full bg-white p-2 text-secondary  hover:bg-primary hover:text-textColor">
-          <HiBell className="text-xl " />
+          <HiBell className="text-xl transition ease-in-out" />
         </button>
       </div>
     </header>
