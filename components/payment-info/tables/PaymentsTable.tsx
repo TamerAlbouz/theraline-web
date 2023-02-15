@@ -8,7 +8,7 @@ import {
   paymentMethodTemplate,
   paymentNoteTemplate,
   paymentStatusTemplate,
-} from "./TablesTemplates";
+} from "./Templates";
 
 const paymentList: Array<paymentDataModel> = [
   {

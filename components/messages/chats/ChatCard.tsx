@@ -34,7 +34,7 @@ function ChatCard(props: { chat: chatModel }) {
         <span>{props.chat.lastMessageDate}</span>
 
         {props.chat.unreadCount > 0 && (
-          <div className="mt-2 flex h-6 w-6 items-center justify-center rounded-xl bg-green-500 px-2 py-1 text-center text-sm font-bold text-white">
+          <div className="mt-2 flex h-6 w-6 items-center justify-center rounded-xl bg-green-500 px-2 py-1 text-center text-sm font-bold text-textColor">
             {props.chat.unreadCount}
           </div>
         )}

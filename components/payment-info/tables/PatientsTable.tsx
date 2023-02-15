@@ -7,7 +7,7 @@ import {
   cityTemplate,
   lastAppointmentTemplate,
   phoneNumberTemplate,
-} from "./TablesTemplates";
+} from "./Templates";
 
 const patientList: Array<patientDataModel> = [
   {

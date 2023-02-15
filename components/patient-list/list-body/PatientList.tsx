@@ -147,7 +147,7 @@ function PatientList() {
           onClick={options.onClick}
           disabled={options.disabled}
         >
-          <span className="p-3 font-bold text-white hover:text-tertiary">
+          <span className="p-3 font-bold text-textColor hover:text-tertiary">
             Previous
           </span>
           <Ripple />
@@ -166,7 +166,7 @@ function PatientList() {
           onClick={options.onClick}
           disabled={options.disabled}
         >
-          <span className="p-3 font-bold text-white hover:text-tertiary">
+          <span className="p-3 font-bold text-textColor hover:text-tertiary">
             Next
           </span>
           <Ripple />
@@ -198,7 +198,7 @@ function PatientList() {
       return (
         <button
           type="button"
-          className={options.className + " mx-2 font-bold text-white"}
+          className={options.className + " mx-2 font-bold text-textColor"}
           onClick={options.onClick}
         >
           {options.page + 1}
@@ -243,7 +243,7 @@ function PatientList() {
             width: "120px",
             textAlign: "center",
           }}
-          className="mx-6 text-white"
+          className="mx-6 text-textColor"
         >
           Showing {options.first} - {options.last} of {options.totalRecords}
         </span>
@@ -278,7 +278,7 @@ function PatientList() {
             <Column
               key={col.id}
               header={col.header}
-              headerClassName="p-3 bg-primary-dark text-xl text-white w-12"
+              headerClassName="p-3 bg-primary-dark text-xl text-textColor w-12"
               className="my-5 w-1/5"
               body={col.body}
               sortable
@@ -291,7 +291,7 @@ function PatientList() {
           <Column
             key={col.id}
             header={col.header}
-            headerClassName="p-3 bg-primary-dark text-xl text-white"
+            headerClassName="p-3 bg-primary-dark text-xl text-textColor"
             className="w-1/5 py-5"
             body={col.body}
           />

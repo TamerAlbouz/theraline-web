@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { paymentDataModel } from "../../../types/paymentData";
 import {
+  paginatorTemplate,
   paymentAmountTemplate,
   paymentDateTemplate,
   paymentMethodTemplate,
   paymentNoteTemplate,
   paymentStatusTemplate,
-} from "./TablesTemplates";
+} from "./Templates";
+import { useRouter } from "next/router";
 
 const paymentList: Array<paymentDataModel> = [
   {
@@ -43,9 +45,84 @@ const paymentList: Array<paymentDataModel> = [
     note: "SFG81237PL99",
     amount: "$207,80",
   },
+  {
+    paymentId: "5",
+    date: "Nov 05, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "6",
+    date: "Nov 06, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "7",
+    date: "Nov 07, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "8",
+    date: "Nov 08, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "9",
+    date: "Nov 09, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "10",
+    date: "Nov 10, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "11",
+    date: "Nov 11, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "12",
+    date: "Nov 12, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
+  {
+    paymentId: "13",
+    date: "Nov 13, 2019",
+    paymentStatus: "Paid",
+    method: "Bank",
+    note: "SFG81237PL99",
+    amount: "$207,80",
+  },
 ];
 
 const PayoutTable = () => {
+  const [first, setFirst] = useState(0);
+  const router = useRouter();
+
   const columns = [
     { id: 1, header: "Date", body: paymentDateTemplate },
     { id: 2, header: "Paid", body: paymentStatusTemplate },
@@ -73,8 +150,13 @@ const PayoutTable = () => {
       autoLayout
       tableClassName="w-full"
       className="rounded-md bg-primary-dark p-1"
-      rows={3}
+      paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
+      rows={9}
       paginator
+      paginatorTemplate={paginatorTemplate}
+      onRowClick={(e) => {
+        router.push(`/payment-info/payouts/${e.data.paymentId}`);
+      }}
       rowClassName={(rowData) => {
         return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
       }}
