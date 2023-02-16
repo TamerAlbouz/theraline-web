@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { paymentDataModel } from "../../../types/paymentData";
@@ -9,27 +9,20 @@ import {
   paymentNoteTemplate,
   paymentStatusTemplate,
 } from "./Templates";
+import { createRandomPayment } from "../../faker/payment";
 
-const paymentList: Array<paymentDataModel> = [
-  {
-    paymentId: "1",
-    date: "Nov 01, 2019",
-    paymentStatus: "Paid",
-    method: "Bank",
-    note: "SFV80127HL22",
-    amount: "$257,90",
-  },
-  {
-    paymentId: "2",
-    date: "Nov 02, 2019",
-    paymentStatus: "Paid",
-    method: "Bank",
-    note: "SFG81237PL99",
-    amount: "$207,80",
-  },
+const payments: Array<paymentDataModel> = [
+  createRandomPayment(),
+  createRandomPayment(),
 ];
 
 const PaymentsTable = () => {
+  const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
+
+  useEffect(() => {
+    setPaymentList(payments);
+  }, []);
+
   const columns = [
     { id: 1, header: "Date", body: paymentDateTemplate },
     { id: 2, header: "Paid", body: paymentStatusTemplate },

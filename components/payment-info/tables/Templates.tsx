@@ -1,3 +1,4 @@
+import { FilterMatchMode } from "primereact/api";
 import { Ripple } from "primereact/ripple";
 import { classNames } from "primereact/utils";
 import React, {
@@ -6,9 +7,11 @@ import React, {
   ReactElement,
   ReactFragment,
   ReactPortal,
+  useState,
 } from "react";
 import { patientDataModel } from "../../../types/patientData";
 import { paymentDataModel } from "../../../types/paymentData";
+import { InputText } from "primereact/inputtext";
 
 export const basicInfoTemplate = (data: patientDataModel) => {
   return (
@@ -71,6 +74,38 @@ export const paymentStatusTemplate = (data: paymentDataModel) => {
     <p className="m-auto w-fit rounded-sm bg-green-600 py-1 px-2 font-semibold">
       {data.paymentStatus}
     </p>
+  );
+};
+
+export const headerTemplate = () => {
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    date: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    paid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    method: { value: null, matchMode: FilterMatchMode.IN },
+    notes: { value: null, matchMode: FilterMatchMode.EQUALS },
+    amount: { value: null, matchMode: FilterMatchMode.EQUALS },
+  });
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const onGlobalFilterChange = (e: any) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+  return (
+    <div className="flex justify-end">
+      <span className="text-black">
+        <i className="pi pi-search" />
+        <InputText
+          value={globalFilterValue}
+          onChange={onGlobalFilterChange}
+          placeholder="Keyword Search"
+        />
+      </span>
+    </div>
   );
 };
 
