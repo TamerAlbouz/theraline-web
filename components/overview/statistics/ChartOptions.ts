@@ -1,6 +1,6 @@
 export const basicOptions = {
   maintainAspectRatio: false,
-  aspectRatio: 0.8,
+  aspectRatio: 0.85,
   plugins: {
     legend: {
       labels: {
