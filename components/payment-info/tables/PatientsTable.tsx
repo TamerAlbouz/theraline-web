@@ -24,8 +24,6 @@ function PatientsTable() {
     setPatientList(patients);
   }, []);
 
-  const [selectedPatient, setSelectedPatient] = useState<patientDataModel>();
-
   const columns = [
     {
       id: 2,

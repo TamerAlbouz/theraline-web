@@ -33,6 +33,6 @@ export var navigation = [
   { name: "Settings", href: "/settings", icon: FiSettings },
 ];
 
-export function classNames(...classes: any) {
+export function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }

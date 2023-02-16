@@ -21,12 +21,13 @@ class Patient {
 
 export function createRandomPatient(): Patient {
   const sex = faker.name.sexType();
-  const name = faker.name.fullName({ sex });
-  const email = faker.internet.email(
-    name.split(" ")[0],
-    name.split(" ")[1],
-    "gmail.com"
-  );
+  const firstName = faker.name.firstName(sex);
+  const lastName = faker.name.lastName();
+  const name = faker.name.fullName({ firstName, lastName });
+  const email = faker.helpers.unique(faker.internet.email, [
+    firstName,
+    lastName,
+  ]);
   const phoneNumber = faker.phone.number().split(" x")[0];
   const city = faker.address.city();
   const street = faker.address.streetName();

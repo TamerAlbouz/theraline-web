@@ -2,7 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { HiArrowCircleRight } from "react-icons/hi";
 
-function CardWrapper(props: any) {
+function CardWrapper(props: {
+  title: string;
+  children: React.ReactNode;
+  link: string;
+}) {
   const { title, children, link } = props;
   const router = useRouter();
 

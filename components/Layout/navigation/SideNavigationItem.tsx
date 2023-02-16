@@ -2,7 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { classNames } from "../utils";
 
-function SideNavigationItem(props: any) {
+function SideNavigationItem(props: {
+  name: string;
+  href: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}) {
   const { name, href } = props;
 
   const router = useRouter();
