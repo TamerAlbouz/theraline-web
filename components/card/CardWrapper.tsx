@@ -26,7 +26,7 @@ function CardWrapper(props: {
         <p className="text-center">More</p>
         <HiArrowCircleRight
           onClick={navigateToLink}
-          className="text-4xl text-textColor group-hover:text-gray-300"
+          className="text-4xl text-textColor transition ease-in-out  group-hover:text-primary"
         />
       </div>
     </div>

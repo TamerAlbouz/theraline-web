@@ -28,9 +28,9 @@ export function createRandomPatient(): Patient {
     firstName,
     lastName,
   ]);
-  const phoneNumber = faker.phone.number().split(" x")[0];
+  const phoneNumber = faker.phone.number("+961-##-###-###");
   const city = faker.address.city();
-  const street = faker.address.streetName();
+  const street = faker.address.street();
 
   return {
     patientId: faker.datatype.uuid(),

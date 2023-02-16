@@ -3,7 +3,6 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { paymentDataModel } from "../../../types/paymentData";
 import {
-  headerTemplate,
   paginatorTemplate,
   paymentAmountTemplate,
   paymentDateTemplate,
@@ -13,6 +12,8 @@ import {
 } from "./Templates";
 import { useRouter } from "next/router";
 import { createRandomPayment } from "../../faker/payment";
+import { InputText } from "primereact/inputtext";
+import { FilterMatchMode } from "primereact/api";
 
 const payments: Array<paymentDataModel> = [
   createRandomPayment(),
@@ -37,8 +38,23 @@ const payments: Array<paymentDataModel> = [
 ];
 
 const PayoutTable = () => {
-  const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
   const router = useRouter();
+  const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
+
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  });
+
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+
+  const onGlobalFilterChange = (e: any) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
 
   useEffect(() => {
     setPaymentList(payments);
@@ -64,16 +80,36 @@ const PayoutTable = () => {
     );
   });
 
+  const headerTemplate = () => {
+    return (
+      <div className="flex justify-end">
+        <span className="m-2 flex items-center justify-center gap-3 ">
+          <i className="pi pi-search text-xl text-white" />
+          <InputText
+            className="rounded-md bg-primary p-3"
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder="Keyword Search"
+          />
+        </span>
+      </div>
+    );
+  };
+
   return (
     <DataTable
+      dataKey="id"
       value={paymentList}
       responsiveLayout="scroll"
       autoLayout
       tableClassName="w-full"
       className="rounded-md bg-primary-dark p-1"
       paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
-      rows={9}
+      rows={8}
       header={headerTemplate}
+      filters={filters}
+      globalFilterFields={["date", "paymentStatus", "method", "note", "amount"]}
+      emptyMessage="No results found."
       paginator
       paginatorTemplate={paginatorTemplate}
       onRowClick={(e) => {

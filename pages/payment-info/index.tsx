@@ -1,11 +1,11 @@
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { MdArrowForwardIos } from "react-icons/md";
-import PaymentStatistics from "../../components/payment-info/Statistics";
+import PaymentStatistics from "../../components/payment-info/summary/Statistics";
 import PatientsTable from "../../components/payment-info/tables/PatientsTable";
 import PaymentsTable from "../../components/payment-info/tables/PaymentsTable";
-import TotalPatients from "../../components/payment-info/TotalPatients";
-import TotalPayments from "../../components/payment-info/TotalPayments";
+import TotalPatients from "../../components/payment-info/summary/TotalPatients";
+import TotalPayments from "../../components/payment-info/summary/TotalPayments";
 
 function PaymentInfoPage() {
   const router = useRouter();
