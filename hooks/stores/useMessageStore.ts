@@ -1,3 +1,4 @@
+import { messageModel } from "./../../types/chats/message.d";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { chatModel } from "../../types/chats/chat";

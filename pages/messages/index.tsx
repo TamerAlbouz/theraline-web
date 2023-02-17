@@ -1,12 +1,17 @@
 import { getSession } from "next-auth/react";
 import ChatsList from "../../components/messages/chats/ChatsList";
-import MessageList from "../../components/messages/MessageList";
+import AppMessageList from "../../components/messages/messages/MessageList";
 
-function MessegesPage() {
+function MessagesPage() {
   return (
-    <div>
-      <ChatsList />
-      <MessageList />
+    <div className="flex w-full flex-row h-[37rem]">
+      <div className="w-2/5">
+        <ChatsList />
+      </div>
+
+      <div className="w-3/5">
+        <AppMessageList />
+      </div>
     </div>
   );
 }
@@ -28,4 +33,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default MessegesPage;
+export default MessagesPage;

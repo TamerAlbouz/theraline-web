@@ -1,9 +1,20 @@
+import { useMessageStore } from "../../../hooks/stores/useMessageStore";
 import { chatModel } from "../../../types/chats/chat";
 
-function ChatCard(props: { chat: chatModel }) {
-  console.log("building");
+function ChatCard(props: { chat: chatModel; isLast: boolean }) {
+  const { selectedChat, setSelectedChat } = useMessageStore();
+
+  const selectChat = () => {
+    setSelectedChat(props.chat);
+  };
+
   return (
-    <div className="flex cursor-pointer flex-row items-start justify-between border-b border-gray-200 py-3 px-2 transition-all duration-150 hover:bg-gray-50">
+    <div
+      onClick={selectChat}
+      className={`flex cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
+        props.isLast ? "" : "border-b border-gray-200"
+      } ${selectedChat == props.chat ? "bg-primary" : ""}`}
+    >
       <div className="flex flex-row items-center">
         <div className="relative">
           <img
@@ -18,11 +29,11 @@ function ChatCard(props: { chat: chatModel }) {
         </div>
 
         <div className="ml-4 mr-6 flex flex-col">
-          <span className="font-bold text-black">{props.chat.name}</span>
+          <span className="font-bold">{props.chat.name}</span>
 
           <span
             className={
-              props.chat.unreadCount > 0 ? "text-black" : "text-gray-500"
+              props.chat.unreadCount > 0 ? "text-white" : "text-gray-400"
             }
           >
             {props.chat.lastMessage}
