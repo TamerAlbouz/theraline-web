@@ -6,7 +6,7 @@ import {
   paymentAmountTemplate,
   paymentDateTemplate,
   paymentMethodTemplate,
-  paymentNoteTemplate,
+  paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
 import { createRandomPayment } from "../../faker/payment";
@@ -24,10 +24,9 @@ const PaymentsTable = () => {
   }, []);
 
   const columns = [
-    { id: 1, header: "Date", body: paymentDateTemplate },
     { id: 2, header: "Paid", body: paymentStatusTemplate },
-    { id: 3, header: "Method", body: paymentMethodTemplate },
-    { id: 4, header: "Notes", body: paymentNoteTemplate },
+    { id: 3, header: "Date", body: paymentDateTemplate },
+    { id: 4, header: "Method", body: paymentMethodTemplate },
     { id: 5, header: "Amount", body: paymentAmountTemplate },
   ];
 
@@ -37,7 +36,7 @@ const PaymentsTable = () => {
         key={col.id}
         header={col.header}
         headerClassName="p-3 bg-primary-dark text-xl"
-        className="w-1/5 py-5 text-center"
+        className="w-auto py-5 text-center"
         body={col.body}
       />
     );
@@ -54,6 +53,13 @@ const PaymentsTable = () => {
         return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
       }}
     >
+      <Column
+        key={1}
+        header={"Patient"}
+        headerClassName="py-3 bg-primary-dark text-xl"
+        className="w-4/12 py-5"
+        body={paymentPatientTemplate}
+      />
       {dynamicColumns}
     </DataTable>
   );

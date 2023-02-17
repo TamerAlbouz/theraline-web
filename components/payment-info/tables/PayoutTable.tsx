@@ -7,7 +7,7 @@ import {
   paymentAmountTemplate,
   paymentDateTemplate,
   paymentMethodTemplate,
-  paymentNoteTemplate,
+  paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
 import { useRouter } from "next/router";
@@ -61,10 +61,10 @@ const PayoutTable = () => {
   }, []);
 
   const columns = [
-    { id: 1, header: "Date", body: paymentDateTemplate },
+    { id: 1, header: "Patient", body: paymentPatientTemplate },
     { id: 2, header: "Paid", body: paymentStatusTemplate },
-    { id: 3, header: "Method", body: paymentMethodTemplate },
-    { id: 4, header: "Notes", body: paymentNoteTemplate },
+    { id: 3, header: "Date", body: paymentDateTemplate },
+    { id: 4, header: "Method", body: paymentMethodTemplate },
     { id: 5, header: "Amount", body: paymentAmountTemplate },
   ];
 
@@ -82,9 +82,10 @@ const PayoutTable = () => {
 
   const headerTemplate = () => {
     return (
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between pl-5">
+        <span className="text-2xl font-semibold text-textColor">Payouts</span>
         <span className="m-2 flex items-center justify-center gap-3 ">
-          <i className="pi pi-search text-xl text-white" />
+          <i className="pi pi-search text-xl text-textColor" />
           <InputText
             className="rounded-md bg-primary p-3"
             value={globalFilterValue}
@@ -105,10 +106,17 @@ const PayoutTable = () => {
       tableClassName="w-full"
       className="rounded-md bg-primary-dark p-1"
       paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
-      rows={8}
+      rows={7}
       header={headerTemplate}
       filters={filters}
-      globalFilterFields={["date", "paymentStatus", "method", "note", "amount"]}
+      globalFilterFields={[
+        "name",
+        "email",
+        "paymentStatus",
+        "date",
+        "method",
+        "amount",
+      ]}
       emptyMessage="No results found."
       paginator
       paginatorTemplate={paginatorTemplate}

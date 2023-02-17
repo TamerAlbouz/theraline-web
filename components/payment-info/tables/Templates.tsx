@@ -51,6 +51,22 @@ export const lastAppointmentTemplate = (data: patientDataModel) => {
   );
 };
 
+export const paymentPatientTemplate = (data: paymentDataModel) => {
+  return (
+    <div className="mx-4 flex items-center justify-start gap-4">
+      <img
+        className="h-10 w-10 rounded-full md:h-12 md:w-12"
+        src={data.imageUrl}
+        alt=""
+      />
+      <div className="flex flex-col text-left">
+        <p className="text-md font-bold ">{data.name}</p>
+        <p className="text-sm">{data.email}</p>
+      </div>
+    </div>
+  );
+};
+
 export const paymentAmountTemplate = (data: paymentDataModel) => {
   return <p>{data.amount}</p>;
 };
@@ -61,10 +77,6 @@ export const paymentDateTemplate = (data: paymentDataModel) => {
 
 export const paymentMethodTemplate = (data: paymentDataModel) => {
   return <p>{data.method}</p>;
-};
-
-export const paymentNoteTemplate = (data: paymentDataModel) => {
-  return <p>{data.note}</p>;
 };
 
 export const paymentStatusTemplate = (data: paymentDataModel) => {
