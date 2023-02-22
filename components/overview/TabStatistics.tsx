@@ -29,7 +29,7 @@ function TabStatistics() {
     <Tab.Group
       as="div"
       defaultIndex={0}
-      className="flex h-118.75 w-full flex-col gap-2 rounded-sm bg-primary-dark p-5"
+      className="flex h-118.75 w-full flex-col gap-2 rounded-md bg-primary-dark p-5"
     >
       <div className="flex items-center justify-between text-textColor">
         <h1 className="text-2xl font-semibold ">

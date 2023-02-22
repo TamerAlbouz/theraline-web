@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import { createRandomPayment } from "../../faker/payment";
 import { InputText } from "primereact/inputtext";
 import { FilterMatchMode } from "primereact/api";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
 
 const payments: Array<paymentDataModel> = [
   createRandomPayment(),
@@ -40,6 +42,7 @@ const payments: Array<paymentDataModel> = [
 const PayoutTable = () => {
   const router = useRouter();
   const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
+  const [visible, setVisible] = useState(false);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -87,7 +90,7 @@ const PayoutTable = () => {
         <span className="m-2 flex items-center justify-center gap-3 ">
           <i className="pi pi-search text-xl text-textColor" />
           <InputText
-            className="rounded-md bg-primary p-3"
+            className="rounded-md bg-primary p-3 text-textColor"
             value={globalFilterValue}
             onChange={onGlobalFilterChange}
             placeholder="Keyword Search"
@@ -97,38 +100,75 @@ const PayoutTable = () => {
     );
   };
 
+  const onHide = () => {
+    setVisible(false);
+  };
+
+  const renderFooter = () => {
+    return (
+      <div>
+        <Button
+          label="No"
+          icon="pi pi-times"
+          onClick={onHide}
+          className="p-button-text"
+        />
+        <Button label="Yes" icon="pi pi-check" onClick={onHide} autoFocus />
+      </div>
+    );
+  };
+
   return (
-    <DataTable
-      dataKey="id"
-      value={paymentList}
-      responsiveLayout="scroll"
-      autoLayout
-      tableClassName="w-full"
-      className="rounded-md bg-primary-dark p-1"
-      paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
-      rows={7}
-      header={headerTemplate}
-      filters={filters}
-      globalFilterFields={[
-        "name",
-        "email",
-        "paymentStatus",
-        "date",
-        "method",
-        "amount",
-      ]}
-      emptyMessage="No results found."
-      paginator
-      paginatorTemplate={paginatorTemplate}
-      onRowClick={(e) => {
-        router.push(`/payment-info/payouts/${e.data.paymentId}`);
-      }}
-      rowClassName={(rowData) => {
-        return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
-      }}
-    >
-      {dynamicColumns}
-    </DataTable>
+    <>
+      <DataTable
+        dataKey="id"
+        value={paymentList}
+        responsiveLayout="scroll"
+        autoLayout
+        tableClassName="w-full"
+        className="rounded-md bg-primary-dark p-1"
+        paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
+        rows={7}
+        header={headerTemplate}
+        filters={filters}
+        globalFilterFields={[
+          "name",
+          "email",
+          "paymentStatus",
+          "date",
+          "method",
+          "amount",
+        ]}
+        emptyMessage="No results found."
+        paginator
+        paginatorTemplate={paginatorTemplate}
+        onRowClick={(e) => {
+          setVisible(true);
+        }}
+        rowClassName={(rowData) => {
+          return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
+        }}
+      >
+        {dynamicColumns}
+      </DataTable>
+      {/* <Dialog
+        header="Header"
+        className="bg-red-500 text-textColor backdrop:bg-gray-50 "
+        visible={visible}
+        footer={renderFooter}
+        onHide={onHide}
+      >
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </Dialog> */}
+    </>
   );
 };
 
