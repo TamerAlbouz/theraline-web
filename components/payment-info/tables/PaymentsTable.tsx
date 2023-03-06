@@ -9,18 +9,13 @@ import {
   paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
-import { createRandomPayment } from "../../faker/payment";
-
-const payments: Array<paymentDataModel> = [
-  createRandomPayment(),
-  createRandomPayment(),
-];
+import { createPayments } from "../../../utils/components/payment-utils";
 
 const PaymentsTable = () => {
   const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
 
   useEffect(() => {
-    setPaymentList(payments);
+    setPaymentList(createPayments(2));
   }, []);
 
   const columns = [

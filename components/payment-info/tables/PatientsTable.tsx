@@ -8,20 +8,13 @@ import {
   lastAppointmentTemplate,
   phoneNumberTemplate,
 } from "./Templates";
-import { createRandomPatient } from "../../faker/patient";
-
-const patients: Array<patientDataModel> = [
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-];
+import { createPatients } from "../../../utils/components/patient-utils";
 
 function PatientsTable() {
   const [patientList, setPatientList] = useState<Array<patientDataModel>>();
 
   useEffect(() => {
-    setPatientList(patients);
+    setPatientList(createPatients(4));
   }, []);
 
   const columns = [

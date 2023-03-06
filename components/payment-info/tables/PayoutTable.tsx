@@ -11,38 +11,19 @@ import {
   paymentStatusTemplate,
 } from "./Templates";
 import { useRouter } from "next/router";
-import { createRandomPayment } from "../../faker/payment";
 import { InputText } from "primereact/inputtext";
 import { FilterMatchMode } from "primereact/api";
-import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
-
-const payments: Array<paymentDataModel> = [
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-  createRandomPayment(),
-];
+import { createPayments } from "../../../utils/components/payment-utils";
 
 const PayoutTable = () => {
   const router = useRouter();
-  const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
   const [visible, setVisible] = useState(false);
+  const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>([]);
+
+  useEffect(() => {
+    setPaymentList(createPayments(50));
+  }, []);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -58,10 +39,6 @@ const PayoutTable = () => {
     setFilters(_filters);
     setGlobalFilterValue(value);
   };
-
-  useEffect(() => {
-    setPaymentList(payments);
-  }, []);
 
   const columns = [
     { id: 1, header: "Patient", body: paymentPatientTemplate },
@@ -128,7 +105,7 @@ const PayoutTable = () => {
         tableClassName="w-full"
         className="rounded-md bg-primary-dark p-1"
         paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
-        rows={7}
+        rows={6}
         header={headerTemplate}
         filters={filters}
         globalFilterFields={[

@@ -1,17 +1,17 @@
 import { faker } from "@faker-js/faker";
 
-class Payment {
-  "paymentId": string;
-  "name": string;
-  "imageUrl": string;
-  "email": string;
-  "date": string;
-  "paymentStatus": string;
-  "method": string;
-  "amount": string;
-}
+type _Payment = {
+  paymentId: string;
+  name: string;
+  imageUrl: string;
+  email: string;
+  date: string;
+  paymentStatus: string;
+  method: string;
+  amount: string;
+};
 
-export function createRandomPayment(): Payment {
+function _createRandomPayment(): _Payment {
   const sex = faker.name.sexType();
   const firstName = faker.name.firstName(sex);
   const lastName = faker.name.lastName();
@@ -31,4 +31,20 @@ export function createRandomPayment(): Payment {
     method: faker.helpers.arrayElement(["Cash", "Credit Card", "Check"]),
     amount: faker.finance.amount(undefined, undefined, 2, "$"),
   };
+}
+
+/**
+ * Creates an array of random payments
+ * @param numPayments - Number of payments to create
+ * @returns Array of random payments
+ * @category Payment
+ * @public
+ * @example
+ * ```ts
+ * import { createRandomPayments } from "@utils/payment-utils";
+ *    const payments = createRandomPayments(10);
+ * ```
+ */
+export function createPayments(numPayments: number): _Payment[] {
+  return Array.from({ length: numPayments }, _createRandomPayment);
 }

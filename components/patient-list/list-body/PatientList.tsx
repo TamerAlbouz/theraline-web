@@ -12,36 +12,14 @@ import { FilterMatchMode } from "primereact/api";
 import { useRouter } from "next/router";
 import { patientDataModel } from "../../../types/patientData";
 import { useEffect, useState } from "react";
-import { createRandomPatient } from "../../faker/patient";
-
-const patients: Array<patientDataModel> = [
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-  createRandomPatient(),
-];
+import { createPatients } from "../../../utils/components/patient-utils";
 
 function PatientList() {
   const [patientList, setPatientList] = useState<Array<patientDataModel>>();
   const router = useRouter();
 
   useEffect(() => {
-    setPatientList(patients);
+    setPatientList(createPatients(50));
   }, []);
 
   const navigateToPatient = (patientId: string) => {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { classNames } from "../utils";
+import { classNames } from "../../../utils/components/layout-utils";
 
 function SideNavigationItem(props: {
   name: string;

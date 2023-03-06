@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import TopBar from "./topbar/topbar";
 import SideNavigation from "./navigation/SideNavigation";
-import { Tab } from "@headlessui/react";
+import TopBar from "./topbar/topbar";
 
 function Layout(props: { children: React.ReactNode }) {
   const router = useRouter();

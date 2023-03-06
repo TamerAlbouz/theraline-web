@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { HiBell, HiPlus, HiSearch } from "react-icons/hi";
-import { navigation } from "../utils";
+import { navigation } from "../../../utils/components/layout-utils";
 
 function TopBar() {
   const router = useRouter();

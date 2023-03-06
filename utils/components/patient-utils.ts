@@ -1,25 +1,26 @@
+import { patientDataModel } from "../../types/patientData";
 import { faker } from "@faker-js/faker";
 
-class Patient {
-  "patientId": string;
-  "name": string;
-  "imageUrl": string;
-  "email": string;
-  "phoneNumber": string;
-  "city": string;
-  "street": string;
-  "gender": string;
-  "birthday": string;
-  "zipCode": string;
-  "memberStatus": string;
-  "registerDate": string;
-  "nextAppointment": string | null;
-  "lastAppointment": string | null;
-  "nextAppointmentsCount": number;
-  "previousAppointmentsCount": number;
-}
+type _Patient = {
+  patientId: string;
+  name: string;
+  imageUrl: string;
+  email: string;
+  phoneNumber: string;
+  city: string;
+  street: string;
+  gender: string;
+  birthday: string;
+  zipCode: string;
+  memberStatus: string;
+  registerDate: string;
+  nextAppointment: string | null;
+  lastAppointment: string | null;
+  nextAppointmentsCount: number;
+  previousAppointmentsCount: number;
+};
 
-export function createRandomPatient(): Patient {
+function _createRandomPatient(): _Patient {
   const sex = faker.name.sexType();
   const firstName = faker.name.firstName(sex);
   const lastName = faker.name.lastName();
@@ -50,4 +51,20 @@ export function createRandomPatient(): Patient {
     nextAppointmentsCount: faker.datatype.number(),
     previousAppointmentsCount: faker.datatype.number(),
   };
+}
+
+/**
+ * Creates an array of random patients
+ * @param numPatients - Number of patients to create
+ * @returns Array of random patients
+ * @category Patient
+ * @public
+ * @example
+ * ```ts
+ * import { createRandomPatients } from "@utils/patient-utils";
+ *   const patients = createRandomPatients(10);
+ * ```
+ */
+export function createPatients(numPatients: number): _Patient[] {
+  return Array.from({ length: numPatients }, _createRandomPatient);
 }
