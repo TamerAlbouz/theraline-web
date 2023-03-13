@@ -21,9 +21,11 @@ export const NoteInfo = (props: { showTitle: boolean }) => {
   }
 
   return (
-    <div className="flex h-full flex-col border-b border-white bg-white p-4 text-black">
+    <div className="flex h-full flex-col rounded-lg border-b border-white bg-white p-4 text-black">
       {props.showTitle && (
-        <p className="mb-2 px-3 text-2xl font-bold">{selectedNote.title}</p>
+        <p className="mb-2 px-3 text-center text-2xl font-bold">
+          {selectedNote.title}
+        </p>
       )}
 
       <textarea

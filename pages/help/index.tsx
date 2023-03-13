@@ -1,10 +1,11 @@
 import { getSession } from "next-auth/react";
+import PrivacyPolicy from "../../components/help/PrivacyPolicy";
 
 function HelpPage() {
   return (
-    <div>
-      <h1>Help Page</h1>
-    </div>
+    <>
+      <PrivacyPolicy />
+    </>
   );
 }
 
