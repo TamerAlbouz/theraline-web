@@ -1,22 +1,21 @@
 import { HiTrash } from "react-icons/hi2";
-import { calendarEvent } from "../../types/calendarEvent";
+import { useCalendarStore } from "../../hooks/stores/useCalendarStore";
 
-function ExistingEventModalContent(props: {
-  data: calendarEvent;
-  deleteEventCallback: () => void;
-}) {
+function ExistingEventModalContent(props: { deleteEventCallback: () => void }) {
+  const { selectedEvent } = useCalendarStore();
+
   return (
     <div className="mt-4">
       <div className="flex flex-row">
         <span className="mr-8">Start:</span>
 
-        {props.data.start.toString()}
+        {selectedEvent!.start.toString()}
       </div>
 
       <div className="mt-4 flex flex-row">
         <span className="mr-8">End:</span>
 
-        {props.data.end.toString()}
+        {selectedEvent!.end.toString()}
       </div>
 
       <HiTrash

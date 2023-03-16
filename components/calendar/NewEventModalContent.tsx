@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { callback } from "chart.js/dist/helpers/helpers.core";
-import { calendarEvent } from "../../types/calendarEvent";
+import { calendarEventModel } from "../../types/calendarEvent";
 
 const newEventSchema = z.object({
   title: z.string(),
@@ -16,13 +14,13 @@ const newEventSchema = z.object({
 type settingsValues = z.infer<typeof newEventSchema>;
 
 function NewEventModalContent(props: {
-  addEventCallback: (data: calendarEvent) => void;
+  addEventCallback: (data: calendarEventModel) => void;
 }) {
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<settingsValues>({
     resolver: zodResolver(newEventSchema),
   });
@@ -67,6 +65,7 @@ function NewEventModalContent(props: {
               id="event-startDate"
               type="date"
               onChange={(e) => {
+                console.log(e.currentTarget.value);
                 setValue("endDate", e.currentTarget.value);
               }}
               className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
