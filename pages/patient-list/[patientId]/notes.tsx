@@ -46,7 +46,7 @@ function NotesPage() {
 
   return (
     <>
-      <div className="hidden h-[40rem] w-full md:flex md:flex-row">
+      <div className="hidden h-[40rem] md:flex md:flex-row">
         <div className="relative mr-4 flex h-full w-2/5 flex-col overflow-y-scroll rounded-lg bg-primary-dark">
           {notes.map((element, index) => {
             return (

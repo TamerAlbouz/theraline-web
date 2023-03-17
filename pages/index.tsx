@@ -7,7 +7,7 @@ import TotalPatients from "../components/overview/TotalPatients";
 
 function OverviewPage() {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
+    <div className="flex flex-col items-center justify-center gap-5">
       <TabStatistics />
       <section className="flex w-full flex-wrap items-center justify-center gap-5">
         <ClinicInfo />

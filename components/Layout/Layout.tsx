@@ -12,7 +12,7 @@ function Layout(props: { children: React.ReactNode }) {
       <main className="w-full text-textColor">
         <TopBar />
         <section
-          className={`flex flex-col items-center justify-center p-5 ${
+          className={`flex w-full flex-col items-center justify-center p-5 ${
             path === "/auth/signin" || path === "/auth/signup" ? "h-full " : ""
           } `}
         >

@@ -10,7 +10,7 @@ function Payout() {
   };
 
   return (
-    <div className="flex w-full flex-col gap-5 px-24">
+    <div className="flex flex-col gap-5 px-24">
       <button
         className="flex w-fit items-center justify-center gap-3 rounded-md border-2 border-solid border-white bg-primary px-4 py-2"
         onClick={navigateToLink.bind(null, "/payment-info")}

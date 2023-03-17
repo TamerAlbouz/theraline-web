@@ -17,7 +17,7 @@ function PaymentInfoPage() {
   return (
     <>
       {/* <PaymentsListHeader /> */}
-      <div className="flex w-full gap-16 text-textColor">
+      <div className="flex gap-16 text-textColor">
         <div className="flex w-2/3 flex-col gap-14">
           <div className="flex flex-col gap-7">
             <div className="flex items-center justify-between">

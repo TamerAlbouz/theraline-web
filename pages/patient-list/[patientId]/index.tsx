@@ -7,7 +7,7 @@ import { patientDataModel } from "../../../types/patientData";
 
 const PatientDetails = (props: { patientData: patientDataModel }) => {
   return (
-    <div className="h-full w-full">
+    <div className="h-full">
       <div className="mb-6 rounded-md border-b-2 border-white bg-primary px-4 pt-2 pb-4">
         <PatientListHeader patientName={props.patientData.name} />
       </div>
