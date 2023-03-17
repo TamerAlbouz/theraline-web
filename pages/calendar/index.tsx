@@ -1,9 +1,12 @@
 import { getSession } from "next-auth/react";
+import AppCalendar from "../../components/calendar/Calendar";
+import CalendarToolbar from "../../components/calendar/Toolbar";
 
 function CalendarPage() {
   return (
-    <div>
-      <h1>Calendar</h1>
+    <div className="h-full w-full">
+      <CalendarToolbar />
+      <AppCalendar />
     </div>
   );
 }
