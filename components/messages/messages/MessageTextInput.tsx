@@ -59,7 +59,7 @@ function MessageTextInput() {
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row ">
       <div className="flex w-full flex-col">
         {fileName != "" && <span className="text-sm">{fileName} uploaded</span>}
 

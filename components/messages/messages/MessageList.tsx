@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useMessageStore } from "../../../hooks/stores/useMessageStore";
 import MessageItem from "./MessageItem";
 import MessageTextInput from "./MessageTextInput";
@@ -64,8 +65,8 @@ function AppMessageList() {
   }
 
   return (
-    <div className="relative flex flex-col rounded-r-lg bg-primary px-4 py-2 h-full">
-      <div className="overflow-y-scroll">
+    <div className="relative flex h-full flex-col justify-end rounded-r-lg bg-primary px-4 py-2">
+      <div className="overflow-y-scroll scroll-smooth">
         {selectedChat == undefined && (
           <span>Please select a chat to continue</span>
         )}
@@ -75,8 +76,7 @@ function AppMessageList() {
 
         {messageItems}
       </div>
-
-      {selectedChat != undefined && <MessageTextInput />}
+      <div>{selectedChat != undefined && <MessageTextInput />}</div>
     </div>
   );
 }

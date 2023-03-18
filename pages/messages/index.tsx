@@ -4,7 +4,7 @@ import AppMessageList from "../../components/messages/messages/MessageList";
 
 function MessagesPage() {
   return (
-    <div className="flex h-[37rem] flex-row">
+    <div className="flex h-[50rem] w-full flex-row">
       <div className="w-2/5">
         <ChatsList />
       </div>
