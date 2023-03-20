@@ -1,8 +1,8 @@
-import InfoCard from "../../../components/patient-list/details-body/InfoCard";
-import NotesCard from "../../../components/patient-list/details-body/NotesCard";
-import ProfileCard from "../../../components/patient-list/details-body/ProfileCard";
-import PatientListHeader from "../../../components/patient-list/header/Header";
-import FilesCard from "../../../components/patient-list/details-body/FilesCard";
+import FilesCard from "../../../components/pages/patient-list/details-body/FilesCard";
+import InfoCard from "../../../components/pages/patient-list/details-body/InfoCard";
+import NotesCard from "../../../components/pages/patient-list/details-body/NotesCard";
+import ProfileCard from "../../../components/pages/patient-list/details-body/ProfileCard";
+import PatientListHeader from "../../../components/pages/patient-list/header/Header";
 import { patientDataModel } from "../../../types/patientData";
 
 const PatientDetails = (props: { patientData: patientDataModel }) => {

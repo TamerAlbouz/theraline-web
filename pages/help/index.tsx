@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import PrivacyPolicy from "../../components/help/PrivacyPolicy";
+import PrivacyPolicy from "../../components/pages/help/PrivacyPolicy";
 
 function HelpPage() {
   return (

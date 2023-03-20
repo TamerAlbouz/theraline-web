@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import Profile from "../../components/settings/Profile";
+import Profile from "../../components/pages/settings/Profile";
 
 function SettingsPage() {
   return (

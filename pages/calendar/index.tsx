@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
-import AppCalendar from "../../components/calendar/Calendar";
-import CalendarToolbar from "../../components/calendar/Toolbar";
+import AppCalendar from "../../components/pages/calendar/Calendar";
+import CalendarToolbar from "../../components/pages/calendar/Toolbar";
 
 function CalendarPage() {
   return (

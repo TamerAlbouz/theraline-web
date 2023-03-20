@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
-import PatientList from "../../components/patient-list/list-body/PatientList";
-import PatientListHeader from "../../components/patient-list/header/Header";
+import PatientList from "../../components/pages/patient-list/list-body/PatientList";
+import PatientListHeader from "../../components/pages/patient-list/header/Header";
 import { Fragment } from "react";
 
 function PatientListPage() {

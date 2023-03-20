@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
-import { NoteCard } from "../../../components/patient-list/notes/NoteCard";
-import { NoteInfo } from "../../../components/patient-list/notes/NoteInfo";
+import { NoteCard } from "../../../components/pages/patient-list/notes/NoteCard";
+import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo";
 import { noteModel } from "../../../types/note";
 import { HiPlus } from "react-icons/hi2";
 import React, { Fragment, useEffect, useRef, useState } from "react";

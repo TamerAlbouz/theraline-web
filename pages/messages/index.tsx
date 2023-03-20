@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
-import ChatsList from "../../components/messages/chats/ChatsList";
-import AppMessageList from "../../components/messages/messages/MessageList";
+import ChatsList from "../../components/pages/messages/chats/ChatsList";
+import AppMessageList from "../../components/pages/messages/messages/MessageList";
 
 function MessagesPage() {
   return (
