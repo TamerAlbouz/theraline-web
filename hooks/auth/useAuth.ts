@@ -22,7 +22,7 @@ export const useAuth = () => {
     lastName: string,
     email: string,
     password: string,
-    phone: string
+    phone: string,
   ) => {
     // Axios register and set data to store
   };

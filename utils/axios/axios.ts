@@ -8,8 +8,7 @@ const baseURL = "https://theraline.onrender.com";
 
 const refreshToken = async () => {
   try {
-    const res = await refreshClient.post("/api/refresh_token");
-
+    const res = await refreshClient.post("/auth/refresh");
     return res.data.access_token;
   } catch (err) {
     throw err;
@@ -32,14 +31,12 @@ export const accessClient = axios.create({
 });
 
 accessClient.interceptors.request.use(
-  (config: AxiosRequestConfig<any>) => {
+  (config) => {
     if (useAuthStore.getState().accessToken) {
       config.headers.Authorization = `Bearer ${
         useAuthStore.getState().accessToken
       }`;
     }
-    console.log(config);
-
     return config;
   },
   (error) => {
@@ -54,17 +51,12 @@ accessClient.interceptors.response.use(
     if (status === 401 && useAuthStore.getState().refreshToken) {
       try {
         const newAccessToken = await refreshToken();
-
         setAccessToken(newAccessToken);
-
         const config = error.config;
-
         config.headers.common.Authorization = `Bearer ${newAccessToken}`;
-
         return axios(config);
       } catch (err) {
         setIsAuthenticated(false);
-
         throw err;
       }
     }

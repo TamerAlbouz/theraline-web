@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
 import { useSignUpMutation } from "../../hooks/mutations/useSignupMutation";
-import { getSession } from "next-auth/react";
+import { AxiosError } from "axios";
+import { useRouter } from "next/router";
 
 const signUpSchema = z
   .object({
@@ -27,6 +28,7 @@ type signUpValues = z.infer<typeof signUpSchema>;
 
 function SignUpPage() {
   const { mutate: signup } = useSignUpMutation();
+  const router = useRouter();
 
   const {
     register,
@@ -40,7 +42,10 @@ function SignUpPage() {
     console.log(data);
 
     let res = signup(data, {
-      onError(error, variables, context) {
+      onSuccess() {
+        router.push("auth/signin");
+      },
+      onError: (error) => {
         console.log(error);
       },
     });
@@ -167,23 +172,6 @@ function SignUpPage() {
       </form>
     </AuthBackgroundCard>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
 
 export default SignUpPage;

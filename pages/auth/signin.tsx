@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import { getSession, signIn } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
+import useAuthStore from "../../hooks/stores/useAuthStore";
+import { useRouter } from "next/router";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -18,6 +18,8 @@ type signInValues = z.infer<typeof signInSchema>;
 
 function SignInPage() {
   const { mutate: login } = useLoginMutation();
+  const { setIsAuthenticated } = useAuthStore();
+  const router = useRouter();
 
   const {
     register,
@@ -35,17 +37,20 @@ function SignInPage() {
     console.log(data);
 
     let res = login(data, {
+      onSuccess: (data) => {
+        console.log(res);
+        setIsAuthenticated(true);
+        router.push("/");
+      },
       onError: (error) => {
         console.log(error);
       },
     });
 
+    // left here just for testing (axios login error)
     console.log(res);
-
-    await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-    });
+    setIsAuthenticated(true);
+    router.push("/");
   };
 
   return (
@@ -106,23 +111,6 @@ function SignInPage() {
       </form>
     </AuthBackgroundCard>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permenant: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
 
 export default SignInPage;

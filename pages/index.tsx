@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/react";
 import Appointments from "../components/pages/overview/Appointments";
 import ClinicInfo from "../components/pages/overview/ClinicInfo";
 import Revenue from "../components/pages/overview/Revenue";
@@ -17,23 +16,6 @@ function OverviewPage() {
       </section>
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permenant: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
 
 export default OverviewPage;

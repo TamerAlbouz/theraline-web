@@ -1,9 +1,5 @@
-import { getSession, signOut } from "next-auth/react";
-
 const SignOutPage = () => {
-  const onSignOut = () => {
-    signOut({ callbackUrl: "/" });
-  };
+  const onSignOut = () => {};
 
   return (
     <button
@@ -14,18 +10,5 @@ const SignOutPage = () => {
     </button>
   );
 };
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permanent: false,
-      },
-    };
-  }
-}
 
 export default SignOutPage;

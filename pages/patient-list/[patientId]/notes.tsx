@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/react";
 import { NoteCard } from "../../../components/pages/patient-list/notes/NoteCard";
 import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo";
 import { noteModel } from "../../../types/note";
@@ -162,20 +161,8 @@ export async function getServerSideProps(context: any) {
   const { patientId } = context.params;
   console.log(patientId);
 
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permenant: false,
-      },
-    };
-  }
-
   return {
     props: {
-      session,
       notes: [
         { title: "title1", body: "body1" },
         { title: "title2", body: "body2" },

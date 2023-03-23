@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/react";
 import ChatsList from "../../components/pages/messages/chats/ChatsList";
 import AppMessageList from "../../components/pages/messages/messages/MessageList";
 
@@ -14,23 +13,6 @@ function MessagesPage() {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permenant: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
 
 export default MessagesPage;

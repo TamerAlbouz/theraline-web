@@ -1,5 +1,5 @@
 import { StateCreator, create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { PersistOptions } from "zustand/middleware";
 
 interface IAuthState {
@@ -30,17 +30,15 @@ const useAuthStore = create<IAuthState>(
       setRefreshToken: (newToken) => set({ refreshToken: newToken }),
 
       user: {},
-
       setUser: (newUser) => set({ user: newUser }),
-
       isAuthenticated: false,
-
       setIsAuthenticated: (newIsAuthenticated) =>
         set({ isAuthenticated: newIsAuthenticated }),
     }),
 
     {
       name: "auth-storage",
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

@@ -20,7 +20,8 @@
     "types/**/*.ts",
     "types/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "utils/axios/axios.ts"
   ],
   "exclude": ["node_modules"]
 }

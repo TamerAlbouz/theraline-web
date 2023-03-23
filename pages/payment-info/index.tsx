@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { MdArrowForwardIos } from "react-icons/md";
 import TotalPatients from "../../components/pages/overview/TotalPatients";
@@ -54,23 +53,6 @@ function PaymentInfoPage() {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession({ req: context.req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permenant: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
 
 export default PaymentInfoPage;
