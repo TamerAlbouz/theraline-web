@@ -41,8 +41,16 @@ function SignUpPage() {
   const submitUserInfo = async (data: any) => {
     console.log(data);
 
-    let res = signup(data, {
-      onSuccess() {
+    const x = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    };
+
+    let res = signup(x, {
+      onSuccess(data) {
+        console.log(data);
         router.push("auth/signin");
       },
       onError: (error) => {

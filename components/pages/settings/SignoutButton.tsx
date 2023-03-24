@@ -1,10 +1,10 @@
 import { useAuth } from "../../../hooks/auth/useAuth";
 
-function LogoutButton() {
-  const { logout } = useAuth();
+function SignoutButton() {
+  const { signout } = useAuth();
 
   const onLogout = () => {
-    logout();
+    signout();
   };
 
   return (
@@ -12,9 +12,9 @@ function LogoutButton() {
       onClick={onLogout}
       className="focus:shadow-outline cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none w-28"
     >
-      Log Out
+      Sign Out
     </button>
   );
 }
 
-export default LogoutButton;
+export default SignoutButton;

@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
 import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
-import useAuthStore from "../../hooks/stores/useAuthStore";
 import { useRouter } from "next/router";
+import { useAuth } from "../../hooks/auth/useAuth";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -18,7 +18,7 @@ type signInValues = z.infer<typeof signInSchema>;
 
 function SignInPage() {
   const { mutate: login } = useLoginMutation();
-  const { setIsAuthenticated } = useAuthStore();
+  const { signin } = useAuth();
   const router = useRouter();
 
   const {
@@ -36,21 +36,22 @@ function SignInPage() {
   const submitUserInfo = async (data: any) => {
     console.log(data);
 
-    let res = login(data, {
+    login(data, {
       onSuccess: (data) => {
-        console.log(res);
-        setIsAuthenticated(true);
+        console.log(data);
+
+        signin(
+          data.data.access_token,
+          data.data.refresh_token,
+          data.data.role[0]
+        );
+
         router.push("/");
       },
       onError: (error) => {
         console.log(error);
       },
     });
-
-    // left here just for testing (axios login error)
-    console.log(res);
-    setIsAuthenticated(true);
-    router.push("/");
   };
 
   return (

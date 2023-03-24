@@ -1,31 +1,22 @@
 import useAuthStore from "../stores/useAuthStore";
-import { useLoginMutation } from "../mutations/useLoginMutation";
 
 export const useAuth = () => {
-  const {
-    setAccessToken,
-    setRefreshToken,
-    setUser,
+  const { setAccessToken, setRefreshToken, setUser, setIsAuthenticated } =
+    useAuthStore();
 
-    setIsAuthenticated,
-  } = useAuthStore();
-
-  const logout = () => {
+  const signout = () => {
     setAccessToken("");
     setRefreshToken("");
     setUser({});
     setIsAuthenticated(false);
   };
 
-  const register = (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    phone: string,
-  ) => {
-    // Axios register and set data to store
+  const signin = (accessToken: string, refreshToken: string, role: string) => {
+    setAccessToken(accessToken);
+    setRefreshToken(refreshToken);
+    setUser({ role });
+    setIsAuthenticated(true);
   };
 
-  return { logout, register };
+  return { signout, signin };
 };

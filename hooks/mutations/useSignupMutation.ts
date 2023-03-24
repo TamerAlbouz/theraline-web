@@ -3,33 +3,26 @@ import { accessClient } from "../../utils/axios/axios";
 import useAuthStore from "../stores/useAuthStore";
 
 const signUpUser = async ({
-  email,
-  password,
   firstName,
   lastName,
-  confirmPassword,
+  email,
+  password,
 }: {
-  email: string;
-  password: string;
   firstName: string;
   lastName: string;
-  confirmPassword: string;
+  email: string;
+  password: string;
 }) => {
-  console.log("REACHED HERE");
-  return accessClient.post("/auth/signup", {
-    email,
-    password,
+  return accessClient.post("/auth/create_doctor", {
     firstName,
     lastName,
-    confirmPassword,
+    email,
+    password,
   });
 };
 
 export const useSignUpMutation = () => {
   return useMutation({
     mutationFn: signUpUser,
-    onError: (error) => {
-      console.log(error);
-    },
   });
 };
