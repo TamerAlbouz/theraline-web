@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import SideNavigation from "./navigation/SideNavigation";
-import TopBar from "./topbar/Topbar";
+import TopBar from "./Topbar/Topbar";
 
 function Layout(props: { children: React.ReactNode }) {
   const router = useRouter();

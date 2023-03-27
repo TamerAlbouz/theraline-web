@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { calendarEventModel } from "../../../types/calendarEvent";
+import useAuthStore from "../../../hooks/stores/useAuthStore";
 
 const newEventSchema = z.object({
   title: z.string(),
@@ -24,6 +25,7 @@ function NewEventModalContent(props: {
   } = useForm<settingsValues>({
     resolver: zodResolver(newEventSchema),
   });
+  const user = useAuthStore();
 
   const submitUserInfo = async (data: any) => {
     console.log(data);
@@ -32,6 +34,29 @@ function NewEventModalContent(props: {
     const end = new Date(`${data.endDate} ${data.endTime}`);
 
     props.addEventCallback({ title: data.title, start, end });
+
+    const result = await fetch(
+      "https://theraline.onrender.com/appointement/create_appointement",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + user.accessToken,
+        },
+        body: JSON.stringify({
+          patient_id: "6418b25a337d50ab61fe5915",
+          date: "2023-07-18T18:00:00",
+          paymentInfo: {
+            amount: 100,
+            status: "Paid",
+            method: "Credit Card",
+            date: "2023-03-18T18:00:00",
+          },
+        }),
+      }
+    );
+
+    console.log(result);
   };
 
   return (

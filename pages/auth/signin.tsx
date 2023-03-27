@@ -33,7 +33,7 @@ function SignInPage() {
     },
   });
 
-  const submitUserInfo = async (data: any) => {
+  async function submitUserInfo(data: signInValues) {
     console.log(data);
 
     login(data, {
@@ -52,7 +52,7 @@ function SignInPage() {
         console.log(error);
       },
     });
-  };
+  }
 
   return (
     <AuthBackgroundCard>

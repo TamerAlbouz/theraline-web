@@ -4,6 +4,8 @@ import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 function ExistingEventModalContent(props: { deleteEventCallback: () => void }) {
   const { selectedEvent } = useCalendarStore();
 
+  fetch("");
+
   return (
     <div className="mt-4">
       <div className="flex flex-row">

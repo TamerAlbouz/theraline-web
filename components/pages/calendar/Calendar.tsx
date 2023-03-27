@@ -14,9 +14,7 @@ import { calendarEventModel } from "../../../types/calendarEvent";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
-
   const [isOpen, setIsOpen] = useState(false);
-
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
 
   useEffect(() => {
@@ -39,6 +37,7 @@ function AppCalendar() {
   return (
     <>
       <FullCalendar
+        aspectRatio={2}
         ref={calendarRef}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         headerToolbar={{
