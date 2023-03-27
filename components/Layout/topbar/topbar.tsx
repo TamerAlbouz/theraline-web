@@ -4,7 +4,6 @@ import { navigation } from "../../../utils/components/layout-utils";
 
 function TopBar() {
   const router = useRouter();
-
   const path = router.pathname;
 
   const navigationItem: any = navigation.find((item) => item.href === path);
