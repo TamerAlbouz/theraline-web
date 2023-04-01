@@ -39,8 +39,17 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-// @Tamer
-// we could probably check if authenticated here.
-// if yes, show the layout; otherwise don't
+export async function getServerSideProps(context: any) {
+  const { req, res } = context;
+
+  if (!req.cookies["access_token"]) {
+    res.writeHead(302, { Location: "/auth/signin" });
+    res.end();
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default App;

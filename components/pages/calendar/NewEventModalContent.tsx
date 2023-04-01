@@ -36,7 +36,7 @@ function NewEventModalContent(props: {
     props.addEventCallback({ title: data.title, start, end });
 
     const result = await fetch(
-      "https://theraline.onrender.com/appointement/create_appointement",
+      "https://theraline.onrender.com/appointment/create_appointment",
       {
         method: "POST",
         headers: {
@@ -45,12 +45,13 @@ function NewEventModalContent(props: {
         },
         body: JSON.stringify({
           patient_id: "6418b25a337d50ab61fe5915",
-          date: "2023-07-18T18:00:00",
+          start_date: "2023-12-07T12:30:00",
+          end_date: "2023-12-07T13:30:00",
           paymentInfo: {
             amount: 100,
             status: "Paid",
             method: "Credit Card",
-            date: "2023-03-18T18:00:00",
+            date: "2023-03-18T16:00:00",
           },
         }),
       }
