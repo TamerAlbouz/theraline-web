@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
 import { useRouter } from "next/router";
 import { useAuth } from "../../hooks/auth/useAuth";
+import { useState } from "react";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -20,6 +21,7 @@ function SignInPage() {
   const { mutate: login } = useLoginMutation();
   const { signin } = useAuth();
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -103,11 +105,14 @@ function SignInPage() {
             </a>
           </Link>
 
-          <input
+          <button
+            disabled={loading}
             type="submit"
             value="Sign in"
-            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
-          />
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600"
+          >
+            Sign In
+          </button>
         </div>
       </form>
     </AuthBackgroundCard>

@@ -10,14 +10,11 @@ import {
   paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
-import { useRouter } from "next/router";
 import { InputText } from "primereact/inputtext";
 import { FilterMatchMode } from "primereact/api";
-import { Button } from "primereact/button";
 import { createPayments } from "../../../../utils/components/payment-utils";
 
 const PayoutTable = () => {
-  const router = useRouter();
   const [visible, setVisible] = useState(false);
   const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>([]);
 
@@ -77,24 +74,6 @@ const PayoutTable = () => {
     );
   };
 
-  const onHide = () => {
-    setVisible(false);
-  };
-
-  const renderFooter = () => {
-    return (
-      <div>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          onClick={onHide}
-          className="p-button-text"
-        />
-        <Button label="Yes" icon="pi pi-check" onClick={onHide} autoFocus />
-      </div>
-    );
-  };
-
   return (
     <>
       <DataTable
@@ -105,7 +84,7 @@ const PayoutTable = () => {
         tableClassName="w-full"
         className="rounded-md bg-primary-dark p-1"
         paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
-        rows={6}
+        rows={7}
         header={headerTemplate}
         filters={filters}
         globalFilterFields={[

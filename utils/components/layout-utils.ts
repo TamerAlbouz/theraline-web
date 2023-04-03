@@ -1,7 +1,7 @@
 import { AiOutlineMessage } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { HiOutlineClipboardList } from "react-icons/hi";
-import { MdOutlinePayments } from "react-icons/md";
+import { MdOutlineArticle, MdOutlinePayments } from "react-icons/md";
 import { RiCalendarTodoLine, RiDashboard2Line } from "react-icons/ri";
 
 export var navigation = [
@@ -14,6 +14,11 @@ export var navigation = [
     name: "Calendar",
     href: "/calendar",
     icon: RiCalendarTodoLine,
+  },
+  {
+    name: "Upload Article",
+    href: "/article",
+    icon: MdOutlineArticle,
   },
   {
     name: "Patient List",

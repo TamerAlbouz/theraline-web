@@ -20,17 +20,7 @@ function Profile() {
           <FormWrapper
             title="Personal Info"
             description="This section contails all your personal info"
-            icon={HiUser}
             child={PersonalInfoForm}
-          />
-        </div>
-
-        <div className="my-4 ml-0 w-full lg:ml-4 lg:w-1/4">
-          <FormWrapper
-            title="Newsletter"
-            description="Receive our newsletters!"
-            icon={HiNewspaper}
-            child={NewsletterForm}
           />
         </div>
       </div>
