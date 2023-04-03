@@ -14,7 +14,7 @@ function AppMessageList() {
     );
   }
 
-  let messageItems: Array<JSX.Element> = [];
+  const messageItems: Array<JSX.Element> = [];
 
   for (let i = 0; i < selectedChat.messages.length; i++) {
     let isFirst = false;
@@ -60,7 +60,7 @@ function AppMessageList() {
         isLast={isLast}
         isOnly={isOnly}
         key={i}
-      />
+      />,
     );
   }
 

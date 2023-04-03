@@ -29,7 +29,7 @@ function PersonalInfoForm() {
     formState: { errors, isDirty },
   } = useForm<settingsValues>({
     resolver: zodResolver(settingsSchema),
-    defaultValues: defaultValues,
+    defaultValues,
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -61,8 +61,7 @@ function PersonalInfoForm() {
           <div className="mb-4">
             <label
               htmlFor="settings-email"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Email
             </label>
             <input
@@ -83,8 +82,7 @@ function PersonalInfoForm() {
           <div className="mb-4">
             <label
               htmlFor="settings-fullName"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Full Name
             </label>
             <input
@@ -104,8 +102,7 @@ function PersonalInfoForm() {
           <div className="mb-4">
             <label
               htmlFor="settings-displayName"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Display Name
             </label>
             <input
@@ -127,8 +124,7 @@ function PersonalInfoForm() {
           <div className="mb-4 w-full">
             <label
               htmlFor="settings-phoneNumber"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Phone Number
             </label>
             <input
@@ -148,8 +144,7 @@ function PersonalInfoForm() {
           <div className="mb-4">
             <label
               htmlFor="settings-description"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Description / Bio
             </label>
             <textarea
@@ -170,8 +165,7 @@ function PersonalInfoForm() {
       <div className="mt-8 flex justify-between">
         <button
           onClick={triggerEdit}
-          className="focus:shadow-outline cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none"
-        >
+          className="focus:shadow-outline cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none">
           {isEditing ? "Cancel" : "Edit"}
         </button>
 

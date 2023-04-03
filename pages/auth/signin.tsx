@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
-import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
 import { useRouter } from "next/router";
-import { useAuth } from "../../hooks/auth/useAuth";
 import { useState } from "react";
+import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
+import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
+import { useAuth } from "../../hooks/auth/useAuth";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -45,7 +45,7 @@ function SignInPage() {
         signin(
           data.data.access_token,
           data.data.refresh_token,
-          data.data.role[0]
+          data.data.role[0],
         );
 
         router.push("/");
@@ -62,8 +62,7 @@ function SignInPage() {
         <div className="mb-4">
           <label
             htmlFor="signin-email"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             Email
           </label>
           <input
@@ -81,8 +80,7 @@ function SignInPage() {
         <div className="mb-4">
           <label
             htmlFor="signin-password"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             Password
           </label>
           <input
@@ -109,8 +107,7 @@ function SignInPage() {
             disabled={loading}
             type="submit"
             value="Sign in"
-            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600"
-          >
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">
             Sign In
           </button>
         </div>

@@ -6,9 +6,9 @@ function ArticlePage({ data }: any) {
 
   const header = (
     <span className="ql-formats">
-      <button className="ql-bold" aria-label="Bold"></button>
-      <button className="ql-italic" aria-label="Italic"></button>
-      <button className="ql-underline" aria-label="Underline"></button>
+      <button className="ql-bold" aria-label="Bold" />
+      <button className="ql-italic" aria-label="Italic" />
+      <button className="ql-underline" aria-label="Underline" />
     </span>
   );
 
@@ -16,7 +16,7 @@ function ArticlePage({ data }: any) {
     <div className="h-full w-full">
       <Editor
         className="h-full w-full text-black"
-        value={text ? text : "Hello, World!"}
+        value={text || "Hello, World!"}
         onTextChange={(e) => setText(e.htmlValue)}
       />
     </div>

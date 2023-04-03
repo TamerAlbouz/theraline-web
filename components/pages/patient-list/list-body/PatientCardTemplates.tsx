@@ -73,8 +73,7 @@ export const paginatorTemplate = {
         type="button"
         className={options.className}
         onClick={options.onClick}
-        disabled={options.disabled}
-      >
+        disabled={options.disabled}>
         <span className="p-3 font-bold text-textColor hover:text-tertiary">
           Previous
         </span>
@@ -92,8 +91,7 @@ export const paginatorTemplate = {
         type="button"
         className={options.className}
         onClick={options.onClick}
-        disabled={options.disabled}
-      >
+        disabled={options.disabled}>
         <span className="p-3 font-bold text-textColor hover:text-tertiary">
           Next
         </span>
@@ -126,9 +124,8 @@ export const paginatorTemplate = {
     return (
       <button
         type="button"
-        className={options.className + " mx-2 font-bold text-textColor"}
-        onClick={options.onClick}
-      >
+        className={`${options.className} mx-2 font-bold text-textColor`}
+        onClick={options.onClick}>
         {options.page + 1}
         <Ripple />
       </button>
@@ -171,8 +168,7 @@ export const paginatorTemplate = {
           width: "120px",
           textAlign: "center",
         }}
-        className="mx-6 text-textColor"
-      >
+        className="mx-6 text-textColor">
         Showing {options.first} - {options.last} of {options.totalRecords}
       </span>
     );

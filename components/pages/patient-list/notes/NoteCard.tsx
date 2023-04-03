@@ -4,12 +4,12 @@ import { NoteInfo } from "./NoteInfo";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
 import { noteModel } from "../../../../types/note";
 
-export const NoteCard = (props: {
+export function NoteCard(props: {
   data: noteModel;
   opensModal: boolean;
   isFirstInList: boolean;
-}) => {
-  let [isOpen, setIsOpen] = useState(false);
+}) {
+  const [isOpen, setIsOpen] = useState(false);
 
   const { selectedNote, setSelectedNote } = useNotesStore();
 
@@ -39,8 +39,7 @@ export const NoteCard = (props: {
             ? "border-b border-green-500 bg-primary"
             : "bg-primary-dark"
         } ${props.isFirstInList ? "rounded-t-lg" : ""}`}
-        onClick={selectNote}
-      >
+        onClick={selectNote}>
         <div className="text-lg font-bold text-textColor">
           {props.data.title}
         </div>
@@ -55,8 +54,7 @@ export const NoteCard = (props: {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+            leaveTo="opacity-0">
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
@@ -69,13 +67,11 @@ export const NoteCard = (props: {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
+                leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="h-[20rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-bold leading-6 text-black"
-                  >
+                    className="text-lg font-bold leading-6 text-black">
                     {selectedNote && selectedNote?.title}
                   </Dialog.Title>
 
@@ -88,4 +84,4 @@ export const NoteCard = (props: {
       </Transition>
     </>
   );
-};
+}

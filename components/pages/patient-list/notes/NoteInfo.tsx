@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
 
-export const NoteInfo = (props: { showTitle: boolean }) => {
+export function NoteInfo(props: { showTitle: boolean }) {
   const { selectedNote } = useNotesStore();
 
   const [body, setBody] = useState("");
@@ -48,4 +48,4 @@ export const NoteInfo = (props: { showTitle: boolean }) => {
       )}
     </div>
   );
-};
+}

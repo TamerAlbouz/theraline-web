@@ -13,8 +13,7 @@ function ChatCard(props: { chat: chatModel; isLast: boolean }) {
       onClick={selectChat}
       className={`flex cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
         props.isLast ? "" : "border-b border-gray-200"
-      } ${selectedChat == props.chat ? "bg-primary" : ""}`}
-    >
+      } ${selectedChat == props.chat ? "bg-primary" : ""}`}>
       <div className="flex flex-row items-center">
         <div className="relative">
           <img
@@ -34,8 +33,7 @@ function ChatCard(props: { chat: chatModel; isLast: boolean }) {
           <span
             className={
               props.chat.unreadCount > 0 ? "text-white" : "text-gray-400"
-            }
-          >
+            }>
             {props.chat.lastMessage}
           </span>
         </div>

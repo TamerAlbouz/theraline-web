@@ -86,19 +86,19 @@ export const paymentStatusTemplate = (data: paymentDataModel) => {
         {data.paymentStatus}
       </p>
     );
-  } else if (data.paymentStatus === "Pending") {
+  }
+  if (data.paymentStatus === "Pending") {
     return (
       <p className="m-auto w-fit rounded-sm bg-yellow-600 py-1 px-2 font-semibold">
         {data.paymentStatus}
       </p>
     );
-  } else {
-    return (
-      <p className="m-auto w-fit rounded-sm bg-red-600 py-1 px-2 font-semibold">
-        {data.paymentStatus}
-      </p>
-    );
   }
+  return (
+    <p className="m-auto w-fit rounded-sm bg-red-600 py-1 px-2 font-semibold">
+      {data.paymentStatus}
+    </p>
+  );
 };
 
 export const paginatorTemplate = {
@@ -129,11 +129,8 @@ export const paginatorTemplate = {
     return (
       <button
         type="button"
-        className={
-          options.className + " mx-3 pb-1 text-lg font-bold text-textColor"
-        }
-        onClick={options.onClick}
-      >
+        className={`${options.className} mx-3 pb-1 text-lg font-bold text-textColor`}
+        onClick={options.onClick}>
         {options.page + 1}
         <Ripple />
       </button>
@@ -174,8 +171,7 @@ export const paginatorTemplate = {
           color: "var(--text-color)",
           userSelect: "none",
         }}
-        className="mx-6 w-fit text-center text-base text-textColor"
-      >
+        className="mx-6 w-fit text-center text-base text-textColor">
         Showing {options.first} - {options.last} of {options.totalRecords}
       </span>
     );

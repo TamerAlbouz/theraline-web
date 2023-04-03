@@ -16,8 +16,7 @@ function MessageItem(props: {
       className={`flex flex-row items-end ${
         props.message.isMe ? "justify-end" : "justify-start"
       } ${props.isFirst ? "mt-6" : ""}
-      ${props.isLast ? "mb-6" : ""} ${props.isOnly ? "my-6" : "my-1"}`}
-    >
+      ${props.isLast ? "mb-6" : ""} ${props.isOnly ? "my-6" : "my-1"}`}>
       {!props.message.isMe && (props.isOnly || props.isLast) && (
         <img
           className="mr-2 h-10 w-10 cursor-pointer rounded-full"
@@ -56,8 +55,7 @@ function MessageItem(props: {
           !props.message.isMe && props.isLast
             ? "rounded-r-3xl rounded-bl-3xl"
             : ""
-        }`}
-      >
+        }`}>
         <span className="whitespace-pre-wrap">{props.message.message}</span>
       </div>
 

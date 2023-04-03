@@ -30,8 +30,7 @@ function Appointments() {
           {DUMMY_APPOINTMENTS.slice(0, 2).map((appointment) => (
             <div
               key={appointment.id}
-              className="flex items-center justify-between rounded-md bg-primary-dark p-3 text-sm text-textColor "
-            >
+              className="flex items-center justify-between rounded-md bg-primary-dark p-3 text-sm text-textColor ">
               <div>
                 <p>{appointment.length}</p>
                 <h6 className="font-semibold">{appointment.title}</h6>

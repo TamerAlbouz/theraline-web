@@ -63,8 +63,7 @@ function PrivacyPolicy() {
         handling of your personal information, please contact us at{" "}
         <a
           className="cursor-pointer text-tertiary"
-          href="mailto:info@theraline.com"
-        >
+          href="mailto:info@theraline.com">
           support@theraline.com
         </a>
         .

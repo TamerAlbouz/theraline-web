@@ -25,9 +25,9 @@ const useNotesStore = create<NotesState>()(
       }),
       {
         name: "notes-storage",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );
 
 export { useNotesStore };

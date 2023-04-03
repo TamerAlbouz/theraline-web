@@ -26,7 +26,7 @@ function PaymentStatistics() {
     ],
   });
 
-  let basicOptions = {
+  const basicOptions = {
     maintainAspectRatio: false,
     aspectRatio: 1.25,
 

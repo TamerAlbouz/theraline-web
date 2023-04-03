@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig } from "axios";
 import useAuthStore from "../../hooks/stores/useAuthStore";
 
-const setAccessToken = useAuthStore.getState().setAccessToken;
-const setIsAuthenticated = useAuthStore.getState().setIsAuthenticated;
+const { setAccessToken } = useAuthStore.getState();
+const { setIsAuthenticated } = useAuthStore.getState();
 
 const baseURL = "https://theraline.onrender.com";
 
@@ -41,7 +41,7 @@ accessClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 accessClient.interceptors.response.use(
@@ -52,9 +52,9 @@ accessClient.interceptors.response.use(
       try {
         const newAccessToken = await refreshToken();
         setAccessToken(newAccessToken);
-        const config = error.config;
+        const { config } = error;
         config.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        return axios(config);
+        return await axios(config);
       } catch (err) {
         setIsAuthenticated(false);
         throw err;
@@ -62,5 +62,5 @@ accessClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

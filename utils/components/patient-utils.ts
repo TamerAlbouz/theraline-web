@@ -1,5 +1,5 @@
-import { patientDataModel } from "../../types/patientData";
 import { faker } from "@faker-js/faker";
+import { patientDataModel } from "../../types/patientData";
 
 type _Patient = {
   patientId: string;

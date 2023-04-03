@@ -10,8 +10,7 @@ function SignoutButton() {
   return (
     <button
       onClick={onLogout}
-      className="focus:shadow-outline cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none w-28"
-    >
+      className="focus:shadow-outline w-28 cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none">
       Sign Out
     </button>
   );

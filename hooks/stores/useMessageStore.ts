@@ -1,6 +1,6 @@
-import { messageModel } from "./../../types/chats/message.d";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { messageModel } from "../../types/chats/message.d";
 import { chatModel } from "../../types/chats/chat";
 
 interface MessagesState {
@@ -18,9 +18,9 @@ const useMessageStore = create<MessagesState>()(
       }),
       {
         name: "messages-storage",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );
 
 export { useMessageStore };

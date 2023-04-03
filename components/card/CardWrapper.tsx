@@ -17,8 +17,7 @@ function CardWrapper(props: {
     <div
       className={`flex w-full flex-grow flex-col justify-between rounded-md bg-primary p-5 md:w-1/3 xl:w-1/5 ${
         router.pathname === "/" ? "h-80" : "h-60"
-      }`}
-    >
+      }`}>
       <h1 className="mb-3 text-lg font-semibold text-textColor">{title}</h1>
       {children}
       <div className="group mt-3 flex w-36 cursor-pointer flex-row items-center justify-between rounded-full border-2 border-white bg-secondary pl-5 text-textColor">

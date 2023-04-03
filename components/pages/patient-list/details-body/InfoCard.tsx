@@ -1,6 +1,6 @@
 import { patientDataModel } from "../../../../types/patientData";
 
-const InfoCard = (props: { data: patientDataModel }) => {
+function InfoCard(props: { data: patientDataModel }) {
   const infoItems: Array<{ label: string; value: string }> = [
     { label: "Gender", value: props.data.gender },
     { label: "Birthday", value: props.data.birthday },
@@ -18,8 +18,7 @@ const InfoCard = (props: { data: patientDataModel }) => {
         return (
           <div
             className="flex flex-col items-center border-b border-white p-4 text-center"
-            key={index}
-          >
+            key={index}>
             <p className="text-md text-textColor">{e.label}</p>
 
             <p className="text-lg font-bold text-textColor">{e.value}</p>
@@ -28,6 +27,6 @@ const InfoCard = (props: { data: patientDataModel }) => {
       })}
     </div>
   );
-};
+}
 
 export default InfoCard;

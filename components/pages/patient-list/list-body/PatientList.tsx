@@ -1,3 +1,8 @@
+import { Column } from "primereact/column";
+import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
+import { FilterMatchMode } from "primereact/api";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import {
   basicInfoTemplate,
   phoneNumberTemplate,
@@ -6,11 +11,6 @@ import {
   lastAppointmentTemplate,
   paginatorTemplate,
 } from "./PatientCardTemplates";
-import { Column } from "primereact/column";
-import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
-import { FilterMatchMode } from "primereact/api";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { patientDataModel } from "../../../../types/patientData";
 import { createPatients } from "../../../../utils/components/patient-utils";
 
@@ -72,8 +72,7 @@ function PatientList() {
       }}
       removableSort
       dataKey="id"
-      filters={filters}
-    >
+      filters={filters}>
       {columns.map((col) => {
         if (col.sortable) {
           return (

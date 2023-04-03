@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import AppCalendar from "../../components/pages/calendar/Calendar";
 import CalendarToolbar from "../../components/pages/calendar/Toolbar";
-import { useEffect } from "react";
 
 function CalendarPage({ data }: any) {
   useEffect(() => {

@@ -76,9 +76,9 @@ function AppCalendar() {
           openModal();
         }}
         initialView="dayGridMonth"
-        nowIndicator={true}
-        editable={true}
-        selectable={true}
+        nowIndicator
+        editable
+        selectable
         initialEvents={[
           {
             title: "nice event",
@@ -97,8 +97,7 @@ function AppCalendar() {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+            leaveTo="opacity-0">
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
@@ -111,13 +110,11 @@ function AppCalendar() {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
+                leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="h-[26rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-bold leading-6 text-black"
-                  >
+                    className="text-xl font-bold leading-6 text-black">
                     {selectedEvent != undefined
                       ? selectedEvent!.title
                       : "New Event"}

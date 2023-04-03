@@ -32,8 +32,7 @@ function NewsletterForm() {
       <div className="mb-4">
         <label
           htmlFor="settings-weekly"
-          className="text-md mb-2 mr-2 font-bold"
-        >
+          className="text-md mb-2 mr-2 font-bold">
           Weekly
         </label>
         <input
@@ -49,8 +48,7 @@ function NewsletterForm() {
       <div className="mb-4">
         <label
           htmlFor="settings-monthly"
-          className="text-md mb-2 mr-2 font-bold"
-        >
+          className="text-md mb-2 mr-2 font-bold">
           Monthly
         </label>
         <input

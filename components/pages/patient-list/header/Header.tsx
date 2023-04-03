@@ -1,13 +1,10 @@
-import HeaderButton from "./HeaderButton";
+import { HiOutlineViewColumns, HiPencil, HiPrinter } from "react-icons/hi2";
+
 import PatientCount from "./PatientCount";
-import { HiOutlineViewColumns } from "react-icons/hi2";
-import { HiPencil } from "react-icons/hi2";
-import { HiPrinter } from "react-icons/hi2";
+import HeaderButton from "./HeaderButton";
 import PatientName from "./PatientName";
 
-const PatientListHeader = (props: {
-  patientName: string | undefined | null;
-}) => {
+function PatientListHeader(props: { patientName: string | undefined | null }) {
   return (
     <div className="my-4 mt-2 flex w-full flex-col flex-wrap items-center justify-between border-b border-solid pb-4 lg:flex-row">
       {!props.patientName && (
@@ -51,6 +48,6 @@ const PatientListHeader = (props: {
       </div>
     </div>
   );
-};
+}
 
 export default PatientListHeader;

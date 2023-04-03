@@ -1,11 +1,7 @@
 import PrivacyPolicy from "../../components/pages/help/PrivacyPolicy";
 
 function HelpPage() {
-  return (
-    <>
-      <PrivacyPolicy />
-    </>
-  );
+  return <PrivacyPolicy />;
 }
 
 export default HelpPage;

@@ -1,10 +1,10 @@
+import { HiPlus } from "react-icons/hi2";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import { NoteCard } from "../../../components/pages/patient-list/notes/NoteCard";
 import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo";
 import { noteModel } from "../../../types/note";
-import { HiPlus } from "react-icons/hi2";
-import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useNotesStore } from "../../../hooks/stores/useNotesStore";
-import { Dialog, Transition } from "@headlessui/react";
 
 const dummyData: Array<noteModel> = [
   { id: "1", title: "title 1", body: "lorem ipsum 1" },
@@ -13,7 +13,7 @@ const dummyData: Array<noteModel> = [
 ];
 
 function NotesPage() {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { notes, setNotes, addNewNote, setSelectedNote } = useNotesStore();
 
@@ -32,16 +32,15 @@ function NotesPage() {
     setIsOpen(false);
   };
 
-  const AddButton = () => {
+  function AddButton() {
     return (
       <div
         onClick={openModal}
-        className="cursor-pointer rounded-full bg-white p-3 transition-all duration-200 hover:bg-gray-100"
-      >
+        className="cursor-pointer rounded-full bg-white p-3 transition-all duration-200 hover:bg-gray-100">
         <HiPlus className="h-7 w-7 text-primary" />
       </div>
     );
-  };
+  }
 
   return (
     <>
@@ -64,7 +63,7 @@ function NotesPage() {
         </div>
 
         <div className="mr-2 h-full w-3/5">
-          <NoteInfo showTitle={true} />
+          <NoteInfo showTitle />
         </div>
       </div>
 
@@ -73,7 +72,7 @@ function NotesPage() {
           return (
             <NoteCard
               data={element}
-              opensModal={true}
+              opensModal
               isFirstInList={index == 0}
               key={index}
             />
@@ -94,8 +93,7 @@ function NotesPage() {
             enterTo="opacity-100"
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+            leaveTo="opacity-0">
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
@@ -108,13 +106,11 @@ function NotesPage() {
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
+                leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="h-[20rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-bold leading-6 text-black"
-                  >
+                    className="text-xl font-bold leading-6 text-black">
                     New note
                   </Dialog.Title>
 

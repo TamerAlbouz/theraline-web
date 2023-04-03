@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { patientDataModel } from "../../../../types/patientData";
 
-const ProfileCard = (props: { data: patientDataModel }) => {
+function ProfileCard(props: { data: patientDataModel }) {
   return (
     <div className="flex flex-col items-center rounded-lg bg-primary-dark px-6 py-10">
       <img
@@ -39,6 +39,6 @@ const ProfileCard = (props: { data: patientDataModel }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ProfileCard;

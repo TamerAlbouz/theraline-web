@@ -1,6 +1,6 @@
 import { HiTrash } from "react-icons/hi2";
-import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import { useEffect, useState } from "react";
+import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import useAuthStore from "../../../hooks/stores/useAuthStore";
 
 function ExistingEventModalContent(props: any) {

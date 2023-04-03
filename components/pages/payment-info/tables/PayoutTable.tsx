@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { InputText } from "primereact/inputtext";
+import { FilterMatchMode } from "primereact/api";
 import { paymentDataModel } from "../../../../types/paymentData";
 import {
   paginatorTemplate,
@@ -10,11 +12,9 @@ import {
   paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
-import { InputText } from "primereact/inputtext";
-import { FilterMatchMode } from "primereact/api";
 import { createPayments } from "../../../../utils/components/payment-utils";
 
-const PayoutTable = () => {
+function PayoutTable() {
   const [visible, setVisible] = useState(false);
   const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>([]);
 
@@ -29,9 +29,9 @@ const PayoutTable = () => {
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const onGlobalFilterChange = (e: any) => {
-    const value = e.target.value;
-    let _filters = { ...filters };
-    _filters["global"].value = value;
+    const { value } = e.target;
+    const _filters = { ...filters };
+    _filters.global.value = value;
 
     setFilters(_filters);
     setGlobalFilterValue(value);
@@ -103,8 +103,7 @@ const PayoutTable = () => {
         }}
         rowClassName={(rowData) => {
           return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
-        }}
-      >
+        }}>
         {dynamicColumns}
       </DataTable>
       {/* <Dialog
@@ -126,6 +125,6 @@ const PayoutTable = () => {
       </Dialog> */}
     </>
   );
-};
+}
 
 export default PayoutTable;

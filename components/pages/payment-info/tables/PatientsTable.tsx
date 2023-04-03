@@ -47,8 +47,7 @@ function PatientsTable() {
       className="rounded-md"
       rowClassName={(rowData) => {
         return "cursor-pointer";
-      }}
-    >
+      }}>
       <Column
         key={1}
         className="relative w-2/5 text-center text-textColor"

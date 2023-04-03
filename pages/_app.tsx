@@ -1,11 +1,11 @@
 import "../styles/globals.css";
 import "primeicons/primeicons.css";
 import type { AppProps } from "next/app";
-import Layout from "../components/Layout/Layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import useAuthStore from "../hooks/stores/useAuthStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import useAuthStore from "../hooks/stores/useAuthStore";
+import Layout from "../components/Layout/Layout";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 2 } },
@@ -42,7 +42,7 @@ function App({ Component, pageProps }: AppProps) {
 export async function getServerSideProps(context: any) {
   const { req, res } = context;
 
-  if (!req.cookies["access_token"]) {
+  if (!req.cookies.access_token) {
     res.writeHead(302, { Location: "/auth/signin" });
     res.end();
   }

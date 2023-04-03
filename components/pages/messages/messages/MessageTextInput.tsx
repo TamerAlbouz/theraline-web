@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useRef } from "react";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+
 import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import { chatModel } from "../../../../types/chats/chat";
@@ -24,7 +24,7 @@ function MessageTextInput() {
 
     if (event.shiftKey) {
       // idk
-      setInput((oldInput) => oldInput + "\n");
+      setInput((oldInput) => `${oldInput}\n`);
 
       return;
     }
@@ -40,11 +40,11 @@ function MessageTextInput() {
 
   const handleUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFileName(event.target.files![0].name);
-    console.log("File Name: " + event.target.files![0].name);
+    console.log(`File Name: ${event.target.files![0].name}`);
   };
 
   const submitMessage = () => {
-    let tempChat: chatModel = selectedChat!;
+    const tempChat: chatModel = selectedChat!;
 
     tempChat.messages.push({
       id: "1121",

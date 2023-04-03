@@ -41,7 +41,7 @@ function NewEventModalContent(props: {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + user.accessToken,
+          Authorization: `Bearer ${user.accessToken}`,
         },
         body: JSON.stringify({
           patient_id: "6418b25a337d50ab61fe5915",
@@ -54,7 +54,7 @@ function NewEventModalContent(props: {
             date: "2023-03-18T16:00:00",
           },
         }),
-      }
+      },
     );
 
     console.log(result);
@@ -80,8 +80,7 @@ function NewEventModalContent(props: {
           <div className="mr-4">
             <label
               htmlFor="event-startDate"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Start Date
             </label>
             <input
@@ -104,8 +103,7 @@ function NewEventModalContent(props: {
           <div>
             <label
               htmlFor="event-startTime"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               Start Time
             </label>
             <input
@@ -128,8 +126,7 @@ function NewEventModalContent(props: {
           <div className="mb-4 mr-4">
             <label
               htmlFor="event-endDate"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               End Date
             </label>
             <input
@@ -151,8 +148,7 @@ function NewEventModalContent(props: {
           <div>
             <label
               htmlFor="event-endTime"
-              className="text-md mb-2 block font-bold"
-            >
+              className="text-md mb-2 block font-bold">
               End Time
             </label>
             <input

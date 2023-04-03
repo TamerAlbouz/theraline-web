@@ -1,10 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
-import SideNavigationList from "./SideNavigationList";
-import ProfileMenu from "./ProfileMenu";
 import { BiHelpCircle } from "react-icons/bi";
 import { HiX, HiMenu, HiBell } from "react-icons/hi";
 import { useRouter } from "next/router";
+import ProfileMenu from "./ProfileMenu";
+import SideNavigationList from "./SideNavigationList";
 
 function SideNavigation() {
   const router = useRouter();
@@ -17,14 +17,13 @@ function SideNavigation() {
   return (
     <Disclosure
       as="nav"
-      className="bg-primary transition ease-in-out md:w-60 lg:w-72"
-    >
+      className="bg-primary transition ease-in-out md:w-60 lg:w-72">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 md:h-full md:px-0">
             <div className="relative flex h-16 items-center justify-between md:h-full md:flex-col">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
-                {/* Mobile menu button*/}
+                {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-textColor hover:bg-secondary hover:text-textColor focus:outline-none">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -65,8 +64,7 @@ function SideNavigation() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:w-full md:flex-col md:justify-start md:gap-5 md:py-5 md:pr-0">
                 <button
                   type="button"
-                  className="block rounded-full bg-secondary p-1 text-textColor hover:bg-gray-500 hover:text-textColor focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary md:hidden"
-                >
+                  className="block rounded-full bg-secondary p-1 text-textColor hover:bg-gray-500 hover:text-textColor focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary md:hidden">
                   <span className="sr-only">View notifications</span>
                   <HiBell className="h-6 w-6" aria-hidden="true" />
                 </button>
@@ -78,7 +76,7 @@ function SideNavigation() {
                     </p>
                   </a>
                 </Link>
-                <div className="hidden h-0.5 w-full bg-secondary md:block"></div>
+                <div className="hidden h-0.5 w-full bg-secondary md:block" />
 
                 <ProfileMenu />
               </div>

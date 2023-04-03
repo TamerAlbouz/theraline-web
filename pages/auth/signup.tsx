@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import Link from "next/link";
-import { useSignUpMutation } from "../../hooks/mutations/useSignupMutation";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import { useSignUpMutation } from "../../hooks/mutations/useSignupMutation";
+import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 
 const signUpSchema = z
   .object({
@@ -48,7 +48,7 @@ function SignUpPage() {
       password: data.password,
     };
 
-    let res = signup(x, {
+    const res = signup(x, {
       onSuccess(data) {
         console.log(data);
         router.push("auth/signin");
@@ -67,8 +67,7 @@ function SignUpPage() {
         <div className="mb-4">
           <label
             htmlFor="signup-first-name"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             First Name
           </label>
           <input
@@ -87,8 +86,7 @@ function SignUpPage() {
         <div className="mb-4">
           <label
             htmlFor="signup-last-name"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             Last Name
           </label>
           <input
@@ -108,8 +106,7 @@ function SignUpPage() {
         <div className="mb-4">
           <label
             htmlFor="signup-email"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             Email
           </label>
           <input
@@ -127,8 +124,7 @@ function SignUpPage() {
         <div className="mb-4">
           <label
             htmlFor="signup-password"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             Password
           </label>
           <input
@@ -147,8 +143,7 @@ function SignUpPage() {
         <div className="mb-4">
           <label
             htmlFor="signup-confirm-password"
-            className="text-md mb-2 block font-bold text-primary-dark"
-          >
+            className="text-md mb-2 block font-bold text-primary-dark">
             Confirm Password
           </label>
           <input

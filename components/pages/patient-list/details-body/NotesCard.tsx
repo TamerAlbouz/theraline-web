@@ -5,7 +5,7 @@ import { HiOutlineUser } from "react-icons/hi2";
 function NotesCard() {
   const router = useRouter();
 
-  const patientId = router.query.patientId;
+  const { patientId } = router.query;
 
   return (
     <div className="flex flex-col rounded-lg bg-primary-dark px-6 py-10">

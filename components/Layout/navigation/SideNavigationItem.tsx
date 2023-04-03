@@ -19,14 +19,13 @@ function SideNavigationItem(props: {
           current
             ? "bg-white text-primary"
             : "text-textColor hover:bg-secondary hover:text-textColor",
-          "flex flex-row items-center px-5 py-4 text-lg font-semibold transition-all duration-200 focus:outline-none"
+          "flex flex-row items-center px-5 py-4 text-lg font-semibold transition-all duration-200 focus:outline-none",
         )}
-        aria-current={current ? "page" : undefined}
-      >
+        aria-current={current ? "page" : undefined}>
         <props.icon
           className={classNames(
             current ? "text-primary" : "text-textColor",
-            "mr-3 h-7 w-7"
+            "mr-3 h-7 w-7",
           )}
           aria-hidden="true"
         />

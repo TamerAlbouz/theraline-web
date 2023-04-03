@@ -11,7 +11,7 @@ import {
 } from "./Templates";
 import { createPayments } from "../../../../utils/components/payment-utils";
 
-const PaymentsTable = () => {
+function PaymentsTable() {
   const [paymentList, setPaymentList] = useState<Array<paymentDataModel>>();
 
   useEffect(() => {
@@ -46,11 +46,10 @@ const PaymentsTable = () => {
       className="rounded-md bg-primary-dark p-1"
       rowClassName={(rowData) => {
         return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
-      }}
-    >
+      }}>
       <Column
         key={1}
-        header={"Patient"}
+        header="Patient"
         headerClassName="py-3 bg-primary-dark text-xl"
         className="w-4/12 py-5"
         body={paymentPatientTemplate}
@@ -58,6 +57,6 @@ const PaymentsTable = () => {
       {dynamicColumns}
     </DataTable>
   );
-};
+}
 
 export default PaymentsTable;

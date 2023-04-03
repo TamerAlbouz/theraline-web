@@ -3,7 +3,7 @@ import Profile from "../../components/pages/settings/Profile";
 
 function SettingsPage() {
   return (
-    <div className="flex flex-col justify-start w-full">
+    <div className="flex w-full flex-col justify-start">
       <Profile />
       <SignoutButton />
     </div>

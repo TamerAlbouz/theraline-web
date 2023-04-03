@@ -1,6 +1,6 @@
-import { calendarEventModel } from "./../../types/calendarEvent.d";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { calendarEventModel } from "../../types/calendarEvent.d";
 
 interface CalendarState {
   selectedEvent: calendarEventModel | undefined;
@@ -22,9 +22,9 @@ const useCalendarStore = create<CalendarState>()(
       }),
       {
         name: "notes-storage",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );
 
 export { useCalendarStore };
