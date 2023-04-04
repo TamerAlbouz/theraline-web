@@ -1,6 +1,6 @@
 import { BsFillTelephoneFill, BsPaperclip } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
-import CardWrapper from "../../card/CardWrapper";
+import CardWrapper from "../../../card/CardWrapper";
 
 const arr = [
   { title: "Horizon Therapy Center", icon: BsPaperclip },

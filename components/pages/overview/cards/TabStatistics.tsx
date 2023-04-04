@@ -1,8 +1,8 @@
 import { Tab } from "@headlessui/react";
 import { useState } from "react";
-import MonthlyStatistics from "./statistics/MonthlyStatistics";
-import WeeklyStatistics from "./statistics/WeeklyStatistics";
-import YearlyStatistics from "./statistics/YearlyStatistics";
+import MonthlyStatistics from "../statistics/MonthlyStatistics";
+import WeeklyStatistics from "../statistics/WeeklyStatistics";
+import YearlyStatistics from "../statistics/YearlyStatistics";
 
 function TabStatistics() {
   const lastName = "Doe";
