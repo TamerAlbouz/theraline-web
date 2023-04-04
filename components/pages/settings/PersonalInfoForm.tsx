@@ -13,15 +13,15 @@ const settingsSchema = z.object({
 
 type settingsValues = z.infer<typeof settingsSchema>;
 
-function PersonalInfoForm() {
-  const defaultValues = {
-    email: "tim.cook@gmail.com",
-    displayName: "Tim",
-    fullName: "Tim Cook",
-    description: "Licensed therapist operating in the DC area",
-    phoneNumber: "78655417",
-  };
+const defaultValues = {
+  email: "tim.cook@gmail.com",
+  displayName: "Tim",
+  fullName: "Tim Cook",
+  description: "Licensed therapist operating in the DC area",
+  phoneNumber: "78655417",
+};
 
+function PersonalInfoForm() {
   const {
     register,
     handleSubmit,

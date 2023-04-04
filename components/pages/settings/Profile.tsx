@@ -1,6 +1,4 @@
-import { HiUser, HiNewspaper } from "react-icons/hi";
 import FormWrapper from "./FormWrapper";
-import NewsletterForm from "./NewsletterForm";
 import PersonalInfoForm from "./PersonalInfoForm";
 import ProfilePicture from "./ProfilePicture";
 
@@ -16,7 +14,7 @@ function Profile() {
       </div>
 
       <div className="flex w-full flex-col lg:flex-row">
-        <div className="my-4 mr-0 w-full lg:mr-4 lg:w-3/4">
+        <div className="my-4 mr-0 w-full lg:mr-4">
           <FormWrapper
             title="Personal Info"
             description="This section contails all your personal info"

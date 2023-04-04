@@ -1,31 +1,30 @@
 import CardWrapper from "../../card/CardWrapper";
 
-function Appointments() {
-  const DUMMY_APPOINTMENTS = [
-    {
-      id: 1,
-      title: "Consultation",
-      time: "10:00 AM",
-      length: "30 minutes",
-    },
-    {
-      id: 2,
-      title: "Group Therapy",
-      time: "11:00 AM",
-      length: "1 hour",
-    },
-    {
-      id: 3,
-      title: "Activities",
-      time: "12:00 PM",
-      length: "1 hour",
-    },
-  ];
+const DUMMY_APPOINTMENTS = [
+  {
+    id: 1,
+    title: "Consultation",
+    time: "10:00 AM",
+    length: "30 minutes",
+  },
+  {
+    id: 2,
+    title: "Group Therapy",
+    time: "11:00 AM",
+    length: "1 hour",
+  },
+  {
+    id: 3,
+    title: "Activities",
+    time: "12:00 PM",
+    length: "1 hour",
+  },
+];
 
+function Appointments() {
   return (
-    <CardWrapper title="APPOINTMENTS TODAY" link="/calendar">
+    <CardWrapper title="APPOINTMENTS TODAY">
       <div className="flex flex-row justify-between gap-5 overflow-hidden">
-        <p className="text-7xl text-textColor">{DUMMY_APPOINTMENTS.length}</p>
         <div className="flex w-full flex-col gap-3">
           {DUMMY_APPOINTMENTS.slice(0, 2).map((appointment) => (
             <div

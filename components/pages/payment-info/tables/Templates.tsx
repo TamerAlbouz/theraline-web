@@ -10,11 +10,14 @@ import React, {
 } from "react";
 import { patientDataModel } from "../../../../types/patientData";
 import { paymentDataModel } from "../../../../types/paymentData";
+import Image from "next/image";
 
 export const basicInfoTemplate = (data: patientDataModel) => {
   return (
     <div className="my-1 -mr-1 flex flex-row rounded-l-md bg-primary py-4 px-2 pl-4">
-      <img
+      <Image
+        width={40}
+        height={40}
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
         src={data.imageUrl}
         alt=""
@@ -67,14 +70,17 @@ export const paymentPatientTemplate = (data: paymentDataModel) => {
   );
 };
 
+// Consider removing this function
 export const paymentAmountTemplate = (data: paymentDataModel) => {
   return <p>{data.amount}</p>;
 };
 
+// Consider removing this function
 export const paymentDateTemplate = (data: paymentDataModel) => {
   return <p>{data.date}</p>;
 };
 
+// Consider removing this function
 export const paymentMethodTemplate = (data: paymentDataModel) => {
   return <p>{data.method}</p>;
 };

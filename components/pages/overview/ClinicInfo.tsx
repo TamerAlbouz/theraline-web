@@ -1,22 +1,23 @@
-import { BsFillTelephoneFill } from "react-icons/bs";
+import { BsFillTelephoneFill, BsPaperclip } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
 import CardWrapper from "../../card/CardWrapper";
 
-function ClinicInfo() {
-  const address = "1234 Main Street, New York, NY 10001";
-  const phone = "(123) 456-7890";
+const arr = [
+  { title: "Horizon Therapy Center", icon: BsPaperclip },
+  { title: "1234 Main Street, New York, NY 10001", icon: BiCurrentLocation },
+  { title: "212-555-5555", icon: BsFillTelephoneFill },
+];
 
+function ClinicInfo() {
   return (
-    <CardWrapper title="CLINIC INFO" link="/profile">
+    <CardWrapper title="CLINIC INFO">
       <div className="flex flex-col gap-5 font-medium text-textColor">
-        <div className="flex items-center gap-2 ">
-          <BiCurrentLocation className="text-2xl" />
-          <p>{address}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <BsFillTelephoneFill className="text-xl " />
-          <p>{phone}</p>
-        </div>
+        {arr.map((item) => (
+          <div className="flex items-center gap-3" key={item.title}>
+            <item.icon className="text-xl " />
+            <p>{item.title}</p>
+          </div>
+        ))}
       </div>
     </CardWrapper>
   );

@@ -4,12 +4,12 @@ import {
   HiOutlineArrowDownTray,
 } from "react-icons/hi2";
 
-function FilesCard() {
-  const dummyData: Array<{ name: string; size: string }> = [
-    { name: "Check-up result", size: "240KB" },
-    { name: "Report", size: "194KB" },
-  ];
+const dummyData: Array<{ name: string; size: string }> = [
+  { name: "Check-up result", size: "240KB" },
+  { name: "Report", size: "194KB" },
+];
 
+function FilesCard() {
   return (
     <div className="flex flex-col rounded-lg bg-primary-dark px-6 py-10">
       <div className="flex flex-row justify-between">

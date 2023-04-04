@@ -1,5 +1,3 @@
-import { IconType } from "react-icons";
-
 function FormWrapper(props: {
   title: String;
   description: String;

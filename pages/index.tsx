@@ -1,8 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import Appointments from "../components/pages/overview/Appointments";
 import ClinicInfo from "../components/pages/overview/ClinicInfo";
 import Revenue from "../components/pages/overview/Revenue";
 import TabStatistics from "../components/pages/overview/TabStatistics";
 import TotalPatients from "../components/pages/overview/TotalPatients";
+import useAuthStore from "../hooks/stores/useAuthStore";
 
 function OverviewPage() {
   return (

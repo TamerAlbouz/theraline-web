@@ -8,14 +8,17 @@ import React, {
   ReactPortal,
 } from "react";
 import { patientDataModel } from "../../../../types/patientData";
+import Image from "next/image";
 
 export const basicInfoTemplate = (data: patientDataModel) => {
   return (
     <div className="my-2 flex flex-row px-2 py-2 pl-4">
-      <img
+      <Image
+        width={40}
+        height={40}
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
         src={data.imageUrl}
-        alt=""
+        alt="Avatar"
       />
       <div className="ml-4 flex flex-col">
         <p className="text-md font-bold text-textColor">{data.name}</p>

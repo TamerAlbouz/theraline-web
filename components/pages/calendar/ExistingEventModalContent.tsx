@@ -1,11 +1,9 @@
 import { HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
-import useAuthStore from "../../../hooks/stores/useAuthStore";
 
 function ExistingEventModalContent(props: any) {
   const { selectedEvent } = useCalendarStore();
-  const user = useAuthStore();
   const [list, setList] = useState<any>([]);
 
   useEffect(() => {
@@ -14,7 +12,7 @@ function ExistingEventModalContent(props: any) {
     }
 
     // console.log(list);
-  }, [list, user.accessToken, props]);
+  }, [props]);
 
   return (
     <div className="mt-4">
