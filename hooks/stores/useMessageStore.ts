@@ -5,6 +5,7 @@ import { chatModel } from "../../types/chats/chat";
 
 interface MessagesState {
   selectedChat: chatModel | undefined;
+  messages: Array<messageModel>|undefined;
   setSelectedChat: (newChat: chatModel) => void;
 }
 
@@ -13,6 +14,7 @@ const useMessageStore = create<MessagesState>()(
     persist(
       (set) => ({
         selectedChat: undefined,
+        messages:undefined,
         setSelectedChat: (newChat: chatModel) =>
           set((_: any) => ({ selectedChat: newChat })),
       }),

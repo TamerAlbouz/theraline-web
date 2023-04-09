@@ -4,9 +4,9 @@ import useAuthStore from "../../hooks/stores/useAuthStore";
 const { setAccessToken } = useAuthStore.getState();
 const { setIsAuthenticated } = useAuthStore.getState();
 
-const baseURL = "https://theraline.onrender.com";
+export const baseURL = "https://theraline.onrender.com";
 
-const refreshToken = async () => {
+export const refreshToken = async () => {
   try {
     const res = await refreshClient.post("/auth/refresh");
     return res.data.access_token;

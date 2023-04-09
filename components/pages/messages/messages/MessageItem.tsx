@@ -1,8 +1,9 @@
 import { messageModel } from "../../../../types/chats/message";
+import DefaultAvatar from "../chats/DefaultAvatar";
 
 function MessageItem(props: {
   message: messageModel;
-  profileImageUrl: string;
+  profileImageUrl: string | undefined;
   isFirst: boolean;
   isLast: boolean;
   isOnly: boolean;
@@ -17,13 +18,17 @@ function MessageItem(props: {
         props.message.isMe ? "justify-end" : "justify-start"
       } ${props.isFirst ? "mt-6" : ""}
       ${props.isLast ? "mb-6" : ""} ${props.isOnly ? "my-6" : "my-1"}`}>
-      {!props.message.isMe && (props.isOnly || props.isLast) && (
-        <img
-          className="mr-2 h-10 w-10 cursor-pointer rounded-full"
-          src={props.profileImageUrl}
-          alt="Profile Photo"
-        />
-      )}
+      {/* {!props.message.isMe &&
+        (props.isOnly || props.isLast) &&
+        (props.profileImageUrl ? (
+          <img
+            className="mr-2 h-10 w-10 cursor-pointer rounded-full"
+            src={props.profileImageUrl}
+            alt="Profile Photo"
+          />
+        ) : (
+          <DefaultAvatar />
+        ))} */}
       {!props.message.isMe && !(props.isOnly || props.isLast) && (
         <div className="mr-2 h-10 w-10" />
       )}
