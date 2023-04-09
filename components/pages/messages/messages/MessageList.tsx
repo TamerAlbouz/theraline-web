@@ -4,9 +4,9 @@ import MessageTextInput from "./MessageTextInput";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 
 function AppMessageList() {
-  const { selectedChat } = useMessageStore();
+  const { selectedChat, messages } = useMessageStore();
 
-  if (selectedChat == undefined) {
+  if (selectedChat == undefined || messages == undefined) {
     return (
       <div className="flex items-center justify-center">
         Please choose a chat
@@ -16,7 +16,7 @@ function AppMessageList() {
 
   const messageItems: Array<JSX.Element> = [];
 
-  for (let i = 0; i < selectedChat.messages.length; i++) {
+  for (let i = 0; i < messages.length; i++) {
     let isFirst = false;
     let isLast = false;
     let isOnly = false;
@@ -25,28 +25,28 @@ function AppMessageList() {
       isFirst = true;
 
       if (
-        i + 1 <= selectedChat.messages.length - 1 &&
-        selectedChat.messages[i].isMe != selectedChat.messages[i + 1].isMe
+        i + 1 <= messages.length - 1 &&
+        messages[i].isMe != messages[i + 1].isMe
       ) {
         isOnly = true;
       }
-    } else if (i == selectedChat.messages.length - 1) {
+    } else if (i == messages.length - 1) {
       isLast = true;
     } else {
       if (
-        selectedChat.messages[i].isMe != selectedChat.messages[i - 1].isMe &&
-        selectedChat.messages[i].isMe != selectedChat.messages[i + 1].isMe
+        messages[i].isMe != messages[i - 1].isMe &&
+        messages[i].isMe != messages[i + 1].isMe
       ) {
         isOnly = true;
       } else if (
-        selectedChat.messages[i].isMe != selectedChat.messages[i - 1].isMe &&
-        selectedChat.messages[i].isMe == selectedChat.messages[i + 1].isMe
+        messages[i].isMe != messages[i - 1].isMe &&
+        messages[i].isMe == messages[i + 1].isMe
       ) {
         isFirst = true;
       }
       if (
-        selectedChat.messages[i].isMe == selectedChat.messages[i - 1].isMe &&
-        selectedChat.messages[i].isMe != selectedChat.messages[i + 1].isMe
+        messages[i].isMe == messages[i - 1].isMe &&
+        messages[i].isMe != messages[i + 1].isMe
       ) {
         isLast = true;
       }
@@ -54,7 +54,7 @@ function AppMessageList() {
 
     messageItems.push(
       <MessageItem
-        message={selectedChat.messages[i]}
+        message={messages[i]}
         profileImageUrl={selectedChat.profileImageUrl}
         isFirst={isFirst}
         isLast={isLast}

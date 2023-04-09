@@ -1,4 +1,6 @@
 import { StateCreator, create } from "zustand";
+import { createContext, useContext } from "react";
+import { createStore, useStore } from "zustand";
 import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 
 interface IAuthState {
@@ -17,6 +19,8 @@ type MyPersist = (
   options: PersistOptions<IAuthState>,
 ) => StateCreator<IAuthState>;
 
+
+
 const useAuthStore = create<IAuthState>(
   (persist as MyPersist)(
     (set) => ({
@@ -29,8 +33,11 @@ const useAuthStore = create<IAuthState>(
       setRefreshToken: (newToken) => set({ refreshToken: newToken }),
 
       user: {},
+
       setUser: (newUser) => set({ user: newUser }),
+
       isAuthenticated: false,
+
       setIsAuthenticated: (newIsAuthenticated) =>
         set({ isAuthenticated: newIsAuthenticated }),
     }),
