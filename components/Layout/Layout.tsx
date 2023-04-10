@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import SideNavigation from "./navigation/SideNavigation";
-import TopBar from "./topbar/topbar";
+import TopBar from "./Topbar/Topbar";
 import { useChatSocket } from "../../hooks/queries/useChatSocket";
 
 function Layout(props: { children: React.ReactNode }) {

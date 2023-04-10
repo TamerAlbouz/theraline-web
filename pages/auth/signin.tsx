@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
 import { useAuth } from "../../hooks/auth/useAuth";
+import { CustomInput } from "../../components/auth/CustomInput";
 
 const signInSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -58,56 +58,35 @@ function SignInPage() {
 
   return (
     <AuthBackgroundCard>
-      <form onSubmit={handleSubmit(submitUserInfo)}>
-        <div className="mb-4">
-          <label
-            htmlFor="signin-email"
-            className="text-md mb-2 block font-bold text-primary-dark">
-            Email
-          </label>
-          <input
-            {...register("email", {
-              required: { value: true, message: "This field is required" },
-            })}
-            id="signin-email"
-            type="text"
-            placeholder="Email"
-            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-          />{" "}
-          <span className="text-xs text-red-500">{errors.email?.message}</span>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="signin-password"
-            className="text-md mb-2 block font-bold text-primary-dark">
-            Password
-          </label>
-          <input
-            {...register("password", {
-              required: { value: true, message: "This field is required" },
-            })}
-            id="signin-password"
-            type="text"
-            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-          />{" "}
-          <span className="text-xs text-red-500">
-            {errors.password?.message}
-          </span>
-        </div>
-
-        <div className="mt-4 flex justify-between">
-          <Link replace href="/auth/signup">
-            <a className="w-1/2 text-sm text-primary-dark hover:text-primary">
-              Not a member? Join here
-            </a>
-          </Link>
-
+      <form
+        onSubmit={handleSubmit(submitUserInfo)}
+        className="flex w-full flex-col gap-5">
+        <CustomInput
+          label="Email"
+          type="text"
+          placeholder="Enter Your Email"
+          register={register("email", {
+            required: { value: true, message: "This field is required" },
+          })}
+          error={errors.email?.message}
+          htmlForValue="signin-email"
+        />
+        <CustomInput
+          label="Password"
+          type="password"
+          placeholder="Enter Your Password"
+          register={register("password", {
+            required: { value: true, message: "This field is required" },
+          })}
+          error={errors.password?.message}
+          htmlForValue="signin-password"
+        />
+        <div className="">
           <button
             disabled={loading}
             type="submit"
             value="Sign in"
-            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">
+            className="focus:shadow-outline w-full cursor-pointer rounded-lg bg-primary py-3 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">
             Sign In
           </button>
         </div>
