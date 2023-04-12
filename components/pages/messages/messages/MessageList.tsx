@@ -7,15 +7,7 @@ import { messageModel } from "../../../../types/chats/message";
 function AppMessageList() {
   const { selectedChat } = useMessageStore();
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data,
-    fetchNextPage,
-    isFetching,
-    isFetchingNextPage,
-  } = useMessagesQuery(selectedChat?.id);
+  const { isLoading, data, isFetching } = useMessagesQuery(selectedChat?.id);
 
   if (selectedChat == undefined) {
     return (
@@ -29,13 +21,7 @@ function AppMessageList() {
     return <div>Loading...</div>;
   }
 
-  data!.pages.map((page: any) =>
-    page.results.map((msg: any) => {
-      console.log(msg);
-    }),
-  );
-
-  let messages: Array<messageModel> = []; //data!;
+  let messages: Array<messageModel> = data!;
   const messageItems: Array<JSX.Element> = [];
 
   for (let i = 0; i < messages.length; i++) {

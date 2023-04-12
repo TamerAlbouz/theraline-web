@@ -9,7 +9,7 @@ import Layout from "../components/Layout/Layout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 2 } },
+  defaultOptions: { queries: { retry: 0 } },
 });
 
 function App({ Component, pageProps }: AppProps) {

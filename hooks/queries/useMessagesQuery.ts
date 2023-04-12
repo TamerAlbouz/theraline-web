@@ -12,28 +12,25 @@ const getChats = async (chatId: string | undefined, page: number) => {
 };
 
 export const useMessagesQuery = (chatId: string | undefined) => {
-  return useInfiniteQuery(
+  return useQuery(
     [`messages-${chatId}`],
     ({ pageParam = 1 }) => getChats(chatId, pageParam),
     {
-      getNextPageParam: (lastPage: any, pages) => {
-        return lastPage.info.page + 1;
+      select: (data: any) => {
+        let messages: Array<messageModel> = [];
+
+        data.data.docs.forEach((element: any) => {
+          messages.push({
+            id: element._id,
+            time: element.send_at,
+            message: element.text,
+            isMe: false,
+          });
+        });
+        console.log(messages);
+
+        return messages;
       },
-      // select: (data: any) => {
-      //   let messages: Array<messageModel> = [];
-
-      //   data.data.docs.forEach((element: any) => {
-      //     messages.push({
-      //       id: element._id,
-      //       time: element.send_at,
-      //       message: element.text,
-      //       isMe: false,
-      //     });
-      //   });
-      //   console.log(messages);
-
-      //   return messages;
-      // },
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       enabled: useMessageStore.getState().selectedChat != undefined,
