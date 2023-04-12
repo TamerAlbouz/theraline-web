@@ -1,12 +1,23 @@
-import { useEffect, useRef } from "react";
 import MessageItem from "./MessageItem";
 import MessageTextInput from "./MessageTextInput";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
+import { useMessagesQuery } from "../../../../hooks/queries/useMessagesQuery";
+import { messageModel } from "../../../../types/chats/message";
 
 function AppMessageList() {
-  const { selectedChat, messages } = useMessageStore();
+  const { selectedChat } = useMessageStore();
 
-  if (selectedChat == undefined || messages == undefined) {
+  const {
+    isLoading,
+    isError,
+    error,
+    data,
+    fetchNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useMessagesQuery(selectedChat?.id);
+
+  if (selectedChat == undefined) {
     return (
       <div className="flex items-center justify-center">
         Please choose a chat
@@ -14,6 +25,17 @@ function AppMessageList() {
     );
   }
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  data!.pages.map((page: any) =>
+    page.results.map((msg: any) => {
+      console.log(msg);
+    }),
+  );
+
+  let messages: Array<messageModel> = []; //data!;
   const messageItems: Array<JSX.Element> = [];
 
   for (let i = 0; i < messages.length; i++) {

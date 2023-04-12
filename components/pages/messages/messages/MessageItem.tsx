@@ -17,7 +17,8 @@ function MessageItem(props: {
       className={`flex flex-row items-end ${
         props.message.isMe ? "justify-end" : "justify-start"
       } ${props.isFirst ? "mt-6" : ""}
-      ${props.isLast ? "mb-6" : ""} ${props.isOnly ? "my-6" : "my-1"}`}>
+      ${props.isLast ? "mb-6" : ""} ${props.isOnly ? "my-6" : "my-1"}
+      `}>
       {/* {!props.message.isMe &&
         (props.isOnly || props.isLast) &&
         (props.profileImageUrl ? (
@@ -34,7 +35,7 @@ function MessageItem(props: {
       )}
 
       {props.isLast && props.message.isMe && (
-        <span className="mr-2 text-sm">{props.message.time}</span>
+        <span className="mr-2 text-sm">{ props.message.time}</span>
       )}
 
       <div

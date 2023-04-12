@@ -5,23 +5,21 @@ import { chatModel } from "../../types/chats/chat";
 
 interface MessagesState {
   selectedChat: chatModel | undefined;
-  messages: Array<messageModel>|undefined;
+  messages: Array<messageModel> | undefined;
   setSelectedChat: (newChat: chatModel) => void;
 }
 
 const useMessageStore = create<MessagesState>()(
   devtools(
-    persist(
-      (set) => ({
-        selectedChat: undefined,
-        messages:undefined,
-        setSelectedChat: (newChat: chatModel) =>
-          set((_: any) => ({ selectedChat: newChat })),
-      }),
-      {
-        name: "messages-storage",
-      },
-    ),
+    (set) => ({
+      selectedChat: undefined,
+      messages: undefined,
+      setSelectedChat: (newChat: chatModel) =>
+        set((_: any) => ({ selectedChat: newChat })),
+    }),
+    {
+      name: "messages-storage",
+    },
   ),
 );
 

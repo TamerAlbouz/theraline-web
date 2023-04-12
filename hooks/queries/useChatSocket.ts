@@ -1,8 +1,8 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { io } from "socket.io-client";
 import { refreshToken, baseURL } from "../../utils/axios/axios";
 import useAuthStore from "../stores/useAuthStore";
 import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useChatSocket = () => {
   const queryClient = useQueryClient();
@@ -24,6 +24,13 @@ export const useChatSocket = () => {
 
     websocket.on("newMessage", (data) => {
       console.log("Received message from server:", data);
+
+      queryClient.invalidateQueries({
+        queryKey: ["chats"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [`messages-${data.message.group_id}`],
+      });
     });
 
     return () => {

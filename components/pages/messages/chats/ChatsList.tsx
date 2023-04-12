@@ -1,9 +1,15 @@
 import { useState } from "react";
 import ChatCard from "./ChatCard";
 import { chatModel } from "../../../../types/chats/chat";
+import { useChatsQuery } from "../../../../hooks/queries/useChatsQuery";
 
-function ChatsList(props: { chats: Array<chatModel> }) {
+function ChatsList() {
   const [searchValue, setSearchValue] = useState("");
+  const { data, isLoading, isFetching } = useChatsQuery();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const filterChats = (chats: Array<chatModel>) => {
     if (searchValue === "") {
@@ -27,11 +33,11 @@ function ChatsList(props: { chats: Array<chatModel> }) {
         />
       </div>
 
-      {filterChats(props.chats).map((chat, index) => {
+      {filterChats(data!).map((chat, index) => {
         return (
           <ChatCard
             chat={chat}
-            isLast={index == props.chats.length - 1}
+            isLast={index == data!.length - 1}
             key={index}
           />
         );

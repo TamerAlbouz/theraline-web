@@ -3,9 +3,11 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import { chatModel } from "../../../../types/chats/chat";
+import { useSendMessageMutation } from "../../../../hooks/mutations/useSendMessageMutation";
 
 function MessageTextInput() {
   const { selectedChat, setSelectedChat } = useMessageStore();
+  const { mutate: sendMessage } = useSendMessageMutation();
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const [input, setInput] = useState("");
@@ -44,18 +46,10 @@ function MessageTextInput() {
   };
 
   const submitMessage = () => {
-    const tempChat: chatModel = selectedChat!;
-
-    tempChat.messages.push({
-      id: "1121",
-      message: input,
-      isMe: true,
-      time: "Now",
+    sendMessage({
+      text: input,
+      chatId: selectedChat!.id,
     });
-
-    setSelectedChat(tempChat);
-
-    setInput("");
   };
 
   return (
