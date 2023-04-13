@@ -50,6 +50,8 @@ function MessageTextInput() {
       text: input,
       chatId: selectedChat!.id,
     });
+
+    setInput("");
   };
 
   return (

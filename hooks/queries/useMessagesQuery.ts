@@ -3,34 +3,36 @@ import { accessClient } from "../../utils/axios/axios";
 import { messageModel } from "../../types/chats/message";
 import { useMessageStore } from "../stores/useMessageStore";
 
-const getChats = async (chatId: string | undefined, page: number) => {
-  if (chatId == undefined) {
-    return Promise;
-  }
-
+const getChats = (chatId: string | undefined, page: number) => {
   return accessClient.get(`/message/${chatId}/chat?page=${page}`);
 };
 
 export const useMessagesQuery = (chatId: string | undefined) => {
-  return useQuery(
+  return useInfiniteQuery(
     [`messages-${chatId}`],
-    ({ pageParam = 1 }) => getChats(chatId, pageParam),
+    ({ pageParam = 0 }) => getChats(chatId, pageParam),
     {
-      select: (data: any) => {
-        let messages: Array<messageModel> = [];
-
-        data.data.docs.forEach((element: any) => {
-          messages.push({
-            id: element._id,
-            time: element.send_at,
-            message: element.text,
-            isMe: false,
-          });
-        });
-        console.log(messages);
-
-        return messages;
+      getNextPageParam: (lastPage, pages) => {
+        if (pages.length < pages[pages.length - 1].data.totalPages) {
+          return pages.length + 1;
+        }
+        return undefined;
       },
+      //   select: (data: any) => {
+      //     let messages: Array<messageModel> = [];
+
+      //     data.data.docs.forEach((element: any) => {
+      //       messages.push({
+      //         id: element._id,
+      //         time: element.send_at,
+      //         message: element.text,
+      //         isMe: false,
+      //       });
+      //     });
+      //     console.log(messages);
+
+      //     return messages;
+      //   },
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       enabled: useMessageStore.getState().selectedChat != undefined,

@@ -5,10 +5,14 @@ import { useChatsQuery } from "../../../../hooks/queries/useChatsQuery";
 
 function ChatsList() {
   const [searchValue, setSearchValue] = useState("");
-  const { data, isLoading, isFetching } = useChatsQuery();
+  const { data, isLoading, isFetching, isError, error } = useChatsQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>An error has ocurred</div>;
   }
 
   const filterChats = (chats: Array<chatModel>) => {

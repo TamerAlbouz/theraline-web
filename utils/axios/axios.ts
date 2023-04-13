@@ -9,8 +9,10 @@ export const baseURL = "https://theraline.onrender.com";
 export const refreshToken = async () => {
   try {
     const res = await refreshClient.post("/auth/refresh");
+    console.log("Refresh")
     return res.data.access_token;
   } catch (err) {
+    console.log("Refresh Failed")
     throw err;
   }
 };
@@ -52,10 +54,13 @@ accessClient.interceptors.response.use(
       try {
         const newAccessToken = await refreshToken();
         setAccessToken(newAccessToken);
+
         const { config } = error;
         config.headers.common.Authorization = `Bearer ${newAccessToken}`;
+        console.log("Reached Interceptor Response")
         return await axios(config);
       } catch (err) {
+        console.warn("Failed", err)
         setIsAuthenticated(false);
         throw err;
       }

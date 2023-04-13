@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { messageModel } from "../../../../types/chats/message";
 import DefaultAvatar from "../chats/DefaultAvatar";
 
@@ -8,9 +9,14 @@ function MessageItem(props: {
   isLast: boolean;
   isOnly: boolean;
 }) {
-  // console.log(
-  //   `${props.message.message}, isFirst: ${props.isFirst}, isLast: ${props.isLast}, isOnly: ${props.isOnly}`
-  // );
+  const date = new Date(props.message.time);
+  let formattedTime;
+  // today
+  if (new Date().toDateString() == date.toDateString()) {
+    formattedTime = format(date, "p");
+  } else {
+    formattedTime = format(date, "PP");
+  }
 
   return (
     <div
@@ -30,18 +36,18 @@ function MessageItem(props: {
         ) : (
           <DefaultAvatar />
         ))} */}
-      {!props.message.isMe && !(props.isOnly || props.isLast) && (
+      {/* {!props.message.isMe && !(props.isOnly || props.isLast) && (
         <div className="mr-2 h-10 w-10" />
-      )}
+      )} */}
 
       {props.isLast && props.message.isMe && (
-        <span className="mr-2 text-sm">{ props.message.time}</span>
+        <span className="mr-2 text-sm">{formattedTime}</span>
       )}
 
       <div
         className={`px-4 py-3 ${
           props.message.isMe
-            ? "rounded-l-3xl bg-green-500 text-white"
+            ? "mx-4 rounded-l-3xl bg-green-500 text-white"
             : "rounded-r-3xl bg-gray-300 text-black"
         } ${
           !props.message.isMe && (props.isOnly || props.isFirst)
@@ -66,7 +72,7 @@ function MessageItem(props: {
       </div>
 
       {props.isLast && !props.message.isMe && (
-        <span className="ml-2 text-sm">{props.message.time}</span>
+        <span className="ml-2 text-sm">{formattedTime}</span>
       )}
     </div>
   );
