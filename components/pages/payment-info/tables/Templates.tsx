@@ -59,12 +59,12 @@ export const paymentPatientTemplate = (data: paymentDataModel) => {
     <div className="mx-4 flex items-center justify-start gap-4">
       <img
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={data.imageUrl}
+        src={data.paymentInfo.imageUrl}
         alt=""
       />
       <div className="flex flex-col text-left">
-        <p className="text-md font-bold ">{data.name}</p>
-        <p className="text-sm">{data.email}</p>
+        <p className="text-md font-bold ">{data.paymentInfo.name}</p>
+        <p className="text-sm">{data.paymentInfo.email}</p>
       </div>
     </div>
   );
@@ -72,37 +72,37 @@ export const paymentPatientTemplate = (data: paymentDataModel) => {
 
 // Consider removing this function
 export const paymentAmountTemplate = (data: paymentDataModel) => {
-  return <p>{data.amount}</p>;
+  return <p>{data.paymentInfo.amount}</p>;
 };
 
 // Consider removing this function
 export const paymentDateTemplate = (data: paymentDataModel) => {
-  return <p>{data.date}</p>;
+  return <p>{data.paymentInfo.date}</p>;
 };
 
 // Consider removing this function
 export const paymentMethodTemplate = (data: paymentDataModel) => {
-  return <p>{data.method}</p>;
+  return <p>{data.paymentInfo.method}</p>;
 };
 
 export const paymentStatusTemplate = (data: paymentDataModel) => {
-  if (data.paymentStatus === "Paid") {
+  if (data.paymentInfo.paymentStatus === "Paid") {
     return (
       <p className="m-auto w-fit rounded-sm bg-green-600 py-1 px-2 font-semibold">
-        {data.paymentStatus}
+        {data.paymentInfo.paymentStatus}
       </p>
     );
   }
-  if (data.paymentStatus === "Pending") {
+  if (data.paymentInfo.paymentStatus === "Pending") {
     return (
       <p className="m-auto w-fit rounded-sm bg-yellow-600 py-1 px-2 font-semibold">
-        {data.paymentStatus}
+        {data.paymentInfo.paymentStatus}
       </p>
     );
   }
   return (
     <p className="m-auto w-fit rounded-sm bg-red-600 py-1 px-2 font-semibold">
-      {data.paymentStatus}
+      {data.paymentInfo.paymentStatus}
     </p>
   );
 };
