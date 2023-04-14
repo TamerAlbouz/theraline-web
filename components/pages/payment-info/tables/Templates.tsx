@@ -6,53 +6,9 @@ import React, {
   ReactElement,
   ReactFragment,
   ReactPortal,
-  useState,
 } from "react";
-import { patientDataModel } from "../../../../types/patientData";
 import { paymentDataModel } from "../../../../types/paymentData";
 import Image from "next/image";
-
-export const basicInfoTemplate = (data: patientDataModel) => {
-  return (
-    <div className="my-1 -mr-1 flex flex-row rounded-l-md bg-primary py-4 px-2 pl-4">
-      <Image
-        width={40}
-        height={40}
-        className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={data.imageUrl}
-        alt=""
-      />
-      <div className="ml-4 flex flex-col text-left">
-        <p className="text-md font-bold ">{data.name}</p>
-        <p className="text-sm">{data.email}</p>
-      </div>
-    </div>
-  );
-};
-
-export const phoneNumberTemplate = (data: patientDataModel) => {
-  return (
-    <div className="-mr-1 bg-primary px-2 py-7">
-      <p className="text-md">{data.phoneNumber}</p>
-    </div>
-  );
-};
-
-export const cityTemplate = (data: patientDataModel) => {
-  return (
-    <div className="-mr-1 bg-primary px-2 py-7">
-      <p className="text-md">{data.city}</p>
-    </div>
-  );
-};
-
-export const lastAppointmentTemplate = (data: patientDataModel) => {
-  return (
-    <div className="rounded-r-md bg-primary px-2 py-7">
-      <p className="text-md">{data.lastAppointment}</p>
-    </div>
-  );
-};
 
 export const paymentPatientTemplate = (data: paymentDataModel) => {
   return (

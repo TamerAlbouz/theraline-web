@@ -1,17 +1,7 @@
 import { faker } from "@faker-js/faker";
+import { paymentDataModel } from "../../types/paymentData";
 
-type _Payment = {
-  paymentId: string;
-  name: string;
-  imageUrl: string;
-  email: string;
-  date: string;
-  paymentStatus: string;
-  method: string;
-  amount: string;
-};
-
-function _createRandomPayment(): _Payment {
+function _createRandomPayment(): paymentDataModel {
   const sex = faker.name.sexType();
   const firstName = faker.name.firstName(sex);
   const lastName = faker.name.lastName();
@@ -22,14 +12,21 @@ function _createRandomPayment(): _Payment {
   ]);
 
   return {
-    paymentId: faker.datatype.uuid(),
-    name,
-    imageUrl: faker.image.imageUrl(undefined, undefined, "people", true),
-    email,
-    date: faker.date.past().toDateString(),
-    paymentStatus: faker.helpers.arrayElement(["Paid", "Pending", "Awaiting"]),
-    method: faker.helpers.arrayElement(["Cash", "Credit Card", "Check"]),
-    amount: faker.finance.amount(undefined, undefined, 2, "$"),
+    Id: faker.datatype.uuid(),
+    paymentInfo: {
+      name,
+      imageUrl: faker.image.imageUrl(undefined, undefined, "people", true),
+      email,
+      date: faker.date.past().toDateString(),
+      paymentStatus: faker.helpers.arrayElement([
+        "Paid",
+        "Pending",
+        "Awaiting",
+      ]),
+      method: faker.helpers.arrayElement(["Cash", "Credit Card", "Check"]),
+      amount: faker.finance.amount(undefined, undefined, 2, "$"),
+      Id: faker.datatype.uuid(),
+    },
   };
 }
 
@@ -45,6 +42,6 @@ function _createRandomPayment(): _Payment {
  *    const payments = createRandomPayments(10);
  * ```
  */
-export function createPayments(numPayments: number): _Payment[] {
+export function createPayments(numPayments: number): paymentDataModel[] {
   return Array.from({ length: numPayments }, _createRandomPayment);
 }
