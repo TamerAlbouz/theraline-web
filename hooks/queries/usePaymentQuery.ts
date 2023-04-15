@@ -3,7 +3,11 @@ import { accessClient } from "../../utils/axios/axios";
 import { paymentDataModel } from "../../types/paymentData";
 
 export const getPayment = async () => {
-  return accessClient.get("/appointment/get_payment_info");
+  return accessClient.get("/appointment/get_payment_info", {
+    headers: {
+      page: "1",
+    },
+  });
 };
 
 export const usePaymentQuery = () => {
@@ -13,14 +17,14 @@ export const usePaymentQuery = () => {
 
       console.log(data.data.chats);
 
-      data.data.forEach((element: any) => {
+      data.data.docs.forEach((element: any) => {
         payments.push({
           Id: element._id,
           paymentInfo: {
             name: element.paymentInfo.method,
             imageUrl: element.paymentInfo.method,
             email: element.paymentInfo.method,
-            date: element.paymentInfo.date,
+            date: element.paymentInfo.date.split("T")[0],
             paymentStatus: element.paymentInfo.status,
             method: element.paymentInfo.method,
             amount: element.paymentInfo.amount,

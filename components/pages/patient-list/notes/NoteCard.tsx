@@ -9,6 +9,9 @@ export function NoteCard(props: {
   opensModal: boolean;
   isFirstInList: boolean;
 }) {
+  const { data, opensModal, isFirstInList } = props;
+  const { title } = data;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const { selectedNote, setSelectedNote } = useNotesStore();
@@ -22,28 +25,27 @@ export function NoteCard(props: {
   };
 
   const selectNote = () => {
-    setSelectedNote(props.data);
+    setSelectedNote(data);
 
-    if (props.opensModal) {
+    if (opensModal) {
       openModal();
     }
   };
 
-  const isSelected = selectedNote === props.data;
+  const isSelected = selectedNote === data;
 
   return (
     <>
-      <div
+      <button
+        type="button"
         className={`cursor-pointer border-b border-white px-2 py-4 text-black hover:bg-primary ${
           isSelected
             ? "border-b border-green-500 bg-primary"
             : "bg-primary-dark"
-        } ${props.isFirstInList ? "rounded-t-lg" : ""}`}
+        } ${isFirstInList ? "rounded-t-lg" : ""}`}
         onClick={selectNote}>
-        <div className="text-lg font-bold text-textColor">
-          {props.data.title}
-        </div>
-      </div>
+        <div className="text-lg font-bold text-textColor">{title}</div>
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

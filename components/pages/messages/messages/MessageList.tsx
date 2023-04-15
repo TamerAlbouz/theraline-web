@@ -7,16 +7,9 @@ import { messageModel } from "../../../../types/chats/message";
 function AppMessageList() {
   const { selectedChat } = useMessageStore();
 
-  const {
-    isLoading,
-    data,
-    isFetching,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useMessagesQuery(selectedChat?.id);
+  const { isLoading, data, fetchNextPage } = useMessagesQuery(selectedChat?.id);
 
-  if (selectedChat == undefined) {
+  if (selectedChat === undefined) {
     return (
       <div className="flex items-center justify-center">
         Please choose a chat
@@ -29,11 +22,12 @@ function AppMessageList() {
   }
 
   // console.log(data!.pages[0]);
-  let x: Array<Array<messageModel>> = data!.pages.map((messageSet) => {
-    let messages: Array<messageModel> = [];
+  const x: Array<Array<messageModel>> = data!.pages.map((messageSet) => {
+    const messages: Array<messageModel> = [];
 
     messageSet.data.docs.forEach((element: any) => {
       messages.push({
+        // eslint-disable-next-line no-underscore-dangle
         id: element._id,
         time: element.send_at,
         message: element.text,
@@ -44,40 +38,42 @@ function AppMessageList() {
     return messages;
   });
 
-  let messages: Array<messageModel> = x.flat(); // data!;
+  const messages: Array<messageModel> = x.flat(); // data!;
+  // eslint-disable-next-line no-undef
   const messageItems: Array<JSX.Element> = [];
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < messages.length; i++) {
     let isFirst = false;
     let isLast = false;
     let isOnly = false;
 
-    if (i == 0) {
+    if (i === 0) {
       isFirst = true;
 
       if (
         i + 1 <= messages.length - 1 &&
-        messages[i].isMe != messages[i + 1].isMe
+        messages[i].isMe !== messages[i + 1].isMe
       ) {
         isOnly = true;
       }
-    } else if (i == messages.length - 1) {
+    } else if (i === messages.length - 1) {
       isLast = true;
     } else {
       if (
-        messages[i].isMe != messages[i - 1].isMe &&
-        messages[i].isMe != messages[i + 1].isMe
+        messages[i].isMe !== messages[i - 1].isMe &&
+        messages[i].isMe !== messages[i + 1].isMe
       ) {
         isOnly = true;
       } else if (
-        messages[i].isMe != messages[i - 1].isMe &&
-        messages[i].isMe == messages[i + 1].isMe
+        messages[i].isMe !== messages[i - 1].isMe &&
+        messages[i].isMe === messages[i + 1].isMe
       ) {
         isFirst = true;
       }
       if (
-        messages[i].isMe == messages[i - 1].isMe &&
-        messages[i].isMe != messages[i + 1].isMe
+        messages[i].isMe === messages[i - 1].isMe &&
+        messages[i].isMe !== messages[i + 1].isMe
       ) {
         isLast = true;
       }
@@ -85,8 +81,7 @@ function AppMessageList() {
 
     messageItems.push(
       <MessageItem
-        message={messages[i]}
-        profileImageUrl={selectedChat.profileImageUrl}
+        msg={messages[i]}
         isFirst={isFirst}
         isLast={isLast}
         isOnly={isOnly}
@@ -99,21 +94,21 @@ function AppMessageList() {
     <div className="relative flex h-full flex-col justify-end rounded-r-lg bg-primary px-4 py-2">
       <div
         className="overflow-y-scroll scroll-smooth"
-        onScroll={(data: any) => {
-          if (data.target.scrollTop === 0) {
+        onScroll={(result: any) => {
+          if (result.target.scrollTop === 0) {
             fetchNextPage();
           }
         }}>
-        {selectedChat == undefined && (
+        {selectedChat === undefined && (
           <span>Please select a chat to continue</span>
         )}
-        {messageItems.length == 0 && (
+        {messageItems.length === 0 && (
           <span>No messages have been sent. Be the first to reach out!</span>
         )}
 
         {messageItems}
       </div>
-      <div>{selectedChat != undefined && <MessageTextInput />}</div>
+      <div>{selectedChat !== undefined && <MessageTextInput />}</div>
     </div>
   );
 }

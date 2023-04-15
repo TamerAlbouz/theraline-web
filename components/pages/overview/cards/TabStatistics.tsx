@@ -1,14 +1,14 @@
 import { Tab } from "@headlessui/react";
-import { useState } from "react";
 import MonthlyStatistics from "../statistics/MonthlyStatistics";
-import WeeklyStatistics from "../statistics/WeeklyStatistics";
-import YearlyStatistics from "../statistics/YearlyStatistics";
+import WeeklyStatistics from "../statistics/WeeklyStatistics"; // eslint-disable-next-line import/no-cycle
+import YearlyStatistics from "../statistics/YearlyStatistics"; // eslint-disable-next-line import/no-cycle
 
 function TabStatistics() {
   const lastName = "Doe";
 
   const dynamicTabs = ["Weekly", "Monthly", "Yearly"].map((tab, i) => {
     return (
+      // eslint-disable-next-line react/no-array-index-key
       <Tab key={i} className="focus:outline-none">
         {({ selected }) => (
           <div

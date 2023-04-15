@@ -1,30 +1,36 @@
+import Image from "next/image";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import { chatModel } from "../../../../types/chats/chat";
 import DefaultAvatar from "./DefaultAvatar";
 
 function ChatCard(props: { chat: chatModel; isLast: boolean }) {
+  const { chat, isLast } = props;
+  const { profileImageUrl, name, lastMessage } = chat;
   const { selectedChat, setSelectedChat } = useMessageStore();
 
   const selectChat = () => {
-    setSelectedChat(props.chat);
+    setSelectedChat(chat);
   };
 
   return (
-    <div
+    <button
+      type="button"
       onClick={selectChat}
       className={`flex cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
-        props.isLast ? "" : "border-b border-gray-200"
-      } ${selectedChat == props.chat ? "bg-primary" : ""}`}>
+        isLast ? "" : "border-b border-gray-200"
+      } ${selectedChat === chat ? "bg-primary" : ""}`}>
       <div className="flex flex-row items-center">
         <div className="relative">
-          {props.chat.profileImageUrl ? (
-            <img
+          {profileImageUrl ? (
+            <Image
+              width={48}
+              height={48}
               className="h-12 w-12 cursor-pointer rounded-full"
-              src={props.chat.profileImageUrl}
+              src={profileImageUrl}
               alt="Profile Photo"
             />
           ) : (
-            <DefaultAvatar chat={props.chat} />
+            <DefaultAvatar chat={chat} />
           )}
 
           {/* {props.chat.isActive && (
@@ -33,11 +39,9 @@ function ChatCard(props: { chat: chatModel; isLast: boolean }) {
         </div>
 
         <div className="ml-4 mr-6 flex flex-col">
-          <span className="font-bold">{props.chat.name}</span>
+          <span className="font-bold">{name}</span>
 
-          <span className="text-gray-100">
-            {props.chat.lastMessage?.message}
-          </span>
+          <span className="text-gray-100">{lastMessage?.message}</span>
         </div>
       </div>
 
@@ -50,7 +54,7 @@ function ChatCard(props: { chat: chatModel; isLast: boolean }) {
           </div>
         )}
       </div> */}
-    </div>
+    </button>
   );
 }
 

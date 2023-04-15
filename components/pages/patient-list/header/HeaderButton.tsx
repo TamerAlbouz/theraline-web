@@ -2,21 +2,21 @@ import { IconType } from "react-icons";
 
 function HeaderButton(props: {
   label: string | null | undefined;
-  icon: IconType;
+  Icon: IconType;
   handleClick: () => void;
 }) {
+  const { Icon, label, handleClick } = props;
   return (
-    <div
+    <button
+      type="button"
       className="mr-4 flex cursor-pointer flex-row flex-wrap items-center justify-center rounded-md bg-primary-dark py-2 px-3 shadow-md hover:bg-primary"
-      onClick={props.handleClick}>
-      <props.icon className="h-4 w-4 text-textColor" />
+      onClick={handleClick}>
+      <Icon className="h-4 w-4 text-textColor" />
 
-      {props.label && (
-        <p className="ml-2 text-sm font-semibold text-textColor">
-          {props.label}
-        </p>
+      {label && (
+        <p className="ml-2 text-sm font-semibold text-textColor">{label}</p>
       )}
-    </div>
+    </button>
   );
 }
 

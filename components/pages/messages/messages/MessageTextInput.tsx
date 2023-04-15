@@ -2,23 +2,31 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
-import { chatModel } from "../../../../types/chats/chat";
 import { useSendMessageMutation } from "../../../../hooks/mutations/useSendMessageMutation";
 
 function MessageTextInput() {
-  const { selectedChat, setSelectedChat } = useMessageStore();
+  const { selectedChat } = useMessageStore();
   const { mutate: sendMessage } = useSendMessageMutation();
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const [input, setInput] = useState("");
   const [fileName, setFileName] = useState("");
 
+  const submitMessage = () => {
+    sendMessage({
+      text: input,
+      chatId: selectedChat!.id,
+    });
+
+    setInput("");
+  };
+
   useEffect(() => {
     setFileName("");
   }, [selectedChat]);
 
   const handleKeyDown = (event: any) => {
-    if (event.key != "Enter") {
+    if (event.key !== "Enter") {
       return;
     }
 
@@ -31,7 +39,7 @@ function MessageTextInput() {
       return;
     }
 
-    if (input == "") {
+    if (input === "") {
       return;
     }
 
@@ -45,19 +53,12 @@ function MessageTextInput() {
     console.log(`File Name: ${event.target.files![0].name}`);
   };
 
-  const submitMessage = () => {
-    sendMessage({
-      text: input,
-      chatId: selectedChat!.id,
-    });
-
-    setInput("");
-  };
-
   return (
     <div className="flex flex-row ">
       <div className="flex w-full flex-col">
-        {fileName != "" && <span className="text-sm">{fileName} uploaded</span>}
+        {fileName !== "" && (
+          <span className="text-sm">{fileName} uploaded</span>
+        )}
 
         <textarea
           value={input}

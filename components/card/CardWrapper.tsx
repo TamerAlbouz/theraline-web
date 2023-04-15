@@ -1,4 +1,6 @@
-function CardWrapper(props: { title: string; children: React.ReactNode }) {
+import { ReactNode } from "react";
+
+function CardWrapper(props: { title: string; children: ReactNode }) {
   const { title, children } = props;
 
   return (

@@ -12,17 +12,19 @@ const newEventSchema = z.object({
   endTime: z.string(),
 });
 
-type settingsValues = z.infer<typeof newEventSchema>;
+type SettingsValues = z.infer<typeof newEventSchema>;
 
 function NewEventModalContent(props: {
   addEventCallback: (data: calendarEventModel) => void;
 }) {
+  const { addEventCallback } = props;
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<settingsValues>({
+  } = useForm<SettingsValues>({
     resolver: zodResolver(newEventSchema),
   });
   const user = useAuthStore();
@@ -33,7 +35,7 @@ function NewEventModalContent(props: {
     const start = new Date(`${data.startDate} ${data.startTime}`);
     const end = new Date(`${data.endDate} ${data.endTime}`);
 
-    props.addEventCallback({ title: data.title, start, end });
+    addEventCallback({ title: data.title, start, end });
 
     const result = await fetch(
       "https://theraline.onrender.com/appointment/create_appointment",
@@ -72,7 +74,7 @@ function NewEventModalContent(props: {
             type="text"
             placeholder="Title"
             className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-          />{" "}
+          />
           <span className="text-xs text-red-500">{errors.title?.message}</span>
         </div>
 
@@ -82,19 +84,19 @@ function NewEventModalContent(props: {
               htmlFor="event-startDate"
               className="text-md mb-2 block font-bold">
               Start Date
+              <input
+                {...register("startDate", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                id="event-startDate"
+                type="date"
+                onChange={(e) => {
+                  console.log(e.currentTarget.value);
+                  setValue("endDate", e.currentTarget.value);
+                }}
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("startDate", {
-                required: { value: true, message: "This field is required" },
-              })}
-              id="event-startDate"
-              type="date"
-              onChange={(e) => {
-                console.log(e.currentTarget.value);
-                setValue("endDate", e.currentTarget.value);
-              }}
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.startDate?.message}
             </span>
@@ -105,17 +107,17 @@ function NewEventModalContent(props: {
               htmlFor="event-startTime"
               className="text-md mb-2 block font-bold">
               Start Time
+              <input
+                {...register("startTime", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                id="event-startTime"
+                type="time"
+                min="00:00"
+                max="23:59"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("startTime", {
-                required: { value: true, message: "This field is required" },
-              })}
-              id="event-startTime"
-              type="time"
-              min="00:00"
-              max="23:59"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.startTime?.message}
             </span>
@@ -128,18 +130,18 @@ function NewEventModalContent(props: {
               htmlFor="event-endDate"
               className="text-md mb-2 block font-bold">
               End Date
+              <input
+                {...register("endDate", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                onChange={(e) => {
+                  setValue("startDate", e.currentTarget.value);
+                }}
+                id="event-endDate"
+                type="date"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />{" "}
             </label>
-            <input
-              {...register("endDate", {
-                required: { value: true, message: "This field is required" },
-              })}
-              onChange={(e) => {
-                setValue("startDate", e.currentTarget.value);
-              }}
-              id="event-endDate"
-              type="date"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.endDate?.message}
             </span>
@@ -150,18 +152,18 @@ function NewEventModalContent(props: {
               htmlFor="event-endTime"
               className="text-md mb-2 block font-bold">
               End Time
+              <input
+                {...register("endTime", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                id="event-endTime"
+                type="time"
+                onChange={(e) => console.log(e)}
+                min="00:00"
+                max="23:59"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("endTime", {
-                required: { value: true, message: "This field is required" },
-              })}
-              id="event-endTime"
-              type="time"
-              onChange={(e) => console.log(e)}
-              min="00:00"
-              max="23:59"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.endTime?.message}
             </span>

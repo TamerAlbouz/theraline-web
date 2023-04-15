@@ -11,6 +11,7 @@ import {
   paginatorTemplate,
 } from "./PatientCardTemplates";
 import { createPatients } from "../../../../utils/components/patient-utils";
+import { useEffect, useState } from "react";
 
 const filters = {
   name: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -42,6 +43,12 @@ const columns = [
 const randomPatientList = createPatients(50);
 
 function PatientList() {
+  const [patients, setPatients] = useState([{}]);
+
+  useEffect(() => {
+    setPatients(randomPatientList);
+  }, [randomPatientList]);
+
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
@@ -50,7 +57,7 @@ function PatientList() {
 
   return (
     <DataTable
-      value={randomPatientList}
+      value={patients}
       paginator
       paginatorTemplate={paginatorTemplate}
       paginatorClassName="py-2"
@@ -62,7 +69,7 @@ function PatientList() {
       autoLayout
       tableClassName="w-full"
       className="w-full rounded-md bg-primary-dark p-1"
-      rowClassName={(rowData) => {
+      rowClassName={() => {
         return "hover:bg-secondary bg-primary cursor-pointer transition duration-200 ease-in-out";
       }}
       removableSort

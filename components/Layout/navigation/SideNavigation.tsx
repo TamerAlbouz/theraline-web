@@ -69,12 +69,14 @@ function SideNavigation() {
                   <HiBell className="h-6 w-6" aria-hidden="true" />
                 </button>
                 <Link href="/help">
-                  <a className="hidden w-full flex-row items-center justify-start gap-2 px-5 py-3 md:flex">
+                  <button
+                    type="button"
+                    className="hidden w-full flex-row items-center justify-start gap-2 px-5 py-3 md:flex">
                     <BiHelpCircle className="text-3xl text-secondary" />
                     <p className="text-xl font-semibold text-secondary">
                       Help?
                     </p>
-                  </a>
+                  </button>
                 </Link>
                 <div className="hidden h-0.5 w-full bg-secondary md:block" />
 

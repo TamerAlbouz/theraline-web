@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { DateSelectArg, EventClickArg } from "@fullcalendar/core";
+import { EventClickArg } from "@fullcalendar/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { addHours, endOfHour } from "date-fns";
-import { EventDropArg } from "fullcalendar";
 import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
@@ -17,15 +16,6 @@ function AppCalendar() {
   const [isOpen, setIsOpen] = useState(false);
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
 
-  useEffect(() => {
-    useCalendarStore.subscribe((state, prevState) => {
-      // opens the modal only when an event is triggered that isn't a show weekend change
-      if (state.showWeekends == prevState.showWeekends) {
-        openModal();
-      }
-    });
-  }, []);
-
   const openModal = () => {
     setIsOpen(true);
   };
@@ -33,6 +23,15 @@ function AppCalendar() {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    useCalendarStore.subscribe((state, prevState) => {
+      // opens the modal only when an event is triggered that isn't a show weekend change
+      if (state.showWeekends === prevState.showWeekends) {
+        openModal();
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -57,7 +56,7 @@ function AppCalendar() {
         dayCellClassNames="bg-primary"
         dayHeaderClassNames="bg-primary-dark py-4"
         slotLabelClassNames="px-4"
-        eventDrop={(data: EventDropArg) => {
+        eventDrop={() => {
           //  update time happens here
           console.log("Event Drop Here");
         }}
@@ -70,7 +69,7 @@ function AppCalendar() {
 
           openModal();
         }}
-        select={(data: DateSelectArg) => {
+        select={() => {
           setSelectedEvent(undefined);
 
           openModal();
@@ -115,7 +114,7 @@ function AppCalendar() {
                   <Dialog.Title
                     as="h3"
                     className="text-xl font-bold leading-6 text-black">
-                    {selectedEvent != undefined
+                    {selectedEvent !== undefined
                       ? selectedEvent!.title
                       : "New Event"}
                   </Dialog.Title>
