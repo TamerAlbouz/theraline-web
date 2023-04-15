@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
@@ -11,7 +12,6 @@ import {
   paginatorTemplate,
 } from "./PatientCardTemplates";
 import { createPatients } from "../../../../utils/components/patient-utils";
-import { useEffect, useState } from "react";
 
 const filters = {
   name: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -47,6 +47,7 @@ function PatientList() {
 
   useEffect(() => {
     setPatients(randomPatientList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [randomPatientList]);
 
   const router = useRouter();
