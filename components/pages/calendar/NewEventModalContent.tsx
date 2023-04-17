@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { calendarEventModel } from "../../../types/calendarEvent";
 import useAuthStore from "../../../hooks/stores/useAuthStore";
+import { useAppointmentsMutation } from "../../../hooks/mutations/useAppointmentMutation";
+import { appointmentsDataModel } from "../../../types/appointmentsData";
 
 const newEventSchema = z.object({
   title: z.string(),
+  patient_id: z.string(),
   startDate: z.string(),
   startTime: z.string(),
   endDate: z.string(),
@@ -15,8 +17,9 @@ const newEventSchema = z.object({
 type SettingsValues = z.infer<typeof newEventSchema>;
 
 function NewEventModalContent(props: {
-  addEventCallback: (data: calendarEventModel) => void;
+  addEventCallback: (data: appointmentsDataModel) => void;
 }) {
+  const { mutate: createAppointments } = useAppointmentsMutation();
   const { addEventCallback } = props;
 
   const {
@@ -32,34 +35,24 @@ function NewEventModalContent(props: {
   const submitUserInfo = async (data: any) => {
     console.log(data);
 
-    const start = new Date(`${data.startDate} ${data.startTime}`);
-    const end = new Date(`${data.endDate} ${data.endTime}`);
+    const start = data.startDate + "T" + data.startTime + ":00";
+    console.log(start);
 
-    addEventCallback({ title: data.title, start, end });
+    const end = data.endDate + "T" + data.endTime + ":00";
 
-    const result = await fetch(
-      "https://theraline.onrender.com/appointment/create_appointment",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-        body: JSON.stringify({
-          patient_id: "6418b25a337d50ab61fe5915",
-          start_date: "2023-12-07T12:30:00",
-          end_date: "2023-12-07T13:30:00",
-          paymentInfo: {
-            amount: 100,
-            status: "Paid",
-            method: "Credit Card",
-            date: "2023-03-18T16:00:00",
-          },
-        }),
-      },
-    );
+    addEventCallback({
+      title: data.title,
+      patient_id: "6418b25a337d50ab61fe5915",
+      start: start,
+      end: end,
+    });
 
-    console.log(result);
+    createAppointments({
+      title: data.title,
+      patient_id: "6418b25a337d50ab61fe5915",
+      start: start,
+      end: end,
+    });
   };
 
   return (
@@ -72,6 +65,18 @@ function NewEventModalContent(props: {
             })}
             id="event-title"
             type="text"
+            placeholder="Title"
+            className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+          />
+          <span className="text-xs text-red-500">{errors.title?.message}</span>
+        </div>
+        <div className="my-4">
+          <input
+            {...register("patient_id", {
+              required: { value: true, message: "This field is required" },
+            })}
+            id="event-title"
+            type="email"
             placeholder="Title"
             className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
           />
@@ -91,7 +96,6 @@ function NewEventModalContent(props: {
                 id="event-startDate"
                 type="date"
                 onChange={(e) => {
-                  console.log(e.currentTarget.value);
                   setValue("endDate", e.currentTarget.value);
                 }}
                 className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
@@ -171,7 +175,7 @@ function NewEventModalContent(props: {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-4 flex justify-end">
         <input
           type="submit"
           value="Save"

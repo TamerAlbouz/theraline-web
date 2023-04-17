@@ -4,17 +4,19 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { addHours, endOfHour } from "date-fns";
 import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
-import { calendarEventModel } from "../../../types/calendarEvent";
+import { appointmentsDataModel } from "../../../types/appointmentsData";
+import { useAppointmentsQuery } from "../../../hooks/queries/useAppointmentsQuery";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
+  const { data } = useAppointmentsQuery();
+  const [events, setEvents] = useState<Array<appointmentsDataModel>>();
 
   const openModal = () => {
     setIsOpen(true);
@@ -31,7 +33,10 @@ function AppCalendar() {
         openModal();
       }
     });
-  }, []);
+
+    setEvents(data);
+    console.log(events);
+  }, [data, events]);
 
   return (
     <>
@@ -78,13 +83,7 @@ function AppCalendar() {
         nowIndicator
         editable
         selectable
-        initialEvents={[
-          {
-            title: "nice event",
-            start: new Date(),
-            end: addHours(endOfHour(new Date()), 2),
-          },
-        ]}
+        initialEvents={events}
       />
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -131,10 +130,11 @@ function AppCalendar() {
                     />
                   ) : (
                     <NewEventModalContent
-                      addEventCallback={(data: calendarEventModel) => {
+                      addEventCallback={(data: appointmentsDataModel) => {
                         console.log(data);
                         calendarRef.current!.getApi().addEvent({
                           title: data.title,
+                          patient_id: data.patient_id,
                           start: data.start,
                           end: data.end,
                         });

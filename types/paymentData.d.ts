@@ -1,5 +1,6 @@
 export type paymentDataModel = {
   Id: string;
+  patient_id: string;
   paymentInfo: {
     name: string;
     imageUrl: string;
