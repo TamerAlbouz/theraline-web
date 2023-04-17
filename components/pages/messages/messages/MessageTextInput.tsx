@@ -14,12 +14,21 @@ function MessageTextInput() {
   const [input, setInput] = useState("");
   const [fileName, setFileName] = useState("");
 
+  const submitMessage = () => {
+    sendMessage({
+      text: input,
+      chatId: selectedChat!.id,
+    });
+
+    setInput("");
+  };
+
   useEffect(() => {
     setFileName("");
   }, [selectedChat]);
 
   const handleKeyDown = (event: any) => {
-    if (event.key != "Enter") {
+    if (event.key !== "Enter") {
       return;
     }
 
@@ -32,7 +41,7 @@ function MessageTextInput() {
       return;
     }
 
-    if (input == "") {
+    if (input === "") {
       return;
     }
 
@@ -58,7 +67,9 @@ function MessageTextInput() {
   return (
     <div className="flex flex-row ">
       <div className="flex w-full flex-col">
-        {fileName != "" && <span className="text-sm">{fileName} uploaded</span>}
+        {fileName !== "" && (
+          <span className="text-sm">{fileName} uploaded</span>
+        )}
 
         <textarea
           value={input}

@@ -34,7 +34,7 @@ function AppMessageList() {
     });
   }, [data]);
 
-  if (selectedChat == undefined) {
+  if (selectedChat === undefined) {
     return (
       <div className="flex items-center justify-center">
         Please choose a chat
@@ -63,13 +63,14 @@ function AppMessageList() {
   let messages: Array<Message> = allChats.flat();
   const messageItems: Array<JSX.Element> = [];
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < messages.length; i++) {
     let isFirst = false;
     let isLast = false;
     let isOnly = false;
     let showTime = false;
 
-    if (i == 0) {
+    if (i === 0) {
       isFirst = true;
 
       if (
@@ -78,7 +79,7 @@ function AppMessageList() {
       ) {
         isOnly = true;
       }
-    } else if (i == messages.length - 1) {
+    } else if (i === messages.length - 1) {
       isLast = true;
       showTime = true;
     } else {
@@ -128,21 +129,21 @@ function AppMessageList() {
       <div
         id="message-list"
         className="overflow-y-scroll scroll-smooth"
-        onScroll={(data: any) => {
-          if (data.target.scrollTop === 0) {
+        onScroll={(result: any) => {
+          if (result.target.scrollTop === 0) {
             fetchNextPage();
           }
         }}>
-        {selectedChat == undefined && (
+        {selectedChat === undefined && (
           <span>Please select a chat to continue</span>
         )}
-        {messageItems.length == 0 && (
+        {messageItems.length === 0 && (
           <span>No messages have been sent. Be the first to reach out!</span>
         )}
 
         {messageItems}
       </div>
-      <div>{selectedChat != undefined && <MessageTextInput />}</div>
+      <div>{selectedChat !== undefined && <MessageTextInput />}</div>
     </div>
   );
 }

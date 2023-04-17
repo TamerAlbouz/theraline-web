@@ -1,3 +1,4 @@
+import { ComponentType, SVGProps } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { classNames } from "../../../utils/components/layout-utils";
@@ -5,16 +6,17 @@ import { classNames } from "../../../utils/components/layout-utils";
 function SideNavigationItem(props: {
   name: string;
   href: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  Icon: ComponentType<SVGProps<SVGSVGElement>>;
 }) {
-  const { name, href } = props;
+  const { name, href, Icon } = props;
 
   const router = useRouter();
   const current = router.pathname === href;
 
   return (
     <Link href={href} key={name}>
-      <a
+      <button
+        type="button"
         className={classNames(
           current
             ? "bg-white text-primary"
@@ -22,7 +24,7 @@ function SideNavigationItem(props: {
           "flex flex-row items-center px-5 py-4 text-lg font-semibold transition-all duration-200 focus:outline-none",
         )}
         aria-current={current ? "page" : undefined}>
-        <props.icon
+        <Icon
           className={classNames(
             current ? "text-primary" : "text-textColor",
             "mr-3 h-7 w-7",
@@ -31,7 +33,7 @@ function SideNavigationItem(props: {
         />
 
         {name}
-      </a>
+      </button>
     </Link>
   );
 }

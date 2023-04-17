@@ -4,7 +4,8 @@ function SignOutPage() {
   return (
     <button
       className="text-3xl font-semibold text-textColor"
-      onClick={onSignOut}>
+      onClick={onSignOut}
+      type="button">
       Sign out
     </button>
   );

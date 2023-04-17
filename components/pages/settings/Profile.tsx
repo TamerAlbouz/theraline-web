@@ -18,7 +18,7 @@ function Profile() {
           <FormWrapper
             title="Personal Info"
             description="This section contails all your personal info"
-            child={PersonalInfoForm}
+            Child={PersonalInfoForm}
           />
         </div>
       </div>

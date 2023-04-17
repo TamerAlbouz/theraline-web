@@ -11,7 +11,7 @@ import {
   paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
-import { createPayments } from "../../../../utils/components/payment-utils";
+import { usePaymentQuery } from "../../../../hooks/queries/usePaymentQuery";
 
 const columns = [
   { id: 1, header: "Patient", body: paymentPatientTemplate },
@@ -21,9 +21,9 @@ const columns = [
   { id: 5, header: "Amount", body: paymentAmountTemplate },
 ];
 
-const randomPatientList = createPayments(50);
-
 function PayoutTable() {
+  const { data } = usePaymentQuery();
+
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
@@ -32,10 +32,10 @@ function PayoutTable() {
 
   const onGlobalFilterChange = (e: any) => {
     const { value } = e.target;
-    const _filters = { ...filters };
-    _filters.global.value = value;
+    const flts = { ...filters };
+    flts.global.value = value;
 
-    setFilters(_filters);
+    setFilters(flts);
     setGlobalFilterValue(value);
   };
 
@@ -69,35 +69,35 @@ function PayoutTable() {
   };
 
   return (
-    <>
-      <DataTable
-        dataKey="id"
-        value={randomPatientList}
-        responsiveLayout="scroll"
-        autoLayout
-        tableClassName="w-full"
-        className="h-full rounded-md bg-primary-dark p-1"
-        paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
-        rows={7}
-        header={headerTemplate}
-        filters={filters}
-        globalFilterFields={[
-          "name",
-          "email",
-          "paymentStatus",
-          "date",
-          "method",
-          "amount",
-        ]}
-        emptyMessage="No results found."
-        paginator
-        paginatorTemplate={paginatorTemplate}
-        rowClassName={(rowData) => {
-          return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
-        }}>
-        {dynamicColumns}
-      </DataTable>
-    </>
+    <DataTable
+      dataKey="id"
+      value={data?.map((payment) => {
+        return payment;
+      })}
+      responsiveLayout="scroll"
+      autoLayout
+      tableClassName="w-full"
+      className="h-full rounded-md bg-primary-dark p-1"
+      paginatorClassName="flex justify-center items-center gap-3 text-xl py-3"
+      rows={7}
+      header={headerTemplate}
+      filters={filters}
+      globalFilterFields={[
+        "name",
+        "email",
+        "paymentStatus",
+        "date",
+        "method",
+        "amount",
+      ]}
+      emptyMessage="No results found."
+      paginator
+      paginatorTemplate={paginatorTemplate}
+      rowClassName={() => {
+        return "hover:bg-secondary bg-primary cursor-pointer transition duration-300 ease-in-out";
+      }}>
+      {dynamicColumns}
+    </DataTable>
   );
 }
 

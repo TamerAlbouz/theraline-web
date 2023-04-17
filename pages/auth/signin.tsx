@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
 import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
 import { useAuth } from "../../hooks/auth/useAuth";
@@ -15,19 +14,18 @@ const signInSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
-type signInValues = z.infer<typeof signInSchema>;
+type SignInValues = z.infer<typeof signInSchema>;
 
 function SignInPage() {
   const { mutate: login } = useLoginMutation();
   const { signin } = useAuth();
   const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<signInValues>({
+  } = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
@@ -35,17 +33,17 @@ function SignInPage() {
     },
   });
 
-  async function submitUserInfo(data: signInValues) {
+  async function submitUserInfo(data: SignInValues) {
     console.log(data);
 
     login(data, {
-      onSuccess: (data) => {
-        console.log(data);
+      onSuccess: (result) => {
+        console.log(result);
 
         signin(
-          data.data.access_token,
-          data.data.refresh_token,
-          data.data.role[0],
+          result.data.access_token,
+          result.data.refresh_token,
+          result.data.role[0],
         );
 
         router.push("/");
@@ -83,7 +81,6 @@ function SignInPage() {
         />
         <div className="">
           <button
-            disabled={loading}
             type="submit"
             value="Sign in"
             className="focus:shadow-outline w-full cursor-pointer rounded-lg bg-primary py-3 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">

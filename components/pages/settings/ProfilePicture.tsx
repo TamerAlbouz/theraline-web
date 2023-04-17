@@ -7,7 +7,8 @@ function ProfilePicture() {
 
   const handleUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFileName(event.target.files![0].name);
-    console.log(`File Name: ${event.target.files![0].name}`);
+
+    console.log(`File Name: ${fileName}`);
   };
 
   return (

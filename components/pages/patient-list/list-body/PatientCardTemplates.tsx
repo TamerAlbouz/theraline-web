@@ -7,58 +7,65 @@ import React, {
   ReactFragment,
   ReactPortal,
 } from "react";
-import { patientDataModel } from "../../../../types/patientData";
 import Image from "next/image";
+import { patientDataModel } from "../../../../types/patientData";
 
 export const basicInfoTemplate = (data: patientDataModel) => {
+  const { imageUrl, name, email } = data;
   return (
     <div className="my-2 flex flex-row px-2 py-2 pl-4">
       <Image
         width={40}
         height={40}
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={data.imageUrl}
+        src={imageUrl}
         alt="Avatar"
       />
       <div className="ml-4 flex flex-col">
-        <p className="text-md font-bold text-textColor">{data.name}</p>
-        <p className="text-sm text-textColor">{data.email}</p>
+        <p className="text-md font-bold text-textColor">{name}</p>
+        <p className="text-sm text-textColor">{email}</p>
       </div>
     </div>
   );
 };
 
 export const phoneNumberTemplate = (data: patientDataModel) => {
+  const { phoneNumber } = data;
   return (
     <div className="px-2">
-      <p className="text-md text-center text-textColor">{data.phoneNumber}</p>
+      <p className="text-md text-center text-textColor">{phoneNumber}</p>
     </div>
   );
 };
 
 export const cityTemplate = (data: patientDataModel) => {
+  const { city } = data;
   return (
     <div className="px-2">
-      <p className="text-md text-center text-textColor">{data.city}</p>
+      <p className="text-md text-center text-textColor">{city}</p>
     </div>
   );
 };
 
 export const lastAppointmentTemplate = (data: patientDataModel) => {
+  const { nextAppointment } = data;
   return (
     <div className="px-2">
       <p className="text-md text-center text-textColor">
-        {data.nextAppointment ? data.nextAppointment : "-"}
+        {/* eslint-disable-next-line no-unneeded-ternary */}
+        {nextAppointment ? nextAppointment : "-"}
       </p>
     </div>
   );
 };
 
 export const nextAppointmentTemplate = (data: patientDataModel) => {
+  const { lastAppointment } = data;
   return (
     <div className="px-2">
       <p className="text-md text-center text-textColor">
-        {data.lastAppointment ? data.lastAppointment : "-"}
+        {/* eslint-disable-next-line no-unneeded-ternary */}
+        {lastAppointment ? lastAppointment : "-"}
       </p>
     </div>
   );
@@ -71,12 +78,13 @@ export const paginatorTemplate = {
     onClick: MouseEventHandler<HTMLButtonElement> | undefined;
     disabled: boolean | undefined;
   }) => {
+    const { className, onClick, disabled } = options;
     return (
       <button
         type="button"
-        className={options.className}
-        onClick={options.onClick}
-        disabled={options.disabled}>
+        className={className}
+        onClick={onClick}
+        disabled={disabled}>
         <span className="p-3 font-bold text-textColor hover:text-tertiary">
           Previous
         </span>
@@ -89,12 +97,13 @@ export const paginatorTemplate = {
     onClick: MouseEventHandler<HTMLButtonElement> | undefined;
     disabled: boolean | undefined;
   }) => {
+    const { className, onClick, disabled } = options;
     return (
       <button
         type="button"
-        className={options.className}
-        onClick={options.onClick}
-        disabled={options.disabled}>
+        className={className}
+        onClick={onClick}
+        disabled={disabled}>
         <span className="p-3 font-bold text-textColor hover:text-tertiary">
           Next
         </span>
@@ -109,16 +118,16 @@ export const paginatorTemplate = {
     className: string | undefined;
     onClick: MouseEventHandler<HTMLButtonElement> | undefined;
   }) => {
+    const { view, page, totalPages, className, onClick } = options;
+    const { startPage, endPage } = view;
     if (
-      (options.view.startPage === options.page &&
-        options.view.startPage !== 0) ||
-      (options.view.endPage === options.page &&
-        options.page + 1 !== options.totalPages)
+      (startPage === page && startPage !== 0) ||
+      (endPage === page && page + 1 !== totalPages)
     ) {
-      const className = classNames(options.className, { "p-disabled": true });
+      const classN = classNames(className, { "p-disabled": true });
 
       return (
-        <span className={className} style={{ userSelect: "none" }}>
+        <span className={classN} style={{ userSelect: "none" }}>
           ...
         </span>
       );
@@ -127,9 +136,9 @@ export const paginatorTemplate = {
     return (
       <button
         type="button"
-        className={`${options.className} mx-2 font-bold text-textColor`}
-        onClick={options.onClick}>
-        {options.page + 1}
+        className={`${className} mx-2 font-bold text-textColor`}
+        onClick={onClick}>
+        {page + 1}
         <Ripple />
       </button>
     );
@@ -163,6 +172,7 @@ export const paginatorTemplate = {
       | null
       | undefined;
   }) => {
+    const { first, last, totalRecords } = options;
     return (
       <span
         style={{
@@ -172,7 +182,7 @@ export const paginatorTemplate = {
           textAlign: "center",
         }}
         className="mx-6 text-textColor">
-        Showing {options.first} - {options.last} of {options.totalRecords}
+        Showing {first} - {last} of {totalRecords}
       </span>
     );
   },

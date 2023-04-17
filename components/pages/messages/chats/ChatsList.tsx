@@ -4,7 +4,7 @@ import useChatsQuery, { Chat } from "../../../../hooks/queries/useChatsQuery";
 
 function ChatsList() {
   const [searchValue, setSearchValue] = useState("");
-  const { data, isLoading, isFetching, isError, error } = useChatsQuery();
+  const { data, isLoading, isError } = useChatsQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -40,8 +40,8 @@ function ChatsList() {
         return (
           <ChatCard
             chat={chat}
-            isLast={index == data!.length - 1}
-            key={index}
+            isLast={index === data!.length - 1}
+            key={chat.id}
           />
         );
       })}

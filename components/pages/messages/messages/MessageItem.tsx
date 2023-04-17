@@ -11,7 +11,7 @@ function MessageItem(props: {
   const date = new Date(props.message.send_at);
   let formattedTime;
   // today
-  if (new Date().toDateString() == date.toDateString()) {
+  if (new Date().toDateString() === date.toDateString()) {
     formattedTime = format(date, "p");
   } else {
     formattedTime = format(date, "PP");

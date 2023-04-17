@@ -21,10 +21,10 @@ function FilesCard() {
         </div>
       </div>
 
-      {dummyData.map((element, index) => {
+      {dummyData.map((element) => {
         return (
           <div
-            key={index}
+            key={element.name}
             className="group my-3 flex flex-row items-center justify-between rounded-md bg-white px-6 py-3 shadow-md drop-shadow-md">
             <div className="flex flex-row items-center">
               <HiDocumentArrowUp className="mr-4 h-10 w-10 text-primary" />

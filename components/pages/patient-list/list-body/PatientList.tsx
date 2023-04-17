@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
@@ -42,6 +43,13 @@ const columns = [
 const randomPatientList = createPatients(50);
 
 function PatientList() {
+  const [patients, setPatients] = useState([{}]);
+
+  useEffect(() => {
+    setPatients(randomPatientList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [randomPatientList]);
+
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
@@ -50,7 +58,7 @@ function PatientList() {
 
   return (
     <DataTable
-      value={randomPatientList}
+      value={patients}
       paginator
       paginatorTemplate={paginatorTemplate}
       paginatorClassName="py-2"
@@ -62,7 +70,7 @@ function PatientList() {
       autoLayout
       tableClassName="w-full"
       className="w-full rounded-md bg-primary-dark p-1"
-      rowClassName={(rowData) => {
+      rowClassName={() => {
         return "hover:bg-secondary bg-primary cursor-pointer transition duration-200 ease-in-out";
       }}
       removableSort

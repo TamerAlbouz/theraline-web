@@ -1,25 +1,17 @@
 import { Editor } from "primereact/editor";
-import { SetStateAction, useState } from "react";
 
-function ArticlePage({ data }: any) {
-  const [text, setText] = useState("");
-
+function ArticlePage() {
   const header = (
     <span className="ql-formats">
-      <button className="ql-bold" aria-label="Bold"></button>
-      <button className="ql-italic" aria-label="Italic"></button>
-      <button className="ql-underline" aria-label="Underline"></button>
+      <button className="ql-bold" aria-label="Bold" type="button" />
+      <button className="ql-italic" aria-label="Italic" type="button" />
+      <button className="ql-underline" aria-label="Underline" type="button" />
     </span>
   );
 
   return (
     <div className="bg-white text-black">
-      <Editor
-        headerTemplate={header}
-        className=" text-black"
-        value="Hello"
-        onTextChange={(e) => setText("")}
-      />
+      <Editor headerTemplate={header} className=" text-black" value="Hello" />
     </div>
   );
 }

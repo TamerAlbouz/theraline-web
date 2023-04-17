@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 
 function ExistingEventModalContent(props: any) {
+  const { deleteEventCallback, data } = props;
   const { selectedEvent } = useCalendarStore();
   const [list, setList] = useState<any>([]);
 
   useEffect(() => {
-    if (props.data) {
-      setList(props.data);
+    if (data) {
+      setList(data);
     }
 
-    // console.log(list);
-  }, [props]);
+    console.log(list);
+  }, [props, data, list]);
 
   return (
     <div className="mt-4">
@@ -29,7 +30,7 @@ function ExistingEventModalContent(props: any) {
       </div>
 
       <HiTrash
-        onClick={() => props.deleteEventCallback()}
+        onClick={() => deleteEventCallback()}
         className="h-7 w-7 cursor-pointer text-red-500"
       />
     </div>

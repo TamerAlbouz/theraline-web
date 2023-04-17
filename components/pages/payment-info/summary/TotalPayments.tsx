@@ -11,7 +11,7 @@ function TotalPayments() {
         ">
       <h1 className="mb-3 text-2xl font-bold text-textColor">TOTAL PAYMENTS</h1>
       {arr.map((item) => (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2" key={item.amount}>
           <p className="text-5xl font-normal text-textColor">{item.amount}</p>
           <p className="text-xl font-medium text-textColor">{item.text}</p>
         </div>

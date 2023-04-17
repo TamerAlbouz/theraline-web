@@ -1,15 +1,15 @@
-import { HiPlus } from "react-icons/hi2";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { NoteCard } from "../../../components/pages/patient-list/notes/NoteCard";
 import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo";
 import { noteModel } from "../../../types/note";
 import { useNotesStore } from "../../../hooks/stores/useNotesStore";
+import AddButton from "../../../components/pages/patient-list/notes/AddButton";
 
 const dummyData: Array<noteModel> = [
-  { id: "1", title: "title 1", body: "lorem ipsum 1" },
-  { id: "2", title: "title 2", body: "lorem ipsum 2" },
-  { id: "3", title: "title 3", body: "lorem ipsum 3" },
+  { id: "1", title: "Title 1", body: "lorem ipsum 1" },
+  { id: "2", title: "Title 2", body: "lorem ipsum 2" },
+  { id: "3", title: "Title 3", body: "lorem ipsum 3" },
 ];
 
 function NotesPage() {
@@ -22,7 +22,7 @@ function NotesPage() {
   useEffect(() => {
     setNotes(dummyData);
     setSelectedNote(notes.at(0));
-  }, []);
+  }, [notes, setNotes, setSelectedNote]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -32,33 +32,23 @@ function NotesPage() {
     setIsOpen(false);
   };
 
-  function AddButton() {
-    return (
-      <div
-        onClick={openModal}
-        className="cursor-pointer rounded-full bg-white p-3 transition-all duration-200 hover:bg-gray-100">
-        <HiPlus className="h-7 w-7 text-primary" />
-      </div>
-    );
-  }
-
   return (
     <>
-      <div className="hidden h-[40rem] md:flex md:flex-row w-full">
+      <div className="hidden h-[40rem] w-full md:flex md:flex-row">
         <div className="relative mr-4 flex h-full w-2/5 flex-col overflow-y-scroll rounded-lg bg-primary-dark">
           {notes.map((element, index) => {
             return (
               <NoteCard
                 data={element}
                 opensModal={false}
-                isFirstInList={index == 0}
-                key={index}
+                isFirstInList={index === 0}
+                key={element.id}
               />
             );
           })}
 
           <div className="absolute right-3 bottom-3">
-            <AddButton />
+            <AddButton openModal={openModal} />
           </div>
         </div>
 
@@ -73,14 +63,14 @@ function NotesPage() {
             <NoteCard
               data={element}
               opensModal
-              isFirstInList={index == 0}
-              key={index}
+              isFirstInList={index === 0}
+              key={element.id}
             />
           );
         })}
 
         <div className="absolute right-3 bottom-3">
-          <AddButton />
+          <AddButton openModal={openModal} />
         </div>
       </div>
 
@@ -125,8 +115,8 @@ function NotesPage() {
                     <input
                       type="submit"
                       value="Save"
-                      onClick={(e) => {
-                        if (newTitleRef.current?.value.length == 0) {
+                      onClick={() => {
+                        if (newTitleRef.current?.value.length === 0) {
                           return;
                         }
 
@@ -152,17 +142,3 @@ function NotesPage() {
 }
 
 export default NotesPage;
-
-export async function getServerSideProps(context: any) {
-  const { patientId } = context.params;
-  console.log(patientId);
-
-  return {
-    props: {
-      notes: [
-        { title: "title1", body: "body1" },
-        { title: "title2", body: "body2" },
-      ],
-    },
-  };
-}

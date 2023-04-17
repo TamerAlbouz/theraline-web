@@ -3,12 +3,6 @@ import { BiCurrentLocation } from "react-icons/bi";
 import CardWrapper from "../../../card/CardWrapper";
 import { useClinicQuery } from "../../../../hooks/queries/useClinicQuery";
 
-const arr = [
-  { title: "Horizon Therapy Center", icon: BsPaperclip },
-  { title: "1234 Main Street, New York, NY 10001", icon: BiCurrentLocation },
-  { title: "212-555-5555", icon: BsFillTelephoneFill },
-];
-
 function ClinicInfo() {
   const { data } = useClinicQuery();
 
