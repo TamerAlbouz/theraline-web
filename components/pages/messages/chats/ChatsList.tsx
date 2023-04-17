@@ -41,7 +41,7 @@ function ChatsList() {
           <ChatCard
             chat={chat}
             isLast={index === data!.length - 1}
-            key={chat.id}
+            key={chat._id}
           />
         );
       })}

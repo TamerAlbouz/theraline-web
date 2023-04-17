@@ -17,7 +17,7 @@ function MessageTextInput() {
   const submitMessage = () => {
     sendMessage({
       text: input,
-      chatId: selectedChat!.id,
+      chatId: selectedChat!._id,
     });
 
     setInput("");
@@ -53,15 +53,6 @@ function MessageTextInput() {
   const handleUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFileName(event.target.files![0].name);
     console.log(`File Name: ${event.target.files![0].name}`);
-  };
-
-  const submitMessage = () => {
-    sendMessage({
-      text: input,
-      chatId: selectedChat!._id,
-    });
-
-    setInput("");
   };
 
   return (

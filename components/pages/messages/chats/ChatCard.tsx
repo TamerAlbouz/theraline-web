@@ -6,7 +6,7 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
   const { selectedChat, setSelectedChat } = useMessageStore();
 
   const selectChat = () => {
-    setSelectedChat(chat);
+    setSelectedChat(props.chat);
   };
 
   return (
@@ -14,8 +14,8 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
       type="button"
       onClick={selectChat}
       className={`flex cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
-        isLast ? "" : "border-b border-gray-200"
-      } ${selectedChat === chat ? "bg-primary" : ""}`}>
+        props.isLast ? "" : "border-b border-gray-200"
+      } ${selectedChat === props.chat ? "bg-primary" : ""}`}>
       <div className="flex flex-row items-center">
         <div className="relative">
           {props.chat.groupImage ? (
@@ -25,7 +25,7 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
               alt="Profile Photo"
             />
           ) : (
-            <DefaultAvatar chat={chat} />
+            <DefaultAvatar chat={props.chat} />
           )}
 
           {/* {props.chat.isActive && (
@@ -33,10 +33,10 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
           )} */}
         </div>
 
-        <div className="ml-4 mr-6 flex flex-col">
-          <span className="font-bold">{name}</span>
+        <div className="ml-4 mr-6 flex flex-col items-start">
+          <span className="font-bold">{props.chat.name}</span>
 
-          <span className="text-gray-100">
+          <span className="text-sm text-gray-100">
             {props.chat.latestMessage?.text}
           </span>
         </div>
