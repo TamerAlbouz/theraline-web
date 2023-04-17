@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { useRouter } from "next/router";
 import SideNavigation from "./navigation/SideNavigation";
 import TopBar from "./topbar/topbar";
-import { useChatSocket } from "../../hooks/queries/useChatSocket";
 
 function Layout(props: { children: ReactNode }) {
   const { children } = props;
