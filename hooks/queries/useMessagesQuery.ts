@@ -50,7 +50,7 @@ export const useMessagesQuery = (chatId: string | undefined) => {
 
         return undefined;
       },
-
+      refetchInterval: 1000,
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       enabled: useMessageStore.getState().selectedChat != undefined, // !!chatId
