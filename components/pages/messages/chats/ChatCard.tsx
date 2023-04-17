@@ -1,8 +1,8 @@
+import { Chat } from "../../../../hooks/queries/useChatsQuery";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
-import { chatModel } from "../../../../types/chats/chat";
 import DefaultAvatar from "./DefaultAvatar";
 
-function ChatCard(props: { chat: chatModel; isLast: boolean }) {
+function ChatCard(props: { chat: Chat; isLast: boolean }) {
   const { selectedChat, setSelectedChat } = useMessageStore();
 
   const selectChat = () => {
@@ -17,10 +17,10 @@ function ChatCard(props: { chat: chatModel; isLast: boolean }) {
       } ${selectedChat == props.chat ? "bg-primary" : ""}`}>
       <div className="flex flex-row items-center">
         <div className="relative">
-          {props.chat.profileImageUrl ? (
+          {props.chat.groupImage ? (
             <img
               className="h-12 w-12 cursor-pointer rounded-full"
-              src={props.chat.profileImageUrl}
+              src={props.chat.groupImage}
               alt="Profile Photo"
             />
           ) : (
@@ -36,7 +36,7 @@ function ChatCard(props: { chat: chatModel; isLast: boolean }) {
           <span className="font-bold">{props.chat.name}</span>
 
           <span className="text-gray-100">
-            {props.chat.lastMessage?.message}
+            {props.chat.latestMessage?.text}
           </span>
         </div>
       </div>

@@ -1,8 +1,20 @@
+import { animateScroll, ScrollElement } from "react-scroll";
 import MessageItem from "./MessageItem";
 import MessageTextInput from "./MessageTextInput";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
-import { useMessagesQuery } from "../../../../hooks/queries/useMessagesQuery";
-import { messageModel } from "../../../../types/chats/message";
+import {
+  Message,
+  useMessagesQuery,
+} from "../../../../hooks/queries/useMessagesQuery";
+import { useEffect } from "react";
+
+function sameDay(d1: Date, d2: Date) {
+  return (
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate()
+  );
+}
 
 function AppMessageList() {
   const { selectedChat } = useMessageStore();
@@ -14,7 +26,13 @@ function AppMessageList() {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useMessagesQuery(selectedChat?.id);
+  } = useMessagesQuery(selectedChat?._id);
+
+  useEffect(() => {
+    animateScroll.scrollToBottom({
+      containerId: "message-list",
+    });
+  }, [data]);
 
   if (selectedChat == undefined) {
     return (
@@ -28,68 +46,78 @@ function AppMessageList() {
     return <div>Loading...</div>;
   }
 
-  // console.log(data!.pages[0]);
-  let x: Array<Array<messageModel>> = data!.pages.map((messageSet) => {
-    let messages: Array<messageModel> = [];
-
-    messageSet.data.docs.forEach((element: any) => {
-      messages.push({
-        id: element._id,
-        time: element.send_at,
-        message: element.text,
-        isMe: element.sentByMe === "YES",
-      });
+  let allChats: Array<Array<Message>> = data!.pages.map((page) => {
+    let messageSet = page.data.docs.sort((a, b) => {
+      if (a.send_at < b.send_at) {
+        return -1;
+      }
+      if (a.send_at > b.send_at) {
+        return 1;
+      }
+      return 0;
     });
 
-    return messages;
+    return messageSet;
   });
 
-  let messages: Array<messageModel> = x.flat(); // data!;
+  let messages: Array<Message> = allChats.flat();
   const messageItems: Array<JSX.Element> = [];
 
   for (let i = 0; i < messages.length; i++) {
     let isFirst = false;
     let isLast = false;
     let isOnly = false;
+    let showTime = false;
 
     if (i == 0) {
       isFirst = true;
 
       if (
         i + 1 <= messages.length - 1 &&
-        messages[i].isMe != messages[i + 1].isMe
+        messages[i].sentByMe != messages[i + 1].sentByMe
       ) {
         isOnly = true;
       }
     } else if (i == messages.length - 1) {
       isLast = true;
+      showTime = true;
     } else {
       if (
-        messages[i].isMe != messages[i - 1].isMe &&
-        messages[i].isMe != messages[i + 1].isMe
+        messages[i].sentByMe != messages[i - 1].sentByMe &&
+        messages[i].sentByMe != messages[i + 1].sentByMe
       ) {
         isOnly = true;
       } else if (
-        messages[i].isMe != messages[i - 1].isMe &&
-        messages[i].isMe == messages[i + 1].isMe
+        messages[i].sentByMe != messages[i - 1].sentByMe &&
+        messages[i].sentByMe == messages[i + 1].sentByMe
       ) {
         isFirst = true;
       }
       if (
-        messages[i].isMe == messages[i - 1].isMe &&
-        messages[i].isMe != messages[i + 1].isMe
+        messages[i].sentByMe == messages[i - 1].sentByMe &&
+        messages[i].sentByMe != messages[i + 1].sentByMe
       ) {
         isLast = true;
+        showTime = true;
+      }
+
+      if (
+        !sameDay(
+          new Date(messages[i - 1].send_at),
+          new Date(messages[i].send_at),
+        )
+      ) {
+        showTime = true;
       }
     }
 
     messageItems.push(
       <MessageItem
         message={messages[i]}
-        profileImageUrl={selectedChat.profileImageUrl}
         isFirst={isFirst}
         isLast={isLast}
         isOnly={isOnly}
+        showTime={showTime}
         key={i}
       />,
     );
@@ -98,6 +126,7 @@ function AppMessageList() {
   return (
     <div className="relative flex h-full flex-col justify-end rounded-r-lg bg-primary px-4 py-2">
       <div
+        id="message-list"
         className="overflow-y-scroll scroll-smooth"
         onScroll={(data: any) => {
           if (data.target.scrollTop === 0) {

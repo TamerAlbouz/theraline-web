@@ -2,12 +2,13 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
-import { chatModel } from "../../../../types/chats/chat";
 import { useSendMessageMutation } from "../../../../hooks/mutations/useSendMessageMutation";
 
 function MessageTextInput() {
   const { selectedChat, setSelectedChat } = useMessageStore();
-  const { mutate: sendMessage } = useSendMessageMutation();
+  const { mutate: sendMessage } = useSendMessageMutation({
+    chatId: selectedChat?._id,
+  });
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const [input, setInput] = useState("");
@@ -48,7 +49,7 @@ function MessageTextInput() {
   const submitMessage = () => {
     sendMessage({
       text: input,
-      chatId: selectedChat!.id,
+      chatId: selectedChat!._id,
     });
 
     setInput("");

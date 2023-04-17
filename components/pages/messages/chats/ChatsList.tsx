@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ChatCard from "./ChatCard";
-import { chatModel } from "../../../../types/chats/chat";
-import { useChatsQuery } from "../../../../hooks/queries/useChatsQuery";
+import useChatsQuery, { Chat } from "../../../../hooks/queries/useChatsQuery";
 
 function ChatsList() {
   const [searchValue, setSearchValue] = useState("");
@@ -15,7 +14,7 @@ function ChatsList() {
     return <div>An error has ocurred</div>;
   }
 
-  const filterChats = (chats: Array<chatModel>) => {
+  const filterChats = (chats: Chat[]) => {
     if (searchValue === "") {
       return chats;
     }

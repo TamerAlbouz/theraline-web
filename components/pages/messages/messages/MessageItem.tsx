@@ -1,15 +1,14 @@
 import { format } from "date-fns";
-import { messageModel } from "../../../../types/chats/message";
-import DefaultAvatar from "../chats/DefaultAvatar";
+import { Message } from "../../../../hooks/queries/useMessagesQuery";
 
 function MessageItem(props: {
-  message: messageModel;
-  profileImageUrl: string | undefined;
+  message: Message;
   isFirst: boolean;
   isLast: boolean;
   isOnly: boolean;
+  showTime: boolean;
 }) {
-  const date = new Date(props.message.time);
+  const date = new Date(props.message.send_at);
   let formattedTime;
   // today
   if (new Date().toDateString() == date.toDateString()) {
@@ -21,57 +20,48 @@ function MessageItem(props: {
   return (
     <div
       className={`flex flex-row items-end ${
-        props.message.isMe ? "justify-end" : "justify-start"
+        props.message.sentByMe ? "justify-end" : "justify-start"
       } ${props.isFirst ? "mt-6" : ""}
       ${props.isLast ? "mb-6" : ""} ${props.isOnly ? "my-6" : "my-1"}
       `}>
-      {/* {!props.message.isMe &&
-        (props.isOnly || props.isLast) &&
-        (props.profileImageUrl ? (
-          <img
-            className="mr-2 h-10 w-10 cursor-pointer rounded-full"
-            src={props.profileImageUrl}
-            alt="Profile Photo"
-          />
-        ) : (
-          <DefaultAvatar />
-        ))} */}
-      {/* {!props.message.isMe && !(props.isOnly || props.isLast) && (
-        <div className="mr-2 h-10 w-10" />
-      )} */}
-
-      {props.isLast && props.message.isMe && (
+      {props.showTime && props.message.sentByMe && (
         <span className="mr-2 text-sm">{formattedTime}</span>
       )}
 
       <div
-        className={`px-4 py-3 ${
-          props.message.isMe
+        className={`flex flex-col px-4 py-3  ${
+          props.message.sentByMe
             ? "mx-4 rounded-l-3xl bg-green-500 text-white"
             : "rounded-r-3xl bg-gray-300 text-black"
         } ${
-          !props.message.isMe && (props.isOnly || props.isFirst)
+          !props.message.sentByMe && (props.isOnly || props.isFirst)
             ? "rounded-t-3xl rounded-br-3xl"
             : ""
         } ${
-          props.message.isMe && (props.isOnly || props.isFirst)
+          props.message.sentByMe && (props.isOnly || props.isFirst)
             ? "rounded-t-3xl rounded-bl-3xl"
             : ""
         } 
         ${
-          props.message.isMe && props.isLast
+          props.message.sentByMe && props.isLast
             ? "rounded-l-3xl rounded-br-3xl"
             : ""
         }
         ${
-          !props.message.isMe && props.isLast
+          !props.message.sentByMe && props.isLast
             ? "rounded-r-3xl rounded-bl-3xl"
             : ""
         }`}>
-        <span className="whitespace-pre-wrap">{props.message.message}</span>
+        <span
+          className={`text-xs   ${
+            props.message.sentByMe ? "text-gray-50" : "text-gray-500"
+          }`}>
+          {props.message.username}
+        </span>
+        <span className="whitespace-pre-wrap">{props.message.text}</span>
       </div>
 
-      {props.isLast && !props.message.isMe && (
+      {props.showTime && !props.message.sentByMe && (
         <span className="ml-2 text-sm">{formattedTime}</span>
       )}
     </div>

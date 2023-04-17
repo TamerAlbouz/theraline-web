@@ -1,66 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
 import { accessClient } from "../../utils/axios/axios";
-import { chatModel } from "../../types/chats/chat";
+import { AxiosResponse } from "axios";
 
-const getChats = async () => {
-  return accessClient.get("/groups/get_chats");
+export type ReceivedMessage = {
+  _id: string;
+  text: string;
+  user_id: string;
+  send_at: Date;
 };
 
-export const useChatsQuery = () => {
-  return useQuery(["chats"], getChats, {
-    select: (data: any) => {
-      const chats: Array<chatModel> = [];
+export type Chat = {
+  _id: string;
+  name: string;
+  groupType: "PRIVATE" | "GROUP";
+  groupImage: string;
+  latestMessage?: ReceivedMessage;
+  image?: string;
+};
 
-      console.log(data.data.chats);
+const getChats = (): Promise<AxiosResponse<Chat[]>> => {
+  return accessClient.get(`/groups/get_chats`);
+};
 
-      data.data.chats.forEach((element: any) => {
-        chats.push({
-          id: element._id,
-          name: element.name,
-          lastMessage: element.latestMessage
-            ? {
-                id: element.latestMessage._id,
-                time: element.latestMessage.send_at,
-                message: element.latestMessage.text,
-                isMe: false,
-              }
-            : undefined,
-          profileImageUrl: element.groupImage ?? "",
-          type: element.groupType[0],
-        });
-      });
-
-      return chats;
-    },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+const useChatsQuery = () => {
+  return useQuery({
+    queryKey: ["chats"],
+    select: (data) => data.data,
+    queryFn: getChats,
   });
 };
 
-// _id: "6418b793337d50ab61fe592f"
-// ​​​
-// send_at: "2023-03-20T19:44:19.883Z"
-// ​​​
-// text: "Hello!"
-// ​​​
-// user_id: "6418b239337d50ab61fe5912"
-
-// 0: Object { _id: "6418b6fe337d50ab61fe591e", name: "Super cool group", groupType: (1) […], … }
-// ​​
-// _id: "6418b6fe337d50ab61fe591e"
-// ​​
-// groupType: Array [ "GROUP" ]
-// ​​
-// latestMessage: Object { _id: "6418b793337d50ab61fe592f", send_at: "2023-03-20T19:44:19.883Z", user_id: "6418b239337d50ab61fe5912", … }
-// ​​​
-// _id: "6418b793337d50ab61fe592f"
-// ​​​
-// send_at: "2023-03-20T19:44:19.883Z"
-// ​​​
-// text: "Hello!"
-// ​​​
-// user_id: "6418b239337d50ab61fe5912"
-// ​​​
-// <prototype>: Object { … }
-// ​​
-// name: "Super cool group"
+export default useChatsQuery;
