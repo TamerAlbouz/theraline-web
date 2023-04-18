@@ -1,33 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { accessClient } from "../../utils/axios/axios";
 
-const sendMessage = async ({
-  text,
-  chatId,
+const createGroup = async ({
+  name,
+  image,
+  users_id,
 }: {
-  text: string;
-  chatId: string;
+  name: string;
+  image: string;
+  users_id: string[];
 }) => {
-  return accessClient.post(`/message/${chatId}/send_message`, {
-    text,
+  return accessClient.post("/groups/create_group", {
+    users_id,
+    name,
+    image,
   });
 };
 
-export const useSendMessageMutation = ({
-  chatId,
-}: {
-  chatId: string | undefined;
-}) => {
+export const useCreateGroupMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: sendMessage,
+    mutationFn: createGroup,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["chats"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["messages", chatId],
       });
     },
     onError: (error) => {

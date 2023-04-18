@@ -5,8 +5,10 @@ import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import { useSendMessageMutation } from "../../../../hooks/mutations/useSendMessageMutation";
 
 function MessageTextInput() {
-  const { selectedChat } = useMessageStore();
-  const { mutate: sendMessage } = useSendMessageMutation();
+  const { selectedChat, setSelectedChat } = useMessageStore();
+  const { mutate: sendMessage } = useSendMessageMutation({
+    chatId: selectedChat?._id,
+  });
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const [input, setInput] = useState("");
@@ -15,7 +17,7 @@ function MessageTextInput() {
   const submitMessage = () => {
     sendMessage({
       text: input,
-      chatId: selectedChat!.id,
+      chatId: selectedChat!._id,
     });
 
     setInput("");

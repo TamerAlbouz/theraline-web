@@ -2,14 +2,11 @@ import { ReactNode } from "react";
 import { useRouter } from "next/router";
 import SideNavigation from "./navigation/SideNavigation";
 import TopBar from "./Topbar/Topbar";
-import { useChatSocket } from "../../hooks/queries/useChatSocket";
 
 function Layout(props: { children: ReactNode }) {
   const { children } = props;
   const router = useRouter();
   const path = router.pathname;
-
-  useChatSocket();
 
   return (
     <div className="flex min-h-screen flex-col bg-secondary md:flex-row">

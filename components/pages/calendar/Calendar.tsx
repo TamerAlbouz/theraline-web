@@ -8,15 +8,31 @@ import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
+import useAppointmentsQuery, {
+  Appointment,
+} from "../../../hooks/queries/useAppointmentsQuery";
 import { appointmentsDataModel } from "../../../types/appointmentsData";
-import { useAppointmentsQuery } from "../../../hooks/queries/useAppointmentsQuery";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
-  const { data } = useAppointmentsQuery();
-  const [events, setEvents] = useState<Array<appointmentsDataModel>>();
+  const { data, isLoading } = useAppointmentsQuery();
+  useEffect(() => {
+    useCalendarStore.subscribe((state, prevState) => {
+      // opens the modal only when an event is triggered that isn't a show weekend change
+      if (state.showWeekends === prevState.showWeekends) {
+        openModal();
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      setAppointments(data);
+    }
+  }, [data]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -25,18 +41,6 @@ function AppCalendar() {
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  useEffect(() => {
-    useCalendarStore.subscribe((state, prevState) => {
-      // opens the modal only when an event is triggered that isn't a show weekend change
-      if (state.showWeekends === prevState.showWeekends) {
-        openModal();
-      }
-    });
-
-    setEvents(data);
-    console.log(events);
-  }, [data, events]);
 
   return (
     <>
@@ -66,7 +70,9 @@ function AppCalendar() {
           console.log("Event Drop Here");
         }}
         eventClick={(data: EventClickArg) => {
+          console.log(data);
           setSelectedEvent({
+            id: data.event.id,
             title: data.event.title,
             start: data.event.start!,
             end: data.event.end!,
@@ -83,7 +89,32 @@ function AppCalendar() {
         nowIndicator
         editable
         selectable
-        initialEvents={events}
+        events={appointments.map((element) => {
+          let appointmentClass;
+
+          switch (element.status) {
+            case "CANCELED":
+              appointmentClass = "bg-red-500";
+              break;
+            case "CONFIRMED":
+              appointmentClass = "bg-yellow-500";
+              break;
+            case "DONE":
+              appointmentClass = "bg-green-500";
+              break;
+            default:
+              appointmentClass = "bg-blue-500";
+              break;
+          }
+
+          return {
+            id: element._id,
+            title: element.title,
+            start: new Date(element.start_date),
+            end: new Date(element.end_date),
+            className: appointmentClass,
+          };
+        })}
       />
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -119,15 +150,7 @@ function AppCalendar() {
                   </Dialog.Title>
 
                   {selectedEvent ? (
-                    <ExistingEventModalContent
-                      deleteEventCallback={() => {
-                        console.log(`DELETING ${selectedEvent?.title}`);
-
-                        // calendarRef.current!.getApi().refetchEvents();
-
-                        closeModal();
-                      }}
-                    />
+                    <ExistingEventModalContent />
                   ) : (
                     <NewEventModalContent
                       addEventCallback={(data: appointmentsDataModel) => {
