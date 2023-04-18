@@ -8,7 +8,7 @@ import useAuthStore from "../hooks/stores/useAuthStore";
 import Layout from "../components/Layout/Layout";
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 0 } },
+  defaultOptions: { queries: { retry: 1 } },
 });
 
 function App({ Component, pageProps }: AppProps) {

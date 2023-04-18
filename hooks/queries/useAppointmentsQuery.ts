@@ -27,6 +27,7 @@ export type GetAppointments = {
 };
 
 const getAppointments = (): Promise<AxiosResponse<GetAppointments>> => {
+  console.log("Getting Appointments");
   const page = 0;
   return accessClient.get(`appointment/doctor/appointment?page=${page}`);
 };

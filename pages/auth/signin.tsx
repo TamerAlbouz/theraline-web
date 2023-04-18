@@ -46,7 +46,7 @@ function SignInPage() {
         signin(
           result.data.access_token,
           result.data.refresh_token,
-          result.data.role[0],
+          result.data.role,
         );
 
         router.push("/");
