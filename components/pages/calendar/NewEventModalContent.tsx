@@ -84,7 +84,13 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
         </div>
 
         <span>Users</span>
-        <Combobox value={selectedUsers} onChange={setSelectedUsers} multiple>
+        <Combobox
+          value={selectedUsers}
+          onChange={(data: any) => {
+            setSelectedUsers([...data]);
+          }}
+          multiple
+          defaultValue={[]}>
           <div className="relative mt-1 mb-4">
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input

@@ -38,8 +38,8 @@ export const useMessagesQuery = (chatId: string | undefined) => {
     ["messages", chatId],
     ({ pageParam = 0 }) => getMessages(chatId, pageParam),
     {
+      // TODO: fix this
       getNextPageParam: (_, pages) => {
-        console.log(pages.length);
         if (pages.length == 1) {
           return 1;
         }

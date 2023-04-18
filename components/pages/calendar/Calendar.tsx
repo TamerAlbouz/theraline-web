@@ -18,7 +18,7 @@ function AppCalendar() {
   const [isOpen, setIsOpen] = useState(false);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
-  const { data, isLoading } = useAppointmentsQuery();
+  const { data } = useAppointmentsQuery();
   useEffect(() => {
     useCalendarStore.subscribe((state, prevState) => {
       // opens the modal only when an event is triggered that isn't a show weekend change
@@ -72,6 +72,7 @@ function AppCalendar() {
             title: data.event.title,
             start: data.event.start!,
             end: data.event.end!,
+            status: data.event.extendedProps.status,
           });
 
           openModal();
@@ -107,6 +108,9 @@ function AppCalendar() {
             title: element.title,
             start: new Date(element.start_date),
             end: new Date(element.end_date),
+            extendedProps: {
+              status: element.status,
+            },
             className: appointmentClass,
           };
         })}
@@ -145,7 +149,11 @@ function AppCalendar() {
                   </Dialog.Title>
 
                   {selectedEvent ? (
-                    <ExistingEventModalContent />
+                    <ExistingEventModalContent
+                      closeModalCallback={() => {
+                        closeModal();
+                      }}
+                    />
                   ) : (
                     <NewEventModalContent
                       closeModalCallback={() => {
