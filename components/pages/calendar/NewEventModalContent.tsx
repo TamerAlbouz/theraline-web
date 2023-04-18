@@ -12,6 +12,7 @@ import { useCreateAppointmentMutation } from "../../../hooks/mutations/useCreate
 
 const newEventSchema = z.object({
   title: z.string(),
+  patient_id: z.string(),
   startDate: z.string(),
   startTime: z.string(),
   endDate: z.string(),
@@ -167,7 +168,6 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
                 id="event-startDate"
                 type="date"
                 onChange={(e) => {
-                  console.log(e.currentTarget.value);
                   setValue("endDate", e.currentTarget.value);
                 }}
                 className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
@@ -247,7 +247,7 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-4 flex justify-end">
         <input
           type="submit"
           value="Save"

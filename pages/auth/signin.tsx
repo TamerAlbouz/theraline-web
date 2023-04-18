@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +18,7 @@ const signInSchema = z.object({
 type SignInValues = z.infer<typeof signInSchema>;
 
 function SignInPage() {
+  const [loading, setLoading] = useState(false);
   const { mutate: login } = useLoginMutation();
   const { signin } = useAuth();
   const router = useRouter();
@@ -34,6 +36,7 @@ function SignInPage() {
   });
 
   async function submitUserInfo(data: SignInValues) {
+    setLoading(true);
     console.log(data);
 
     login(data, {
@@ -52,13 +55,13 @@ function SignInPage() {
         console.log(error);
       },
     });
+
+    setLoading(false);
   }
 
   return (
     <AuthBackgroundCard>
-      <form
-        onSubmit={handleSubmit(submitUserInfo)}
-        className="flex w-full flex-col gap-5">
+      <form className="flex w-full flex-col gap-5">
         <CustomInput
           label="Email"
           type="text"
@@ -81,6 +84,8 @@ function SignInPage() {
         />
         <div className="">
           <button
+            disabled={loading}
+            onClick={handleSubmit(submitUserInfo)}
             type="submit"
             value="Sign in"
             className="focus:shadow-outline w-full cursor-pointer rounded-lg bg-primary py-3 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">

@@ -8,10 +8,10 @@ import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
-import { calendarEventModel } from "../../../types/calendarEvent";
 import useAppointmentsQuery, {
   Appointment,
 } from "../../../hooks/queries/useAppointmentsQuery";
+import { appointmentsDataModel } from "../../../types/appointmentsData";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
