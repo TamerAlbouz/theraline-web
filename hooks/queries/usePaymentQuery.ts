@@ -23,7 +23,8 @@ export const usePaymentQuery = () => {
           patient_id: element.patient_id,
           paymentInfo: {
             name: element.paymentInfo.method,
-            imageUrl: "",
+            imageUrl:
+              "https://www.shutterstock.com/image-vector/male-avatar-profile-picture-vector-600w-148661735.jpg",
             email: element.paymentInfo.method,
             date: element.paymentInfo.date.split("T")[0],
             paymentStatus: element.paymentInfo.status,
