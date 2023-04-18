@@ -3,4 +3,5 @@ export type calendarEventModel = {
   title: string;
   start: Date;
   end: Date;
+  status: "CREATED" | "CANCELED" | "DONE" | "CONFIRMED" | undefined | null;
 };
