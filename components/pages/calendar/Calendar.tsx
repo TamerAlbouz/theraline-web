@@ -61,14 +61,10 @@ function AppCalendar() {
         weekends={showWeekends}
         eventTextColor="black"
         viewClassNames="bg-primary-dark p-4 rounded-lg border-none"
-        eventClassNames="bg-tertiary text-black"
+        eventClassNames="text-black cursor-pointer"
         dayCellClassNames="bg-primary"
         dayHeaderClassNames="bg-primary-dark py-4"
         slotLabelClassNames="px-4"
-        eventDrop={() => {
-          //  update time happens here
-          console.log("Event Drop Here");
-        }}
         eventClick={(data: EventClickArg) => {
           console.log(data);
           setSelectedEvent({
@@ -87,23 +83,22 @@ function AppCalendar() {
         }}
         initialView="dayGridMonth"
         nowIndicator
-        editable
         selectable
         events={appointments.map((element) => {
           let appointmentClass;
 
-          switch (element.status) {
+          switch (element.status.toString()) {
             case "CANCELED":
-              appointmentClass = "bg-red-500";
+              appointmentClass = "bg-red-400";
               break;
             case "CONFIRMED":
-              appointmentClass = "bg-yellow-500";
+              appointmentClass = "bg-yellow-400";
               break;
             case "DONE":
-              appointmentClass = "bg-green-500";
+              appointmentClass = "bg-green-400";
               break;
             default:
-              appointmentClass = "bg-blue-500";
+              appointmentClass = "bg-tertiary";
               break;
           }
 
@@ -140,7 +135,7 @@ function AppCalendar() {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="h-[26rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="h-[30rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-xl font-bold leading-6 text-black">
@@ -153,14 +148,7 @@ function AppCalendar() {
                     <ExistingEventModalContent />
                   ) : (
                     <NewEventModalContent
-                      addEventCallback={(data: calendarEventModel) => {
-                        console.log(data);
-                        calendarRef.current!.getApi().addEvent({
-                          title: data.title,
-                          start: data.start,
-                          end: data.end,
-                        });
-
+                      closeModalCallback={() => {
                         closeModal();
                       }}
                     />

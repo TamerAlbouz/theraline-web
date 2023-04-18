@@ -25,14 +25,14 @@ function ExistingEventModalContent() {
       )}
 
       <div className="mt-4 flex flex-row">
-        <button
+        {/* <button
           type="button"
           className="mt-4 mr-4 cursor-pointer rounded-md bg-green-500 px-4 py-2 font-semibold text-white shadow-md transition ease-in-out hover:bg-green-700"
           onClick={() => {
             console.log("Confirm");
           }}>
           Confirm
-        </button>
+        </button> */}
 
         <button
           type="button"
