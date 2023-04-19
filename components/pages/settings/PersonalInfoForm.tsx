@@ -11,23 +11,23 @@ const settingsSchema = z.object({
   phoneNumber: z.string(),
 });
 
-type settingsValues = z.infer<typeof settingsSchema>;
+type SettingsValues = z.infer<typeof settingsSchema>;
+
+const defaultValues = {
+  email: "tim.cook@gmail.com",
+  displayName: "Tim",
+  fullName: "Tim Cook",
+  description: "Licensed therapist operating in the DC area",
+  phoneNumber: "78655417",
+};
 
 function PersonalInfoForm() {
-  const defaultValues = {
-    email: "tim.cook@gmail.com",
-    displayName: "Tim",
-    fullName: "Tim Cook",
-    description: "Licensed therapist operating in the DC area",
-    phoneNumber: "78655417",
-  };
-
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors, isDirty },
-  } = useForm<settingsValues>({
+  } = useForm<SettingsValues>({
     resolver: zodResolver(settingsSchema),
     defaultValues,
   });
@@ -63,17 +63,17 @@ function PersonalInfoForm() {
               htmlFor="settings-email"
               className="text-md mb-2 block font-bold">
               Email
+              <input
+                {...register("email", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                readOnly={!isEditing}
+                id="settings-email"
+                type="text"
+                placeholder="Email"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("email", {
-                required: { value: true, message: "This field is required" },
-              })}
-              readOnly={!isEditing}
-              id="settings-email"
-              type="text"
-              placeholder="Email"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.email?.message}
             </span>
@@ -84,16 +84,16 @@ function PersonalInfoForm() {
               htmlFor="settings-fullName"
               className="text-md mb-2 block font-bold">
               Full Name
+              <input
+                {...register("fullName", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                readOnly={!isEditing}
+                id="settings-fullName"
+                type="text"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("fullName", {
-                required: { value: true, message: "This field is required" },
-              })}
-              readOnly={!isEditing}
-              id="settings-fullName"
-              type="text"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.fullName?.message}
             </span>
@@ -104,16 +104,16 @@ function PersonalInfoForm() {
               htmlFor="settings-displayName"
               className="text-md mb-2 block font-bold">
               Display Name
+              <input
+                {...register("displayName", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                readOnly={!isEditing}
+                id="settings-displayName"
+                type="text"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("displayName", {
-                required: { value: true, message: "This field is required" },
-              })}
-              readOnly={!isEditing}
-              id="settings-displayName"
-              type="text"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.displayName?.message}
             </span>
@@ -126,16 +126,16 @@ function PersonalInfoForm() {
               htmlFor="settings-phoneNumber"
               className="text-md mb-2 block font-bold">
               Phone Number
+              <input
+                {...register("phoneNumber", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                readOnly={!isEditing}
+                id="settings-phoneNumber"
+                type="text"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("phoneNumber", {
-                required: { value: true, message: "This field is required" },
-              })}
-              readOnly={!isEditing}
-              id="settings-phoneNumber"
-              type="text"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.phoneNumber?.message}
             </span>
@@ -146,15 +146,15 @@ function PersonalInfoForm() {
               htmlFor="settings-description"
               className="text-md mb-2 block font-bold">
               Description / Bio
+              <textarea
+                {...register("description", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                readOnly={!isEditing}
+                id="settings-description"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <textarea
-              {...register("description", {
-                required: { value: true, message: "This field is required" },
-              })}
-              readOnly={!isEditing}
-              id="settings-description"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.description?.message}
             </span>
@@ -164,6 +164,7 @@ function PersonalInfoForm() {
 
       <div className="mt-8 flex justify-between">
         <button
+          type="button"
           onClick={triggerEdit}
           className="focus:shadow-outline cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none">
           {isEditing ? "Cancel" : "Edit"}

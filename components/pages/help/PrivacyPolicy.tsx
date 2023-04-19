@@ -4,7 +4,7 @@ function PrivacyPolicy() {
       <p className="mb-4 text-xl">
         {" "}
         At Theraline, we understand the importance of protecting the privacy and
-        confidentiality of our users' information. This privacy policy outlines
+        confidentiality of our users information. This privacy policy outlines
         the information we collect, how we use it, and how we protect it.
       </p>
       <span className="text-xl font-bold">Information Collection</span>

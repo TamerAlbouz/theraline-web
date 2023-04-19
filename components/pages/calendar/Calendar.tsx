@@ -1,30 +1,37 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { DateSelectArg, EventClickArg } from "@fullcalendar/core";
+import { EventClickArg } from "@fullcalendar/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { addHours, endOfHour } from "date-fns";
-import { EventDropArg } from "fullcalendar";
 import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
-import { calendarEventModel } from "../../../types/calendarEvent";
+import useAppointmentsQuery, {
+  Appointment,
+} from "../../../hooks/queries/appointments/useAppointmentsQuery";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
-
+  const { data } = useAppointmentsQuery();
   useEffect(() => {
     useCalendarStore.subscribe((state, prevState) => {
       // opens the modal only when an event is triggered that isn't a show weekend change
-      if (state.showWeekends == prevState.showWeekends) {
+      if (state.showWeekends === prevState.showWeekends) {
         openModal();
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setAppointments(data);
+    }
+  }, [data]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -53,39 +60,61 @@ function AppCalendar() {
         weekends={showWeekends}
         eventTextColor="black"
         viewClassNames="bg-primary-dark p-4 rounded-lg border-none"
-        eventClassNames="bg-tertiary text-black"
+        eventClassNames="text-black cursor-pointer"
         dayCellClassNames="bg-primary"
         dayHeaderClassNames="bg-primary-dark py-4"
         slotLabelClassNames="px-4"
-        eventDrop={(data: EventDropArg) => {
-          //  update time happens here
-          console.log("Event Drop Here");
-        }}
         eventClick={(data: EventClickArg) => {
+          console.log(data);
           setSelectedEvent({
+            id: data.event.id,
             title: data.event.title,
             start: data.event.start!,
             end: data.event.end!,
+            status: data.event.extendedProps.status,
+            paymentInfo: data.event.extendedProps.paymentInfo,
           });
 
           openModal();
         }}
-        select={(data: DateSelectArg) => {
+        select={() => {
           setSelectedEvent(undefined);
 
           openModal();
         }}
         initialView="dayGridMonth"
         nowIndicator
-        editable
         selectable
-        initialEvents={[
-          {
-            title: "nice event",
-            start: new Date(),
-            end: addHours(endOfHour(new Date()), 2),
-          },
-        ]}
+        events={appointments.map((element) => {
+          let appointmentClass;
+
+          switch (element.status.toString()) {
+            case "CANCELED":
+              appointmentClass = "bg-red-400";
+              break;
+            case "CONFIRMED":
+              appointmentClass = "bg-yellow-400";
+              break;
+            case "DONE":
+              appointmentClass = "bg-green-400";
+              break;
+            default:
+              appointmentClass = "bg-tertiary";
+              break;
+          }
+
+          return {
+            id: element._id,
+            title: element.title,
+            start: new Date(element.start_date),
+            end: new Date(element.end_date),
+            extendedProps: {
+              status: element.status,
+              paymentInfo: element.paymentInfo,
+            },
+            className: appointmentClass,
+          };
+        })}
       />
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -111,35 +140,24 @@ function AppCalendar() {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="h-[26rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="h-[30rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-xl font-bold leading-6 text-black">
-                    {selectedEvent != undefined
+                    {selectedEvent !== undefined
                       ? selectedEvent!.title
                       : "New Event"}
                   </Dialog.Title>
 
                   {selectedEvent ? (
                     <ExistingEventModalContent
-                      deleteEventCallback={() => {
-                        console.log(`DELETING ${selectedEvent?.title}`);
-
-                        // calendarRef.current!.getApi().refetchEvents();
-
+                      closeModalCallback={() => {
                         closeModal();
                       }}
                     />
                   ) : (
                     <NewEventModalContent
-                      addEventCallback={(data: calendarEventModel) => {
-                        console.log(data);
-                        calendarRef.current!.getApi().addEvent({
-                          title: data.title,
-                          start: data.start,
-                          end: data.end,
-                        });
-
+                      closeModalCallback={() => {
                         closeModal();
                       }}
                     />

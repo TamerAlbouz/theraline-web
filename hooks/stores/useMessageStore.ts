@@ -1,25 +1,25 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { messageModel } from "../../types/chats/message.d";
-import { chatModel } from "../../types/chats/chat";
+import { Chat } from "../queries/chats/useChatsQuery";
+import { Message } from "../queries/chats/useMessagesQuery";
 
 interface MessagesState {
-  selectedChat: chatModel | undefined;
-  setSelectedChat: (newChat: chatModel) => void;
+  selectedChat: Chat | undefined;
+  messages: Array<Message> | undefined;
+  setSelectedChat: (newChat: Chat) => void;
 }
 
 const useMessageStore = create<MessagesState>()(
   devtools(
-    persist(
-      (set) => ({
-        selectedChat: undefined,
-        setSelectedChat: (newChat: chatModel) =>
-          set((_: any) => ({ selectedChat: newChat })),
-      }),
-      {
-        name: "messages-storage",
-      },
-    ),
+    (set) => ({
+      selectedChat: undefined,
+      messages: undefined,
+      setSelectedChat: (newChat: Chat) =>
+        set((_: any) => ({ selectedChat: newChat })),
+    }),
+    {
+      name: "messages-storage",
+    },
   ),
 );
 

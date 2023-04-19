@@ -1,6 +1,5 @@
 import { Chart } from "primereact/chart";
 import { useState } from "react";
-import Tabs from "../TabStatistics";
 import { basicOptions } from "./ChartOptions";
 
 function WeeklyStatistics() {

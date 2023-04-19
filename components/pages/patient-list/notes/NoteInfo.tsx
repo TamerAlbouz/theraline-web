@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
 
 export function NoteInfo(props: { showTitle: boolean }) {
+  const { showTitle } = props;
   const { selectedNote } = useNotesStore();
 
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState<string | undefined>("");
 
-  if (selectedNote) {
-    useEffect(() => {
-      setBody(selectedNote.body);
-    }, [selectedNote.body]);
-  }
+  useEffect(() => {
+    setBody(selectedNote?.body);
+  }, [selectedNote?.body]);
 
-  if (selectedNote == undefined) {
+  if (selectedNote === undefined) {
     return (
       <div className="flex items-center justify-center p-16 text-black">
         <p>Choose a note to proceed</p>
@@ -22,7 +21,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
 
   return (
     <div className="flex h-full flex-col rounded-lg border-b border-white bg-white p-4 text-black">
-      {props.showTitle && (
+      {showTitle && (
         <p className="mb-2 px-3 text-center text-2xl font-bold">
           {selectedNote.title}
         </p>
@@ -36,11 +35,11 @@ export function NoteInfo(props: { showTitle: boolean }) {
         }}
       />
 
-      {body != selectedNote.body && (
+      {body !== selectedNote.body && (
         <input
           type="submit"
           value="Save"
-          onClick={(e) => {
+          onClick={() => {
             console.log(body);
           }}
           className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-textColor hover:bg-primary"

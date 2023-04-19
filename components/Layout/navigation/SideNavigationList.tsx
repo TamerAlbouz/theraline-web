@@ -7,7 +7,7 @@ function SideNavigationList(): any {
       key={item.name}
       name={item.name}
       href={item.href}
-      icon={item.icon}
+      Icon={item.icon}
     />
   ));
 }

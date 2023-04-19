@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import {
   basicInfoTemplate,
   phoneNumberTemplate,
@@ -11,51 +11,54 @@ import {
   lastAppointmentTemplate,
   paginatorTemplate,
 } from "./PatientCardTemplates";
-import { patientDataModel } from "../../../../types/patientData";
 import { createPatients } from "../../../../utils/components/patient-utils";
 
+const filters = {
+  name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+};
+
+const columns = [
+  { id: 1, header: "Basic Info", sortable: true, body: basicInfoTemplate },
+  {
+    id: 2,
+    header: "Phone Number",
+    sortable: false,
+    body: phoneNumberTemplate,
+  },
+  { id: 3, header: "City", sortable: false, body: cityTemplate },
+  {
+    id: 4,
+    header: "Last Appointment",
+    sortable: false,
+    body: lastAppointmentTemplate,
+  },
+  {
+    id: 5,
+    header: "Next Appointment",
+    sortable: false,
+    body: nextAppointmentTemplate,
+  },
+];
+
+const randomPatientList = createPatients(50);
+
 function PatientList() {
-  const [patientList, setPatientList] = useState<Array<patientDataModel>>();
-  const router = useRouter();
+  const [patients, setPatients] = useState([{}]);
 
   useEffect(() => {
-    setPatientList(createPatients(50));
-  }, []);
+    setPatients(randomPatientList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [randomPatientList]);
+
+  const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {
     router.push(`/patient-list/${patientId}`);
   };
 
-  const filters = {
-    name: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  };
-
-  const columns = [
-    { id: 1, header: "Basic Info", sortable: true, body: basicInfoTemplate },
-    {
-      id: 2,
-      header: "Phone Number",
-      sortable: false,
-      body: phoneNumberTemplate,
-    },
-    { id: 3, header: "City", sortable: false, body: cityTemplate },
-    {
-      id: 4,
-      header: "Last Appointment",
-      sortable: false,
-      body: lastAppointmentTemplate,
-    },
-    {
-      id: 5,
-      header: "Next Appointment",
-      sortable: false,
-      body: nextAppointmentTemplate,
-    },
-  ];
-
   return (
     <DataTable
-      value={patientList}
+      value={patients}
       paginator
       paginatorTemplate={paginatorTemplate}
       paginatorClassName="py-2"
@@ -67,7 +70,7 @@ function PatientList() {
       autoLayout
       tableClassName="w-full"
       className="w-full rounded-md bg-primary-dark p-1"
-      rowClassName={(rowData) => {
+      rowClassName={() => {
         return "hover:bg-secondary bg-primary cursor-pointer transition duration-200 ease-in-out";
       }}
       removableSort

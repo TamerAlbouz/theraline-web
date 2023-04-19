@@ -6,97 +6,67 @@ import React, {
   ReactElement,
   ReactFragment,
   ReactPortal,
-  useState,
 } from "react";
-import { patientDataModel } from "../../../../types/patientData";
+import Image from "next/image";
+
 import { paymentDataModel } from "../../../../types/paymentData";
 
-export const basicInfoTemplate = (data: patientDataModel) => {
-  return (
-    <div className="my-1 -mr-1 flex flex-row rounded-l-md bg-primary py-4 px-2 pl-4">
-      <img
-        className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={data.imageUrl}
-        alt=""
-      />
-      <div className="ml-4 flex flex-col text-left">
-        <p className="text-md font-bold ">{data.name}</p>
-        <p className="text-sm">{data.email}</p>
-      </div>
-    </div>
-  );
-};
-
-export const phoneNumberTemplate = (data: patientDataModel) => {
-  return (
-    <div className="-mr-1 bg-primary px-2 py-7">
-      <p className="text-md">{data.phoneNumber}</p>
-    </div>
-  );
-};
-
-export const cityTemplate = (data: patientDataModel) => {
-  return (
-    <div className="-mr-1 bg-primary px-2 py-7">
-      <p className="text-md">{data.city}</p>
-    </div>
-  );
-};
-
-export const lastAppointmentTemplate = (data: patientDataModel) => {
-  return (
-    <div className="rounded-r-md bg-primary px-2 py-7">
-      <p className="text-md">{data.lastAppointment}</p>
-    </div>
-  );
-};
-
 export const paymentPatientTemplate = (data: paymentDataModel) => {
+  const { imageUrl, name, email } = data.paymentInfo;
   return (
     <div className="mx-4 flex items-center justify-start gap-4">
-      <img
+      <Image
+        width={40}
+        height={40}
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={data.imageUrl}
-        alt=""
+        src={imageUrl}
+        alt="Profile Picture"
       />
       <div className="flex flex-col text-left">
-        <p className="text-md font-bold ">{data.name}</p>
-        <p className="text-sm">{data.email}</p>
+        <p className="text-md font-bold">{name}</p>
+        <p className="text-sm">{email}</p>
       </div>
     </div>
   );
 };
 
+// Consider removing this function
 export const paymentAmountTemplate = (data: paymentDataModel) => {
-  return <p>{data.amount}</p>;
+  const { amount } = data.paymentInfo;
+  return <p>{amount}</p>;
 };
 
+// Consider removing this function
 export const paymentDateTemplate = (data: paymentDataModel) => {
-  return <p>{data.date}</p>;
+  const { date } = data.paymentInfo;
+  return <p>{date}</p>;
 };
 
+// Consider removing this function
 export const paymentMethodTemplate = (data: paymentDataModel) => {
-  return <p>{data.method}</p>;
+  const { method } = data.paymentInfo;
+  return <p>{method}</p>;
 };
 
 export const paymentStatusTemplate = (data: paymentDataModel) => {
-  if (data.paymentStatus === "Paid") {
+  const { paymentStatus } = data.paymentInfo;
+  if (paymentStatus === "Paid") {
     return (
       <p className="m-auto w-fit rounded-sm bg-green-600 py-1 px-2 font-semibold">
-        {data.paymentStatus}
+        {paymentStatus}
       </p>
     );
   }
-  if (data.paymentStatus === "Pending") {
+  if (paymentStatus === "Pending") {
     return (
       <p className="m-auto w-fit rounded-sm bg-yellow-600 py-1 px-2 font-semibold">
-        {data.paymentStatus}
+        {paymentStatus}
       </p>
     );
   }
   return (
     <p className="m-auto w-fit rounded-sm bg-red-600 py-1 px-2 font-semibold">
-      {data.paymentStatus}
+      {paymentStatus}
     </p>
   );
 };
@@ -111,16 +81,16 @@ export const paginatorTemplate = {
     className: string | undefined;
     onClick: MouseEventHandler<HTMLButtonElement> | undefined;
   }) => {
+    const { view, page, totalPages, className, onClick } = options;
+    const { startPage, endPage } = view;
     if (
-      (options.view.startPage === options.page &&
-        options.view.startPage !== 0) ||
-      (options.view.endPage === options.page &&
-        options.page + 1 !== options.totalPages)
+      (startPage === page && startPage !== 0) ||
+      (endPage === page && page + 1 !== totalPages)
     ) {
-      const className = classNames(options.className, { "p-disabled": true });
+      const classN = classNames(className, { "p-disabled": true });
 
       return (
-        <span className={className} style={{ userSelect: "none" }}>
+        <span className={classN} style={{ userSelect: "none" }}>
           ...
         </span>
       );
@@ -129,9 +99,9 @@ export const paginatorTemplate = {
     return (
       <button
         type="button"
-        className={`${options.className} mx-3 pb-1 text-lg font-bold text-textColor`}
-        onClick={options.onClick}>
-        {options.page + 1}
+        className={`${className} mx-3 pb-1 text-lg font-bold text-textColor`}
+        onClick={onClick}>
+        {page + 1}
         <Ripple />
       </button>
     );
@@ -165,6 +135,7 @@ export const paginatorTemplate = {
       | null
       | undefined;
   }) => {
+    const { first, last, totalRecords } = options;
     return (
       <span
         style={{
@@ -172,7 +143,7 @@ export const paginatorTemplate = {
           userSelect: "none",
         }}
         className="mx-6 w-fit text-center text-base text-textColor">
-        Showing {options.first} - {options.last} of {options.totalRecords}
+        Showing {first} - {last} of {totalRecords}
       </span>
     );
   },

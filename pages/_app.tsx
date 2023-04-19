@@ -1,14 +1,14 @@
 import "../styles/globals.css";
-import "primeicons/primeicons.css";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import useAuthStore from "../hooks/stores/useAuthStore";
 import Layout from "../components/Layout/Layout";
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 2 } },
+  defaultOptions: { queries: { retry: 1 } },
 });
 
 function App({ Component, pageProps }: AppProps) {
@@ -16,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  console.log(`Authenticated? ${isAuthenticated}`);
+  console.log(`Is Authenticated? ${isAuthenticated ? "Yes" : "No"}`);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -24,6 +24,7 @@ function App({ Component, pageProps }: AppProps) {
     }
 
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   if (isLoading) {
@@ -35,21 +36,9 @@ function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const { req, res } = context;
-
-  if (!req.cookies.access_token) {
-    res.writeHead(302, { Location: "/auth/signin" });
-    res.end();
-  }
-
-  return {
-    props: {},
-  };
 }
 
 export default App;

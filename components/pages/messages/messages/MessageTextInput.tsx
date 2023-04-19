@@ -2,21 +2,33 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
-import { chatModel } from "../../../../types/chats/chat";
+import { useSendMessageMutation } from "../../../../hooks/mutations/chats/useSendMessageMutation";
 
 function MessageTextInput() {
   const { selectedChat, setSelectedChat } = useMessageStore();
+  const { mutate: sendMessage } = useSendMessageMutation({
+    chatId: selectedChat?._id,
+  });
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const [input, setInput] = useState("");
   const [fileName, setFileName] = useState("");
+
+  const submitMessage = () => {
+    sendMessage({
+      text: input,
+      chatId: selectedChat!._id,
+    });
+
+    setInput("");
+  };
 
   useEffect(() => {
     setFileName("");
   }, [selectedChat]);
 
   const handleKeyDown = (event: any) => {
-    if (event.key != "Enter") {
+    if (event.key !== "Enter") {
       return;
     }
 
@@ -29,7 +41,7 @@ function MessageTextInput() {
       return;
     }
 
-    if (input == "") {
+    if (input === "") {
       return;
     }
 
@@ -43,25 +55,12 @@ function MessageTextInput() {
     console.log(`File Name: ${event.target.files![0].name}`);
   };
 
-  const submitMessage = () => {
-    const tempChat: chatModel = selectedChat!;
-
-    tempChat.messages.push({
-      id: "1121",
-      message: input,
-      isMe: true,
-      time: "Now",
-    });
-
-    setSelectedChat(tempChat);
-
-    setInput("");
-  };
-
   return (
     <div className="flex flex-row ">
       <div className="flex w-full flex-col">
-        {fileName != "" && <span className="text-sm">{fileName} uploaded</span>}
+        {fileName !== "" && (
+          <span className="text-sm">{fileName} uploaded</span>
+        )}
 
         <textarea
           value={input}

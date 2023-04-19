@@ -1,15 +1,13 @@
-import { useEffect } from "react";
 import AppCalendar from "../../components/pages/calendar/Calendar";
 import CalendarToolbar from "../../components/pages/calendar/Toolbar";
 
-function CalendarPage({ data }: any) {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
+function CalendarPage() {
   return (
     <div className="h-full w-full">
-      <CalendarToolbar />
+      <div className="mb-4">
+        <CalendarToolbar />
+      </div>
+
       <AppCalendar />
     </div>
   );

@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { HiBell, HiPlus, HiSearch } from "react-icons/hi";
 import { navigation } from "../../../utils/components/layout-utils";
 
 function TopBar() {
@@ -10,7 +9,7 @@ function TopBar() {
 
   // for paths like sign-in
   // alternatively, could define a list of excluded paths for which the header won't be shown
-  if (navigationItem == undefined) {
+  if (navigationItem === undefined) {
     return <div />;
   }
 

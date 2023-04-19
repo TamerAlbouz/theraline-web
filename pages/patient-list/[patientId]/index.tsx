@@ -6,19 +6,21 @@ import PatientListHeader from "../../../components/pages/patient-list/header/Hea
 import { patientDataModel } from "../../../types/patientData";
 
 function PatientDetails(props: { patientData: patientDataModel }) {
+  const { patientData } = props;
+  const { name } = patientData;
   return (
     <div className="h-full">
       <div className="mb-6 rounded-md border-b-2 border-white bg-primary px-4 pt-2 pb-4">
-        <PatientListHeader patientName={props.patientData.name} />
+        <PatientListHeader patientName={name} />
       </div>
 
       <div className="flex flex-col lg:flex-row">
         <div className="w-full lg:w-1/2">
-          <ProfileCard data={props.patientData} />
+          <ProfileCard data={patientData} />
         </div>
 
         <div className="w-full pt-4 pl-0 lg:w-1/2 lg:pl-4 lg:pt-0">
-          <InfoCard data={props.patientData} />
+          <InfoCard data={patientData} />
         </div>
       </div>
 

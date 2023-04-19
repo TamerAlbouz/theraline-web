@@ -1,8 +1,14 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { calendarEventModel } from "../../../types/calendarEvent";
-import useAuthStore from "../../../hooks/stores/useAuthStore";
+import { Combobox, Transition } from "@headlessui/react";
+import { HiChevronUpDown } from "react-icons/hi2";
+import { Fragment, useEffect, useState } from "react";
+import { HiCheck } from "react-icons/hi";
+import usePatientsQuery, {
+  Patient,
+} from "../../../hooks/queries/appointments/usePatientsQuery";
+import { useCreateAppointmentMutation } from "../../../hooks/mutations/appointments/useCreateAppointmentMutation";
 
 const newEventSchema = z.object({
   title: z.string(),
@@ -12,53 +18,54 @@ const newEventSchema = z.object({
   endTime: z.string(),
 });
 
-type settingsValues = z.infer<typeof newEventSchema>;
+type NewEventValues = z.infer<typeof newEventSchema>;
 
-function NewEventModalContent(props: {
-  addEventCallback: (data: calendarEventModel) => void;
-}) {
+function NewEventModalContent(props: { closeModalCallback: Function }) {
+  const { data } = usePatientsQuery();
+  const { mutate: createAppointment } = useCreateAppointmentMutation();
+  const [users, setUsers] = useState<Patient[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<Patient[]>([]);
+  const [query, setQuery] = useState("");
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<settingsValues>({
+  } = useForm<NewEventValues>({
     resolver: zodResolver(newEventSchema),
   });
-  const user = useAuthStore();
 
-  const submitUserInfo = async (data: any) => {
+  useEffect(() => {
+    if (data) {
+      setUsers(data);
+    }
+  }, [data]);
+
+  const submitUserInfo = async (data: NewEventValues) => {
     console.log(data);
+    const startDate = new Date(data.startDate + "T" + data.startTime);
+    const endDate = new Date(data.endDate + "T" + data.endTime);
 
-    const start = new Date(`${data.startDate} ${data.startTime}`);
-    const end = new Date(`${data.endDate} ${data.endTime}`);
+    createAppointment({
+      title: data.title,
+      patient_id: selectedUsers[0]._id,
+      start_date: startDate.toISOString().slice(0, -5),
+      end_date: endDate.toISOString().slice(0, -5),
+    });
 
-    props.addEventCallback({ title: data.title, start, end });
-
-    const result = await fetch(
-      "https://theraline.onrender.com/appointment/create_appointment",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-        body: JSON.stringify({
-          patient_id: "6418b25a337d50ab61fe5915",
-          start_date: "2023-12-07T12:30:00",
-          end_date: "2023-12-07T13:30:00",
-          paymentInfo: {
-            amount: 100,
-            status: "Paid",
-            method: "Credit Card",
-            date: "2023-03-18T16:00:00",
-          },
-        }),
-      },
-    );
-
-    console.log(result);
+    props.closeModalCallback();
   };
+
+  const filteredUsers =
+    query === ""
+      ? users
+      : users.filter((user) =>
+          `${user.firstName} ${user.lastName}`
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, "")),
+        );
 
   return (
     <form onSubmit={handleSubmit(submitUserInfo)}>
@@ -72,9 +79,80 @@ function NewEventModalContent(props: {
             type="text"
             placeholder="Title"
             className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-          />{" "}
+          />
           <span className="text-xs text-red-500">{errors.title?.message}</span>
         </div>
+
+        <span>Users</span>
+        <Combobox
+          value={selectedUsers}
+          onChange={(data: any) => {
+            setSelectedUsers([...data]);
+          }}
+          multiple
+          defaultValue={[]}>
+          <div className="relative mt-1 mb-4">
+            <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+              <Combobox.Input
+                className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                displayValue={(users: Patient[]) =>
+                  users.map((user) => user.firstName).join(", ")
+                }
+                onChange={(event) => setQuery(event.target.value)}
+              />
+              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                <HiChevronUpDown
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </Combobox.Button>
+            </div>
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+              afterLeave={() => setQuery("")}>
+              <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                {filteredUsers.length === 0 && query !== "" ? (
+                  <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                    Nothing found.
+                  </div>
+                ) : (
+                  filteredUsers.map((user) => (
+                    <Combobox.Option
+                      key={user._id}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                          active ? "bg-secondary text-white" : "text-primary"
+                        }`
+                      }
+                      value={user}>
+                      {({ selected, active }) => (
+                        <>
+                          <span
+                            className={`block truncate ${
+                              selected ? "font-medium" : "font-normal"
+                            }`}>
+                            {`${user.firstName} ${user.lastName}`}
+                          </span>
+                          {selected ? (
+                            <span
+                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                active ? "text-white" : "text-secondary"
+                              }`}>
+                              <HiCheck className="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Combobox.Option>
+                  ))
+                )}
+              </Combobox.Options>
+            </Transition>
+          </div>
+        </Combobox>
 
         <div className="mb-4 flex flex-row">
           <div className="mr-4">
@@ -82,19 +160,18 @@ function NewEventModalContent(props: {
               htmlFor="event-startDate"
               className="text-md mb-2 block font-bold">
               Start Date
+              <input
+                {...register("startDate", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                id="event-startDate"
+                type="date"
+                onChange={(e) => {
+                  setValue("endDate", e.currentTarget.value);
+                }}
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("startDate", {
-                required: { value: true, message: "This field is required" },
-              })}
-              id="event-startDate"
-              type="date"
-              onChange={(e) => {
-                console.log(e.currentTarget.value);
-                setValue("endDate", e.currentTarget.value);
-              }}
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.startDate?.message}
             </span>
@@ -105,17 +182,17 @@ function NewEventModalContent(props: {
               htmlFor="event-startTime"
               className="text-md mb-2 block font-bold">
               Start Time
+              <input
+                {...register("startTime", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                id="event-startTime"
+                type="time"
+                min="00:00"
+                max="23:59"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("startTime", {
-                required: { value: true, message: "This field is required" },
-              })}
-              id="event-startTime"
-              type="time"
-              min="00:00"
-              max="23:59"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.startTime?.message}
             </span>
@@ -128,18 +205,18 @@ function NewEventModalContent(props: {
               htmlFor="event-endDate"
               className="text-md mb-2 block font-bold">
               End Date
+              <input
+                {...register("endDate", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                onChange={(e) => {
+                  setValue("startDate", e.currentTarget.value);
+                }}
+                id="event-endDate"
+                type="date"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />{" "}
             </label>
-            <input
-              {...register("endDate", {
-                required: { value: true, message: "This field is required" },
-              })}
-              onChange={(e) => {
-                setValue("startDate", e.currentTarget.value);
-              }}
-              id="event-endDate"
-              type="date"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.endDate?.message}
             </span>
@@ -150,18 +227,17 @@ function NewEventModalContent(props: {
               htmlFor="event-endTime"
               className="text-md mb-2 block font-bold">
               End Time
+              <input
+                {...register("endTime", {
+                  required: { value: true, message: "This field is required" },
+                })}
+                id="event-endTime"
+                type="time"
+                min="00:00"
+                max="23:59"
+                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+              />
             </label>
-            <input
-              {...register("endTime", {
-                required: { value: true, message: "This field is required" },
-              })}
-              id="event-endTime"
-              type="time"
-              onChange={(e) => console.log(e)}
-              min="00:00"
-              max="23:59"
-              className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-            />{" "}
             <span className="text-xs text-red-500">
               {errors.endTime?.message}
             </span>
@@ -169,7 +245,7 @@ function NewEventModalContent(props: {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-end">
+      <div className="mt-4 flex justify-end">
         <input
           type="submit"
           value="Save"

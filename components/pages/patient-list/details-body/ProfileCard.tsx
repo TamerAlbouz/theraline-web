@@ -1,23 +1,29 @@
 import Link from "next/link";
+import Image from "next/image";
 import { patientDataModel } from "../../../../types/patientData";
 
 function ProfileCard(props: { data: patientDataModel }) {
+  const { data } = props;
+  const { name, email, previousAppointmentsCount, nextAppointmentsCount } =
+    data;
   return (
     <div className="flex flex-col items-center rounded-lg bg-primary-dark px-6 py-10">
-      <img
+      <Image
+        width={64}
+        height={64}
         className="h-16 w-16 cursor-pointer rounded-full md:h-12 md:w-12"
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
         alt=""
       />
 
-      <p className="my-2 text-xl font-bold text-textColor">{props.data.name}</p>
+      <p className="my-2 text-xl font-bold text-textColor">{name}</p>
 
-      <p className="text-md my-2 text-textColor">{props.data.email}</p>
+      <p className="text-md my-2 text-textColor">{email}</p>
 
       <div className="flex flex-row">
         <div className="flex flex-col items-center">
           <p className="text-xl font-bold text-textColor">
-            {props.data.previousAppointmentsCount}
+            {previousAppointmentsCount}
           </p>
 
           <p className="text-lg text-textColor">Past</p>
@@ -27,7 +33,7 @@ function ProfileCard(props: { data: patientDataModel }) {
 
         <div className="flex flex-col items-center">
           <p className="text-xl font-bold text-textColor">
-            {props.data.nextAppointmentsCount}
+            {nextAppointmentsCount}
           </p>
 
           <p className="text-lg text-textColor">Upcoming</p>
