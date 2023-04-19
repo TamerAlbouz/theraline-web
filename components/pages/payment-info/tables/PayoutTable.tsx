@@ -71,7 +71,7 @@ function PayoutTable() {
   return (
     <DataTable
       dataKey="id"
-      value={data?.map((payment) => {
+      value={data?.map((payment: any) => {
         return payment;
       })}
       responsiveLayout="scroll"
