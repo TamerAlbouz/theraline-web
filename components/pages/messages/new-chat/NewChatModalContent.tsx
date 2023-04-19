@@ -4,11 +4,9 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Combobox, Transition } from "@headlessui/react";
 import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
-import useAvailableUsersQuery, {
-  AvailableUser,
-} from "../../../../hooks/queries/useAvailableUsersQuery";
+import { useCreateGroupMutation } from "../../../../hooks/mutations/chats/useCreateGroupMutation";
 import { CustomInput } from "../../../auth/CustomInput";
-import { useCreateGroupMutation } from "../../../../hooks/mutations/useCreateGroupMutation";
+import useAvailableUsersQuery, { AvailableUser } from "../../../../hooks/queries/chats/useAvailableUsersQuery";
 
 const newGroupSchema = z.object({
   name: z.string(),

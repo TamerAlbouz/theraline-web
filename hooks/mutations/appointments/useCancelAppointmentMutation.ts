@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { accessClient } from "../../utils/axios/axios";
+import { accessClient } from "../../../utils/axios/axios";
 
 const cancelAppointment = async (appointmentId: string) => {
   console.log(`cancelling ${appointmentId}`);

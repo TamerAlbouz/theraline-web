@@ -8,9 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
-import useAppointmentsQuery, {
-  Appointment,
-} from "../../../hooks/queries/useAppointmentsQuery";
+import useAppointmentsQuery, { Appointment } from "../../../hooks/queries/appointments/useAppointmentsQuery";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
@@ -73,6 +71,7 @@ function AppCalendar() {
             start: result.event.start!,
             end: result.event.end!,
             status: result.event.extendedProps.status,
+            paymentInfo: result.event.extendedProps.paymentInfo,
           });
 
           openModal();
@@ -111,6 +110,7 @@ function AppCalendar() {
             end: new Date(element.end_date),
             extendedProps: {
               status: element.status,
+              paymentInfo: element.paymentInfo,
             },
             className: appointmentClass,
           };

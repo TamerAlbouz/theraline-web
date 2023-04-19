@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { accessClient } from "../../utils/axios/axios";
+import { accessClient } from "../../../utils/axios/axios";
 
 const sendMessage = async ({
   text,

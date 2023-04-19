@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
-import { useSendMessageMutation } from "../../../../hooks/mutations/useSendMessageMutation";
+import { useSendMessageMutation } from "../../../../hooks/mutations/chats/useSendMessageMutation";
 
 function MessageTextInput() {
   const { selectedChat } = useMessageStore();

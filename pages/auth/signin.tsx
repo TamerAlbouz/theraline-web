@@ -4,7 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import AuthBackgroundCard from "../../components/auth/AuthBackgroundCard";
-import { useLoginMutation } from "../../hooks/mutations/useLoginMutation";
+import { useLoginMutation } from "../../hooks/mutations/auth/useLoginMutation";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { CustomInput } from "../../components/auth/CustomInput";
 

@@ -7,12 +7,11 @@ import { Fragment, useEffect, useState } from "react";
 import { HiCheck } from "react-icons/hi";
 import usePatientsQuery, {
   Patient,
-} from "../../../hooks/queries/usePatientsQuery";
-import { useCreateAppointmentMutation } from "../../../hooks/mutations/useCreateAppointmentMutation";
+} from "../../../hooks/queries/appointments/usePatientsQuery";
+import { useCreateAppointmentMutation } from "../../../hooks/mutations/appointments/useCreateAppointmentMutation";
 
 const newEventSchema = z.object({
   title: z.string(),
-  patient_id: z.string(),
   startDate: z.string(),
   startTime: z.string(),
   endDate: z.string(),
@@ -239,7 +238,6 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
                 })}
                 id="event-endTime"
                 type="time"
-                onChange={(e) => console.log(e)}
                 min="00:00"
                 max="23:59"
                 className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"

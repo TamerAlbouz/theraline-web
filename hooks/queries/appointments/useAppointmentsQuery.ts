@@ -1,6 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { accessClient } from "../../utils/axios/axios";
+import { accessClient } from "../../../utils/axios/axios";
+
+export type PaymentInfo = {
+  amount: number;
+  status: string;
+  method: string;
+  date: string;
+  _id: string;
+};
 
 export type Appointment = {
   _id: string;
@@ -10,6 +18,7 @@ export type Appointment = {
   start_date: string;
   end_date: string;
   status: "CREATED" | "CANCELED" | "DONE" | "CONFIRMED";
+  paymentInfo: PaymentInfo | undefined | null;
   __v: 0;
 };
 

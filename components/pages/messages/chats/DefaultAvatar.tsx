@@ -1,5 +1,5 @@
 import { HiUser, HiUsers } from "react-icons/hi2";
-import { Chat } from "../../../../hooks/queries/useChatsQuery";
+import { Chat } from "../../../../hooks/queries/chats/useChatsQuery";
 
 function DefaultAvatar(props: { chat: Chat }) {
   const { chat } = props;
