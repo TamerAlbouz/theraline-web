@@ -27,6 +27,7 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
   const [users, setUsers] = useState<Patient[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<Patient[]>([]);
   const [query, setQuery] = useState("");
+  const { closeModalCallback } = props;
 
   const {
     register,
@@ -43,19 +44,22 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
     }
   }, [data]);
 
-  const submitUserInfo = async (data: NewEventValues) => {
-    console.log(data);
-    const startDate = new Date(data.startDate + "T" + data.startTime);
-    const endDate = new Date(data.endDate + "T" + data.endTime);
+  const submitUserInfo = async (result: NewEventValues) => {
+    console.log(result);
+    // eslint-disable-next-line prefer-template
+    const startDate = new Date(result.startDate + "T" + result.startTime);
+    // eslint-disable-next-line prefer-template
+    const endDate = new Date(result.endDate + "T" + result.endTime);
 
     createAppointment({
-      title: data.title,
+      title: result.title,
+      // eslint-disable-next-line no-underscore-dangle
       patient_id: selectedUsers[0]._id,
       start_date: startDate.toISOString().slice(0, -5),
       end_date: endDate.toISOString().slice(0, -5),
     });
 
-    props.closeModalCallback();
+    closeModalCallback();
   };
 
   const filteredUsers =
@@ -87,8 +91,8 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
         <span>Users</span>
         <Combobox
           value={selectedUsers}
-          onChange={(data: any) => {
-            setSelectedUsers([...data]);
+          onChange={(change: any) => {
+            setSelectedUsers([...change]);
           }}
           multiple
           defaultValue={[]}>
@@ -96,8 +100,8 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
             <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-                displayValue={(users: Patient[]) =>
-                  users.map((user) => user.firstName).join(", ")
+                displayValue={(patients: Patient[]) =>
+                  patients.map((user) => user.firstName).join(", ")
                 }
                 onChange={(event) => setQuery(event.target.value)}
               />
@@ -122,6 +126,7 @@ function NewEventModalContent(props: { closeModalCallback: Function }) {
                 ) : (
                   filteredUsers.map((user) => (
                     <Combobox.Option
+                      // eslint-disable-next-line no-underscore-dangle
                       key={user._id}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${

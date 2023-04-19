@@ -12,19 +12,21 @@ import Image from "next/image";
 import { paymentDataModel } from "../../../../types/paymentData";
 
 export const paymentPatientTemplate = (data: paymentDataModel) => {
-  const { imageUrl, name, email } = data.paymentInfo;
   return (
     <div className="mx-4 flex items-center justify-start gap-4">
       <Image
         width={40}
         height={40}
         className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={imageUrl}
+        src={
+          data.paymentInfo?.imageUrl ||
+          "https://www.shutterstock.com/image-vector/male-avatar-profile-picture-vector-600w-148661735.jpg"
+        }
         alt="Profile Picture"
       />
       <div className="flex flex-col text-left">
-        <p className="text-md font-bold">{name}</p>
-        <p className="text-sm">{email}</p>
+        <p className="text-md font-bold">{data.paymentInfo?.name || "-"}</p>
+        <p className="text-sm">{data.paymentInfo?.email || "-"}</p>
       </div>
     </div>
   );
@@ -32,41 +34,37 @@ export const paymentPatientTemplate = (data: paymentDataModel) => {
 
 // Consider removing this function
 export const paymentAmountTemplate = (data: paymentDataModel) => {
-  const { amount } = data.paymentInfo;
-  return <p>{amount}</p>;
+  return <p>{data.paymentInfo?.amount || "-"}</p>;
 };
 
 // Consider removing this function
 export const paymentDateTemplate = (data: paymentDataModel) => {
-  const { date } = data.paymentInfo;
-  return <p>{date}</p>;
+  return <p>{data.paymentInfo?.date.split("T")[0] || "-"}</p>;
 };
 
 // Consider removing this function
 export const paymentMethodTemplate = (data: paymentDataModel) => {
-  const { method } = data.paymentInfo;
-  return <p>{method}</p>;
+  return <p>{data.paymentInfo?.method || "-"}</p>;
 };
 
 export const paymentStatusTemplate = (data: paymentDataModel) => {
-  const { paymentStatus } = data.paymentInfo;
-  if (paymentStatus === "Paid") {
+  if (data.paymentInfo?.status === "Paid") {
     return (
       <p className="m-auto w-fit rounded-sm bg-green-600 py-1 px-2 font-semibold">
-        {paymentStatus}
+        {data.paymentInfo?.status || "-"}
       </p>
     );
   }
-  if (paymentStatus === "Pending") {
+  if (data.paymentInfo?.status === "Pending") {
     return (
       <p className="m-auto w-fit rounded-sm bg-yellow-600 py-1 px-2 font-semibold">
-        {paymentStatus}
+        {data.paymentInfo?.status || "-"}
       </p>
     );
   }
   return (
     <p className="m-auto w-fit rounded-sm bg-red-600 py-1 px-2 font-semibold">
-      {paymentStatus}
+      {data.paymentInfo?.status || "-"}
     </p>
   );
 };

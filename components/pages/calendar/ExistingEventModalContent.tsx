@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
+import { Fragment, useState } from "react";
+import { Listbox, Transition } from "@headlessui/react";
+import { format } from "date-fns";
+import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCancelAppointmentMutation } from "../../../hooks/mutations/useCancelAppointmentMutation";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
-import { format } from "date-fns";
-import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
-import { Fragment, useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
+
 import { useCompleteAppointmentMutation } from "../../../hooks/mutations/useCompleteAppointmentMutation";
 
 const paymentInfoSchema = z.object({
@@ -49,6 +50,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
   const { selectedEvent } = useCalendarStore();
   const { mutate: cancelAppointment } = useCancelAppointmentMutation();
   const { mutate: completeAppointment } = useCompleteAppointmentMutation();
+  const { closeModalCallback } = props;
 
   const {
     register,
@@ -63,11 +65,12 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
 
     completeAppointment({
       appointmentId: selectedEvent!.id,
+      // eslint-disable-next-line radix
       amount: parseInt(data.amount),
       method: selectedOption.title,
     });
 
-    props.closeModalCallback();
+    closeModalCallback();
   };
 
   return (
@@ -102,7 +105,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
           </div>
         )}
 
-        {selectedEvent?.status == "CONFIRMED" && (
+        {selectedEvent?.status === "CONFIRMED" && (
           <form onSubmit={handleSubmit(submitPaymentInfo)} className="mt-4">
             <input
               {...register("amount", {
@@ -136,9 +139,9 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0">
                     <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {paymentOptions.map((paymentOption, optionIndex) => (
+                      {paymentOptions.map((paymentOption) => (
                         <Listbox.Option
-                          key={optionIndex}
+                          key={paymentOption.value}
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
                               active
@@ -192,9 +195,9 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0">
                     <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {paymentStatus.map((paymentStatus, statusIndex) => (
+                      {paymentStatus.map((status) => (
                         <Listbox.Option
-                          key={statusIndex}
+                          key={status.title}
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
                               active
@@ -202,14 +205,14 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
                                 : "text-gray-900"
                             }`
                           }
-                          value={paymentStatus}>
+                          value={status}>
                           {({ selected }) => (
                             <>
                               <span
                                 className={`block truncate ${
                                   selected ? "font-medium" : "font-normal"
                                 }`}>
-                                {paymentStatus.title}
+                                {status.title}
                               </span>
                               {selected ? (
                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
@@ -227,7 +230,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
                   </Transition>
                 </div>
               </Listbox>
-            </div>{" "}
+            </div>
             <input
               type="submit"
               value="Complete Appointment"
@@ -238,8 +241,8 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
       </div>
 
       <div className="fixed bottom-6 right-6">
-        {(selectedEvent?.status == "CREATED" ||
-          selectedEvent?.status == "CONFIRMED") && (
+        {(selectedEvent?.status === "CREATED" ||
+          selectedEvent?.status === "CONFIRMED") && (
           <button
             type="button"
             className="cursor-pointer rounded-md bg-red-500 px-4 py-2 font-semibold text-white shadow-md transition ease-in-out hover:bg-red-700"
@@ -248,7 +251,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
 
               cancelAppointment(selectedEvent?.id!);
 
-              props.closeModalCallback();
+              closeModalCallback();
             }}>
             Cancel
           </button>

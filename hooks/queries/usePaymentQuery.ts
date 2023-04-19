@@ -1,43 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { accessClient } from "../../utils/axios/axios";
-import { paymentDataModel } from "../../types/paymentData";
+import { getPayments, paymentDataModel } from "../../types/paymentData";
+import { AxiosResponse } from "axios";
 
-export const getPayment = async () => {
-  return accessClient.get("/appointment/get_payment_info", {
-    headers: {
-      page: "1",
-    },
-  });
+export const getPayment = (): Promise<AxiosResponse<getPayments>> => {
+  console.log("Getting Payments");
+  const page = 0;
+  return accessClient.get(`/appointment/get_payment_info?page=${page}`);
 };
 
 export const usePaymentQuery = () => {
-  return useQuery(["paymentInfo"], getPayment, {
+  return useQuery(["paymentInfo"], () => getPayment(), {
     select: (data: any) => {
-      const payments: Array<paymentDataModel> = [];
-
-      console.log(data.data.chats);
-
-      data.data.docs.forEach((element: any) => {
-        payments.push({
-          Id: element._id,
-          patient_id: element.patient_id,
-          paymentInfo: {
-            name: element.paymentInfo.method,
-            imageUrl:
-              "https://www.shutterstock.com/image-vector/male-avatar-profile-picture-vector-600w-148661735.jpg",
-            email: element.paymentInfo.method,
-            date: element.paymentInfo.date.split("T")[0],
-            paymentStatus: element.paymentInfo.status,
-            method: element.paymentInfo.method,
-            amount: element.paymentInfo.amount,
-            Id: element.paymentInfo._id,
-          },
-        });
-      });
-
-      return payments;
+      return data.data.docs;
     },
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    enabled: true,
   });
 };

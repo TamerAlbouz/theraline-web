@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Fragment, useEffect, useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Combobox, Transition } from "@headlessui/react";
@@ -6,7 +7,6 @@ import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
 import useAvailableUsersQuery, {
   AvailableUser,
 } from "../../../../hooks/queries/useAvailableUsersQuery";
-import { Fragment, useEffect, useState } from "react";
 import { CustomInput } from "../../../auth/CustomInput";
 import { useCreateGroupMutation } from "../../../../hooks/mutations/useCreateGroupMutation";
 
@@ -23,6 +23,7 @@ function NewChatModalContent(props: { closeModal: Function }) {
   const [query, setQuery] = useState("");
   const [base64, setBase64] = useState<string>("");
   const { mutate: createGroup } = useCreateGroupMutation();
+  const { closeModal } = props;
 
   const {
     register,
@@ -43,15 +44,12 @@ function NewChatModalContent(props: { closeModal: Function }) {
 
   const getBase64 = (file: any) => {
     return new Promise((resolve) => {
-      let fileInfo;
-      let baseURL = "";
-
-      let reader = new FileReader();
+      const reader = new FileReader();
 
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        let baseURL = reader.result;
+        const baseURL = reader.result;
 
         resolve(baseURL);
       };
@@ -68,14 +66,15 @@ function NewChatModalContent(props: { closeModal: Function }) {
     });
   };
 
-  async function submitNewGroupInfo(data: NewGroupValues) {
+  async function submitNewGroupInfo(result: NewGroupValues) {
     createGroup({
-      name: data.name,
+      name: result.name,
       image: base64,
+      // eslint-disable-next-line no-underscore-dangle
       users_id: selectedUsers.map((user) => user._id),
     });
 
-    props.closeModal();
+    closeModal();
   }
 
   const filteredUsers =
@@ -120,16 +119,16 @@ function NewChatModalContent(props: { closeModal: Function }) {
       <span>Users</span>
       <Combobox
         value={selectedUsers}
-        onChange={(data: any) => {
-          setSelectedUsers([...data]);
+        onChange={(result: any) => {
+          setSelectedUsers([...result]);
         }}
         multiple>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-              displayValue={(users: AvailableUser[]) =>
-                users.map((user) => user.firstName).join(", ")
+              displayValue={(patients: AvailableUser[]) =>
+                patients.map((user) => user.firstName).join(", ")
               }
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -154,6 +153,7 @@ function NewChatModalContent(props: { closeModal: Function }) {
               ) : (
                 filteredUsers.map((user) => (
                   <Combobox.Option
+                    // eslint-disable-next-line no-underscore-dangle
                     key={user._id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${

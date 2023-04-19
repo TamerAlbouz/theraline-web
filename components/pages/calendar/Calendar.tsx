@@ -11,7 +11,6 @@ import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import useAppointmentsQuery, {
   Appointment,
 } from "../../../hooks/queries/useAppointmentsQuery";
-import { appointmentsDataModel } from "../../../types/appointmentsData";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
@@ -19,6 +18,15 @@ function AppCalendar() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const { selectedEvent, setSelectedEvent, showWeekends } = useCalendarStore();
   const { data } = useAppointmentsQuery();
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     useCalendarStore.subscribe((state, prevState) => {
       // opens the modal only when an event is triggered that isn't a show weekend change
@@ -33,14 +41,6 @@ function AppCalendar() {
       setAppointments(data);
     }
   }, [data]);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
 
   return (
     <>
@@ -65,14 +65,14 @@ function AppCalendar() {
         dayCellClassNames="bg-primary"
         dayHeaderClassNames="bg-primary-dark py-4"
         slotLabelClassNames="px-4"
-        eventClick={(data: EventClickArg) => {
-          console.log(data);
+        eventClick={(result: EventClickArg) => {
+          console.log(result);
           setSelectedEvent({
-            id: data.event.id,
-            title: data.event.title,
-            start: data.event.start!,
-            end: data.event.end!,
-            status: data.event.extendedProps.status,
+            id: result.event.id,
+            title: result.event.title,
+            start: result.event.start!,
+            end: result.event.end!,
+            status: result.event.extendedProps.status,
           });
 
           openModal();
@@ -104,6 +104,7 @@ function AppCalendar() {
           }
 
           return {
+            // eslint-disable-next-line no-underscore-dangle
             id: element._id,
             title: element.title,
             start: new Date(element.start_date),

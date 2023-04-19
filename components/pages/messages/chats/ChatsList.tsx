@@ -41,6 +41,7 @@ function ChatsList() {
           <ChatCard
             chat={chat}
             isLast={index === data!.length - 1}
+            // eslint-disable-next-line no-underscore-dangle
             key={chat._id}
           />
         );

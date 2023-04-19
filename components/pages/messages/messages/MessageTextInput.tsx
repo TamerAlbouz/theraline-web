@@ -5,8 +5,9 @@ import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import { useSendMessageMutation } from "../../../../hooks/mutations/useSendMessageMutation";
 
 function MessageTextInput() {
-  const { selectedChat, setSelectedChat } = useMessageStore();
+  const { selectedChat } = useMessageStore();
   const { mutate: sendMessage } = useSendMessageMutation({
+    // eslint-disable-next-line no-underscore-dangle
     chatId: selectedChat?._id,
   });
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -17,6 +18,7 @@ function MessageTextInput() {
   const submitMessage = () => {
     sendMessage({
       text: input,
+      // eslint-disable-next-line no-underscore-dangle
       chatId: selectedChat!._id,
     });
 

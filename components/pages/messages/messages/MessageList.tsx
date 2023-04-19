@@ -1,4 +1,5 @@
-import { animateScroll, ScrollElement } from "react-scroll";
+import { animateScroll } from "react-scroll";
+import { useEffect } from "react";
 import MessageItem from "./MessageItem";
 import MessageTextInput from "./MessageTextInput";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
@@ -6,7 +7,6 @@ import {
   Message,
   useMessagesQuery,
 } from "../../../../hooks/queries/useMessagesQuery";
-import { useEffect } from "react";
 
 function sameDay(d1: Date, d2: Date) {
   return (
@@ -19,14 +19,10 @@ function sameDay(d1: Date, d2: Date) {
 function AppMessageList() {
   const { selectedChat } = useMessageStore();
 
-  const {
-    isLoading,
-    data,
-    isFetching,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useMessagesQuery(selectedChat?._id);
+  const { isLoading, data, fetchNextPage } = useMessagesQuery(
+    // eslint-disable-next-line no-underscore-dangle
+    selectedChat?._id,
+  );
 
   useEffect(() => {
     animateScroll.scrollToBottom({
@@ -46,8 +42,8 @@ function AppMessageList() {
     return <div>Loading...</div>;
   }
 
-  let allChats: Array<Array<Message>> = data!.pages.map((page) => {
-    let messageSet = page.data.docs.sort((a, b) => {
+  const allChats: Array<Array<Message>> = data!.pages.map((page) => {
+    const messageSet = page.data.docs.sort((a, b) => {
       if (a.send_at < b.send_at) {
         return -1;
       }
@@ -60,7 +56,8 @@ function AppMessageList() {
     return messageSet;
   });
 
-  let messages: Array<Message> = allChats.flat();
+  const messages: Array<Message> = allChats.flat();
+  // eslint-disable-next-line no-undef
   const messageItems: Array<JSX.Element> = [];
 
   // eslint-disable-next-line no-plusplus
@@ -75,7 +72,7 @@ function AppMessageList() {
 
       if (
         i + 1 <= messages.length - 1 &&
-        messages[i].sentByMe != messages[i + 1].sentByMe
+        messages[i].sentByMe !== messages[i + 1].sentByMe
       ) {
         isOnly = true;
       }
@@ -84,19 +81,19 @@ function AppMessageList() {
       showTime = true;
     } else {
       if (
-        messages[i].sentByMe != messages[i - 1].sentByMe &&
-        messages[i].sentByMe != messages[i + 1].sentByMe
+        messages[i].sentByMe !== messages[i - 1].sentByMe &&
+        messages[i].sentByMe !== messages[i + 1].sentByMe
       ) {
         isOnly = true;
       } else if (
-        messages[i].sentByMe != messages[i - 1].sentByMe &&
-        messages[i].sentByMe == messages[i + 1].sentByMe
+        messages[i].sentByMe !== messages[i - 1].sentByMe &&
+        messages[i].sentByMe === messages[i + 1].sentByMe
       ) {
         isFirst = true;
       }
       if (
-        messages[i].sentByMe == messages[i - 1].sentByMe &&
-        messages[i].sentByMe != messages[i + 1].sentByMe
+        messages[i].sentByMe === messages[i - 1].sentByMe &&
+        messages[i].sentByMe !== messages[i + 1].sentByMe
       ) {
         isLast = true;
         showTime = true;
