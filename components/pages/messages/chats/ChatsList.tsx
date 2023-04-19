@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ChatCard from "./ChatCard";
-import useChatsQuery, { Chat } from "../../../../hooks/queries/useChatsQuery";
+import useChatsQuery, {
+  Chat,
+} from "../../../../hooks/queries/chats/useChatsQuery";
 
 function ChatsList() {
   const [searchValue, setSearchValue] = useState("");
@@ -36,15 +38,17 @@ function ChatsList() {
         />
       </div>
 
-      {filterChats(data!).map((chat, index) => {
-        return (
-          <ChatCard
-            chat={chat}
-            isLast={index === data!.length - 1}
-            key={chat._id}
-          />
-        );
-      })}
+      <div className="overflow-y-scroll scroll-smooth scrollbar-hide">
+        {filterChats(data!).map((chat, index) => {
+          return (
+            <ChatCard
+              chat={chat}
+              isLast={index === data!.length - 1}
+              key={chat._id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

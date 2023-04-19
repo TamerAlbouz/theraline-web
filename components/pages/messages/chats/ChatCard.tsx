@@ -1,4 +1,4 @@
-import { Chat } from "../../../../hooks/queries/useChatsQuery";
+import { Chat } from "../../../../hooks/queries/chats/useChatsQuery";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import DefaultAvatar from "./DefaultAvatar";
 
@@ -13,7 +13,7 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
     <button
       type="button"
       onClick={selectChat}
-      className={`flex cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
+      className={`flex w-full cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
         props.isLast ? "" : "border-b border-gray-200"
       } ${selectedChat === props.chat ? "bg-primary" : ""}`}>
       <div className="flex flex-row items-center">

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { Chat } from "../queries/useChatsQuery";
-import { Message } from "../queries/useMessagesQuery";
+import { Chat } from "../queries/chats/useChatsQuery";
+import { Message } from "../queries/chats/useMessagesQuery";
 
 interface MessagesState {
   selectedChat: Chat | undefined;

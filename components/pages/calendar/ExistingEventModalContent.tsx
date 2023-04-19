@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCancelAppointmentMutation } from "../../../hooks/mutations/useCancelAppointmentMutation";
+import { useCancelAppointmentMutation } from "../../../hooks/mutations/appointments/useCancelAppointmentMutation";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import { format } from "date-fns";
 import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { useCompleteAppointmentMutation } from "../../../hooks/mutations/useCompleteAppointmentMutation";
+import { useCompleteAppointmentMutation } from "../../../hooks/mutations/appointments/useCompleteAppointmentMutation";
 
 const paymentInfoSchema = z.object({
   amount: z.string(),
@@ -61,6 +61,12 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
   const submitPaymentInfo = (data: PaymentInfoValues) => {
     console.log(data);
 
+    if (selectedEvent?.status == "DONE") {
+      console.log("UPDATE HERE");
+
+      return;
+    }
+
     completeAppointment({
       appointmentId: selectedEvent!.id,
       amount: parseInt(data.amount),
@@ -102,7 +108,8 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
           </div>
         )}
 
-        {selectedEvent?.status == "CONFIRMED" && (
+        {(selectedEvent?.status == "CONFIRMED" ||
+          selectedEvent?.status == "DONE") && (
           <form onSubmit={handleSubmit(submitPaymentInfo)} className="mt-4">
             <input
               {...register("amount", {
@@ -110,14 +117,23 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
               })}
               id="event-amount"
               type="text"
+              readOnly={selectedEvent?.status == "DONE"}
               placeholder="Amount"
+              value={
+                selectedEvent.paymentInfo
+                  ? selectedEvent.paymentInfo.amount
+                  : undefined
+              }
               className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
             />{" "}
             <span className="text-base text-red-600">
               {errors.amount?.message}
             </span>
             <div className="mt-4 w-72">
-              <Listbox value={selectedOption} onChange={setSelectedOption}>
+              <Listbox
+                value={selectedOption}
+                onChange={setSelectedOption}
+                disabled={selectedEvent?.status == "DONE"}>
                 <div className="relative z-50 mt-1">
                   <Listbox.Button className="relative z-50 w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                     <span className="block truncate">
@@ -156,7 +172,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
                                 {paymentOption.title}
                               </span>
                               {selected ? (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600">
                                   <HiCheck
                                     className="h-5 w-5"
                                     aria-hidden="true"
@@ -212,7 +228,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
                                 {paymentStatus.title}
                               </span>
                               {selected ? (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
                                   <HiCheck
                                     className="h-5 w-5"
                                     aria-hidden="true"
@@ -230,7 +246,11 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
             </div>{" "}
             <input
               type="submit"
-              value="Complete Appointment"
+              value={
+                selectedEvent?.status == "DONE"
+                  ? "Update"
+                  : "Complete Appointment"
+              }
               className="focus:shadow-outline mt-4 cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
             />
           </form>

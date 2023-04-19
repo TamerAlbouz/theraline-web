@@ -5,10 +5,10 @@ import { Combobox, Transition } from "@headlessui/react";
 import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
 import useAvailableUsersQuery, {
   AvailableUser,
-} from "../../../../hooks/queries/useAvailableUsersQuery";
+} from "../../../../hooks/queries/chats/useAvailableUsersQuery";
 import { Fragment, useEffect, useState } from "react";
 import { CustomInput } from "../../../auth/CustomInput";
-import { useCreateGroupMutation } from "../../../../hooks/mutations/useCreateGroupMutation";
+import { useCreateGroupMutation } from "../../../../hooks/mutations/chats/useCreateGroupMutation";
 
 const newGroupSchema = z.object({
   name: z.string(),

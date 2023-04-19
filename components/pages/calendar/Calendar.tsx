@@ -10,8 +10,7 @@ import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import useAppointmentsQuery, {
   Appointment,
-} from "../../../hooks/queries/useAppointmentsQuery";
-import { appointmentsDataModel } from "../../../types/appointmentsData";
+} from "../../../hooks/queries/appointments/useAppointmentsQuery";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
@@ -73,6 +72,7 @@ function AppCalendar() {
             start: data.event.start!,
             end: data.event.end!,
             status: data.event.extendedProps.status,
+            paymentInfo: data.event.extendedProps.paymentInfo,
           });
 
           openModal();
@@ -110,6 +110,7 @@ function AppCalendar() {
             end: new Date(element.end_date),
             extendedProps: {
               status: element.status,
+              paymentInfo: element.paymentInfo,
             },
             className: appointmentClass,
           };

@@ -5,7 +5,7 @@ import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import {
   Message,
   useMessagesQuery,
-} from "../../../../hooks/queries/useMessagesQuery";
+} from "../../../../hooks/queries/chats/useMessagesQuery";
 import { useEffect } from "react";
 
 function sameDay(d1: Date, d2: Date) {
@@ -128,7 +128,7 @@ function AppMessageList() {
     <div className="relative flex h-full flex-col justify-end rounded-r-lg bg-primary px-4 py-2">
       <div
         id="message-list"
-        className="overflow-y-scroll scroll-smooth"
+        className="overflow-y-scroll scroll-smooth scrollbar-hide"
         onScroll={(result: any) => {
           if (result.target.scrollTop === 0) {
             fetchNextPage();

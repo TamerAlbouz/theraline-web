@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Message } from "../../../../hooks/queries/useMessagesQuery";
+import { Message } from "../../../../hooks/queries/chats/useMessagesQuery";
 
 function MessageItem(props: {
   message: Message;
@@ -31,7 +31,7 @@ function MessageItem(props: {
       <div
         className={`flex flex-col px-4 py-3  ${
           props.message.sentByMe
-            ? "mx-4 rounded-l-3xl bg-green-500 text-white"
+            ? "rounded-l-3xl bg-green-500 text-white"
             : "rounded-r-3xl bg-gray-300 text-black"
         } ${
           !props.message.sentByMe && (props.isOnly || props.isFirst)

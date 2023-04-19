@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { accessClient } from "../../utils/axios/axios";
-import { useMessageStore } from "../stores/useMessageStore";
+import { accessClient } from "../../../utils/axios/axios";
+import { useMessageStore } from "../../stores/useMessageStore";
 import { AxiosResponse } from "axios";
 
 export type Message = {
