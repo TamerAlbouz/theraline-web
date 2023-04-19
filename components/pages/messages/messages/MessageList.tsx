@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import MessageItem from "./MessageItem";
 import MessageTextInput from "./MessageTextInput";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
+// eslint-disable-next-line prettier/prettier
 import { Message, useMessagesQuery } from "../../../../hooks/queries/chats/useMessagesQuery";
 
 function sameDay(d1: Date, d2: Date) {

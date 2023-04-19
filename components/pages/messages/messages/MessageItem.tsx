@@ -33,13 +33,8 @@ function MessageItem(props: {
 
       <div
         className={`flex flex-col px-4 py-3  ${
-<<<<<<< HEAD
           sentByMe
-            ? "mx-4 rounded-l-3xl bg-green-500 text-white"
-=======
-          props.message.sentByMe
             ? "rounded-l-3xl bg-green-500 text-white"
->>>>>>> 0f06957e550aca49e110cb1948c8eaeb0931d5f9
             : "rounded-r-3xl bg-gray-300 text-black"
         } ${
           !sentByMe && (isOnly || isFirst) ? "rounded-t-3xl rounded-br-3xl" : ""

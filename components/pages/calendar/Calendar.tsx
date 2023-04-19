@@ -8,6 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
+// eslint-disable-next-line prettier/prettier
 import useAppointmentsQuery, { Appointment } from "../../../hooks/queries/appointments/useAppointmentsQuery";
 
 function AppCalendar() {

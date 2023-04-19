@@ -6,6 +6,7 @@ import { Combobox, Transition } from "@headlessui/react";
 import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
 import { useCreateGroupMutation } from "../../../../hooks/mutations/chats/useCreateGroupMutation";
 import { CustomInput } from "../../../auth/CustomInput";
+// eslint-disable-next-line prettier/prettier
 import useAvailableUsersQuery, { AvailableUser } from "../../../../hooks/queries/chats/useAvailableUsersQuery";
 
 const newGroupSchema = z.object({

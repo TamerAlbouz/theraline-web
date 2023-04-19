@@ -38,30 +38,18 @@ function ChatsList() {
         />
       </div>
 
-<<<<<<< HEAD
-      {filterChats(data!).map((chat, index) => {
-        return (
-          <ChatCard
-            chat={chat}
-            isLast={index === data!.length - 1}
-            // eslint-disable-next-line no-underscore-dangle
-            key={chat._id}
-          />
-        );
-      })}
-=======
       <div className="overflow-y-scroll scroll-smooth scrollbar-hide">
         {filterChats(data!).map((chat, index) => {
           return (
             <ChatCard
               chat={chat}
               isLast={index === data!.length - 1}
+              // eslint-disable-next-line no-underscore-dangle
               key={chat._id}
             />
           );
         })}
       </div>
->>>>>>> 0f06957e550aca49e110cb1948c8eaeb0931d5f9
     </div>
   );
 }
