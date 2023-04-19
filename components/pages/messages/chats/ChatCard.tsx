@@ -1,12 +1,15 @@
-import { Chat } from "../../../../hooks/queries/chats/useChatsQuery";
+import Image from "next/image";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import DefaultAvatar from "./DefaultAvatar";
+import { Chat } from "../../../../hooks/queries/chats/useChatsQuery";
 
 function ChatCard(props: { chat: Chat; isLast: boolean }) {
   const { selectedChat, setSelectedChat } = useMessageStore();
+  const { chat, isLast } = props;
+  const { name, groupImage, latestMessage } = chat;
 
   const selectChat = () => {
-    setSelectedChat(props.chat);
+    setSelectedChat(chat);
   };
 
   return (
@@ -14,40 +17,40 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
       type="button"
       onClick={selectChat}
       className={`flex w-full cursor-pointer flex-row items-start justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
-        props.isLast ? "" : "border-b border-gray-200"
-      } ${selectedChat === props.chat ? "bg-primary" : ""}`}>
+        isLast ? "" : "border-b border-gray-200"
+      } ${selectedChat === chat ? "bg-primary" : ""}`}>
       <div className="flex flex-row items-center">
         <div className="relative">
-          {props.chat.groupImage ? (
-            <img
+          {groupImage ? (
+            <Image
+              width={48}
+              height={48}
               className="h-12 w-12 cursor-pointer rounded-full"
-              src={props.chat.groupImage}
-              alt="Profile Photo"
+              src={groupImage}
+              alt="Profile"
             />
           ) : (
-            <DefaultAvatar chat={props.chat} />
+            <DefaultAvatar chat={chat} />
           )}
 
-          {/* {props.chat.isActive && (
+          {/* {isActive && (
             <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500" />
           )} */}
         </div>
 
         <div className="ml-4 mr-6 flex flex-col items-start">
-          <span className="font-bold">{props.chat.name}</span>
+          <span className="font-bold">{name}</span>
 
-          <span className="text-sm text-gray-100">
-            {props.chat.latestMessage?.text}
-          </span>
+          <span className="text-sm text-gray-100">{latestMessage?.text}</span>
         </div>
       </div>
 
       {/* <div className="flex flex-col items-end">
-        <span>{props.chat.lastMessageDate}</span>
+        <span>{lastMessageDate}</span>
 
-        {props.chat.unreadCount > 0 && (
+        {unreadCount > 0 && (
           <div className="mt-2 flex h-6 w-6 items-center justify-center rounded-xl bg-green-500 px-2 py-1 text-center text-sm font-bold text-textColor">
-            {props.chat.unreadCount}
+            {unreadCount}
           </div>
         )}
       </div> */}

@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import {
   basicInfoTemplate,
   phoneNumberTemplate,
-  cityTemplate,
   nextAppointmentTemplate,
   lastAppointmentTemplate,
   paginatorTemplate,
@@ -25,15 +24,14 @@ const columns = [
     sortable: false,
     body: phoneNumberTemplate,
   },
-  { id: 3, header: "City", sortable: false, body: cityTemplate },
   {
-    id: 4,
+    id: 3,
     header: "Last Appointment",
     sortable: false,
     body: lastAppointmentTemplate,
   },
   {
-    id: 5,
+    id: 4,
     header: "Next Appointment",
     sortable: false,
     body: nextAppointmentTemplate,
@@ -83,7 +81,7 @@ function PatientList() {
               key={col.id}
               header={col.header}
               headerClassName="p-3 bg-primary-dark text-xl text-textColor w-12"
-              className="my-5 w-1/5"
+              className="my-5 w-1/4"
               body={col.body}
               sortable
               sortField="name"
@@ -96,7 +94,7 @@ function PatientList() {
             key={col.id}
             header={col.header}
             headerClassName="p-3 bg-primary-dark text-xl text-textColor"
-            className="w-1/5 py-5"
+            className="w-1/4 py-5"
             body={col.body}
           />
         );

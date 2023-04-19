@@ -12,20 +12,21 @@ function _createRandomPayment(): paymentDataModel {
   ]);
 
   return {
-    Id: faker.datatype.uuid(),
+    _id: faker.datatype.uuid(),
+    patient_id: faker.datatype.uuid(),
     paymentInfo: {
       name,
       imageUrl: faker.image.imageUrl(undefined, undefined, "people", true),
       email,
       date: faker.date.past().toDateString(),
-      paymentStatus: faker.helpers.arrayElement([
+      status: faker.helpers.arrayElement([
         "Paid",
         "Pending",
         "Awaiting",
       ]),
       method: faker.helpers.arrayElement(["Cash", "Credit Card", "Check"]),
       amount: faker.finance.amount(undefined, undefined, 2, "$"),
-      Id: faker.datatype.uuid(),
+      _id: faker.datatype.uuid(),
     },
   };
 }

@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import ChatsList from "../../components/pages/messages/chats/ChatsList";
 import AppMessageList from "../../components/pages/messages/messages/MessageList";
-import { Dialog, Transition } from "@headlessui/react";
 import NewChatModalContent from "../../components/pages/messages/new-chat/NewChatModalContent";
 
 function MessagesPage() {
