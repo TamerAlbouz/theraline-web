@@ -63,7 +63,7 @@ function PaymentStatistics() {
         <h1 className="text-lg font-semibold text-textColor">Statistics</h1>
       </div>
       <div className="text-textColor">
-        <Chart type="bar" data={basicData} options={basicOptions} />
+        <Chart type="bar" data={basicData} options={basicOptions}></Chart>
       </div>
     </div>
   );
