@@ -4,15 +4,15 @@ import useAuthStore from "../../hooks/stores/useAuthStore";
 const { setAccessToken } = useAuthStore.getState();
 const { setIsAuthenticated } = useAuthStore.getState();
 
-export const baseURL = "https://theraline.onrender.com";
+export const baseURL = "https://theraline-backend-api.vercel.app";
 
 export const refreshToken = async () => {
   try {
     const res = await refreshClient.post("/auth/refresh");
-    console.log("Refresh")
+    console.log("Refresh");
     return res.data.access_token;
   } catch (err) {
-    console.log("Refresh Failed")
+    console.log("Refresh Failed");
     throw err;
   }
 };
@@ -57,10 +57,10 @@ accessClient.interceptors.response.use(
 
         const { config } = error;
         config.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        console.log("Reached Interceptor Response")
+        console.log("Reached Interceptor Response");
         return await axios(config);
       } catch (err) {
-        console.warn("Failed", err)
+        console.warn("Failed", err);
         setIsAuthenticated(false);
         throw err;
       }
