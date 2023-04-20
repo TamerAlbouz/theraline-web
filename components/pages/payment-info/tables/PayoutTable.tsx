@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
@@ -23,6 +23,7 @@ const columns = [
 
 function PayoutTable() {
   const { data } = usePaymentQuery();
+  const [payments, setPayments] = useState<any>([]);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -39,13 +40,20 @@ function PayoutTable() {
     setGlobalFilterValue(value);
   };
 
+  // update table data when data changes
+  useEffect(() => {
+    setPayments(data);
+
+    // update filters when data changes
+  }, [data]);
+
   const dynamicColumns = columns.map((col) => {
     return (
       <Column
         key={col.id}
         header={col.header}
         headerClassName="p-3 bg-primary-dark text-xl"
-        className="w-1/5 py-5 text-center"
+        className="w-1/12 py-5 text-center"
         body={col.body}
       />
     );
@@ -71,9 +79,7 @@ function PayoutTable() {
   return (
     <DataTable
       dataKey="id"
-      value={data?.map((payment: any) => {
-        return payment;
-      })}
+      value={payments}
       responsiveLayout="scroll"
       autoLayout
       tableClassName="w-full"

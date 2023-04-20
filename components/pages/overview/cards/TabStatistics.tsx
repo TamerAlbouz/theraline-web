@@ -38,7 +38,7 @@ function TabStatistics() {
         </Tab.List>
       </div>
       <Tab.Panels>
-        <Tab.Panel unmount={true}>
+        <Tab.Panel>
           <WeeklyStatistics />
         </Tab.Panel>
         <Tab.Panel>
