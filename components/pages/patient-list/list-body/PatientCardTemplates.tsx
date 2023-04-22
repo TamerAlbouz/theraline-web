@@ -9,63 +9,64 @@ import React, {
 } from "react";
 import Image from "next/image";
 import { patientDataModel } from "../../../../types/patientData";
+import { PatientListItem } from "../../../../hooks/queries/patient-list/usePatientListQuery";
+import { format } from "date-fns";
 
-export const basicInfoTemplate = (data: patientDataModel) => {
-  const { imageUrl, name, email } = data;
+export const basicInfoTemplate = (data: PatientListItem) => {
+  const { email, firstName, lastName, image } = data;
   return (
     <div className="my-2 flex flex-row px-2 py-2 pl-4">
-      <Image
-        width={40}
-        height={40}
-        className="h-10 w-10 rounded-full md:h-12 md:w-12"
-        src={imageUrl}
-        alt="Avatar"
-      />
+      {image && (
+        <Image
+          width={40}
+          height={40}
+          className="h-10 w-10 rounded-full md:h-12 md:w-12"
+          src={image}
+          alt="Avatar"
+        />
+      )}
       <div className="ml-4 flex flex-col">
-        <p className="text-md font-bold text-textColor">{name}</p>
+        <p className="text-md font-bold text-textColor">{`${firstName} ${lastName}`}</p>
         <p className="text-sm text-textColor">{email}</p>
       </div>
     </div>
   );
 };
 
-export const phoneNumberTemplate = (data: patientDataModel) => {
-  const { phoneNumber } = data;
-  return (
-    <div className="px-2">
-      <p className="text-md text-center text-textColor">{phoneNumber}</p>
-    </div>
-  );
-};
-
-export const cityTemplate = (data: patientDataModel) => {
-  const { city } = data;
-  return (
-    <div className="px-2">
-      <p className="text-md text-center text-textColor">{city}</p>
-    </div>
-  );
-};
-
-export const lastAppointmentTemplate = (data: patientDataModel) => {
-  const { nextAppointment } = data;
+export const phoneNumberTemplate = (data: PatientListItem) => {
+  const { phone } = data;
   return (
     <div className="px-2">
       <p className="text-md text-center text-textColor">
-        {/* eslint-disable-next-line no-unneeded-ternary */}
-        {nextAppointment ? nextAppointment : "-"}
+        {phone ? phone : "-"}
       </p>
     </div>
   );
 };
 
-export const nextAppointmentTemplate = (data: patientDataModel) => {
+export const lastAppointmentTemplate = (data: PatientListItem) => {
+  const { nextAppointment } = data;
+  return (
+    <div className="px-2">
+      <p className="text-md text-center text-textColor">
+        {/* eslint-disable-next-line no-unneeded-ternary */}
+        {nextAppointment
+          ? format(new Date(nextAppointment.start_date), "PP")
+          : "-"}
+      </p>
+    </div>
+  );
+};
+
+export const nextAppointmentTemplate = (data: PatientListItem) => {
   const { lastAppointment } = data;
   return (
     <div className="px-2">
       <p className="text-md text-center text-textColor">
         {/* eslint-disable-next-line no-unneeded-ternary */}
-        {lastAppointment ? lastAppointment : "-"}
+        {lastAppointment
+          ? format(new Date(lastAppointment.start_date), "PP")
+          : "-"}
       </p>
     </div>
   );

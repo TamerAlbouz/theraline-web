@@ -1,13 +1,31 @@
+import { useRouter } from "next/router";
 import FilesCard from "../../../components/pages/patient-list/details-body/FilesCard";
 import InfoCard from "../../../components/pages/patient-list/details-body/InfoCard";
 import NotesCard from "../../../components/pages/patient-list/details-body/NotesCard";
 import ProfileCard from "../../../components/pages/patient-list/details-body/ProfileCard";
 import PatientListHeader from "../../../components/pages/patient-list/header/Header";
 import { patientDataModel } from "../../../types/patientData";
+import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatientDetailsQuery";
+import { useEffect, useState } from "react";
 
 function PatientDetails(props: { patientData: patientDataModel }) {
+  const router = useRouter();
+  const [patientId, setPatientId] = useState("");
+  const { data, refetch } = usePatientDetailsQuery(patientId, );
+
   const { patientData } = props;
   const { name } = patientData;
+
+  useEffect(() => {
+    // to be fixed
+    if (router.query.patientId) {
+      setPatientId(router.query.patientId.toString());
+      refetch();
+    }
+  }, []);
+
+  console.log(router.query.patientId);
+
   return (
     <div className="h-full">
       <div className="mb-6 rounded-md border-b-2 border-white bg-primary px-4 pt-2 pb-4">
