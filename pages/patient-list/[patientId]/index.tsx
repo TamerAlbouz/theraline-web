@@ -10,19 +10,10 @@ import { useEffect, useState } from "react";
 
 function PatientDetails(props: { patientData: patientDataModel }) {
   const router = useRouter();
-  const [patientId, setPatientId] = useState("");
-  const { data, refetch } = usePatientDetailsQuery(patientId, );
+  const { data } = usePatientDetailsQuery(router.query.patientId!.toString());
 
   const { patientData } = props;
   const { name } = patientData;
-
-  useEffect(() => {
-    // to be fixed
-    if (router.query.patientId) {
-      setPatientId(router.query.patientId.toString());
-      refetch();
-    }
-  }, []);
 
   console.log(router.query.patientId);
 
