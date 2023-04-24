@@ -54,6 +54,7 @@ function PatientList() {
       paginatorClassName="py-2"
       rows={20}
       onRowClick={(rowData: DataTableRowClickEventParams) => {
+        // eslint-disable-next-line no-underscore-dangle
         navigateToPatient(rowData.data._id);
       }}
       responsiveLayout="scroll"

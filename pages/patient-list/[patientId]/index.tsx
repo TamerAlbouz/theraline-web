@@ -5,12 +5,10 @@ import NotesCard from "../../../components/pages/patient-list/details-body/Notes
 import ProfileCard from "../../../components/pages/patient-list/details-body/ProfileCard";
 import PatientListHeader from "../../../components/pages/patient-list/header/Header";
 import { patientDataModel } from "../../../types/patientData";
-import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatientDetailsQuery";
-import { useEffect, useState } from "react";
 
 function PatientDetails(props: { patientData: patientDataModel }) {
   const router = useRouter();
-  const { data } = usePatientDetailsQuery(router.query.patientId!.toString());
+  // const { data } = usePatientDetailsQuery(router.query.patientId!.toString());
 
   const { patientData } = props;
   const { name } = patientData;

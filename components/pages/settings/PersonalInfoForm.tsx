@@ -42,12 +42,12 @@ function PersonalInfoForm() {
       setValue("lastName", data.lastName, { shouldDirty: false });
       setValue("phone", data.phone, { shouldDirty: false });
     }
-  }, [data]);
+  }, [data, setValue]);
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const submitUserInfo = async (data: any) => {
-    console.log(data);
+  const submitUserInfo = async (result: any) => {
+    console.log(result);
 
     setIsEditing(false);
   };

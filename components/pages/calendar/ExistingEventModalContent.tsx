@@ -63,39 +63,38 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
 
   useEffect(() => {
     if (selectedEvent?.paymentInfo) {
-      if (selectedEvent.paymentInfo.method == "CREDIT CARD") {
+      if (selectedEvent.paymentInfo.method === "CREDIT CARD") {
         setSelectedOption(paymentOptions[0]);
-      } else if (selectedEvent.paymentInfo.method == "CASH") {
+      } else if (selectedEvent.paymentInfo.method === "CASH") {
         setSelectedOption(paymentOptions[1]);
       } else {
         setSelectedOption(paymentOptions[2]);
       }
 
-      if (selectedEvent.paymentInfo.status == "AWAITING") {
+      if (selectedEvent.paymentInfo.status === "AWAITING") {
         setSelectedStatus(paymentStatus[1]);
-      } else if (selectedEvent.paymentInfo.status == "PAID") {
+      } else if (selectedEvent.paymentInfo.status === "PAID") {
         setSelectedStatus(paymentStatus[2]);
       } else {
         setSelectedStatus(paymentStatus[0]);
       }
     }
-  }, []);
+  }, [selectedEvent?.paymentInfo]);
 
   const submitPaymentInfo = (data: PaymentInfoValues) => {
     console.log(data);
 
     if (
       selectedEvent?.status === "DONE" &&
-      selectedEvent.status.toString() != selectedStatus.value.toString()
+      selectedEvent.status.toString() !== selectedStatus.value.toString()
     ) {
       console.log("UPDATE HERE");
       updateAppointment({
         appointmentId: selectedEvent!.id,
+        // eslint-disable-next-line radix
         amount: parseInt(data.amount),
         status: selectedStatus.value,
       });
-
-      return;
     } else {
       completeAppointment({
         appointmentId: selectedEvent!.id,

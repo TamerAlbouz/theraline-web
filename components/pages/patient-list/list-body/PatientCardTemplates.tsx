@@ -7,10 +7,9 @@ import React, {
   ReactFragment,
   ReactPortal,
 } from "react";
-import Image from "next/image";
-import { patientDataModel } from "../../../../types/patientData";
-import { PatientListItem } from "../../../../hooks/queries/patient-list/usePatientListQuery";
 import { format } from "date-fns";
+import Image from "next/image";
+import { PatientListItem } from "../../../../hooks/queries/patient-list/usePatientListQuery";
 
 export const basicInfoTemplate = (data: PatientListItem) => {
   const { email, firstName, lastName, image } = data;
@@ -38,6 +37,7 @@ export const phoneNumberTemplate = (data: PatientListItem) => {
   return (
     <div className="px-2">
       <p className="text-md text-center text-textColor">
+        {/* eslint-disable-next-line no-unneeded-ternary */}
         {phone ? phone : "-"}
       </p>
     </div>
