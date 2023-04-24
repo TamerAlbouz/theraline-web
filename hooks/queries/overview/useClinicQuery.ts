@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { accessClient } from "../../utils/axios/axios";
-import { clinicInfoModel } from "../../types/clinicInfo";
+import { accessClient } from "../../../utils/axios/axios";
+import { clinicInfoModel } from "../../../types/clinicInfo";
 
 export const getClinic = async () => {
   return accessClient.get("/user/get_clinic_Info");

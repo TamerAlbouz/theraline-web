@@ -1,7 +1,7 @@
 import { BsFillTelephoneFill, BsPaperclip } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
 import CardWrapper from "../../../card/CardWrapper";
-import { useClinicQuery } from "../../../../hooks/queries/useClinicQuery";
+import { useClinicQuery } from "../../../../hooks/queries/overview/useClinicQuery";
 
 function ClinicInfo() {
   const { data } = useClinicQuery();

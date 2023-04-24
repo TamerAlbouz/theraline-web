@@ -1,9 +1,11 @@
 import { Chart } from "primereact/chart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { basicOptions } from "./ChartOptions";
+import { useAppStatsQuery } from "../../../../hooks/queries/overview/useAppStatsQuery";
 
 function YearlyStatistics() {
-  const [basicData] = useState({
+  const { data } = useAppStatsQuery();
+  const [basicData, setBasicData] = useState({
     labels: [
       "January",
       "February",
@@ -22,15 +24,46 @@ function YearlyStatistics() {
       {
         label: "Appointments",
         backgroundColor: "#429cfd",
-        data: [68, 48, 40, 19, 86, 27, 81, 40, 19, 86, 27, 81],
+        data: {},
       },
       {
         label: "Cancelled",
         backgroundColor: "#f66d83",
-        data: [20, 16, 36, 24, 40, 10, 15, 36, 24, 40, 10, 15],
+        data: {},
       },
     ],
   });
+
+  useEffect(() => {
+    setBasicData({
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      datasets: [
+        {
+          label: "Appointments",
+          backgroundColor: "#429cfd",
+          data: data?.year.done,
+        },
+        {
+          label: "Cancelled",
+          backgroundColor: "#f66d83",
+          data: data?.year.canceled,
+        },
+      ],
+    });
+  }, [data]);
 
   return <Chart type="bar" data={basicData} options={basicOptions} />;
 }

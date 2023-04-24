@@ -1,23 +1,59 @@
 import { Chart } from "primereact/chart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { basicOptions } from "./ChartOptions";
+import { useAppStatsQuery } from "../../../../hooks/queries/overview/useAppStatsQuery";
 
 function WeeklyStatistics() {
-  const [basicData] = useState({
-    labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+  const { data } = useAppStatsQuery();
+  const [basicData, setBasicData] = useState({
+    labels: [
+      "Saturday",
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thurday",
+      "Friday",
+    ],
     datasets: [
       {
         label: "Appointments",
         backgroundColor: "#429cfd",
-        data: [68, 48, 40, 19, 86, 27, 81],
+        data: {},
       },
       {
         label: "Cancelled",
         backgroundColor: "#f66d83",
-        data: [20, 16, 36, 24, 40, 10, 15],
+        data: {},
       },
     ],
   });
+
+  useEffect(() => {
+    setBasicData({
+      labels: [
+        "Saturday",
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thurday",
+        "Friday",
+      ],
+      datasets: [
+        {
+          label: "Appointments",
+          backgroundColor: "#429cfd",
+          data: data?.week.done,
+        },
+        {
+          label: "Cancelled",
+          backgroundColor: "#f66d83",
+          data: data?.week.canceled,
+        },
+      ],
+    });
+  }, [data]);
 
   return <Chart type="bar" data={basicData} options={basicOptions} />;
 }
