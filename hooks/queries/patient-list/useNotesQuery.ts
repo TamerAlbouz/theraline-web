@@ -3,9 +3,10 @@ import { accessClient } from "../../../utils/axios/axios";
 import { AxiosResponse } from "axios";
 
 export type PatientNote = {
+  fullName: string;
   title: string;
   body: string;
-  author: string;
+  patient_id: string;
 };
 
 const getPatientNotes = (

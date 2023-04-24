@@ -8,6 +8,8 @@ export type PatientDetails = {
   firstName: string;
   lastName: string;
   email: string;
+  gender: "MALE" | "FEMALE" | "OTHER";
+  birthday: string;
   doctors: string[];
   notes: PatientNote[];
 };

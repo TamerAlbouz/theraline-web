@@ -5,29 +5,38 @@ import NotesCard from "../../../components/pages/patient-list/details-body/Notes
 import ProfileCard from "../../../components/pages/patient-list/details-body/ProfileCard";
 import PatientListHeader from "../../../components/pages/patient-list/header/Header";
 import { patientDataModel } from "../../../types/patientData";
+import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatientDetailsQuery";
 
 function PatientDetails(props: { patientData: patientDataModel }) {
   const router = useRouter();
-  // const { data } = usePatientDetailsQuery(router.query.patientId!.toString());
+  const { data, isLoading } = usePatientDetailsQuery(
+    router.query.patientId!.toString(),
+  );
 
   const { patientData } = props;
   const { name } = patientData;
 
   console.log(router.query.patientId);
 
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="h-full">
+    <div className="h-full w-full">
       <div className="mb-6 rounded-md border-b-2 border-white bg-primary px-4 pt-2 pb-4">
-        <PatientListHeader patientName={name} />
+        <PatientListHeader
+          patientName={`${data?.firstName} ${data?.lastName}`}
+        />
       </div>
 
       <div className="flex flex-col lg:flex-row">
         <div className="w-full lg:w-1/2">
-          <ProfileCard data={patientData} />
+          <ProfileCard data={data} />
         </div>
 
         <div className="w-full pt-4 pl-0 lg:w-1/2 lg:pl-4 lg:pt-0">
-          <InfoCard data={patientData} />
+          <InfoCard data={data} />
         </div>
       </div>
 
@@ -35,7 +44,7 @@ function PatientDetails(props: { patientData: patientDataModel }) {
 
       <div className="mt-4 flex flex-col justify-between lg:mt-0 lg:flex-row">
         <div className="w-full lg:w-1/2">
-          <NotesCard />
+          <NotesCard note={data.notes[0]} />
         </div>
 
         <div className="w-full pt-4 pl-0 lg:w-1/2 lg:pl-4 lg:pt-0">
