@@ -7,7 +7,10 @@ function Revenue() {
   const [result, setResult] = useState({ month: "", all: "" });
 
   useEffect(() => {
-    setResult({ month: `$${data?.month}`, all: `$${data?.all}` });
+    setResult({
+      month: `$${data ? data.month : ""}`,
+      all: `$${data ? data.all : ""}`,
+    });
   }, [data]);
 
   return (

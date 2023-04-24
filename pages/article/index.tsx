@@ -1,18 +1,18 @@
 import { Editor } from "primereact/editor";
+import { useState } from "react";
 
 function ArticlePage() {
-  const header = (
-    <span className="ql-formats">
-      <button className="ql-bold" aria-label="Bold" type="button" />
-      <button className="ql-italic" aria-label="Italic" type="button" />
-      <button className="ql-underline" aria-label="Underline" type="button" />
-    </span>
+  const [text, setText] = useState<string | null>(
+    "<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>",
   );
 
   return (
-    <div className="bg-white text-black">
-      <Editor headerTemplate={header} className=" text-black" value="Hello" />
-    </div>
+    <Editor
+      showHeader={false}
+      className="w-full bg-white text-black"
+      value={text ? text : ""}
+      onTextChange={(e) => setText(e.htmlValue)}
+    />
   );
 }
 
