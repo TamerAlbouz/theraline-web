@@ -3,17 +3,17 @@ import { accessClient } from "../../../utils/axios/axios";
 import { AxiosResponse } from "axios";
 
 export type PatientNote = {
-  fullName: string;
+  _id: string;
   title: string;
   body: string;
-  patient_id: string;
+  author?: string;
 };
 
 const getPatientNotes = (
   patientId: string,
-): Promise<AxiosResponse<PatientNote>> => {
+): Promise<AxiosResponse<PatientNote[]>> => {
   console.log(`Here ${patientId}`);
-  return accessClient.get(``);
+  return accessClient.get(`/user/get_notes/${patientId}`);
 };
 
 const useNotesQuery = (patientId: string) => {
@@ -21,6 +21,7 @@ const useNotesQuery = (patientId: string) => {
     queryKey: ["patient-notes", patientId],
     select: (data) => {
       console.log(data);
+      return data.data;
     },
     queryFn: () => getPatientNotes(patientId),
     refetchOnMount: false,

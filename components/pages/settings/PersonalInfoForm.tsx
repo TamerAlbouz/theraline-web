@@ -2,9 +2,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import useSettingsQuery, {
-  SettingDetails,
-} from "../../../hooks/queries/useSettingsQuery";
+import { SettingDetails } from "../../../hooks/queries/useSettingsQuery";
+import { useUpdateSettingsMutation } from "../../../hooks/mutations/useUpdateSettingsInfo";
 
 const settingsSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -20,10 +19,11 @@ let defaultValues: SettingDetails = {
   firstName: "-",
   lastName: "-",
   phone: "-",
+  image: "",
 };
 
-function PersonalInfoForm() {
-  const { data } = useSettingsQuery();
+function PersonalInfoForm({ data }: { data: SettingDetails }) {
+  const { mutate: updateSettings } = useUpdateSettingsMutation();
   const {
     register,
     handleSubmit,
@@ -46,8 +46,10 @@ function PersonalInfoForm() {
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const submitUserInfo = async (result: any) => {
+  const submitUserInfo = async (result: SettingsValues) => {
     console.log(result);
+
+    updateSettings({ ...result, image: data.image });
 
     setIsEditing(false);
   };

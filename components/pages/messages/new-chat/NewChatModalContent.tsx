@@ -37,6 +37,7 @@ function NewChatModalContent(props: { closeModal: Function }) {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setUsers(data);
     }
   }, [data]);

@@ -8,6 +8,7 @@ export type SettingDetails = {
   lastName: string;
   email: string;
   phone: string;
+  image: string;
 };
 
 const getSettingDetails = (): Promise<AxiosResponse<SettingDetails>> => {
