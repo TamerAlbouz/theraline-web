@@ -4,17 +4,13 @@ import InfoCard from "../../../components/pages/patient-list/details-body/InfoCa
 import NotesCard from "../../../components/pages/patient-list/details-body/NotesCard";
 import ProfileCard from "../../../components/pages/patient-list/details-body/ProfileCard";
 import PatientListHeader from "../../../components/pages/patient-list/header/Header";
-import { patientDataModel } from "../../../types/patientData";
 import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatientDetailsQuery";
 
-function PatientDetails(props: { patientData: patientDataModel }) {
+function PatientDetails() {
   const router = useRouter();
   const { data, isLoading } = usePatientDetailsQuery(
     router.query.patientId!.toString(),
   );
-
-  const { patientData } = props;
-  const { name } = patientData;
 
   console.log(router.query.patientId);
 

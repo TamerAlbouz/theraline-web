@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { HiOutlineUser } from "react-icons/hi2";
 import { PatientNote } from "../../../../hooks/queries/patient-list/useNotesQuery";
 
 function NotesCard({ note }: { note: PatientNote }) {

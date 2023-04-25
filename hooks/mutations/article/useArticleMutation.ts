@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { accessClient } from "../../../utils/axios/axios";
 
 const createArticle = async ({
@@ -6,7 +6,7 @@ const createArticle = async ({
   content,
 }: {
   title: string;
-  content: string;
+  content: string | null;
 }) => {
   console.log(title, content);
 

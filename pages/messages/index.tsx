@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { HiPlus } from "react-icons/hi";
 import ChatsList from "../../components/pages/messages/chats/ChatsList";
 import AppMessageList from "../../components/pages/messages/messages/MessageList";
 import NewChatModalContent from "../../components/pages/messages/new-chat/NewChatModalContent";
@@ -18,15 +19,14 @@ function MessagesPage() {
   return (
     <>
       <div className="flex w-full flex-col">
-        <button
-          type="button"
-          className="mb-2 w-40 cursor-pointer rounded-md bg-primary px-4 py-2 font-semibold text-white  transition ease-in-out hover:bg-primary-dark"
-          onClick={openModal}>
-          New Chat
-        </button>
-
-        <div className="flex h-[50rem] w-full flex-row">
-          <div className="w-2/5">
+        <div className="flex h-[48rem] w-full flex-row">
+          <div className="relative w-2/5">
+            <button
+              type="button"
+              className="absolute right-5 bottom-5 cursor-pointer rounded-full bg-green-600 p-4 font-semibold text-white transition ease-in-out hover:bg-green-800"
+              onClick={openModal}>
+              <HiPlus className="text-3xl text-white" />
+            </button>
             <ChatsList />
           </div>
 

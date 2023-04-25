@@ -1,19 +1,19 @@
 import { Editor } from "primereact/editor";
-import "../../node_modules/quill/dist/quill.snow.css";
+import "quill/dist/quill.snow.css";
 import { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { useArticleMutation } from "../../hooks/mutations/article/useArticleMutation";
 
 function ArticlePage() {
   const [title, setTitle] = useState<string>("");
-  const [text, setText] = useState<string | null>(
+  const [content, setContent] = useState<string | null>(
     "<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>",
   );
 
   const { mutate: createArticle } = useArticleMutation();
 
   const handleSubmit = () => {
-    createArticle({ title: title, content: text ? text : "" });
+    createArticle({ title, content });
   };
 
   return (
@@ -27,19 +27,18 @@ function ArticlePage() {
         />
         <button
           type="button"
-          disabled={!title || !text}
+          disabled={!title || !content}
           onClick={handleSubmit}
           className="rounded-md bg-green-600 py-3 px-5 text-xl font-medium text-white shadow-sm transition duration-300 ease-in-out hover:bg-primary disabled:bg-gray-400 disabled:text-gray-700">
           Submit
         </button>
       </div>
       <Editor
-        showHeader={true}
         style={{ height: "620px" }}
         className="w-full bg-white text-black"
-        value={text ? text : ""}
+        value={content || ""}
         theme="snow"
-        onTextChange={(e) => setText(e.htmlValue)}
+        onTextChange={(e) => setContent(e.htmlValue)}
       />
     </div>
   );

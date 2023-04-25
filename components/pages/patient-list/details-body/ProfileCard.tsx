@@ -22,7 +22,7 @@ function ProfileCard(props: { data: PatientDetails }) {
 
       <div className="flex flex-row">
         <div className="flex flex-col items-center">
-          <p className="text-xl font-bold text-textColor">{`-`}</p>
+          <p className="text-xl font-bold text-textColor">-</p>
 
           <p className="text-lg text-textColor">Past</p>
         </div>
@@ -30,7 +30,7 @@ function ProfileCard(props: { data: PatientDetails }) {
         <div className="m-2 mx-10 h-8 border-l-2 border-white" />
 
         <div className="flex flex-col items-center">
-          <p className="text-xl font-bold text-textColor">{`-`}</p>
+          <p className="text-xl font-bold text-textColor">-</p>
 
           <p className="text-lg text-textColor">Upcoming</p>
         </div>
