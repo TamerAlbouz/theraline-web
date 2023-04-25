@@ -14,7 +14,7 @@ function TopBar() {
   }
 
   return (
-    <header className="hidden flex-row items-center justify-between border-b-2 border-b-white p-5 md:flex">
+    <header className="hidden w-full flex-row items-center justify-between border-b-2 border-b-white p-5 md:flex">
       <div className="flex flex-row items-center gap-3 text-2xl text-textColor">
         <navigationItem.icon className="text-4xl" />
         <h1 className="font-semibold">{navigationItem.name}</h1>
