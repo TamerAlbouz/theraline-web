@@ -8,9 +8,7 @@ import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatie
 
 function PatientDetails() {
   const router = useRouter();
-  const { data, isLoading } = usePatientDetailsQuery(
-    router.query.patientId ? router.query.patientId.toString() : "",
-  );
+  const { data, isLoading } = usePatientDetailsQuery("");
 
   console.log(router.query.patientId);
 
