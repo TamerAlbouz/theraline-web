@@ -6,9 +6,7 @@ import { useArticleMutation } from "../../hooks/mutations/article/useArticleMuta
 
 function ArticlePage() {
   const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string | null>(
-    "<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>",
-  );
+  const [content, setContent] = useState<string | null>("");
 
   const { mutate: createArticle } = useArticleMutation();
 
@@ -34,6 +32,7 @@ function ArticlePage() {
         </button>
       </div>
       <Editor
+        placeholder="Start writing..."
         style={{ height: "620px" }}
         className="w-full bg-white text-black"
         value={content || ""}
