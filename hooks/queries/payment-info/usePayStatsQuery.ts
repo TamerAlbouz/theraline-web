@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { accessClient } from "../../utils/axios/axios";
+import { accessClient } from "../../../utils/axios/axios";
 
 export const getPayStats = async () => {
   return accessClient.get("/appointment/payment_stats");

@@ -1,8 +1,10 @@
 import { Chart } from "primereact/chart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMPSQuery } from "../../../../hooks/queries/payment-info/useMPSQuery";
 
 function PaymentStatistics() {
-  const [basicData] = useState({
+  const { data } = useMPSQuery();
+  const [basicData, setBasicData] = useState({
     labels: [
       "January",
       "February",
@@ -26,6 +28,32 @@ function PaymentStatistics() {
     ],
   });
 
+  useEffect(() => {
+    setBasicData({
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      datasets: [
+        {
+          label: "Payments",
+          backgroundColor: "#429cfd",
+          data: data ? data : "",
+        },
+      ],
+    });
+  }, [data]);
+
   const basicOptions = {
     maintainAspectRatio: false,
     aspectRatio: 1.25,
@@ -47,7 +75,10 @@ function PaymentStatistics() {
         },
       },
       y: {
+        grace: "5%",
+        min: 0,
         ticks: {
+          stepSize: 1,
           color: "#fff",
         },
         grid: {

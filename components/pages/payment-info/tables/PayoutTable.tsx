@@ -11,7 +11,7 @@ import {
   paymentPatientTemplate,
   paymentStatusTemplate,
 } from "./Templates";
-import { usePaymentQuery } from "../../../../hooks/payment-info/usePaymentQuery";
+import { usePaymentQuery } from "../../../../hooks/queries/payment-info/usePaymentQuery";
 
 const columns = [
   { id: 1, header: "Patient", body: paymentPatientTemplate },

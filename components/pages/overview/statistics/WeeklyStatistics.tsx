@@ -31,15 +31,7 @@ function WeeklyStatistics() {
 
   useEffect(() => {
     setBasicData({
-      labels: [
-        "Saturday",
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thurday",
-        "Friday",
-      ],
+      labels: data?.week.label,
       datasets: [
         {
           label: "Appointments",

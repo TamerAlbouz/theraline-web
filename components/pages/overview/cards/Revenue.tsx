@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePayStatsQuery } from "../../../../hooks/payment-info/usePayStatsQuery";
+import { usePayStatsQuery } from "../../../../hooks/queries/payment-info/usePayStatsQuery";
 import CardWrapper from "../../../card/CardWrapper";
 
 function Revenue() {

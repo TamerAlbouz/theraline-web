@@ -11,6 +11,9 @@ export const basicOptions = {
   scales: {
     x: {
       ticks: {
+        font: {
+          size: 13,
+        },
         color: "#fff",
       },
       grid: {
@@ -18,7 +21,13 @@ export const basicOptions = {
       },
     },
     y: {
+      grace: "5%",
+      min: 0,
       ticks: {
+        font: {
+          size: 13,
+        },
+        stepSize: 1,
         color: "#fff",
       },
       grid: {

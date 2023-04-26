@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { accessClient } from "../../utils/axios/axios";
-import { getPayments } from "../../types/paymentData";
+import { accessClient } from "../../../utils/axios/axios";
+import { getPayments } from "../../../types/paymentData";
 import { AxiosResponse } from "axios";
 
 export const getPayment = (): Promise<AxiosResponse<getPayments>> => {

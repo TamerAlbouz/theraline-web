@@ -36,20 +36,7 @@ function YearlyStatistics() {
 
   useEffect(() => {
     setBasicData({
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ],
+      labels: data?.year.label,
       datasets: [
         {
           label: "Appointments",
