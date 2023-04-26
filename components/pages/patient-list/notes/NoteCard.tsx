@@ -2,7 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { NoteInfo } from "./NoteInfo";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
-import { noteModel } from "../../../../types/note";
 import { PatientNote } from "../../../../hooks/queries/patient-list/useNotesQuery";
 
 export function NoteCard(props: {

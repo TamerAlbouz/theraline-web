@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
 import { useUpdateNoteMutation } from "../../../../hooks/mutations/patient-details/useUpdateNoteMutation";
-import { useRouter } from "next/router";
 
 export function NoteInfo(props: { showTitle: boolean }) {
   const { showTitle } = props;
@@ -15,7 +15,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
 
   useEffect(() => {
     setBody(selectedNote?.body);
-  }, []);
+  }, [selectedNote?.body]);
 
   if (selectedNote === undefined) {
     return (
@@ -53,6 +53,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
                 title: selectedNote.title,
                 body: body!,
                 user_id: router.query.patientId!.toString(),
+                // eslint-disable-next-line no-underscore-dangle
                 noteId: selectedNote._id,
               });
             }

@@ -1,16 +1,15 @@
-import { ChangeEvent, useRef, useState } from "react";
-import { HiPencil } from "react-icons/hi2";
+// import { ChangeEvent, useRef, useState } from "react";
 import { SettingDetails } from "../../../hooks/queries/useSettingsQuery";
 
 function ProfilePicture({ data }: { data: SettingDetails }) {
-  const fileRef = useRef<HTMLInputElement | null>(null);
-  const [fileName, setFileName] = useState("");
+  // const fileRef = useRef<HTMLInputElement | null>(null);
+  // const [fileName, setFileName] = useState("");
 
-  const handleUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFileName(event.target.files![0].name);
+  // const handleUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setFileName(event.target.files![0].name);
 
-    console.log(`File Name: ${fileName}`);
-  };
+  //   console.log(`File Name: ${fileName}`);
+  // };
 
   return (
     <div className="relative m-2">

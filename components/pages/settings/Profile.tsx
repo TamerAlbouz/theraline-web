@@ -1,5 +1,4 @@
 import useSettingsQuery from "../../../hooks/queries/useSettingsQuery";
-import FormWrapper from "./FormWrapper";
 import PersonalInfoForm from "./PersonalInfoForm";
 import ProfilePicture from "./ProfilePicture";
 

@@ -48,6 +48,7 @@ function PaymentStatistics() {
         {
           label: "Payments",
           backgroundColor: "#429cfd",
+          // eslint-disable-next-line no-unneeded-ternary
           data: data ? data : "",
         },
       ],

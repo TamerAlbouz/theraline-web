@@ -1,10 +1,10 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
 import { NoteCard } from "../../../components/pages/patient-list/notes/NoteCard";
 import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo";
 import AddButton from "../../../components/pages/patient-list/notes/AddButton";
 import useNotesQuery from "../../../hooks/queries/patient-list/useNotesQuery";
-import { useRouter } from "next/router";
 import { useAddNoteMutation } from "../../../hooks/mutations/patient-details/useAddNoteMutation";
 
 function NotesPage() {
@@ -14,7 +14,6 @@ function NotesPage() {
   const { mutate: addNote } = useAddNoteMutation(
     router.query.patientId!.toString(),
   );
-
 
   const newTitleRef = useRef<HTMLInputElement>(null);
 
@@ -40,6 +39,7 @@ function NotesPage() {
                 data={element}
                 opensModal={false}
                 isFirstInList={index === 0}
+                // eslint-disable-next-line no-underscore-dangle
                 key={element._id}
               />
             );
@@ -62,6 +62,7 @@ function NotesPage() {
               data={element}
               opensModal
               isFirstInList={index === 0}
+              // eslint-disable-next-line no-underscore-dangle
               key={element._id}
             />
           );
