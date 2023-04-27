@@ -12,6 +12,8 @@ export type PatientDetails = {
   birthday: string;
   doctors: string[];
   notes: PatientNote[];
+  previous: number;
+  next: number;
 };
 
 const getPatientDetails = (

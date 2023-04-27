@@ -12,7 +12,6 @@ export type PatientNote = {
 const getPatientNotes = (
   patientId: string,
 ): Promise<AxiosResponse<PatientNote[]>> => {
-  console.log(`Here ${patientId}`);
   return accessClient.get(`/user/get_notes/${patientId}`);
 };
 

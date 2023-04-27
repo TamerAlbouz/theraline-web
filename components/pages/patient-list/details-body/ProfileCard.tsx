@@ -2,8 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PatientDetails } from "../../../../hooks/queries/patient-list/usePatientDetailsQuery";
 
-function ProfileCard(props: { data: PatientDetails }) {
-  const { data } = props;
+function ProfileCard({ data }: { data: PatientDetails }) {
   const { firstName, lastName, email } = data;
 
   return (
@@ -22,7 +21,7 @@ function ProfileCard(props: { data: PatientDetails }) {
 
       <div className="flex flex-row">
         <div className="flex flex-col items-center">
-          <p className="text-xl font-bold text-textColor">-</p>
+          <p className="text-xl font-bold text-textColor">{data.previous}</p>
 
           <p className="text-lg text-textColor">Past</p>
         </div>
@@ -30,7 +29,7 @@ function ProfileCard(props: { data: PatientDetails }) {
         <div className="m-2 mx-10 h-8 border-l-2 border-white" />
 
         <div className="flex flex-col items-center">
-          <p className="text-xl font-bold text-textColor">-</p>
+          <p className="text-xl font-bold text-textColor">{data.next}</p>
 
           <p className="text-lg text-textColor">Upcoming</p>
         </div>

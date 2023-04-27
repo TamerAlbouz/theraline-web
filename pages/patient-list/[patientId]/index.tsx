@@ -9,10 +9,8 @@ import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatie
 function PatientDetails() {
   const router = useRouter();
   const { data, isLoading } = usePatientDetailsQuery(
-    router.query.patientId!.toString(),
+    router.asPath.split("/")[2] ?? "",
   );
-
-  console.log(router.query.patientId);
 
   if (isLoading || !data) {
     return <div>Loading...</div>;

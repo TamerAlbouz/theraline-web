@@ -10,9 +10,9 @@ import { useAddNoteMutation } from "../../../hooks/mutations/patient-details/use
 function NotesPage() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const { data, isLoading } = useNotesQuery(router.query.patientId!.toString());
+  const { data, isLoading } = useNotesQuery(router.asPath.split("/")[2] ?? "");
   const { mutate: addNote } = useAddNoteMutation(
-    router.query.patientId!.toString(),
+    router.asPath.split("/")[2] ?? "",
   );
 
   const newTitleRef = useRef<HTMLInputElement>(null);
@@ -32,7 +32,7 @@ function NotesPage() {
   return (
     <>
       <div className="hidden h-[40rem] w-full md:flex md:flex-row">
-        <div className="relative mr-4 flex h-full w-2/5 flex-col overflow-y-scroll rounded-lg bg-primary-dark">
+        <div className="relative mr-4 flex h-full w-2/5 flex-col overflow-y-scroll rounded-lg bg-primary-dark scrollbar-hide">
           {data.map((element, index) => {
             return (
               <NoteCard
