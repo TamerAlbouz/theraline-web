@@ -1,4 +1,7 @@
-import { PaymentInfo } from "../hooks/queries/appointments/useAppointmentsQuery";
+import {
+  AppPatient,
+  PaymentInfo,
+} from "../hooks/queries/appointments/useAppointmentsQuery";
 
 export type calendarEventModel = {
   id: string;
@@ -7,4 +10,5 @@ export type calendarEventModel = {
   end: Date;
   status: "CREATED" | "CANCELED" | "DONE" | "CONFIRMED" | undefined | null;
   paymentInfo: PaymentInfo | undefined | null;
+  patient: AppPatient;
 };

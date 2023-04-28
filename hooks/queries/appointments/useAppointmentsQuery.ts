@@ -2,6 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { accessClient } from "../../../utils/axios/axios";
 
+export type AppDoctor = {
+  _id: string;
+  fullName: string;
+  email: string;
+};
+
+export type AppPatient = {
+  _id: string;
+  fullName: string;
+  email: string;
+};
+
 export type PaymentInfo = {
   amount: number;
   status: string;
@@ -12,9 +24,9 @@ export type PaymentInfo = {
 
 export type Appointment = {
   _id: string;
-  patient_id: string;
+  patient: AppPatient;
   title: string;
-  doctor_id: string;
+  doctor: AppDoctor;
   start_date: string;
   end_date: string;
   status: "CREATED" | "CANCELED" | "DONE" | "CONFIRMED";
