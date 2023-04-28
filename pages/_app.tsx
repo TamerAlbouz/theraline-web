@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import useAuthStore from "../hooks/stores/useAuthStore";
 import Layout from "../components/Layout/Layout";
 
@@ -16,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  console.log(`Is Authenticated? ${isAuthenticated ? "Yes" : "No"}`);
+  // console.log(`Is Authenticated? ${isAuthenticated ? "Yes" : "No"}`);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -36,7 +35,7 @@ function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
     </QueryClientProvider>
   );
 }

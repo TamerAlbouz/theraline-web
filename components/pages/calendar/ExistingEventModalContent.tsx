@@ -140,14 +140,12 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
           </div>
         )}
 
-        {
-          <div className="mt-4 flex flex-row">
-            <span className="mr-8">Patient:</span>
+        <div className="mt-4 flex flex-row">
+          <span className="mr-8">Patient:</span>
 
-            <span className="font-bold">{`${selectedEvent?.patient.fullName}`}</span>
-            <span>{`, ${selectedEvent?.patient.email}`}</span>
-          </div>
-        }
+          <span className="font-bold">{selectedEvent?.patient.fullName}</span>
+          <span>{`, ${selectedEvent?.patient.email}`}</span>
+        </div>
 
         {(selectedEvent?.status === "CONFIRMED" ||
           selectedEvent?.status === "DONE") && (

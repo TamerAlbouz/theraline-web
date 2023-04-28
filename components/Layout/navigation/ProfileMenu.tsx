@@ -5,7 +5,7 @@ function ProfileMenu() {
   const { data, isLoading } = useSettingsQuery();
 
   if (isLoading || !data) {
-    return <div></div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -20,7 +20,7 @@ function ProfileMenu() {
 
       <div className="hidden md:block">
         <h2 className="text-xl font-semibold text-textColor">
-          {data.firstName + " " + data.lastName}
+          {`${data.firstName} ${data.lastName}`}
         </h2>
         <p className="text-secondary">Therapist</p>
       </div>

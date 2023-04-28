@@ -1,6 +1,6 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-import { HiPaperAirplane, HiPaperClip } from "react-icons/hi2";
+import { HiPaperAirplane } from "react-icons/hi2";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 import { useSendMessageMutation } from "../../../../hooks/mutations/chats/useSendMessageMutation";
 
@@ -10,10 +10,8 @@ function MessageTextInput() {
     // eslint-disable-next-line no-underscore-dangle
     chatId: selectedChat?._id,
   });
-  const fileRef = useRef<HTMLInputElement | null>(null);
 
   const [input, setInput] = useState("");
-  const [fileName, setFileName] = useState("");
 
   const submitMessage = () => {
     sendMessage({
@@ -24,10 +22,6 @@ function MessageTextInput() {
 
     setInput("");
   };
-
-  useEffect(() => {
-    setFileName("");
-  }, [selectedChat]);
 
   const handleKeyDown = (event: any) => {
     if (event.key !== "Enter") {
@@ -52,18 +46,9 @@ function MessageTextInput() {
     submitMessage();
   };
 
-  const handleUploadChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFileName(event.target.files![0].name);
-    console.log(`File Name: ${event.target.files![0].name}`);
-  };
-
   return (
     <div className="flex flex-row ">
       <div className="flex w-full flex-col">
-        {fileName !== "" && (
-          <span className="text-sm">{fileName} uploaded</span>
-        )}
-
         <textarea
           value={input}
           placeholder="Type here (Ctrl + Enter for a new line)"
@@ -74,13 +59,6 @@ function MessageTextInput() {
       </div>
 
       <div className="my-4 ml-4 flex flex-col justify-end py-1">
-        <input type="file" hidden ref={fileRef} onChange={handleUploadChange} />
-
-        <HiPaperClip
-          onClick={() => fileRef.current!.click()}
-          className="mb-3 h-7 w-7 cursor-pointer text-gray-100 hover:text-tertiary"
-        />
-
         <HiPaperAirplane
           onClick={submitMessage}
           className="h-7 w-7 cursor-pointer text-gray-100 hover:text-tertiary"
