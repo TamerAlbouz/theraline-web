@@ -12,6 +12,10 @@ function ArticlePage() {
 
   const handleSubmit = () => {
     createArticle({ title, content });
+    setTitle("");
+    setContent("");
+
+    alert("Article Posted successfully");
   };
 
   return (
