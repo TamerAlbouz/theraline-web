@@ -65,7 +65,7 @@ function MonthlyStatistics() {
         {
           label: "Cancelled",
           backgroundColor: "#f66d83",
-          data: data?.month.canceled,
+          data: data?.month.cancelled,
         },
       ],
     });

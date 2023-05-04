@@ -46,7 +46,7 @@ function YearlyStatistics() {
         {
           label: "Cancelled",
           backgroundColor: "#f66d83",
-          data: data?.year.canceled,
+          data: data?.year.cancelled,
         },
       ],
     });
