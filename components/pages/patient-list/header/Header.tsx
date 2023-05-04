@@ -18,35 +18,6 @@ function PatientListHeader(props: { patientName: string | undefined | null }) {
           <PatientName patientName={patientName} />
         </div>
       )}
-      <div className="ml-6 mt-4 flex flex-wrap last:mr-2 lg:mt-0">
-        <HeaderButton
-          label={null}
-          Icon={HiPrinter}
-          handleClick={() => {
-            console.log("printer");
-          }}
-        />
-
-        {!patientName && (
-          <>
-            <HeaderButton
-              label="Filter"
-              Icon={HiPencil}
-              handleClick={() => {
-                console.log("filter");
-              }}
-            />
-
-            <HeaderButton
-              label="Edit Columns"
-              Icon={HiOutlineViewColumns}
-              handleClick={() => {
-                console.log("edit");
-              }}
-            />
-          </>
-        )}
-      </div>
     </div>
   );
 }
