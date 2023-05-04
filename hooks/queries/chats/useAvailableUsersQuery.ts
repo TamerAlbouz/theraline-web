@@ -17,7 +17,7 @@ const useAvailableUsersQuery = () => {
   return useQuery({
     queryKey: ["available-users"],
     select: (data: any) => {
-      return data.data.users;
+      return data.data;
     },
     queryFn: getAvailableUsers,
   });

@@ -75,6 +75,7 @@ function AppCalendar() {
             end: result.event.end!,
             status: result.event.extendedProps.status,
             paymentInfo: result.event.extendedProps.paymentInfo,
+            patient: result.event.extendedProps.patient,
           });
 
           openModal();
@@ -114,6 +115,7 @@ function AppCalendar() {
             extendedProps: {
               status: element.status,
               paymentInfo: element.paymentInfo,
+              patient: element.patient,
             },
             className: appointmentClass,
           };

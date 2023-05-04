@@ -1,27 +1,29 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { SettingDetails } from "../../../hooks/queries/useSettingsQuery";
+import { useUpdateSettingsMutation } from "../../../hooks/mutations/useUpdateSettingsInfo";
 
 const settingsSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
-  displayName: z.string(),
-  fullName: z.string(),
-  description: z.string(),
-  phoneNumber: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  phone: z.string(),
 });
 
 type SettingsValues = z.infer<typeof settingsSchema>;
 
-const defaultValues = {
-  email: "tim.cook@gmail.com",
-  displayName: "Tim",
-  fullName: "Tim Cook",
-  description: "Licensed therapist operating in the DC area",
-  phoneNumber: "78655417",
+let defaultValues: SettingDetails = {
+  email: "-",
+  firstName: "-",
+  lastName: "-",
+  phone: "-",
+  image: "",
 };
 
-function PersonalInfoForm() {
+function PersonalInfoForm({ data }: { data: SettingDetails }) {
+  const { mutate: updateSettings } = useUpdateSettingsMutation();
   const {
     register,
     handleSubmit,
@@ -32,10 +34,22 @@ function PersonalInfoForm() {
     defaultValues,
   });
 
+  useEffect(() => {
+    if (data) {
+      defaultValues = data;
+      setValue("email", data.email, { shouldDirty: false });
+      setValue("firstName", data.firstName, { shouldDirty: false });
+      setValue("lastName", data.lastName, { shouldDirty: false });
+      setValue("phone", data.phone, { shouldDirty: false });
+    }
+  }, [data, setValue]);
+
   const [isEditing, setIsEditing] = useState(false);
 
-  const submitUserInfo = async (data: any) => {
-    console.log(data);
+  const submitUserInfo = async (result: SettingsValues) => {
+    console.log(result);
+
+    updateSettings({ ...result, image: data.image });
 
     setIsEditing(false);
   };
@@ -45,10 +59,9 @@ function PersonalInfoForm() {
 
     if (isEditing) {
       setValue("email", defaultValues.email, { shouldDirty: true });
-      setValue("displayName", defaultValues.displayName, { shouldDirty: true });
-      setValue("fullName", defaultValues.fullName, { shouldDirty: true });
-      setValue("description", defaultValues.description, { shouldDirty: true });
-      setValue("phoneNumber", defaultValues.phoneNumber, { shouldDirty: true });
+      setValue("firstName", defaultValues.firstName, { shouldDirty: true });
+      setValue("lastName", defaultValues.lastName, { shouldDirty: true });
+      setValue("phone", defaultValues.phone, { shouldDirty: true });
     }
 
     setIsEditing((value) => !value);
@@ -58,6 +71,54 @@ function PersonalInfoForm() {
     <form onSubmit={handleSubmit(submitUserInfo)}>
       <div className="flex w-full flex-col lg:flex-row lg:justify-between">
         <div className="lg:mr-10">
+          <div className="mb-4 flex w-full flex-row">
+            <div className="mr-4">
+              <label
+                htmlFor="settings-firstName"
+                className="text-md mb-2 block font-bold">
+                First Name
+                <input
+                  {...register("firstName", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  })}
+                  readOnly={!isEditing}
+                  id="settings-firstName"
+                  type="text"
+                  className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+                />
+              </label>
+              <span className="text-xs text-red-500">
+                {errors.firstName?.message}
+              </span>
+            </div>
+
+            <div>
+              <label
+                htmlFor="settings-lastName"
+                className="text-md mb-2 block font-bold">
+                Last Name
+                <input
+                  {...register("lastName", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  })}
+                  readOnly={!isEditing}
+                  id="settings-lastName"
+                  type="text"
+                  className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+                />
+              </label>
+              <span className="text-xs text-red-500">
+                {errors.lastName?.message}
+              </span>
+            </div>
+          </div>
+
           <div className="mb-4">
             <label
               htmlFor="settings-email"
@@ -67,7 +128,7 @@ function PersonalInfoForm() {
                 {...register("email", {
                   required: { value: true, message: "This field is required" },
                 })}
-                readOnly={!isEditing}
+                readOnly
                 id="settings-email"
                 type="text"
                 placeholder="Email"
@@ -79,94 +140,38 @@ function PersonalInfoForm() {
             </span>
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="settings-fullName"
-              className="text-md mb-2 block font-bold">
-              Full Name
-              <input
-                {...register("fullName", {
-                  required: { value: true, message: "This field is required" },
-                })}
-                readOnly={!isEditing}
-                id="settings-fullName"
-                type="text"
-                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-              />
-            </label>
-            <span className="text-xs text-red-500">
-              {errors.fullName?.message}
-            </span>
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="settings-displayName"
-              className="text-md mb-2 block font-bold">
-              Display Name
-              <input
-                {...register("displayName", {
-                  required: { value: true, message: "This field is required" },
-                })}
-                readOnly={!isEditing}
-                id="settings-displayName"
-                type="text"
-                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-              />
-            </label>
-            <span className="text-xs text-red-500">
-              {errors.displayName?.message}
-            </span>
-          </div>
-        </div>
-
-        <div>
-          <div className="mb-4 w-full">
-            <label
-              htmlFor="settings-phoneNumber"
-              className="text-md mb-2 block font-bold">
-              Phone Number
-              <input
-                {...register("phoneNumber", {
-                  required: { value: true, message: "This field is required" },
-                })}
-                readOnly={!isEditing}
-                id="settings-phoneNumber"
-                type="text"
-                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-              />
-            </label>
-            <span className="text-xs text-red-500">
-              {errors.phoneNumber?.message}
-            </span>
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="settings-description"
-              className="text-md mb-2 block font-bold">
-              Description / Bio
-              <textarea
-                {...register("description", {
-                  required: { value: true, message: "This field is required" },
-                })}
-                readOnly={!isEditing}
-                id="settings-description"
-                className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
-              />
-            </label>
-            <span className="text-xs text-red-500">
-              {errors.description?.message}
-            </span>
+          <div>
+            <div className="mb-4 w-full">
+              <label
+                htmlFor="settings-phone"
+                className="text-md mb-2 block font-bold">
+                Phone Number
+                <input
+                  {...register("phone", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  })}
+                  readOnly={!isEditing}
+                  id="settings-phone"
+                  type="text"
+                  className="focus:shadow-outline block w-full appearance-none rounded-md border py-2 px-3 leading-tight text-primary-dark shadow focus:outline-none"
+                />
+              </label>
+              <span className="text-xs text-red-500">
+                {errors.phone?.message}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 flex justify-between">
+      <div className="mt-8">
         <button
           type="button"
           onClick={triggerEdit}
-          className="focus:shadow-outline cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none">
+          className="focus:shadow-outline mr-8 cursor-pointer rounded-lg bg-white py-2 px-4 font-bold text-primary hover:bg-gray-100 focus:outline-none">
           {isEditing ? "Cancel" : "Edit"}
         </button>
 
@@ -174,7 +179,7 @@ function PersonalInfoForm() {
           <input
             type="submit"
             value="Save"
-            className="focus:shadow-outline cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
+            className="focus:shadow-outline cursor-pointer rounded-lg bg-tertiary py-2 px-4 font-bold text-primary hover:text-primary-dark focus:outline-none"
           />
         )}
       </div>

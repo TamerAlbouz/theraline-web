@@ -45,11 +45,12 @@ export const useMessagesQuery = (chatId: string | undefined) => {
         }
 
         if (pages.length < pages[0].data.totalPages) {
-          return pages.length + 1;
+          return pages.length;
         }
 
         return undefined;
       },
+
       refetchInterval: 1000,
       refetchOnMount: false,
       refetchOnWindowFocus: false,

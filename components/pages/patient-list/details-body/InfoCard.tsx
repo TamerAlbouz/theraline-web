@@ -1,30 +1,17 @@
-import { patientDataModel } from "../../../../types/patientData";
+import { format } from "date-fns";
+import { PatientDetails } from "../../../../hooks/queries/patient-list/usePatientDetailsQuery";
 
-function InfoCard(props: { data: patientDataModel }) {
+function InfoCard(props: { data: PatientDetails }) {
   const { data } = props;
-  const {
-    gender,
-    birthday,
-    phoneNumber,
-    street,
-    city,
-    zipCode,
-    memberStatus,
-    registerDate,
-  } = data;
+  const { gender, birthday } = data;
+
   const infoItems: Array<{ label: string; value: string }> = [
     { label: "Gender", value: gender },
-    { label: "Birthday", value: birthday },
-    { label: "Phone Number", value: phoneNumber },
-    { label: "Street Address", value: street },
-    { label: "City", value: city },
-    { label: "Zip Code", value: zipCode },
-    { label: "Member Status", value: memberStatus },
-    { label: "Registered Date", value: registerDate },
+    { label: "Birthday", value: format(new Date(birthday), "PPP") },
   ];
 
   return (
-    <div className="grid grid-cols-3 rounded-lg bg-primary-dark px-6 py-10">
+    <div className="grid grid-cols-2 rounded-lg bg-primary-dark px-6 py-10">
       {infoItems.map((e) => {
         return (
           <div

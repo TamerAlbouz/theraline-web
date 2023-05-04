@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { format } from "date-fns";
 import { HiCheck, HiChevronUpDown } from "react-icons/hi2";
@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCancelAppointmentMutation } from "../../../hooks/mutations/appointments/useCancelAppointmentMutation";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import { useCompleteAppointmentMutation } from "../../../hooks/mutations/appointments/useCompleteAppointmentMutation";
+import { useUpdateAppointmentMutation } from "../../../hooks/mutations/appointments/useUpdateAppointmentMutation";
 
 const paymentInfoSchema = z.object({
   amount: z.string(),
@@ -49,6 +50,7 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
   const { selectedEvent } = useCalendarStore();
   const { mutate: cancelAppointment } = useCancelAppointmentMutation();
   const { mutate: completeAppointment } = useCompleteAppointmentMutation();
+  const { mutate: updateAppointment } = useUpdateAppointmentMutation();
   const { closeModalCallback } = props;
 
   const {
@@ -59,23 +61,51 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
     resolver: zodResolver(paymentInfoSchema),
   });
 
+  useEffect(() => {
+    if (selectedEvent?.paymentInfo) {
+      if (selectedEvent.paymentInfo.method === "CREDIT CARD") {
+        setSelectedOption(paymentOptions[0]);
+      } else if (selectedEvent.paymentInfo.method === "CASH") {
+        setSelectedOption(paymentOptions[1]);
+      } else {
+        setSelectedOption(paymentOptions[2]);
+      }
+
+      if (selectedEvent.paymentInfo.status === "AWAITING") {
+        setSelectedStatus(paymentStatus[1]);
+      } else if (selectedEvent.paymentInfo.status === "PAID") {
+        setSelectedStatus(paymentStatus[2]);
+      } else {
+        setSelectedStatus(paymentStatus[0]);
+      }
+    }
+  }, [selectedEvent?.paymentInfo]);
+
   const submitPaymentInfo = (data: PaymentInfoValues) => {
     console.log(data);
 
-    if (selectedEvent?.status === "DONE") {
+    if (
+      selectedEvent?.status === "DONE" &&
+      selectedEvent.status.toString() !== selectedStatus.value.toString()
+    ) {
       console.log("UPDATE HERE");
+      updateAppointment({
+        appointmentId: selectedEvent!.id,
+        // eslint-disable-next-line radix
+        amount: parseInt(data.amount),
+        status: selectedStatus.value,
+      });
+    } else {
+      completeAppointment({
+        appointmentId: selectedEvent!.id,
+        // eslint-disable-next-line radix
+        amount: parseInt(data.amount),
+        method: selectedOption.value,
+        status: selectedStatus.value,
+      });
 
-      return;
+      closeModalCallback();
     }
-
-    completeAppointment({
-      appointmentId: selectedEvent!.id,
-      // eslint-disable-next-line radix
-      amount: parseInt(data.amount),
-      method: selectedOption.title,
-    });
-
-    closeModalCallback();
   };
 
   return (
@@ -109,6 +139,13 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
             </span>
           </div>
         )}
+
+        <div className="mt-4 flex flex-row">
+          <span className="mr-8">Patient:</span>
+
+          <span className="font-bold">{selectedEvent?.patient.fullName}</span>
+          <span>{`, ${selectedEvent?.patient.email}`}</span>
+        </div>
 
         {(selectedEvent?.status === "CONFIRMED" ||
           selectedEvent?.status === "DONE") && (

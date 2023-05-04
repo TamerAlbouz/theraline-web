@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Column } from "primereact/column";
 import { DataTable, DataTableRowClickEventParams } from "primereact/datatable";
 import { FilterMatchMode } from "primereact/api";
@@ -10,7 +9,7 @@ import {
   lastAppointmentTemplate,
   paginatorTemplate,
 } from "./PatientCardTemplates";
-import { createPatients } from "../../../../utils/components/patient-utils";
+import usePatientListQuery from "../../../../hooks/queries/patient-list/usePatientListQuery";
 
 const filters = {
   name: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -38,15 +37,8 @@ const columns = [
   },
 ];
 
-const randomPatientList = createPatients(50);
-
 function PatientList() {
-  const [patients, setPatients] = useState([{}]);
-
-  useEffect(() => {
-    setPatients(randomPatientList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [randomPatientList]);
+  const { data } = usePatientListQuery();
 
   const router = useRouter();
 
@@ -56,13 +48,14 @@ function PatientList() {
 
   return (
     <DataTable
-      value={patients}
+      value={data}
       paginator
       paginatorTemplate={paginatorTemplate}
       paginatorClassName="py-2"
-      rows={7}
+      rows={20}
       onRowClick={(rowData: DataTableRowClickEventParams) => {
-        navigateToPatient(rowData.data.patientId);
+        // eslint-disable-next-line no-underscore-dangle
+        navigateToPatient(rowData.data._id);
       }}
       responsiveLayout="scroll"
       autoLayout

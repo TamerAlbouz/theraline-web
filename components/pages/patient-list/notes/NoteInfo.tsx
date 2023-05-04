@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
+import { useUpdateNoteMutation } from "../../../../hooks/mutations/patient-details/useUpdateNoteMutation";
 
 export function NoteInfo(props: { showTitle: boolean }) {
   const { showTitle } = props;
   const { selectedNote } = useNotesStore();
+  const router = useRouter();
+  const { mutate: updateNote } = useUpdateNoteMutation(
+    router.query.patientId!.toString(),
+  );
 
   const [body, setBody] = useState<string | undefined>("");
 
@@ -32,6 +38,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
         value={body}
         onChange={(event) => {
           setBody(event.target.value);
+          console.log(body);
         }}
       />
 
@@ -41,6 +48,15 @@ export function NoteInfo(props: { showTitle: boolean }) {
           value="Save"
           onClick={() => {
             console.log(body);
+            if (body) {
+              updateNote({
+                title: selectedNote.title,
+                body: body!,
+                user_id: router.query.patientId!.toString(),
+                // eslint-disable-next-line no-underscore-dangle
+                noteId: selectedNote._id,
+              });
+            }
           }}
           className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-textColor hover:bg-primary"
         />

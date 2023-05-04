@@ -1,28 +1,21 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
 import { NoteCard } from "../../../components/pages/patient-list/notes/NoteCard";
 import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo";
-import { noteModel } from "../../../types/note";
-import { useNotesStore } from "../../../hooks/stores/useNotesStore";
 import AddButton from "../../../components/pages/patient-list/notes/AddButton";
-
-const dummyData: Array<noteModel> = [
-  { id: "1", title: "Title 1", body: "lorem ipsum 1" },
-  { id: "2", title: "Title 2", body: "lorem ipsum 2" },
-  { id: "3", title: "Title 3", body: "lorem ipsum 3" },
-];
+import useNotesQuery from "../../../hooks/queries/patient-list/useNotesQuery";
+import { useAddNoteMutation } from "../../../hooks/mutations/patient-details/useAddNoteMutation";
 
 function NotesPage() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const { notes, setNotes, addNewNote, setSelectedNote } = useNotesStore();
+  const router = useRouter();
+  const { data, isLoading } = useNotesQuery(router.asPath.split("/")[2] ?? "");
+  const { mutate: addNote } = useAddNoteMutation(
+    router.asPath.split("/")[2] ?? "",
+  );
 
   const newTitleRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setNotes(dummyData);
-    setSelectedNote(notes.at(0));
-  }, [notes, setNotes, setSelectedNote]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -32,17 +25,22 @@ function NotesPage() {
     setIsOpen(false);
   };
 
+  if (isLoading || !data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="hidden h-[40rem] w-full md:flex md:flex-row">
-        <div className="relative mr-4 flex h-full w-2/5 flex-col overflow-y-scroll rounded-lg bg-primary-dark">
-          {notes.map((element, index) => {
+        <div className="relative mr-4 flex h-full w-2/5 flex-col overflow-y-scroll rounded-lg bg-primary-dark scrollbar-hide">
+          {data.map((element, index) => {
             return (
               <NoteCard
                 data={element}
                 opensModal={false}
                 isFirstInList={index === 0}
-                key={element.id}
+                // eslint-disable-next-line no-underscore-dangle
+                key={element._id}
               />
             );
           })}
@@ -58,13 +56,14 @@ function NotesPage() {
       </div>
 
       <div className="relative flex h-[32rem] w-full flex-col rounded-lg bg-primary-dark md:hidden">
-        {notes.map((element, index) => {
+        {data.map((element, index) => {
           return (
             <NoteCard
               data={element}
               opensModal
               isFirstInList={index === 0}
-              key={element.id}
+              // eslint-disable-next-line no-underscore-dangle
+              key={element._id}
             />
           );
         })}
@@ -120,10 +119,10 @@ function NotesPage() {
                           return;
                         }
 
-                        addNewNote({
-                          id: "aspas",
+                        addNote({
                           title: newTitleRef.current!.value,
                           body: "",
+                          user_id: router.query.patientId!.toString(),
                         });
 
                         closeModal();

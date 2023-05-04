@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { HiOutlineUser } from "react-icons/hi2";
+import { PatientNote } from "../../../../hooks/queries/patient-list/useNotesQuery";
 
-function NotesCard() {
+function NotesCard({ note }: { note: PatientNote }) {
   const router = useRouter();
 
   const { patientId } = router.query;
@@ -18,11 +18,7 @@ function NotesCard() {
       </div>
 
       <div className="my-4 flex flex-col rounded-md bg-primary p-4">
-        <p className="text-textColor">
-          This patient is bla and bla, but also very blabla. Lorem ipsum dolor
-          sit, amet consectetur adipisicing elit. Eos enim autem iusto,
-          perferendis iste sapiente tempora voluptatibus expedita neque vero.
-        </p>
+        <p className="text-textColor">{note.body}</p>
 
         <div className="mt-4 flex flex-row justify-end">
           <div className="text-md bottom-3 right-3 rounded-md bg-white px-4 py-2 text-primary">
@@ -31,9 +27,9 @@ function NotesCard() {
         </div>
       </div>
 
-      <p className="text-md my-2 text-textColor">Lorem ipsum dolor sit amet.</p>
+      <p className="text-md my-2 text-textColor">{note.title}</p>
 
-      <div className="flex flex-row justify-between">
+      {/* <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
           <HiOutlineUser className="mr-2 h-4 w-4 text-tertiary" />
 
@@ -41,7 +37,7 @@ function NotesCard() {
         </div>
 
         <p className="text-textColor">31 Jan 2023</p>
-      </div>
+      </div> */}
     </div>
   );
 }

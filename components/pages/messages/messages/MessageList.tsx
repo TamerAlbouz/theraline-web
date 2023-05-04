@@ -4,15 +4,18 @@ import MessageItem from "./MessageItem";
 import MessageTextInput from "./MessageTextInput";
 import { useMessageStore } from "../../../../hooks/stores/useMessageStore";
 // eslint-disable-next-line prettier/prettier
-import { Message, useMessagesQuery } from "../../../../hooks/queries/chats/useMessagesQuery";
+import {
+  Message,
+  useMessagesQuery,
+} from "../../../../hooks/queries/chats/useMessagesQuery";
 
-function sameDay(d1: Date, d2: Date) {
-  return (
-    d1.getFullYear() === d2.getFullYear() &&
-    d1.getMonth() === d2.getMonth() &&
-    d1.getDate() === d2.getDate()
-  );
-}
+// function sameDay(d1: Date, d2: Date) {
+//   return (
+//     d1.getUTCFullYear() === d2.getUTCFullYear() &&
+//     d1.getMonth() === d2.getMonth() &&
+//     d1.getDate() === d2.getDate()
+//   );
+// }
 
 function AppMessageList() {
   const { selectedChat } = useMessageStore();
@@ -23,10 +26,12 @@ function AppMessageList() {
   );
 
   useEffect(() => {
-    animateScroll.scrollToBottom({
-      containerId: "message-list",
-    });
-  }, [data]);
+    if (!isLoading) {
+      animateScroll.scrollToBottom({
+        containerId: "message-list",
+      });
+    }
+  }, [isLoading]);
 
   if (selectedChat === undefined) {
     return (
@@ -63,7 +68,6 @@ function AppMessageList() {
     let isFirst = false;
     let isLast = false;
     let isOnly = false;
-    let showTime = false;
 
     if (i === 0) {
       isFirst = true;
@@ -76,7 +80,7 @@ function AppMessageList() {
       }
     } else if (i === messages.length - 1) {
       isLast = true;
-      showTime = true;
+      // showTime = true;
     } else {
       if (
         messages[i].sentByMe !== messages[i - 1].sentByMe &&
@@ -94,17 +98,20 @@ function AppMessageList() {
         messages[i].sentByMe !== messages[i + 1].sentByMe
       ) {
         isLast = true;
-        showTime = true;
       }
 
-      if (
-        !sameDay(
-          new Date(messages[i - 1].send_at),
-          new Date(messages[i].send_at),
-        )
-      ) {
-        showTime = true;
-      }
+      // if (
+      //   !sameDay(
+      //     new Date(messages[i - 1].send_at),
+      //     new Date(messages[i].send_at),
+      //   ) ||
+      //   !sameDay(
+      //     new Date(messages[i + 1].send_at),
+      //     new Date(messages[i].send_at),
+      //   )
+      // ) {
+      //   showTime = true;
+      // }
     }
 
     messageItems.push(
@@ -113,7 +120,7 @@ function AppMessageList() {
         isFirst={isFirst}
         isLast={isLast}
         isOnly={isOnly}
-        showTime={showTime}
+        showTime
         key={i}
       />,
     );
