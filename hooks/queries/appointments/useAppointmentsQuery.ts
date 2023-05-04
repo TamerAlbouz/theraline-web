@@ -17,7 +17,7 @@ export type Appointment = {
   doctor_id: string;
   start_date: string;
   end_date: string;
-  status: "CREATED" | "CANCELED" | "DONE" | "CONFIRMED";
+  status: "CREATED" | "CANCELLED" | "DONE" | "CONFIRMED";
   paymentInfo: PaymentInfo | undefined | null;
   __v: 0;
 };

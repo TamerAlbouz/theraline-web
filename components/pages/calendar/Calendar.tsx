@@ -9,7 +9,9 @@ import NewEventModalContent from "./NewEventModalContent";
 import ExistingEventModalContent from "./ExistingEventModalContent";
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 // eslint-disable-next-line prettier/prettier
-import useAppointmentsQuery, { Appointment } from "../../../hooks/queries/appointments/useAppointmentsQuery";
+import useAppointmentsQuery, {
+  Appointment,
+} from "../../../hooks/queries/appointments/useAppointmentsQuery";
 
 function AppCalendar() {
   const calendarRef = useRef<FullCalendar>(null);
@@ -89,7 +91,7 @@ function AppCalendar() {
           let appointmentClass;
 
           switch (element.status.toString()) {
-            case "CANCELED":
+            case "CANCELLED":
               appointmentClass = "bg-red-400";
               break;
             case "CONFIRMED":
