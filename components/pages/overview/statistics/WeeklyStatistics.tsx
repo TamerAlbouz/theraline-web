@@ -41,7 +41,7 @@ function WeeklyStatistics() {
         {
           label: "Cancelled",
           backgroundColor: "#f66d83",
-          data: data?.week.canceled,
+          data: data?.week.cancelled,
         },
       ],
     });
