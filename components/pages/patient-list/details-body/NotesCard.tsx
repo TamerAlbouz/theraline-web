@@ -17,6 +17,8 @@ function NotesCard({ note }: { note: PatientNote }) {
         </div>
       </div>
 
+      <p className="my-2 text-lg text-textColor">Title: {note.title}</p>
+
       <div className="my-4 flex flex-col rounded-md bg-primary p-4">
         <p className="text-textColor">{note.body}</p>
 
@@ -26,8 +28,6 @@ function NotesCard({ note }: { note: PatientNote }) {
           </div>
         </div>
       </div>
-
-      <p className="text-md my-2 text-textColor">{note.title}</p>
 
       {/* <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
