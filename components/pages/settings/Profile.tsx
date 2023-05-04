@@ -10,19 +10,13 @@ function Profile() {
   }
   return (
     <div className="flex w-full flex-col">
-      <div className="flex flex-col items-start justify-start lg:flex-row lg:items-center">
-        <ProfilePicture data={data} />
-
-        <span className="ml-6 text-xl">
-          This is the place to manage all things personal and website related{" "}
-        </span>
-      </div>
+      <div className="flex flex-col items-start justify-start lg:flex-row lg:items-center"></div>
 
       <div className="flex w-full flex-col lg:flex-row">
         <div className="my-4 mr-0 w-full lg:mr-4">
           <div className="w-full rounded-lg bg-primary p-5 text-lg font-medium text-textColor">
-            <div className="flex flex-row items-start">
-              <div className="flex flex-col">
+            <div className="flex w-full flex-row items-center justify-between">
+              <div className="flex w-full flex-col">
                 <span className="mt-2 mb-4 text-2xl font-bold">
                   Personal Info
                 </span>
@@ -30,8 +24,10 @@ function Profile() {
                 <span className="text-md mb-6">
                   This section contails all your personal info
                 </span>
-
-                <PersonalInfoForm data={data} />
+                <div className="flex flex-row items-center justify-between pr-40">
+                  <PersonalInfoForm data={data} />
+                  <ProfilePicture data={data} />
+                </div>
               </div>
             </div>
           </div>

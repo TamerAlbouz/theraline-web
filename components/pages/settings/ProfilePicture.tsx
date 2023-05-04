@@ -12,8 +12,8 @@ function ProfilePicture({ data }: { data: SettingDetails }) {
   // };
 
   return (
-    <div className="relative m-2">
-      <img className="h-20 w-20 rounded-full " src={data.image} alt="" />
+    <div className="relative m-2 mb-20">
+      <img className="h-80 w-80 rounded-full " src={data.image} alt="" />
 
       {/* <div className="absolute -bottom-1 -right-1 cursor-pointer rounded-full bg-gray-100 p-2 hover:bg-gray-200">
         <input type="file" hidden ref={fileRef} onChange={handleUploadChange} />

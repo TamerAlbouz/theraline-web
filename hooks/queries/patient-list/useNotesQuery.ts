@@ -7,6 +7,7 @@ export type PatientNote = {
   title: string;
   body: string;
   author?: string;
+  created_at?: Date;
 };
 
 const getPatientNotes = (

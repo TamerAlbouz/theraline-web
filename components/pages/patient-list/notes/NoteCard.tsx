@@ -10,7 +10,7 @@ export function NoteCard(props: {
   isFirstInList: boolean;
 }) {
   const { data, opensModal, isFirstInList } = props;
-  const { title } = data;
+  const { title, created_at } = data;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,17 @@ export function NoteCard(props: {
             : "bg-primary-dark"
         } ${isFirstInList ? "rounded-t-lg" : ""}`}
         onClick={selectNote}>
-        <div className="text-lg font-bold text-textColor">{title}</div>
+        <div className="flex items-center justify-between px-2">
+          <p className="text-lg font-bold text-textColor">{title}</p>
+          <div className="flex flex-col items-end justify-end">
+            <p className="text-lg font-medium text-textColor">
+              {created_at?.toString().split("T")[0]}
+            </p>
+            <p className="text-lg font-medium text-textColor">
+              {created_at?.toString().split("T")[1].split(".")[0]}
+            </p>
+          </div>
+        </div>
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
