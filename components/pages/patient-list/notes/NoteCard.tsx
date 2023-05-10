@@ -10,6 +10,7 @@ export function NoteCard(props: {
   isFirstInList: boolean;
 }) {
   const { data, opensModal, isFirstInList } = props;
+  // eslint-disable-next-line naming-convention
   const { title, created_at } = data;
 
   const [isOpen, setIsOpen] = useState(false);

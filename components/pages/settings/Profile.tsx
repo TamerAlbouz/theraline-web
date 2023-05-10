@@ -10,8 +10,6 @@ function Profile() {
   }
   return (
     <div className="flex w-full flex-col">
-      <div className="flex flex-col items-start justify-start lg:flex-row lg:items-center"></div>
-
       <div className="flex w-full flex-col lg:flex-row">
         <div className="my-4 mr-0 w-full lg:mr-4">
           <div className="w-full rounded-lg bg-primary p-5 text-lg font-medium text-textColor">

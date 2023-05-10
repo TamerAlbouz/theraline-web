@@ -1,7 +1,4 @@
-import { HiOutlineViewColumns, HiPencil, HiPrinter } from "react-icons/hi2";
-
 import PatientCount from "./PatientCount";
-import HeaderButton from "./HeaderButton";
 import PatientName from "./PatientName";
 
 function PatientListHeader(props: { patientName: string | undefined | null }) {

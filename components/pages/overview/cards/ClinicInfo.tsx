@@ -1,8 +1,8 @@
 import { BsFillTelephoneFill, BsPaperclip } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
+import Link from "next/link";
 import CardWrapper from "../../../card/CardWrapper";
 import { useClinicQuery } from "../../../../hooks/queries/overview/useClinicQuery";
-import Link from "next/link";
 
 function ClinicInfo() {
   const { data } = useClinicQuery();
@@ -14,7 +14,7 @@ function ClinicInfo() {
           <BsPaperclip className="text-xl" />
           <p>
             <Link href={`${data?.name}`} passHref>
-              <a target="_blank">
+              <a target="_blank" className="hover:text-tertiary">
                 {data?.name.replace("https://" || "http://", "")}
               </a>
             </Link>

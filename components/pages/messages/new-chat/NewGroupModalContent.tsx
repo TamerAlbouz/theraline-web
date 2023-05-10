@@ -15,7 +15,7 @@ const newGroupSchema = z.object({
 
 type NewGroupValues = z.infer<typeof newGroupSchema>;
 
-function NewChatModalContent(props: { closeModal: Function }) {
+function NewGroupModalContent(props: { closeModal: Function }) {
   const { data } = useAvailableUsersQuery();
   const [users, setUsers] = useState<AvailableUser[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<AvailableUser[]>([]);
@@ -197,4 +197,4 @@ function NewChatModalContent(props: { closeModal: Function }) {
   );
 }
 
-export default NewChatModalContent;
+export default NewGroupModalContent;

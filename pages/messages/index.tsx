@@ -1,9 +1,11 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiPlus } from "react-icons/hi";
+import { TabView, TabPanel } from "primereact/tabview";
 import ChatsList from "../../components/pages/messages/chats/ChatsList";
 import AppMessageList from "../../components/pages/messages/messages/MessageList";
-import NewChatModalContent from "../../components/pages/messages/new-chat/NewChatModalContent";
+import NewGroupModalContent from "../../components/pages/messages/new-chat/NewGroupModalContent";
+import NewConvoModalContent from "../../components/pages/messages/new-chat/NewConvoModalContent";
 
 function MessagesPage() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -59,14 +61,21 @@ function MessagesPage() {
                 leave="ease-in duration-200"
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="h-[26rem] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="h-[30em] w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-xl font-bold leading-6 text-black">
                     New Chat
                   </Dialog.Title>
 
-                  <NewChatModalContent closeModal={closeModal} />
+                  <TabView>
+                    <TabPanel header="Group">
+                      <NewGroupModalContent closeModal={closeModal} />
+                    </TabPanel>
+                    <TabPanel header="Personal Conversation">
+                      <NewConvoModalContent closeModal={closeModal} />
+                    </TabPanel>
+                  </TabView>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

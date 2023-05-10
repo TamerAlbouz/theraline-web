@@ -52,7 +52,7 @@ function AppCalendar() {
         headerToolbar={{
           left: "prev,next",
           center: "title",
-          right: "dayGridMonth,timeGridWeek",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         businessHours={{
           daysOfWeek: [1, 2, 3, 4, 5],
