@@ -3,13 +3,14 @@ import ChatCard from "./ChatCard";
 import useChatsQuery, {
   Chat,
 } from "../../../../hooks/queries/chats/useChatsQuery";
+import Loader from "../../../misc/Loader";
 
 function ChatsList() {
   const [searchValue, setSearchValue] = useState("");
   const { data, isLoading, isError } = useChatsQuery();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (isError) {

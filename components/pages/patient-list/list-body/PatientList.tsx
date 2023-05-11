@@ -9,7 +9,7 @@ import {
   lastAppointmentTemplate,
   paginatorTemplate,
 } from "./PatientCardTemplates";
-import usePatientListQuery from "../../../../hooks/queries/patient-list/usePatientListQuery";
+import { PatientListItem } from "../../../../hooks/queries/patient-list/usePatientListQuery";
 
 const filters = {
   name: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -37,9 +37,7 @@ const columns = [
   },
 ];
 
-function PatientList() {
-  const { data } = usePatientListQuery();
-
+function PatientList({ data }: { data: PatientListItem[] }) {
   const router = useRouter();
 
   const navigateToPatient = (patientId: string) => {

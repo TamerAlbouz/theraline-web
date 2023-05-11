@@ -2,13 +2,13 @@ import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
 // eslint-disable-next-line prettier/prettier
-import useAvailableUsersQuery, {
+import useConvoUsersQuery, {
   AvailableUser,
-} from "../../../../hooks/queries/chats/useAvailableUsersQuery";
+} from "../../../../hooks/queries/chats/useGroupUsersQuery";
 import { useCreateConvoMutation } from "../../../../hooks/mutations/chats/useCreateConvoMutation";
 
 function NewConvoModalContent(props: { closeModal: Function }) {
-  const { data } = useAvailableUsersQuery();
+  const { data } = useConvoUsersQuery();
   const [users, setUsers] = useState<AvailableUser[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<AvailableUser[]>([]);
   const [query, setQuery] = useState("");
@@ -22,7 +22,9 @@ function NewConvoModalContent(props: { closeModal: Function }) {
     }
   }, [data]);
 
-  async function submitNewConvoInfo() {
+  async function submitNewConvoInfo(event: any) {
+    event.preventDefault();
+
     createConvo({
       // eslint-disable-next-line no-underscore-dangle
       users_id: selectedUsers.map((user) => user._id),
@@ -117,7 +119,7 @@ function NewConvoModalContent(props: { closeModal: Function }) {
       <button
         type="submit"
         value="Create"
-        onClick={submitNewConvoInfo}
+        onClick={(e) => submitNewConvoInfo(e)}
         className="focus:shadow-outline mt-4 w-full cursor-pointer rounded-lg bg-primary py-3 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">
         Create
       </button>

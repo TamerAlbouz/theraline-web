@@ -1,3 +1,4 @@
+// import "primereact/resources/themes/lara-light-blue/theme.css";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiPlus } from "react-icons/hi";
@@ -69,10 +70,14 @@ function MessagesPage() {
                   </Dialog.Title>
 
                   <TabView>
-                    <TabPanel header="Group">
+                    <TabPanel
+                      header="Group"
+                      headerClassName="mx-4 my-2 px-4 py-2 text-lg text-primary-dark">
                       <NewGroupModalContent closeModal={closeModal} />
                     </TabPanel>
-                    <TabPanel header="Personal Conversation">
+                    <TabPanel
+                      header="Personal Conversation"
+                      headerClassName="mx-4 my-2 px-4 py-2 text-lg text-primary-dark">
                       <NewConvoModalContent closeModal={closeModal} />
                     </TabPanel>
                   </TabView>

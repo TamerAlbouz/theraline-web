@@ -8,6 +8,7 @@ import {
   Message,
   useMessagesQuery,
 } from "../../../../hooks/queries/chats/useMessagesQuery";
+import Loader from "../../../misc/Loader";
 
 // function sameDay(d1: Date, d2: Date) {
 //   return (
@@ -42,7 +43,7 @@ function AppMessageList() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   const allChats: Array<Array<Message>> = data!.pages.map((page) => {

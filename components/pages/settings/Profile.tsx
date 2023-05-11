@@ -1,4 +1,5 @@
 import useSettingsQuery from "../../../hooks/queries/useSettingsQuery";
+import Loader from "../../misc/Loader";
 import PersonalInfoForm from "./PersonalInfoForm";
 import ProfilePicture from "./ProfilePicture";
 
@@ -6,8 +7,9 @@ function Profile() {
   const { data, isLoading } = useSettingsQuery();
 
   if (isLoading || !data) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
+
   return (
     <div className="flex w-full flex-col">
       <div className="flex w-full flex-col lg:flex-row">

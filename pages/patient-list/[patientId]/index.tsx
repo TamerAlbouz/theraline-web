@@ -5,6 +5,7 @@ import NotesCard from "../../../components/pages/patient-list/details-body/Notes
 import ProfileCard from "../../../components/pages/patient-list/details-body/ProfileCard";
 import PatientListHeader from "../../../components/pages/patient-list/header/Header";
 import usePatientDetailsQuery from "../../../hooks/queries/patient-list/usePatientDetailsQuery";
+import Loader from "../../../components/misc/Loader";
 
 function PatientDetails() {
   const router = useRouter();
@@ -13,7 +14,7 @@ function PatientDetails() {
   );
 
   if (isLoading || !data) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
@@ -21,6 +22,7 @@ function PatientDetails() {
       <div className="mb-6 rounded-md border-b-2 border-white bg-primary px-4 pt-2 pb-4">
         <PatientListHeader
           patientName={`${data?.firstName} ${data?.lastName}`}
+          count={undefined}
         />
       </div>
 
