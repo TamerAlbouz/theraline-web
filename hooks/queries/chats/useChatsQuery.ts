@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { accessClient } from "../../../utils/axios/axios";
 import { AxiosResponse } from "axios";
+import { accessClient } from "../../../utils/axios/axios";
 
 export type ReceivedMessage = {
   _id: string;

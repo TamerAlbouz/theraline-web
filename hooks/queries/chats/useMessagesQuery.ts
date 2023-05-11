@@ -40,7 +40,7 @@ export const useMessagesQuery = (chatId: string | undefined) => {
     {
       // TODO: fix this
       getNextPageParam: (_, pages) => {
-        if (pages.length == 1) {
+        if (pages.length === 1) {
           return 1;
         }
 

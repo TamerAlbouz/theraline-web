@@ -10,10 +10,10 @@ const updateAppointment = async ({
   amount: number;
   status: string;
 }) => {
-  return accessClient.patch(
-    `/appointment/${appointmentId}/edit_payment_info`,
-    { amount, status },
-  );
+  return accessClient.patch(`/appointment/${appointmentId}/edit_payment_info`, {
+    amount,
+    status,
+  });
 };
 
 export const useUpdateAppointmentMutation = () => {

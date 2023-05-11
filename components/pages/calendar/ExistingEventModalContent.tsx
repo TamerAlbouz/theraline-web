@@ -9,6 +9,8 @@ import { useCancelAppointmentMutation } from "../../../hooks/mutations/appointme
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import { useCompleteAppointmentMutation } from "../../../hooks/mutations/appointments/useCompleteAppointmentMutation";
 import { useUpdateAppointmentMutation } from "../../../hooks/mutations/appointments/useUpdateAppointmentMutation";
+import { getAppointmentsExport } from "../../../hooks/queries/appointments/useAppointmentExportQuery";
+import { useEmailAppointmentMutation } from "../../../hooks/mutations/appointments/useEmailAppointment";
 
 const paymentInfoSchema = z.object({
   amount: z.string(),
@@ -51,8 +53,9 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
   const { mutate: cancelAppointment } = useCancelAppointmentMutation();
   const { mutate: completeAppointment } = useCompleteAppointmentMutation();
   const { mutate: updateAppointment } = useUpdateAppointmentMutation();
-  const { closeModalCallback } = props;
+  const { mutate: emailAppointment } = useEmailAppointmentMutation();
 
+  const { closeModalCallback } = props;
   const {
     register,
     handleSubmit,
@@ -301,7 +304,8 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
           type="button"
           className="focus:shadow-outline mt-4 cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
           onClick={() => {
-            console.log("Export");
+            console.log("Email");
+            emailAppointment({ appointmentId: selectedEvent?.id! });
           }}>
           Export
         </button>
