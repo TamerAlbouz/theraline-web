@@ -9,7 +9,6 @@ import { useCancelAppointmentMutation } from "../../../hooks/mutations/appointme
 import { useCalendarStore } from "../../../hooks/stores/useCalendarStore";
 import { useCompleteAppointmentMutation } from "../../../hooks/mutations/appointments/useCompleteAppointmentMutation";
 import { useUpdateAppointmentMutation } from "../../../hooks/mutations/appointments/useUpdateAppointmentMutation";
-import { getAppointmentsExport } from "../../../hooks/queries/appointments/useAppointmentExportQuery";
 import { useEmailAppointmentMutation } from "../../../hooks/mutations/appointments/useEmailAppointment";
 
 const paymentInfoSchema = z.object({
