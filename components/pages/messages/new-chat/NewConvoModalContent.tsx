@@ -45,7 +45,9 @@ function NewConvoModalContent(props: { closeModal: Function }) {
 
   return (
     <form className="mt-4 flex flex-col">
-      <span>User</span>
+      <span className="mb-2 block text-lg font-bold text-primary-dark">
+        User
+      </span>
       <Combobox
         value={selectedUsers}
         onChange={(result: any) => {

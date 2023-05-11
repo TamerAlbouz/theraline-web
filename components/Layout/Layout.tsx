@@ -14,8 +14,8 @@ function Layout(props: { children: ReactNode }) {
       <main className="w-full text-textColor">
         <TopBar />
         <section
-          className={` h-full w-full flex-col items-center justify-center p-5 ${
-            path === "/auth/signin" ? "flex " : ""
+          className={` w-full flex-col items-center justify-center p-5 ${
+            path === "/auth/signin" ? "flex h-full " : ""
           } `}>
           {children}
         </section>

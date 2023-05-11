@@ -64,7 +64,7 @@ function PrivacyPolicy() {
         <a
           className="cursor-pointer text-tertiary"
           href="mailto:info@theraline.com">
-          support@theraline.com
+          theraline.suport@gmail.com
         </a>
         .
       </p>

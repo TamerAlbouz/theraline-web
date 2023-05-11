@@ -3,17 +3,19 @@ import Image from "next/image";
 import { PatientDetails } from "../../../../hooks/queries/patient-list/usePatientDetailsQuery";
 
 function ProfileCard({ data }: { data: PatientDetails }) {
-  const { firstName, lastName, email } = data;
+  const { firstName, lastName, email, image } = data;
 
   return (
     <div className="flex flex-col items-center rounded-lg bg-primary-dark px-6 py-10">
-      <Image
-        width={64}
-        height={64}
-        className="h-16 w-16 cursor-pointer rounded-full md:h-12 md:w-12"
-        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-        alt=""
-      />
+      {image && (
+        <Image
+          width={64}
+          height={64}
+          className="h-16 w-16 cursor-pointer rounded-full md:h-12 md:w-12"
+          src={image}
+          alt=""
+        />
+      )}
 
       <p className="my-2 text-xl font-bold text-textColor">{`${firstName} ${lastName}`}</p>
 

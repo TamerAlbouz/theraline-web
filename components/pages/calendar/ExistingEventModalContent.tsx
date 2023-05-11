@@ -299,15 +299,18 @@ function ExistingEventModalContent(props: { closeModalCallback: Function }) {
       </div>
 
       <div className="fixed bottom-6 right-6 flex gap-5">
-        <button
-          type="button"
-          className="focus:shadow-outline mt-4 cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
-          onClick={() => {
-            console.log("Email");
-            emailAppointment({ appointmentId: selectedEvent?.id! });
-          }}>
-          Export
-        </button>
+        {(selectedEvent?.status === "CREATED" ||
+          selectedEvent?.status === "CONFIRMED") && (
+          <button
+            type="button"
+            className="focus:shadow-outline mt-4 cursor-pointer rounded-lg bg-primary py-2 px-4 font-bold text-textColor hover:bg-primary-dark focus:outline-none"
+            onClick={() => {
+              console.log("Email");
+              emailAppointment({ appointmentId: selectedEvent?.id! });
+            }}>
+            Export
+          </button>
+        )}
         {(selectedEvent?.status === "CREATED" ||
           selectedEvent?.status === "CONFIRMED") && (
           <button

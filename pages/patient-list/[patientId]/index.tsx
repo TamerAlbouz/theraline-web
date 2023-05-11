@@ -40,7 +40,7 @@ function PatientDetails() {
 
       <div className="mt-4 flex flex-col justify-between lg:mt-0 lg:flex-row">
         <div className="w-full lg:w-1/2">
-          <NotesCard note={data.notes[0]} />
+          <NotesCard note={data.notes.length > 0 ? data.notes[0] : undefined} />
         </div>
 
         <div className="w-full pt-4 pl-0 lg:w-1/2 lg:pl-4 lg:pt-0">

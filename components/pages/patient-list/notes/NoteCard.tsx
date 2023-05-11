@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { format } from "date-fns";
 import { NoteInfo } from "./NoteInfo";
 import { useNotesStore } from "../../../../hooks/stores/useNotesStore";
 import { PatientNote } from "../../../../hooks/queries/patient-list/useNotesQuery";
@@ -10,7 +11,7 @@ export function NoteCard(props: {
   isFirstInList: boolean;
 }) {
   const { data, opensModal, isFirstInList } = props;
-  const { title, created_at } = data;
+  const { title, lastEdited } = data;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -48,10 +49,7 @@ export function NoteCard(props: {
           <p className="text-lg font-bold text-textColor">{title}</p>
           <div className="flex flex-col items-end justify-end">
             <p className="text-lg font-medium text-textColor">
-              {created_at?.toString().split("T")[0]}
-            </p>
-            <p className="text-lg font-medium text-textColor">
-              {created_at?.toString().split("T")[1].split(".")[0]}
+              {format(new Date(lastEdited.toString()), "PPp")}
             </p>
           </div>
         </div>

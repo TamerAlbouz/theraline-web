@@ -1,12 +1,11 @@
 import Image from "next/image";
 import useSettingsQuery from "../../../hooks/queries/useSettingsQuery";
-import Loader from "../../misc/Loader";
 
 function ProfileMenu() {
   const { data, isLoading } = useSettingsQuery();
 
   if (isLoading || !data) {
-    return <Loader />;
+    return <div />;
   }
 
   return (
