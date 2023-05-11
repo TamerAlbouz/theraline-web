@@ -14,8 +14,6 @@ function ArticlePage() {
     createArticle({ title, content });
     setTitle("");
     setContent("");
-
-    alert("Article Posted successfully");
   };
 
   return (

@@ -19,7 +19,7 @@ type SignInValues = z.infer<typeof signInSchema>;
 
 function SignInPage() {
   const [loading, setLoading] = useState(false);
-  const { mutate: login } = useLoginMutation();
+  const { mutate: login, isLoading } = useLoginMutation();
   const { signin } = useAuth();
   const router = useRouter();
 
@@ -42,6 +42,10 @@ function SignInPage() {
     login(data, {
       onSuccess: (result) => {
         console.log(result);
+
+        if (result.data.role !== "DOCTOR") {
+          return;
+        }
 
         signin(
           result.data.access_token,
@@ -89,7 +93,7 @@ function SignInPage() {
             type="submit"
             value="Sign in"
             className="focus:shadow-outline w-full cursor-pointer rounded-lg bg-primary py-3 px-4 font-bold text-textColor transition duration-300 ease-in-out hover:bg-primary-dark focus:outline-none disabled:cursor-default disabled:bg-gray-400 disabled:text-gray-600">
-            Sign In
+            {isLoading ? "Loading" : "Sign In"}
           </button>
         </div>
       </form>

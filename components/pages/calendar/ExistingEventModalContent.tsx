@@ -32,7 +32,7 @@ const paymentStatus = [
 
 const getStatusClassName = (status: string) => {
   switch (status) {
-    case "CANCELED":
+    case "CANCELLED":
       return "text-red-400";
 
     case "CONFIRMED":

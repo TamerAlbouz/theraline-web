@@ -1,19 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { accessClient } from "../../../utils/axios/axios";
 import { AxiosResponse } from "axios";
-
-export type AvailableUser = {
-  _id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-};
+import { AvailableUser } from "./useGroupUsersQuery";
 
 const getAvailableUsers = (): Promise<AxiosResponse<AvailableUser[]>> => {
-  return accessClient.get(`/groups/user_group`);
+  return accessClient.get(`/groups/user_convo`);
 };
 
-const useAvailableUsersQuery = () => {
+const useConvoUsersQuery = () => {
   return useQuery({
     queryKey: ["available-users"],
     select: (data: any) => {
@@ -23,4 +17,4 @@ const useAvailableUsersQuery = () => {
   });
 };
 
-export default useAvailableUsersQuery;
+export default useConvoUsersQuery;

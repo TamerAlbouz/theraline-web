@@ -7,7 +7,9 @@ import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
 import { useCreateGroupMutation } from "../../../../hooks/mutations/chats/useCreateGroupMutation";
 import { CustomInput } from "../../../auth/CustomInput";
 // eslint-disable-next-line prettier/prettier
-import useAvailableUsersQuery, { AvailableUser } from "../../../../hooks/queries/chats/useAvailableUsersQuery";
+import useGroupUsersQuery, {
+  AvailableUser,
+} from "../../../../hooks/queries/chats/useGroupUsersQuery";
 
 const newGroupSchema = z.object({
   name: z.string(),
@@ -15,8 +17,8 @@ const newGroupSchema = z.object({
 
 type NewGroupValues = z.infer<typeof newGroupSchema>;
 
-function NewChatModalContent(props: { closeModal: Function }) {
-  const { data } = useAvailableUsersQuery();
+function NewGroupModalContent(props: { closeModal: Function }) {
+  const { data } = useGroupUsersQuery();
   const [users, setUsers] = useState<AvailableUser[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<AvailableUser[]>([]);
   const [query, setQuery] = useState("");
@@ -106,7 +108,9 @@ function NewChatModalContent(props: { closeModal: Function }) {
       </div>
 
       <div className="mb-4">
-        {" "}
+        <span className="mb-2 block text-lg font-bold text-primary-dark">
+          Image
+        </span>
         <input
           type="file"
           name="avatar"
@@ -197,4 +201,4 @@ function NewChatModalContent(props: { closeModal: Function }) {
   );
 }
 
-export default NewChatModalContent;
+export default NewGroupModalContent;

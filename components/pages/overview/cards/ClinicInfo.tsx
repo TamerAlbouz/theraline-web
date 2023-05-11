@@ -2,7 +2,6 @@ import { BsFillTelephoneFill, BsPaperclip } from "react-icons/bs";
 import { BiCurrentLocation } from "react-icons/bi";
 import CardWrapper from "../../../card/CardWrapper";
 import { useClinicQuery } from "../../../../hooks/queries/overview/useClinicQuery";
-import Link from "next/link";
 
 function ClinicInfo() {
   const { data } = useClinicQuery();
@@ -13,11 +12,13 @@ function ClinicInfo() {
         <div className="flex items-center gap-3">
           <BsPaperclip className="text-xl" />
           <p>
-            <Link href={`${data?.name}`} passHref>
-              <a target="_blank">
-                {data?.name.replace("https://" || "http://", "")}
-              </a>
-            </Link>
+            <a
+              target="_blank"
+              href={`${data?.name}`}
+              rel="noreferrer"
+              className="hover:text-tertiary">
+              {data?.name.replace("https://" || "http://", "")}
+            </a>
           </p>
         </div>
         <div className="flex items-center gap-3">

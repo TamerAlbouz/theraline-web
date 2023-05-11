@@ -6,6 +6,7 @@ import { NoteInfo } from "../../../components/pages/patient-list/notes/NoteInfo"
 import AddButton from "../../../components/pages/patient-list/notes/AddButton";
 import useNotesQuery from "../../../hooks/queries/patient-list/useNotesQuery";
 import { useAddNoteMutation } from "../../../hooks/mutations/patient-details/useAddNoteMutation";
+import Loader from "../../../components/misc/Loader";
 
 function NotesPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ function NotesPage() {
   };
 
   if (isLoading || !data) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
