@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { accessClient } from "../../../utils/axios/axios";
+import { toast } from "react-toastify";
 
 const createGroup = async ({
   name,
@@ -27,8 +28,17 @@ export const useCreateGroupMutation = () => {
         queryKey: ["chats"],
       });
     },
-    onError: (error) => {
-      console.log(error);
+    onError: (error: any) => {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     },
   });
 };

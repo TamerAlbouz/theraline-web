@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { accessClient } from "../../../utils/axios/axios";
+import { toast } from "react-toastify";
 
 const updateNote = async ({
   title,
@@ -12,11 +13,11 @@ const updateNote = async ({
   user_id: string;
   noteId: string;
 }) => {
-    console.log( {
-        _id: noteId,
-        title,
-        body,
-      });
+  console.log({
+    _id: noteId,
+    title,
+    body,
+  });
   return accessClient.put(`/user/update_note/${noteId}`, {
     _id: noteId,
     title,
@@ -34,8 +35,17 @@ export const useUpdateNoteMutation = (patientId: string) => {
         queryKey: ["patient-notes", patientId],
       });
     },
-    onError: (error) => {
-      console.log(error);
+    onError: (error: any) => {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     },
   });
 };
