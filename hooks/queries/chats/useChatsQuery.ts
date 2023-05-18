@@ -6,7 +6,7 @@ export type ReceivedMessage = {
   _id: string;
   text: string;
   user_id: string;
-  send_at: Date;
+  send_at: string;
 };
 
 export type Chat = {
