@@ -7,7 +7,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
   const { showTitle } = props;
   const { selectedNote } = useNotesStore();
   const router = useRouter();
-  const { mutate: updateNote } = useUpdateNoteMutation(
+  const { mutate: updateNote, } = useUpdateNoteMutation(
     router.query.patientId!.toString(),
   );
 
@@ -42,7 +42,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
         }}
       />
 
-      {body !== selectedNote.body && (
+      {/* {body !== selectedNote.body && ( */}
         <input
           type="submit"
           value="Save"
@@ -60,7 +60,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
           }}
           className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-textColor hover:bg-primary"
         />
-      )}
+      {/* )} */}
     </div>
   );
 }

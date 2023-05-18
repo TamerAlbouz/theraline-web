@@ -20,7 +20,7 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
       className={`flex w-full cursor-pointer flex-row items-center justify-between py-3 px-2 transition-all duration-150 hover:bg-primary ${
         isLast ? "" : "border-b border-gray-200"
       } ${selectedChat === chat ? "bg-primary" : ""}`}>
-      <div className="flex w-1/5 justify-start">
+      <div className="flex w-[4rem] justify-start">
         {groupImage ? (
           <Image
             width={48}
@@ -38,7 +38,7 @@ function ChatCard(props: { chat: Chat; isLast: boolean }) {
           )} */}
       </div>
 
-      <div className="ml-4 mr-6 flex w-4/5 flex-col items-start">
+      <div className="ml-4 mr-6 flex w-full flex-col items-start">
         <span className="font-bold">{name}</span>
 
         {latestMessage && (
