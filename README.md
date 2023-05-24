@@ -24,7 +24,7 @@ Theraline is a Capstone Project for the American University of Beirut (AUB). It 
 
 Our aim is to bring/introduce group therapy sessions to the online world. We achieve this by using either group chats, or by Google's Meet face-to-face services.
 
-Visit us now on: [https://www.theraline.com]
+Visit us now on: [https://theraline-web.vercel.app/]
 
 ## Deploy on Vercel
 
