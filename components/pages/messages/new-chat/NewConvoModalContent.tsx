@@ -2,9 +2,8 @@ import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { HiChevronUpDown, HiCheck } from "react-icons/hi2";
 // eslint-disable-next-line prettier/prettier
-import useConvoUsersQuery, {
-  AvailableUser,
-} from "../../../../hooks/queries/chats/useGroupUsersQuery";
+import { AvailableUser } from "../../../../hooks/queries/chats/useGroupUsersQuery";
+import useConvoUsersQuery from "../../../../hooks/queries/chats/useConvoUsersQuery";
 import { useCreateConvoMutation } from "../../../../hooks/mutations/chats/useCreateConvoMutation";
 
 function NewConvoModalContent(props: { closeModal: Function }) {
