@@ -121,8 +121,7 @@ function ChatsList() {
                         <div className="fle flex-col" key={index}>
                           <div className="mt-2 flex flex-row justify-between">
                             <span className="text-lg">
-                              {element &&
-                                `${element.firstName} ${element.lastName}`}
+                              {element && `${element.name}`}
                             </span>
 
                             {element.role === "DOCTOR" && (

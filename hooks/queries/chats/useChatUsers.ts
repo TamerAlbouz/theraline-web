@@ -4,9 +4,8 @@ import { AxiosResponse } from "axios";
 import { useMessageStore } from "../../stores/useMessageStore";
 
 export type ChatUser = {
+  name: string;
   _id: string;
-  firstName: string;
-  lastName: string;
   role: string;
   image: string | null | undefined;
 };
