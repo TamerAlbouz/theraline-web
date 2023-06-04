@@ -7,6 +7,7 @@ export type PatientDetails = {
   _id: string;
   firstName: string;
   lastName: string;
+  username: string;
   email: string;
   image: string | undefined | null;
   gender: "MALE" | "FEMALE" | "OTHER";
