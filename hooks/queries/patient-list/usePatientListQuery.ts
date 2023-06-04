@@ -8,6 +8,7 @@ export type PatientListItem = {
   email: string;
   firstName: string;
   lastName: string;
+  username: string;
   image?: string;
   phone?: string;
   nextAppointment?: Appointment;

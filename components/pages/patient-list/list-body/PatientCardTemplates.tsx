@@ -32,11 +32,23 @@ export const basicInfoTemplate = (data: PatientListItem) => {
   );
 };
 
+export const usernameTemplate = (data: PatientListItem) => {
+  const { username } = data;
+  return (
+    <div className="px-2">
+      <p className="text-md text-left text-textColor">
+        {/* eslint-disable-next-line no-unneeded-ternary */}
+        {username ? username : "-"}
+      </p>
+    </div>
+  );
+};
+
 export const phoneNumberTemplate = (data: PatientListItem) => {
   const { phone } = data;
   return (
     <div className="px-2">
-      <p className="text-md text-center text-textColor">
+      <p className="text-md text-left text-textColor">
         {/* eslint-disable-next-line no-unneeded-ternary */}
         {phone ? phone : "-"}
       </p>
@@ -48,7 +60,7 @@ export const lastAppointmentTemplate = (data: PatientListItem) => {
   const { nextAppointment } = data;
   return (
     <div className="px-2">
-      <p className="text-md text-center text-textColor">
+      <p className="text-md text-left text-textColor">
         {/* eslint-disable-next-line no-unneeded-ternary */}
         {nextAppointment
           ? format(new Date(nextAppointment.start_date), "PP")
@@ -62,7 +74,7 @@ export const nextAppointmentTemplate = (data: PatientListItem) => {
   const { lastAppointment } = data;
   return (
     <div className="px-2">
-      <p className="text-md text-center text-textColor">
+      <p className="text-md text-left text-textColor">
         {/* eslint-disable-next-line no-unneeded-ternary */}
         {lastAppointment
           ? format(new Date(lastAppointment.start_date), "PP")

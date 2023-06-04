@@ -7,6 +7,7 @@ import {
   phoneNumberTemplate,
   nextAppointmentTemplate,
   lastAppointmentTemplate,
+  usernameTemplate,
   paginatorTemplate,
 } from "./PatientCardTemplates";
 import { PatientListItem } from "../../../../hooks/queries/patient-list/usePatientListQuery";
@@ -17,20 +18,21 @@ const filters = {
 
 const columns = [
   { id: 1, header: "Basic Info", sortable: true, body: basicInfoTemplate },
+  { id: 2, header: "Username", sortable: false, body: usernameTemplate },
   {
-    id: 2,
+    id: 3,
     header: "Phone Number",
     sortable: false,
     body: phoneNumberTemplate,
   },
   {
-    id: 3,
+    id: 4,
     header: "Last Appointment",
     sortable: false,
     body: lastAppointmentTemplate,
   },
   {
-    id: 4,
+    id: 5,
     header: "Next Appointment",
     sortable: false,
     body: nextAppointmentTemplate,
@@ -43,7 +45,6 @@ function PatientList({ data }: { data: PatientListItem[] }) {
   const navigateToPatient = (patientId: string) => {
     router.push(`/patient-list/${patientId}`);
   };
-
   return (
     <DataTable
       value={data}
@@ -72,7 +73,7 @@ function PatientList({ data }: { data: PatientListItem[] }) {
               key={col.id}
               header={col.header}
               headerClassName="p-3 bg-primary-dark text-xl text-textColor w-12"
-              className="my-5 w-1/4"
+              className="my-5 w-1/5"
               body={col.body}
               sortable
               sortField="name"
@@ -85,7 +86,7 @@ function PatientList({ data }: { data: PatientListItem[] }) {
             key={col.id}
             header={col.header}
             headerClassName="p-3 bg-primary-dark text-xl text-textColor"
-            className="w-1/4 py-5"
+            className="w-1/5 py-5"
             body={col.body}
           />
         );
