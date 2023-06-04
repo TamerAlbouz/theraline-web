@@ -36,7 +36,7 @@ function NewConvoModalContent(props: { closeModal: Function }) {
     query === ""
       ? users
       : users.filter((user) =>
-          `${user.firstName} ${user.lastName}`
+          `${user.name} ${user.name}`
             .toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, "")),
