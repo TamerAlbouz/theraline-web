@@ -7,7 +7,7 @@ export function NoteInfo(props: { showTitle: boolean }) {
   const { showTitle } = props;
   const { selectedNote } = useNotesStore();
   const router = useRouter();
-  const { mutate: updateNote, } = useUpdateNoteMutation(
+  const { mutate: updateNote } = useUpdateNoteMutation(
     router.query.patientId!.toString(),
   );
 
@@ -43,23 +43,23 @@ export function NoteInfo(props: { showTitle: boolean }) {
       />
 
       {/* {body !== selectedNote.body && ( */}
-        <input
-          type="submit"
-          value="Save"
-          onClick={() => {
-            console.log(body);
-            if (body) {
-              updateNote({
-                title: selectedNote.title,
-                body: body!,
-                user_id: router.query.patientId!.toString(),
-                // eslint-disable-next-line no-underscore-dangle
-                noteId: selectedNote._id,
-              });
-            }
-          }}
-          className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-textColor hover:bg-primary"
-        />
+      <input
+        type="submit"
+        value="Save"
+        onClick={() => {
+          console.log(body);
+          if (body) {
+            updateNote({
+              title: selectedNote.title,
+              body: body!,
+              user_id: router.query.patientId!.toString(),
+              // eslint-disable-next-line no-underscore-dangle
+              noteId: selectedNote._id,
+            });
+          }
+        }}
+        className="mt-2 w-16 cursor-pointer rounded-md bg-primary-dark px-4 py-2 font-bold text-textColor hover:bg-primary"
+      />
       {/* )} */}
     </div>
   );
