@@ -3,6 +3,7 @@ import { accessClient } from "../../../utils/axios/axios";
 import { AxiosResponse } from "axios";
 
 export type AvailableUser = {
+  name: string;
   _id: string;
   email: string;
   firstName: string;
